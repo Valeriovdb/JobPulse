@@ -8,6 +8,7 @@ API docs: https://www.arbeitnow.com/api
 Returns a list of raw job dicts with _source_provider, _source_job_id,
 and _external_job_key injected.
 """
+import re
 import logging
 import requests
 from pipeline.config import ARBEITNOW_TAGS, ARBEITNOW_MAX_PAGES
@@ -15,6 +16,19 @@ from pipeline.config import ARBEITNOW_TAGS, ARBEITNOW_MAX_PAGES
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://www.arbeitnow.com/api/job-board-api"
+
+# Title must match one of these patterns to be kept.
+# Arbeitnow's tag filter is broad — this guards against noise.
+_PM_TITLE_PATTERN = re.compile(
+    r"product manager|product owner|head of product|vp product|"
+    r"director of product|chief product|produktmanager",
+    re.IGNORECASE,
+)
+
+
+def _is_pm_role(job: dict) -> bool:
+    title = job.get("title", "")
+    return bool(_PM_TITLE_PATTERN.search(title))
 
 
 def fetch() -> list[dict]:
@@ -43,6 +57,8 @@ def fetch() -> list[dict]:
                 break
 
             for job in jobs:
+                if not _is_pm_role(job):
+                    continue
                 # Arbeitnow uses 'slug' as unique identifier
                 source_job_id = str(job.get("slug", ""))
                 if not source_job_id:

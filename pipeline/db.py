@@ -1,10 +1,11 @@
 """
 Supabase client singleton.
 """
+from typing import Optional
 from supabase import create_client, Client
 from pipeline.config import SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
-_client: Client | None = None
+_client: Optional[Client] = None
 
 
 def get_client() -> Client:

@@ -184,13 +184,13 @@ def _normalize_publisher_type(url: str, raw_publisher: str = "") -> str:
     return "other"
 
 
-def _has_linkedin_apply(apply_options: list[dict] | None) -> bool:
+def _has_linkedin_apply(apply_options: Optional[list]) -> bool:
     if not apply_options:
         return False
     return any("linkedin" in (o.get("publisher", "") or "").lower() for o in apply_options)
 
 
-def _has_company_site_apply(apply_options: list[dict] | None, canonical_url: str = "") -> bool:
+def _has_company_site_apply(apply_options: Optional[list], canonical_url: str = "") -> bool:
     if not apply_options:
         return bool(
             canonical_url
