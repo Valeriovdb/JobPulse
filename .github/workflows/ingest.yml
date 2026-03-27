@@ -42,3 +42,19 @@ jobs:
           CLASSIFIER_VERSION: "v1"
           ACTIVE_GRACE_DAYS: "1"
         run: python -m pipeline.ingest
+
+      - name: Export frontend data
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python -m pipeline.export_data
+
+      - name: Commit frontend data
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/frontend/
+          git diff --cached --quiet || git commit -m "chore: update frontend data [skip ci]"
+          git push
