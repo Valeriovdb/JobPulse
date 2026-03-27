@@ -296,19 +296,12 @@ def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
             for _, row in active_per_day.iterrows()
         ]
 
-    # Lifespan histogram (inactive jobs only)
+    # Lifespan summary (inactive jobs only)
     inactive = all_jobs[~all_jobs["is_active"]].copy()
     if len(inactive) >= 10:
         median_d = float(inactive["days_online"].median())
         mean_d = float(inactive["days_online"].mean())
         pct_week = float((inactive["days_online"] <= 7).mean() * 100)
-
-        bins = list(range(0, int(inactive["days_online"].max()) + 5, 3))
-        counts, edges = pd.cut(
-            inactive["days_online"], bins=bins, right=False, retbins=True
-        ).pipe(lambda s: (s[0].value_counts(sort=False), bins))
-        hist = inactive["days_online"].value_counts(bins=pd.interval_range(0, int(inactive["days_online"].max()) + 1, freq=3), sort=False)
-
         result["lifespan"] = {
             "median_days": round(median_d),
             "mean_days": round(mean_d, 1),
