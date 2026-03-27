@@ -1,0 +1,147 @@
+{
+  "seniority": [
+    {
+      "label": "junior",
+      "count": 1
+    },
+    {
+      "label": "senior",
+      "count": 2
+    },
+    {
+      "label": "head",
+      "count": 1
+    },
+    {
+      "label": "unknown",
+      "count": 8
+    }
+  ],
+  "work_mode": [
+    {
+      "label": "unknown",
+      "count": 9
+    },
+    {
+      "label": "remote",
+      "count": 3
+    }
+  ],
+  "language": [
+    {
+      "label": "de",
+      "count": 6
+    },
+    {
+      "label": "en",
+      "count": 6
+    }
+  ],
+  "german_requirement": [
+    {
+      "label": "must",
+      "count": 9
+    },
+    {
+      "label": "not_mentioned",
+      "count": 3
+    }
+  ],
+  "pm_type": [
+    {
+      "label": "core_pm",
+      "count": 7
+    },
+    {
+      "label": "technical",
+      "count": 4
+    },
+    {
+      "label": "growth",
+      "count": 1
+    }
+  ],
+  "industry": [
+    {
+      "label": "climatetech",
+      "count": 1
+    },
+    {
+      "label": "healthtech",
+      "count": 1
+    },
+    {
+      "label": "fintech",
+      "count": 1
+    }
+  ],
+  "ai": {
+    "n_enriched": 12,
+    "n_ai_focus": 4,
+    "n_ai_skills": 3,
+    "ai_focus_pct": 33,
+    "ai_skills_pct": 25
+  },
+  "source": [
+    {
+      "label": "arbeitnow",
+      "count": 8
+    },
+    {
+      "label": "jsearch",
+      "count": 4
+    }
+  ],
+  "companies": {
+    "top20": [
+      {
+        "label": "Intercon Solutions GmbH",
+        "count": 2
+      },
+      {
+        "label": "Famedly GmbH",
+        "count": 1
+      },
+      {
+        "label": "1KOMMA5\u02da",
+        "count": 1
+      },
+      {
+        "label": "Ecoturn GmbH",
+        "count": 1
+      },
+      {
+        "label": "Emma \u2013 The Sleep Company",
+        "count": 1
+      },
+      {
+        "label": "Distribusion Technologies",
+        "count": 1
+      },
+      {
+        "label": "Dataiku",
+        "count": 1
+      },
+      {
+        "label": "LOOKIERO OUTFITTERY GROUP",
+        "count": 1
+      },
+      {
+        "label": "PALTRON GmbH",
+        "count": 1
+      },
+      {
+        "label": "Consultport",
+        "count": 1
+      },
+      {
+        "label": "Distribusion Technologies GmbH",
+        "count": 1
+      }
+    ],
+    "n_companies": 11,
+    "top10_share": 11,
+    "top10_pct": 92,
+    "multi_hiring": 1
+  }
+}
