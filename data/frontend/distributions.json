@@ -1,129 +1,129 @@
 {
   "seniority": [
     {
-      "label": "junior",
-      "count": 1
-    },
-    {
       "label": "senior",
-      "count": 2
-    },
-    {
-      "label": "head",
-      "count": 1
+      "count": 5
     },
     {
       "label": "unknown",
-      "count": 8
+      "count": 9
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 9
+      "count": 13
     },
     {
       "label": "remote",
-      "count": 3
+      "count": 1
     }
   ],
   "language": [
     {
-      "label": "de",
-      "count": 6
+      "label": "en",
+      "count": 10
     },
     {
-      "label": "en",
-      "count": 6
+      "label": "de",
+      "count": 4
     }
   ],
   "german_requirement": [
     {
-      "label": "must",
-      "count": 9
+      "label": "not_mentioned",
+      "count": 6
     },
     {
-      "label": "not_mentioned",
+      "label": "must",
+      "count": 5
+    },
+    {
+      "label": "plus",
       "count": 3
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 7
+      "count": 6
     },
     {
       "label": "technical",
-      "count": 4
+      "count": 6
     },
     {
       "label": "growth",
+      "count": 1
+    },
+    {
+      "label": "other",
       "count": 1
     }
   ],
   "industry": [
     {
-      "label": "climatetech",
-      "count": 1
-    },
-    {
-      "label": "healthtech",
-      "count": 1
-    },
-    {
-      "label": "fintech",
+      "label": "mobility",
       "count": 1
     }
   ],
   "ai": {
-    "n_enriched": 12,
-    "n_ai_focus": 4,
-    "n_ai_skills": 3,
-    "ai_focus_pct": 33,
-    "ai_skills_pct": 25
+    "n_enriched": 14,
+    "n_ai_focus": 7,
+    "n_ai_skills": 7,
+    "ai_focus_pct": 50,
+    "ai_skills_pct": 50
   },
   "source": [
     {
       "label": "arbeitnow",
-      "count": 8
+      "count": 11
     },
     {
       "label": "jsearch",
-      "count": 4
+      "count": 3
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "Intercon Solutions GmbH",
+        "label": "Flix",
         "count": 2
       },
       {
-        "label": "Famedly GmbH",
+        "label": "Personio",
         "count": 1
       },
       {
-        "label": "1KOMMA5\u02da",
+        "label": "Doctolib",
         "count": 1
       },
       {
-        "label": "Ecoturn GmbH",
+        "label": "AVS Services GmbH",
         "count": 1
       },
       {
-        "label": "Emma \u2013 The Sleep Company",
+        "label": "Visable GmbH",
         "count": 1
       },
       {
-        "label": "Distribusion Technologies",
+        "label": "Ordio GmbH",
         "count": 1
       },
       {
-        "label": "Dataiku",
+        "label": "Privatize",
         "count": 1
       },
       {
-        "label": "LOOKIERO OUTFITTERY GROUP",
+        "label": "Holzprofi24",
+        "count": 1
+      },
+      {
+        "label": "K-tronik GmbH",
+        "count": 1
+      },
+      {
+        "label": "IP Pilot",
         "count": 1
       },
       {
@@ -139,9 +139,9 @@
         "count": 1
       }
     ],
-    "n_companies": 11,
+    "n_companies": 13,
     "top10_share": 11,
-    "top10_pct": 92,
+    "top10_pct": 79,
     "multi_hiring": 1
   }
 }
