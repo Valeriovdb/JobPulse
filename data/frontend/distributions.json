@@ -2,11 +2,11 @@
   "seniority": [
     {
       "label": "senior",
-      "count": 5
+      "count": 4
     },
     {
       "label": "unknown",
-      "count": 9
+      "count": 10
     }
   ],
   "work_mode": [
@@ -22,20 +22,20 @@
   "language": [
     {
       "label": "en",
-      "count": 10
+      "count": 9
     },
     {
       "label": "de",
-      "count": 4
+      "count": 5
     }
   ],
   "german_requirement": [
     {
-      "label": "not_mentioned",
+      "label": "must",
       "count": 6
     },
     {
-      "label": "must",
+      "label": "not_mentioned",
       "count": 5
     },
     {
@@ -46,15 +46,11 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 6
+      "count": 7
     },
     {
       "label": "technical",
       "count": 6
-    },
-    {
-      "label": "growth",
-      "count": 1
     },
     {
       "label": "other",
@@ -69,19 +65,19 @@
   ],
   "ai": {
     "n_enriched": 14,
-    "n_ai_focus": 7,
-    "n_ai_skills": 7,
-    "ai_focus_pct": 50,
-    "ai_skills_pct": 50
+    "n_ai_focus": 6,
+    "n_ai_skills": 6,
+    "ai_focus_pct": 43,
+    "ai_skills_pct": 43
   },
   "source": [
     {
       "label": "arbeitnow",
-      "count": 11
+      "count": 9
     },
     {
       "label": "jsearch",
-      "count": 3
+      "count": 5
     }
   ],
   "companies": {
@@ -115,10 +111,6 @@
         "count": 1
       },
       {
-        "label": "Holzprofi24",
-        "count": 1
-      },
-      {
         "label": "K-tronik GmbH",
         "count": 1
       },
@@ -127,15 +119,19 @@
         "count": 1
       },
       {
+        "label": "Forward Education GmbH",
+        "count": 1
+      },
+      {
+        "label": "Novanta",
+        "count": 1
+      },
+      {
+        "label": "Holzprofi24",
+        "count": 1
+      },
+      {
         "label": "PALTRON GmbH",
-        "count": 1
-      },
-      {
-        "label": "Consultport",
-        "count": 1
-      },
-      {
-        "label": "Distribusion Technologies GmbH",
         "count": 1
       }
     ],
