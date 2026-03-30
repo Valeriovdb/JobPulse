@@ -489,77 +489,98 @@ def run(dry_run: bool = False) -> None:
     all_sources = ["ats", "jsearch", "arbeitnow"]
     run_id = open_run(today, all_sources, dry_run)
 
-    # 3. Fetch
-    raw_records, active_sources, jsearch_requests_used = fetch_all()
+    # State for close_run
+    raw_records: list[dict] = []
+    active_sources: list[str] = []
+    jsearch_requests_used = 0
+    rows_new = 0
+    rows_updated = 0
 
-    if not raw_records:
-        logger.warning("No records fetched from any source")
-        close_run(run_id, "failed", 0, 0, 0, jsearch_requests_used, "No records fetched")
-        return
+    try:
+        # 3. Fetch
+        raw_records, active_sources, jsearch_requests_used = fetch_all()
 
-    # 4. Normalize
-    normalized: list[NormalizedJob] = []
-    for raw in raw_records:
-        job = normalize(raw)
-        if job:
-            normalized.append(job)
-    logger.info(f"Normalized {len(normalized)}/{len(raw_records)} records")
+        if not raw_records:
+            logger.warning("No records fetched from any source")
+            close_run(run_id, "failed", 0, 0, 0, jsearch_requests_used, "No records fetched")
+            return
 
-    # 5. Cross-source deduplication
-    normalized, dedup_dropped = deduplicate_by_source_priority(normalized)
-    logger.info(f"After dedup: {len(normalized)} jobs ({dedup_dropped} duplicates removed)")
+        # 4. Normalize
+        normalized: list[NormalizedJob] = []
+        for raw in raw_records:
+            job = normalize(raw)
+            if job:
+                normalized.append(job)
+        logger.info(f"Normalized {len(normalized)}/{len(raw_records)} records")
 
-    # 6. LLM enrichment (only jobs with description text)
-    enriched_count = 0
-    for job in normalized:
-        if not job.description_text:
-            continue
-        result = llm.enrich(
-            title=job.job_title_raw or "",
-            company=job.company_name or "",
-            location=job.location_normalized or "",
-            description=job.description_text,
+        # 5. Cross-source deduplication
+        normalized, dedup_dropped = deduplicate_by_source_priority(normalized)
+        logger.info(f"After dedup: {len(normalized)} jobs ({dedup_dropped} duplicates removed)")
+
+        # 6. LLM enrichment (only jobs with description text)
+        enriched_count = 0
+        for job in normalized:
+            if not job.description_text:
+                continue
+            result = llm.enrich(
+                title=job.job_title_raw or "",
+                company=job.company_name or "",
+                location=job.location_normalized or "",
+                description=job.description_text,
+            )
+            if result:
+                job.german_requirement = result.get("german_requirement")
+                job.pm_type = result.get("pm_type")
+                job.b2b_saas = result.get("b2b_saas")
+                job.ai_focus = result.get("ai_focus")
+                job.ai_skills = result.get("ai_skills")
+                job.tools_skills = result.get("tools_skills")
+                job.llm_version = result.get("llm_version")
+                job.llm_confidence = result.get("llm_confidence")
+                job.llm_raw_json = result.get("llm_raw_json")
+                enriched_count += 1
+        logger.info(f"LLM enrichment complete: {enriched_count}/{len(normalized)} jobs enriched")
+
+        # 7. Upsert jobs
+        rows_new, rows_updated = upsert_jobs(normalized, run_id, today, dry_run)
+
+        if not dry_run:
+            # 7b. Raw records
+            upsert_raw_records(raw_records, run_id, dry_run)
+
+            # 7c. Source appearances
+            job_id_map = get_job_id_map([j.external_job_key for j in normalized])
+            upsert_source_appearances(normalized, job_id_map, run_id, today, dry_run)
+
+            # 8. Daily snapshots
+            write_snapshots(normalized, job_id_map, run_id, today, dry_run)
+
+            # 9. Mark stale jobs inactive
+            db = get_client()
+            db.rpc("mark_stale_jobs_inactive", {
+                "p_run_date": today.isoformat(),
+                "p_grace_days": config.ACTIVE_GRACE_DAYS,
+            }).execute()
+            logger.info("Marked stale jobs inactive")
+
+        # 10. Close run + post-run budget log
+        final_status = "completed" if set(active_sources) == set(all_sources) else "partial"
+        close_run(run_id, final_status, len(raw_records), rows_new, rows_updated, jsearch_requests_used)
+        log_jsearch_budget(today, jsearch_requests_used)
+        logger.info("=== Ingestion complete ===")
+
+    except Exception as e:
+        logger.exception(f"Fatal error during ingestion: {e}")
+        close_run(
+            run_id=run_id,
+            status="failed",
+            rows_fetched=len(raw_records),
+            rows_new=rows_new,
+            rows_updated=rows_updated,
+            jsearch_requests_used=jsearch_requests_used,
+            error_message=str(e)[:500]  # truncate to avoid DB overflow
         )
-        if result:
-            job.german_requirement = result.get("german_requirement")
-            job.pm_type = result.get("pm_type")
-            job.b2b_saas = result.get("b2b_saas")
-            job.ai_focus = result.get("ai_focus")
-            job.ai_skills = result.get("ai_skills")
-            job.tools_skills = result.get("tools_skills")
-            job.llm_version = result.get("llm_version")
-            job.llm_confidence = result.get("llm_confidence")
-            job.llm_raw_json = result.get("llm_raw_json")
-            enriched_count += 1
-    logger.info(f"LLM enrichment complete: {enriched_count}/{len(normalized)} jobs enriched")
-
-    # 7. Upsert jobs
-    rows_new, rows_updated = upsert_jobs(normalized, run_id, today, dry_run)
-
-    if not dry_run:
-        # 7b. Raw records
-        upsert_raw_records(raw_records, run_id, dry_run)
-
-        # 7c. Source appearances
-        job_id_map = get_job_id_map([j.external_job_key for j in normalized])
-        upsert_source_appearances(normalized, job_id_map, run_id, today, dry_run)
-
-        # 8. Daily snapshots
-        write_snapshots(normalized, job_id_map, run_id, today, dry_run)
-
-        # 9. Mark stale jobs inactive
-        db = get_client()
-        db.rpc("mark_stale_jobs_inactive", {
-            "p_run_date": today.isoformat(),
-            "p_grace_days": config.ACTIVE_GRACE_DAYS,
-        }).execute()
-        logger.info("Marked stale jobs inactive")
-
-    # 10. Close run + post-run budget log
-    final_status = "completed" if set(active_sources) == set(all_sources) else "partial"
-    close_run(run_id, final_status, len(raw_records), rows_new, rows_updated, jsearch_requests_used)
-    log_jsearch_budget(today, jsearch_requests_used)
-    logger.info("=== Ingestion complete ===")
+        raise e
 
 
 if __name__ == "__main__":

@@ -1,130 +1,182 @@
 {
   "seniority": [
     {
-      "label": "senior",
+      "label": "junior",
       "count": 2
     },
     {
+      "label": "mid",
+      "count": 30
+    },
+    {
+      "label": "senior",
+      "count": 22
+    },
+    {
+      "label": "lead",
+      "count": 2
+    },
+    {
+      "label": "staff",
+      "count": 1
+    },
+    {
+      "label": "principal",
+      "count": 4
+    },
+    {
       "label": "unknown",
-      "count": 12
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 12
+      "count": 46
+    },
+    {
+      "label": "hybrid",
+      "count": 18
+    },
+    {
+      "label": "onsite",
+      "count": 4
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 2
     },
     {
       "label": "remote",
-      "count": 2
+      "count": 1
     }
   ],
   "language": [
     {
-      "label": "de",
-      "count": 8
+      "label": "en",
+      "count": 37
     },
     {
-      "label": "en",
-      "count": 6
+      "label": "unknown",
+      "count": 29
+    },
+    {
+      "label": "de",
+      "count": 5
     }
   ],
   "german_requirement": [
     {
-      "label": "must",
-      "count": 8
-    },
-    {
       "label": "not_mentioned",
-      "count": 4
+      "count": 37
     },
     {
-      "label": "plus",
-      "count": 2
+      "label": "unclassified",
+      "count": 29
+    },
+    {
+      "label": "must",
+      "count": 5
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 7
+      "count": 9
     },
     {
       "label": "technical",
-      "count": 7
+      "count": 6
+    },
+    {
+      "label": "customer_facing",
+      "count": 10
+    },
+    {
+      "label": "platform",
+      "count": 5
+    },
+    {
+      "label": "data_ai",
+      "count": 11
+    },
+    {
+      "label": "growth",
+      "count": 2
     }
   ],
   "industry": [],
   "ai": {
-    "n_enriched": 14,
-    "n_ai_focus": 5,
-    "n_ai_skills": 5,
-    "ai_focus_pct": 36,
-    "ai_skills_pct": 36
+    "n_enriched": 43,
+    "n_ai_focus": 14,
+    "n_ai_skills": 14,
+    "ai_focus_pct": 33,
+    "ai_skills_pct": 33
   },
   "source": [
     {
-      "label": "arbeitnow",
-      "count": 12
+      "label": "ats",
+      "count": 66
     },
     {
-      "label": "jsearch",
-      "count": 2
+      "label": "arbeitnow",
+      "count": 5
     }
   ],
   "companies": {
     "top20": [
       {
+        "label": "Delivery Hero",
+        "count": 17
+      },
+      {
+        "label": "Contentful",
+        "count": 13
+      },
+      {
+        "label": "Scalable Capital",
+        "count": 12
+      },
+      {
+        "label": "SumUp",
+        "count": 7
+      },
+      {
+        "label": "Raisin",
+        "count": 6
+      },
+      {
+        "label": "GetYourGuide",
+        "count": 4
+      },
+      {
+        "label": "N26",
+        "count": 4
+      },
+      {
+        "label": "HelloFresh",
+        "count": 3
+      },
+      {
         "label": "Epikur Software GmbH & Co. KG",
         "count": 2
       },
       {
-        "label": "Flix",
-        "count": 2
-      },
-      {
-        "label": "AVS Services GmbH",
+        "label": "DOCMAiTE",
         "count": 1
       },
       {
-        "label": "Ordio GmbH",
-        "count": 1
-      },
-      {
-        "label": "K-tronik GmbH",
-        "count": 1
-      },
-      {
-        "label": "Privatize",
-        "count": 1
-      },
-      {
-        "label": "Forward Education GmbH",
-        "count": 1
-      },
-      {
-        "label": "IP Pilot",
-        "count": 1
-      },
-      {
-        "label": "Novanta",
-        "count": 1
-      },
-      {
-        "label": "Holzprofi24",
+        "label": "encoway GmbH",
         "count": 1
       },
       {
         "label": "Otark GmbH",
         "count": 1
-      },
-      {
-        "label": "Insurgo GmbH",
-        "count": 1
       }
     ],
     "n_companies": 12,
-    "top10_share": 12,
-    "top10_pct": 86,
-    "multi_hiring": 2
+    "top10_share": 69,
+    "top10_pct": 97,
+    "multi_hiring": 9
   }
 }
