@@ -137,6 +137,7 @@ def _job_to_db_row(job: NormalizedJob, run_date: date) -> dict:
         "first_seen_date": run_date.isoformat(),
         "last_seen_date": run_date.isoformat(),
         "is_active": True,
+        "pipeline_run_at": datetime.now(timezone.utc).isoformat(),
     }
 
 

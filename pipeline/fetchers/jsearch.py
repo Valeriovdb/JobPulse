@@ -36,7 +36,7 @@ def fetch() -> list[dict]:
                         "page": page,
                         "num_pages": 1,
                         "country": "de",
-                        "date_posted": "today",
+                        "date_posted": "3days",
                     },
                     timeout=30,
                 )
