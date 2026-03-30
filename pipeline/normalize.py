@@ -76,13 +76,18 @@ class NormalizedJob:
 
 # Order matters: more specific patterns first
 _SENIORITY_PATTERNS: list[tuple[str, str]] = [
+    # Multi-level / range patterns — must precede individual keywords
+    (r"\(senior\)\s+product|product\s+manager\s*/\s*senior\s+product", "mid_senior"),
+    # Standard levels
     (r"\bprincipal\b", "principal"),
     (r"\bstaff\b", "staff"),
     (r"\bhead\b", "head"),
     (r"\blead\b", "lead"),
-    (r"\bsenior\b|\bsr\b", "senior"),
-    (r"\bjunior\b|\bjr\b", "junior"),
+    (r"\bsenior\b|\bsr\.?\b", "senior"),
+    (r"\bjunior\b|\bjr\.?\b", "junior"),
     (r"\bmid[\s\-]?level\b|\bmid\b", "mid"),
+    # Plain PM title with no seniority prefix defaults to mid
+    (r"\bproduct\s+manager\b|\bproduct\s+owner\b", "mid"),
 ]
 
 
@@ -147,17 +152,83 @@ def _normalize_location(raw: str) -> tuple[str, bool, bool]:
 # Work mode normalization
 # ---------------------------------------------------------------------------
 
-def _normalize_work_mode(raw: str) -> Optional[str]:
+def _extract_hybrid_days(description: str) -> Optional[str]:
+    """Try to extract hybrid office-days-per-week from description text."""
+    if not description:
+        return None
+    d = description.lower()
+    if re.search(r"\b(2|two)\s+days?\s+(per|a|in the)\s+week|twice\s+a\s+week\s+in\s+(the\s+)?office", d):
+        return "hybrid_2d"
+    if re.search(r"\b(3|three)\s+days?\s+(per|a|in the)\s+week|three\s+times\s+a\s+week\s+in\s+(the\s+)?office", d):
+        return "hybrid_3d"
+    if re.search(r"\b(4|four)\s+days?\s+(per|a|in the)\s+week", d):
+        return "hybrid_4d"
+    if re.search(r"\b(1|one)\s+days?\s+(per|a|in the)\s+week|once\s+a\s+week\s+in\s+(the\s+)?office", d):
+        return "hybrid_1d"
+    return None
+
+
+def _normalize_work_mode(raw: str, description: str = "") -> str:
     if not raw:
-        return "unknown"
+        raw = ""
     r = raw.lower()
-    if "hybrid" in r:
-        return "hybrid"
+    d = description.lower() if description else ""
+
     if "remote" in r:
         return "remote"
+
+    if "hybrid" in r or "hybrid" in d:
+        freq = _extract_hybrid_days(d)
+        return freq if freq else "hybrid"
+
     if any(w in r for w in ("onsite", "on-site", "on site", "office", "presence")):
         return "onsite"
+
+    # Check description for work mode clues when raw is uninformative
+    if re.search(r"\bhybrid\b", d):
+        freq = _extract_hybrid_days(d)
+        return freq if freq else "hybrid"
+    if re.search(r"\bfully\s+remote\b|\b100%\s+remote\b|\bremote\s+first\b|\bremote[\s\-]only\b", d):
+        return "remote"
+    if re.search(r"\bin[\s\-]office\b|\bon[\s\-]site\b|\bonsite\b", d):
+        return "onsite"
+
     return "unknown"
+
+
+# ---------------------------------------------------------------------------
+# PM type deterministic pre-classification
+# ---------------------------------------------------------------------------
+
+# Rules evaluated in order; first match wins.
+# LLM enrichment will override these for jobs that have a description.
+_PM_TYPE_RULES: list[tuple[str, str]] = [
+    # Title-level signals (high confidence)
+    (r"technical\s+product\s+manager|technical\s+pm\b", "technical"),
+    (r"growth\s+product\s+manager|growth\s+pm\b|head\s+of\s+growth", "growth"),
+    (r"data\s+product\s+manager|analytics\s+pm\b|ai\s+product\s+manager|ml\s+product\s+manager", "data_ai"),
+    (r"platform\s+product\s+manager|platform\s+pm\b", "platform"),
+    (r"internal\s+tools\s+product|ops\s+product\s+manager", "internal_ops"),
+    # Keyword signals (lower confidence, from title + first part of description)
+    (r"\bplatform\b.*\b(api|infrastructure|developer|enablement)\b|\b(api|infrastructure|developer\s+tools)\b", "platform"),
+    (r"\bgrowth\b|\bacquisition\b|\bretention\b|\bactivation\b|\bconversion\b|\bfunnel\b", "growth"),
+    (r"\bdata\s+product\b|\bai\s+product\b|\bml\b|\bmachine\s+learning\b|\banalytics\s+product\b", "data_ai"),
+    (r"\bcustomer\s+(app|portal|experience|journey)\b|\bself[\s\-]service\b|\buser[\s\-]facing\b|\bconsumer\s+product\b", "customer_facing"),
+    (r"\binternal\s+tools\b|\bback[\s\-]?office\b|\bmerchant\s+(tools|portal)\b|\bops\s+product\b", "internal_ops"),
+]
+
+
+def _classify_pm_type(title: str, description: str = "") -> Optional[str]:
+    """
+    Rule-based pm_type classification. Returns None if no confident signal.
+    LLM enrichment will override this for jobs with a description.
+    """
+    # Use title + first 1500 chars of description for signal
+    text = (title or "").lower() + " " + (description or "")[:1500].lower()
+    for pattern, pm_type in _PM_TYPE_RULES:
+        if re.search(pattern, text):
+            return pm_type
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -298,7 +369,7 @@ def _from_jsearch(raw: dict) -> NormalizedJob:
     if raw.get("job_is_remote"):
         work_mode = "remote"
     else:
-        work_mode = _normalize_work_mode(work_mode_raw)
+        work_mode = _normalize_work_mode(work_mode_raw, description)
 
     posted_raw = raw.get("job_posted_at_timestamp") or raw.get("job_posted_at_datetime_utc")
 
@@ -323,6 +394,90 @@ def _from_jsearch(raw: dict) -> NormalizedJob:
         raw_posted_at=_parse_datetime(posted_raw),
         description_text=description or None,
         raw_payload=raw,
+        pm_type=_classify_pm_type(title_raw, description),
+    )
+
+
+def _from_ats(raw: dict) -> NormalizedJob:
+    """
+    Normalize a job from the ATS fetcher.
+    Handles Greenhouse, Lever, Ashby, SmartRecruiters (distinguished via _ats_platform).
+    """
+    platform = raw.get("_ats_platform", "")
+    slug = raw.get("_ats_slug", "")
+    company = raw.get("_company_name", "")
+
+    if platform == "greenhouse":
+        title_raw = raw.get("title", "")
+        description = raw.get("content", "") or ""
+        offices = raw.get("offices") or raw.get("location") or []
+        if isinstance(offices, list) and offices:
+            location_raw = offices[0].get("name", "") if isinstance(offices[0], dict) else str(offices[0])
+        elif isinstance(offices, dict):
+            location_raw = offices.get("name", "")
+        else:
+            location_raw = ""
+        canonical_url = raw.get("absolute_url") or f"https://boards.greenhouse.io/{slug}/jobs/{raw.get('id', '')}"
+        posted_raw = raw.get("updated_at") or raw.get("created_at")
+
+    elif platform == "lever":
+        title_raw = raw.get("text", "")
+        categories = raw.get("categories") or {}
+        location_raw = categories.get("location", "") or raw.get("workplaceType", "")
+        description = raw.get("descriptionPlain") or raw.get("description") or ""
+        canonical_url = raw.get("applyUrl") or raw.get("hostedUrl") or ""
+        posted_raw = raw.get("createdAt")
+        # Lever timestamps are milliseconds
+        if isinstance(posted_raw, (int, float)):
+            posted_raw = posted_raw / 1000
+
+    elif platform == "ashby":
+        title_raw = raw.get("title", "")
+        location_raw = raw.get("locationName") or (raw.get("primaryLocation") or {}).get("locationName", "")
+        description = raw.get("descriptionPlain") or raw.get("description") or ""
+        canonical_url = raw.get("jobUrl") or f"https://jobs.ashbyhq.com/{slug}/{raw.get('id', '')}"
+        posted_raw = raw.get("publishedDate")
+
+    elif platform == "smartrecruiters":
+        title_raw = raw.get("name", "")
+        loc = raw.get("location") or {}
+        location_raw = ", ".join(filter(None, [loc.get("city"), loc.get("country")]))
+        description = ""  # SR public listing API doesn't include description
+        canonical_url = raw.get("ref") or f"https://www.smartrecruiters.com/jobs/{raw.get('id', '')}"
+        posted_raw = raw.get("releasedDate") or raw.get("updatedOn")
+
+    else:
+        title_raw = raw.get("title") or raw.get("name") or ""
+        location_raw = ""
+        description = ""
+        canonical_url = ""
+        posted_raw = None
+
+    location_norm, is_berlin, is_remote_germany = _normalize_location(location_raw)
+    work_mode = _normalize_work_mode(location_raw, description)
+
+    return NormalizedJob(
+        external_job_key=raw["_external_job_key"],
+        source_provider="ats",
+        source_job_id=raw["_source_job_id"],
+        canonical_url=canonical_url or None,
+        company_name=company or None,
+        job_title_raw=title_raw,
+        job_title_normalized=_normalize_title(title_raw),
+        seniority=_normalize_seniority(title_raw),
+        location_raw=location_raw,
+        location_normalized=location_norm,
+        is_berlin=is_berlin,
+        is_remote_germany=is_remote_germany,
+        work_mode=work_mode,
+        posting_language=_detect_language(description),
+        publisher_type="company_site",
+        has_linkedin_apply_option=False,
+        has_company_site_apply_option=bool(canonical_url),
+        raw_posted_at=_parse_datetime(posted_raw),
+        description_text=description or None,
+        raw_payload=raw,
+        pm_type=_classify_pm_type(title_raw, description),
     )
 
 
@@ -341,7 +496,7 @@ def _from_arbeitnow(raw: dict) -> NormalizedJob:
         if not is_berlin:
             location_norm = "remote_germany"
     else:
-        work_mode = _normalize_work_mode(location_raw)
+        work_mode = _normalize_work_mode(location_raw, description)
 
     publisher_type = _normalize_publisher_type(canonical_url)
 
@@ -370,6 +525,7 @@ def _from_arbeitnow(raw: dict) -> NormalizedJob:
         raw_posted_at=_parse_datetime(posted_raw),
         description_text=description or None,
         raw_payload=raw,
+        pm_type=_classify_pm_type(title_raw, description),
     )
 
 
@@ -380,6 +536,7 @@ def _from_arbeitnow(raw: dict) -> NormalizedJob:
 _EXTRACTORS = {
     "jsearch": _from_jsearch,
     "arbeitnow": _from_arbeitnow,
+    "ats": _from_ats,
 }
 
 

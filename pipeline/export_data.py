@@ -198,11 +198,21 @@ def export_distributions(jobs: pd.DataFrame) -> None:
 
     # PM type
     enriched = jobs[jobs["pm_type"].notna()]
-    pm_order = ["core_pm", "technical", "growth", "data", "other"]
+    # Preferred display order; any extra values observed in data are appended at end
+    pm_order = [
+        "core_pm", "technical", "customer_facing", "platform",
+        "data_ai", "growth", "internal_ops", "unclassified",
+        # legacy values kept for backward compatibility
+        "data", "other",
+    ]
     pm_counts = enriched["pm_type"].value_counts()
+    all_pm_labels = list(pm_counts.index)
+    ordered = [k for k in pm_order if k in pm_counts] + [
+        k for k in all_pm_labels if k not in pm_order
+    ]
     pm_type = [
-        {"label": k, "count": int(pm_counts.get(k, 0))}
-        for k in pm_order
+        {"label": k, "count": int(pm_counts[k])}
+        for k in ordered
         if pm_counts.get(k, 0) > 0
     ]
 

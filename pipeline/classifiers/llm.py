@@ -9,7 +9,7 @@ the job is persisted without enrichment rather than dropped.
 
 Fields classified by LLM:
   german_requirement : must | plus | not_mentioned
-  pm_type            : core_pm | growth | technical | data | other
+  pm_type            : core_pm | technical | customer_facing | platform | data_ai | growth | internal_ops | unclassified
   b2b_saas           : true | false
   ai_focus           : true | false  (role has AI product focus)
   ai_skills          : true | false  (role requires AI/ML skills)
@@ -42,7 +42,7 @@ USER_PROMPT_TEMPLATE = """Classify this PM job posting. Return JSON with exactly
 
 {{
   "german_requirement": "must" | "plus" | "not_mentioned",
-  "pm_type": "core_pm" | "growth" | "technical" | "data" | "other",
+  "pm_type": "core_pm" | "technical" | "customer_facing" | "platform" | "data_ai" | "growth" | "internal_ops" | "unclassified",
   "b2b_saas": true | false,
   "ai_focus": true | false,
   "ai_skills": true | false,
@@ -57,11 +57,14 @@ Definitions:
   - "plus": German mentioned as nice-to-have, advantage, or bonus
   - "not_mentioned": German not mentioned at all
 - pm_type:
-  - "core_pm": general product management
-  - "growth": growth, acquisition, retention focus
-  - "technical": strong engineering/technical PM
-  - "data": data/analytics PM
-  - "other": other specialization
+  - "core_pm": general product management, no strong specialization
+  - "technical": strong technical/engineering focus, deep API or systems work
+  - "customer_facing": customer app, consumer product, self-service, client portal
+  - "platform": internal platform, developer tools, infrastructure, API enablement
+  - "data_ai": data product, analytics, ML, AI products
+  - "growth": growth, acquisition, activation, retention, conversion, funnel
+  - "internal_ops": internal tools, operations, admin systems, merchant or backoffice tooling
+  - "unclassified": role does not fit clearly into any of the above categories
 - b2b_saas: is this a B2B SaaS company / role?
 - ai_focus: does this role involve building AI/ML products?
 - ai_skills: does this role require AI/ML knowledge or experience?
@@ -118,9 +121,15 @@ def enrich(
     if german_req not in ("must", "plus", "not_mentioned"):
         german_req = None
 
+    _VALID_PM_TYPES = {
+        "core_pm", "technical", "customer_facing", "platform",
+        "data_ai", "growth", "internal_ops", "unclassified",
+    }
+    _PM_TYPE_REMAP = {"data": "data_ai", "other": "unclassified"}
     pm_type = result.get("pm_type")
-    if pm_type not in ("core_pm", "growth", "technical", "data", "other"):
-        pm_type = "other"
+    pm_type = _PM_TYPE_REMAP.get(pm_type, pm_type)
+    if pm_type not in _VALID_PM_TYPES:
+        pm_type = "unclassified"
 
     tools = result.get("tools_skills")
     if not isinstance(tools, list):

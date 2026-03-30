@@ -51,25 +51,42 @@ interface StatBarProps {
 }
 
 const DEFAULT_LABEL_MAP: Record<string, string> = {
+  // Language
   not_mentioned: 'No German required',
   plus: 'German is a plus',
   must: 'German required',
+  // Seniority
   junior: 'Junior',
   mid: 'Mid-level',
+  mid_senior: 'Mid / Senior',
   senior: 'Senior',
   lead: 'Lead',
   staff: 'Staff',
   principal: 'Principal',
   head: 'Head / Director',
-  unknown: 'Unclassified',
-  hybrid: 'Hybrid',
+  // Work mode
   remote: 'Remote',
+  hybrid: 'Hybrid',
+  hybrid_1d: 'Hybrid · 1 day/week',
+  hybrid_2d: 'Hybrid · 2 days/week',
+  hybrid_3d: 'Hybrid · 3 days/week',
+  hybrid_4d: 'Hybrid · 4 days/week',
   onsite: 'On-site',
+  // PM type (current)
   core_pm: 'Core PM',
   technical: 'Technical PM',
+  customer_facing: 'Customer-facing PM',
+  platform: 'Platform PM',
+  data_ai: 'Data / AI PM',
   growth: 'Growth PM',
+  internal_ops: 'Internal Tools PM',
+  // PM type (legacy — kept for backward compatibility with existing DB data)
   data: 'Data PM',
   other: 'Other',
+  // Generic
+  unknown: 'Unclassified',
+  unclassified: 'Unclassified',
+  // Sources
   en: 'English',
   de: 'German',
   jsearch: 'JSearch',
@@ -102,12 +119,14 @@ export function StatBar({ items, total, labelMap, showPct = true, barColor }: St
                 }}
               />
             </div>
-            <span className="text-sm text-white font-medium w-8 text-right shrink-0">
-              {item.count}
-            </span>
-            {showPct && (
-              <span className="text-2xs text-muted w-8 text-right shrink-0">
-                {pct}%
+            {showPct ? (
+              <span className="text-xs text-right shrink-0 tabular-nums w-20">
+                <span className="text-white font-medium">{item.count}</span>
+                <span className="text-muted"> · {pct}%</span>
+              </span>
+            ) : (
+              <span className="text-sm text-white font-medium w-8 text-right shrink-0 tabular-nums">
+                {item.count}
               </span>
             )}
           </div>
