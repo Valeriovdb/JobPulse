@@ -17,18 +17,27 @@ logger = logging.getLogger(__name__)
 
 BASE_URL = "https://www.arbeitnow.com/api/job-board-api"
 
-# Title must match one of these patterns to be kept.
-# Arbeitnow's tag filter is broad — this guards against noise.
+# Titles that must match to pass the PM filter.
 _PM_TITLE_PATTERN = re.compile(
-    r"product manager|product owner|head of product|vp product|"
-    r"director of product|chief product|produktmanager",
+    r"product manager|product owner|head of product|principal pm|group pm|"
+    r"technical product manager|growth product manager|"
+    r"produktmanager|produktowner",
+    re.IGNORECASE,
+)
+
+# Executive-scope titles excluded from MVP ingestion.
+# Mirrors the same rule in fetchers/ats.py — keep both in sync.
+_EXEC_TITLE_PATTERN = re.compile(
+    r"\bcpto\b|chief product officer|\bchief product\b|"
+    r"\bvp\s+of\s+product\b|\bvp\s+product\b|vice\s+president.*product|"
+    r"director\s+of\s+product|\bproduct\s+director\b",
     re.IGNORECASE,
 )
 
 
 def _is_pm_role(job: dict) -> bool:
     title = job.get("title", "")
-    return bool(_PM_TITLE_PATTERN.search(title))
+    return bool(_PM_TITLE_PATTERN.search(title)) and not bool(_EXEC_TITLE_PATTERN.search(title))
 
 
 def fetch() -> list[dict]:

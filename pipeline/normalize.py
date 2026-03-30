@@ -446,6 +446,25 @@ def _from_ats(raw: dict) -> NormalizedJob:
         canonical_url = raw.get("ref") or f"https://www.smartrecruiters.com/jobs/{raw.get('id', '')}"
         posted_raw = raw.get("releasedDate") or raw.get("updatedOn")
 
+    elif platform == "personio":
+        # Parsed from XML feed; all fields are pre-extracted strings by the fetcher
+        title_raw = raw.get("name") or raw.get("title") or ""
+        location_raw = raw.get("location") or ""
+        description = ""  # XML feed does not include description text
+        canonical_url = raw.get("_canonical_url_override") or ""
+        posted_raw = raw.get("createdAt") or raw.get("created_at")
+
+    elif platform == "gem":
+        title_raw = raw.get("title") or raw.get("name") or ""
+        loc = raw.get("location") or {}
+        if isinstance(loc, dict):
+            location_raw = loc.get("name") or loc.get("city") or ""
+        else:
+            location_raw = str(loc)
+        description = raw.get("description") or raw.get("body") or ""
+        canonical_url = raw.get("_canonical_url_override") or raw.get("url") or raw.get("job_url") or ""
+        posted_raw = raw.get("created_at") or raw.get("published_at")
+
     else:
         title_raw = raw.get("title") or raw.get("name") or ""
         location_raw = ""

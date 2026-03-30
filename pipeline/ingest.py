@@ -2,14 +2,16 @@
 JobPulse ingestion orchestrator.
 
 Run order:
-  1. Open ingestion run
-  2. Fetch from all sources
-  3. Normalize each record
-  4. LLM-enrich new/unenriched jobs
-  5. Upsert to jobs + raw_job_records + job_source_appearances
-  6. Write daily snapshots
-  7. Mark stale jobs inactive
-  8. Close ingestion run
+  1. Check JSearch monthly budget
+  2. Open ingestion run
+  3. Fetch from all sources (ATS, Arbeitnow, JSearch)
+  4. Normalize each record
+  5. Cross-source deduplication (ATS > Arbeitnow > JSearch)
+  6. LLM-enrich new/unenriched jobs
+  7. Upsert to jobs + raw_job_records + job_source_appearances
+  8. Write daily snapshots
+  9. Mark stale jobs inactive
+  10. Close ingestion run
 
 Usage:
   python -m pipeline.ingest [--dry-run]
@@ -17,13 +19,15 @@ Usage:
 import argparse
 import json
 import logging
+import re
 import sys
+import urllib.parse
 from datetime import date, datetime, timezone
 from typing import Optional
 
 from pipeline import config
 from pipeline.db import get_client
-from pipeline.fetchers import jsearch, arbeitnow
+from pipeline.fetchers import jsearch, arbeitnow, ats
 from pipeline.normalize import normalize, NormalizedJob
 from pipeline.classifiers import llm
 
@@ -63,6 +67,7 @@ def close_run(
     rows_fetched: int,
     rows_new: int,
     rows_updated: int,
+    jsearch_requests_used: int = 0,
     error_message: Optional[str] = None,
 ) -> None:
     db = get_client()
@@ -71,32 +76,168 @@ def close_run(
         "rows_fetched": rows_fetched,
         "rows_new": rows_new,
         "rows_updated": rows_updated,
+        "jsearch_requests_used": jsearch_requests_used,
         "error_message": error_message,
         "completed_at": datetime.now(timezone.utc).isoformat(),
     }).eq("run_id", run_id).execute()
-    logger.info(f"Closed run {run_id}: status={status}, fetched={rows_fetched}, new={rows_new}, updated={rows_updated}")
+    logger.info(
+        f"Closed run {run_id}: status={status}, fetched={rows_fetched}, "
+        f"new={rows_new}, updated={rows_updated}, jsearch_requests={jsearch_requests_used}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# JSearch monthly budget
+# ---------------------------------------------------------------------------
+
+def get_jsearch_monthly_usage(run_date: date) -> int:
+    """
+    Query ingestion_runs for the sum of jsearch_requests_used in the current month.
+    """
+    db = get_client()
+    month_start = run_date.replace(day=1).isoformat()
+    try:
+        resp = (
+            db.table("ingestion_runs")
+            .select("jsearch_requests_used")
+            .gte("run_date", month_start)
+            .lte("run_date", run_date.isoformat())
+            .execute()
+        )
+        return sum(r.get("jsearch_requests_used") or 0 for r in resp.data)
+    except Exception as e:
+        logger.warning(f"Could not query JSearch monthly usage: {e}")
+        return 0
+
+
+def log_jsearch_budget(run_date: date, requests_this_run: int = 0) -> None:
+    """Log current monthly JSearch API usage against the budget."""
+    used_before = get_jsearch_monthly_usage(run_date)
+    used_after = used_before + requests_this_run
+    budget = config.JSEARCH_MONTHLY_SCHEDULED_BUDGET
+    remaining = budget - used_after
+    logger.info(
+        f"JSearch monthly budget: {used_after}/{budget} used "
+        f"({requests_this_run} this run, {remaining} remaining)"
+    )
+    if remaining < config.JSEARCH_REQUESTS_PER_RUN * 3:
+        logger.warning(
+            f"JSearch budget low: {remaining} requests remaining this month "
+            f"(~{remaining // config.JSEARCH_REQUESTS_PER_RUN} runs left)"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Cross-source deduplication
+# ---------------------------------------------------------------------------
+
+def _normalize_url_for_dedup(url: str) -> str:
+    """Normalize a canonical URL for cross-source comparison."""
+    if not url:
+        return ""
+    try:
+        parsed = urllib.parse.urlparse(url.lower().strip())
+        params = dict(urllib.parse.parse_qsl(parsed.query))
+        # Strip tracking query params
+        tracking_prefixes = ("utm_", "ref", "source", "tracking", "trk", "gh_src")
+        clean_params = {k: v for k, v in params.items() if not any(k.startswith(p) for p in tracking_prefixes)}
+        clean_query = urllib.parse.urlencode(sorted(clean_params.items()))
+        clean = parsed._replace(query=clean_query, fragment="")
+        return urllib.parse.urlunparse(clean).rstrip("/")
+    except Exception:
+        return url.lower().strip().rstrip("/")
+
+
+def deduplicate_by_source_priority(
+    jobs: list[NormalizedJob],
+) -> tuple[list[NormalizedJob], int]:
+    """
+    Within a batch of normalized jobs, keep only the highest-priority source
+    for each unique canonical URL (ATS > Arbeitnow > JSearch).
+
+    Returns (deduplicated_jobs, duplicates_dropped).
+    """
+    url_winners: dict[str, NormalizedJob] = {}
+    no_url_jobs: list[NormalizedJob] = []
+
+    for job in jobs:
+        url = _normalize_url_for_dedup(job.canonical_url or "")
+        if not url:
+            no_url_jobs.append(job)
+            continue
+
+        if url not in url_winners:
+            url_winners[url] = job
+        else:
+            existing = url_winners[url]
+            existing_priority = config.SOURCE_PRIORITY.get(existing.source_provider, 0)
+            new_priority = config.SOURCE_PRIORITY.get(job.source_provider, 0)
+            if new_priority > existing_priority:
+                logger.debug(
+                    f"Dedup: {job.source_provider} wins over {existing.source_provider} "
+                    f"for URL {url[:80]}"
+                )
+                url_winners[url] = job
+
+    deduplicated = list(url_winners.values()) + no_url_jobs
+    dropped = len(jobs) - len(deduplicated)
+    if dropped:
+        logger.info(f"Cross-source dedup: {dropped} duplicate(s) dropped (lower-priority sources)")
+    return deduplicated, dropped
 
 
 # ---------------------------------------------------------------------------
 # Fetch phase
 # ---------------------------------------------------------------------------
 
-def fetch_all() -> tuple[list[dict], list[str]]:
-    """Fetch from all sources. Returns (raw_records, active_sources)."""
+def fetch_all() -> tuple[list[dict], list[str], int]:
+    """
+    Fetch from all sources.
+    Returns (raw_records, active_sources, jsearch_budget_used).
+    jsearch_budget_used excludes 429-rejected requests (not consumed against quota).
+    """
     raw: list[dict] = []
     active_sources: list[str] = []
+    jsearch_budget_used = 0
 
-    for source_name, fetch_fn in [("jsearch", jsearch.fetch), ("arbeitnow", arbeitnow.fetch)]:
-        try:
-            records = fetch_fn()
-            raw.extend(records)
-            active_sources.append(source_name)
-            logger.info(f"{source_name}: fetched {len(records)} records")
-        except Exception as e:
-            logger.error(f"{source_name}: fetch failed — {e}")
-            # continue with other sources; run will be marked 'partial'
+    # ATS first (highest priority — fetched before others for dedup)
+    try:
+        ats_records = ats.fetch()
+        raw.extend(ats_records)
+        active_sources.append("ats")
+        logger.info(f"ats: fetched {len(ats_records)} records")
+    except Exception as e:
+        logger.error(f"ats: fetch failed — {e}")
 
-    return raw, active_sources
+    # Arbeitnow
+    try:
+        arbeitnow_records = arbeitnow.fetch()
+        raw.extend(arbeitnow_records)
+        active_sources.append("arbeitnow")
+        logger.info(f"arbeitnow: fetched {len(arbeitnow_records)} records")
+    except Exception as e:
+        logger.error(f"arbeitnow: fetch failed — {e}")
+
+    # JSearch — returns (jobs, stats dict)
+    try:
+        jsearch_records, jsearch_stats = jsearch.fetch()
+        jsearch_budget_used = jsearch_stats["budget_used"]
+        raw.extend(jsearch_records)
+        active_sources.append("jsearch")
+        if jsearch_stats["rate_limited"]:
+            logger.warning(
+                f"jsearch: {jsearch_stats['rate_limited']} request(s) rate limited (429) — "
+                f"not counted against monthly budget"
+            )
+        logger.info(
+            f"jsearch: {len(jsearch_records)} records | "
+            f"attempted={jsearch_stats['attempted']} successful={jsearch_stats['successful']} "
+            f"rate_limited={jsearch_stats['rate_limited']} budget_used={jsearch_budget_used}"
+        )
+    except Exception as e:
+        logger.error(f"jsearch: fetch failed — {e}")
+
+    return raw, active_sources, jsearch_budget_used
 
 
 # ---------------------------------------------------------------------------
@@ -341,19 +482,22 @@ def run(dry_run: bool = False) -> None:
     today = date.today()
     logger.info(f"=== JobPulse ingestion — {today} (dry_run={dry_run}) ===")
 
-    # 1. Open run
-    run_id = open_run(today, ["jsearch", "arbeitnow"], dry_run)
+    # 1. JSearch budget check (pre-run)
+    log_jsearch_budget(today)
 
-    # 2. Fetch
-    raw_records, active_sources = fetch_all()
-    status = "partial" if len(active_sources) < 2 else "started"
+    # 2. Open run
+    all_sources = ["ats", "jsearch", "arbeitnow"]
+    run_id = open_run(today, all_sources, dry_run)
+
+    # 3. Fetch
+    raw_records, active_sources, jsearch_requests_used = fetch_all()
 
     if not raw_records:
         logger.warning("No records fetched from any source")
-        close_run(run_id, "failed", 0, 0, 0, "No records fetched")
+        close_run(run_id, "failed", 0, 0, 0, jsearch_requests_used, "No records fetched")
         return
 
-    # 3. Normalize
+    # 4. Normalize
     normalized: list[NormalizedJob] = []
     for raw in raw_records:
         job = normalize(raw)
@@ -361,7 +505,11 @@ def run(dry_run: bool = False) -> None:
             normalized.append(job)
     logger.info(f"Normalized {len(normalized)}/{len(raw_records)} records")
 
-    # 4. LLM enrichment (only jobs with description text)
+    # 5. Cross-source deduplication
+    normalized, dedup_dropped = deduplicate_by_source_priority(normalized)
+    logger.info(f"After dedup: {len(normalized)} jobs ({dedup_dropped} duplicates removed)")
+
+    # 6. LLM enrichment (only jobs with description text)
     enriched_count = 0
     for job in normalized:
         if not job.description_text:
@@ -379,28 +527,27 @@ def run(dry_run: bool = False) -> None:
             job.ai_focus = result.get("ai_focus")
             job.ai_skills = result.get("ai_skills")
             job.tools_skills = result.get("tools_skills")
-            # Attach LLM metadata directly to the job object for persistence
             job.llm_version = result.get("llm_version")
             job.llm_confidence = result.get("llm_confidence")
             job.llm_raw_json = result.get("llm_raw_json")
             enriched_count += 1
     logger.info(f"LLM enrichment complete: {enriched_count}/{len(normalized)} jobs enriched")
 
-    # 5. Upsert jobs
+    # 7. Upsert jobs
     rows_new, rows_updated = upsert_jobs(normalized, run_id, today, dry_run)
 
     if not dry_run:
-        # 5b. Raw records
+        # 7b. Raw records
         upsert_raw_records(raw_records, run_id, dry_run)
 
-        # 5c. Source appearances
+        # 7c. Source appearances
         job_id_map = get_job_id_map([j.external_job_key for j in normalized])
         upsert_source_appearances(normalized, job_id_map, run_id, today, dry_run)
 
-        # 6. Daily snapshots
+        # 8. Daily snapshots
         write_snapshots(normalized, job_id_map, run_id, today, dry_run)
 
-        # 7. Mark stale jobs inactive
+        # 9. Mark stale jobs inactive
         db = get_client()
         db.rpc("mark_stale_jobs_inactive", {
             "p_run_date": today.isoformat(),
@@ -408,9 +555,10 @@ def run(dry_run: bool = False) -> None:
         }).execute()
         logger.info("Marked stale jobs inactive")
 
-    # 8. Close run
-    final_status = "completed" if active_sources == ["jsearch", "arbeitnow"] else "partial"
-    close_run(run_id, final_status, len(raw_records), rows_new, rows_updated)
+    # 10. Close run + post-run budget log
+    final_status = "completed" if set(active_sources) == set(all_sources) else "partial"
+    close_run(run_id, final_status, len(raw_records), rows_new, rows_updated, jsearch_requests_used)
+    log_jsearch_budget(today, jsearch_requests_used)
     logger.info("=== Ingestion complete ===")
 
 
