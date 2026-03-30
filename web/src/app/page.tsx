@@ -5,10 +5,10 @@ import { StatBar, StackedBar } from '@/components/stat-bar'
 
 function languageItems(lang: { en_none: number; en_plus: number; en_must: number; de: number }) {
   return [
-    { label: 'No German required', count: lang.en_none, color: '#4ade80' },
-    { label: 'German is a plus', count: lang.en_plus, color: '#60a5fa' },
-    { label: 'German required', count: lang.en_must, color: '#fb923c' },
-    { label: 'German posting', count: lang.de, color: '#818cf8' },
+    { label: 'English · No German', count: lang.en_none, color: '#4ade80' },
+    { label: 'English · German a Plus', count: lang.en_plus, color: '#2dd4bf' },
+    { label: 'English · German Required', count: lang.en_must, color: '#60a5fa' },
+    { label: 'German Posting', count: lang.de, color: '#818cf8' },
   ].filter((i) => i.count > 0)
 }
 
@@ -16,7 +16,7 @@ function locationItems(loc: { berlin: number; remote_germany: number; unclear: n
   return [
     { label: 'Berlin on-site', count: loc.berlin, color: '#818cf8' },
     { label: 'Remote Germany', count: loc.remote_germany, color: '#60a5fa' },
-    { label: 'Location unclear', count: loc.unclear, color: '#404040' },
+    { label: 'Location unclear', count: loc.unclear, color: '#fb923c' },
   ].filter((i) => i.count > 0)
 }
 
@@ -90,13 +90,22 @@ export default function OverviewPage() {
   const pmTypeItems = pm_type.map((item, i) => ({
     label: PM_TYPE_LABELS[item.label] ?? item.label,
     count: item.count,
-    color: ['#818cf8', '#60a5fa', '#4ade80', '#fb923c', '#737373'][i % 5],
+    color: ['#818cf8', '#60a5fa', '#2dd4bf', '#4ade80', '#fb923c'][i % 5],
   }))
 
   const industryItems = industry.slice(0, 8).map((item, i) => ({
     label: item.label,
     count: item.count,
-    color: ['#818cf8', '#60a5fa', '#4ade80', '#fb923c', '#f472b6', '#a78bfa', '#34d399', '#737373'][i % 8],
+    color: [
+      '#818cf8',
+      '#60a5fa',
+      '#2dd4bf',
+      '#4ade80',
+      '#fb923c',
+      '#f472b6',
+      '#a78bfa',
+      '#34d399',
+    ][i % 8],
   }))
 
   const classifiedLocation = overview.location.berlin + overview.location.remote_germany
