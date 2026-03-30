@@ -4,12 +4,12 @@
   "n_new_week": 71,
   "senior_pct": 41,
   "median_age_days": 0,
-  "accessible_pct": 52,
+  "accessible_pct": 49,
   "entry_pct": 45,
   "language": {
-    "en_none": 37,
-    "en_plus": 0,
-    "en_must": 0,
+    "en_none": 35,
+    "en_plus": 1,
+    "en_must": 1,
     "de": 5
   },
   "location": {

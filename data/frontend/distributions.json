@@ -68,7 +68,7 @@
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 37
+      "count": 36
     },
     {
       "label": "unclassified",
@@ -77,6 +77,10 @@
     {
       "label": "must",
       "count": 5
+    },
+    {
+      "label": "plus",
+      "count": 1
     }
   ],
   "pm_type": [
@@ -86,7 +90,7 @@
     },
     {
       "label": "technical",
-      "count": 6
+      "count": 5
     },
     {
       "label": "customer_facing",
@@ -94,7 +98,7 @@
     },
     {
       "label": "platform",
-      "count": 5
+      "count": 6
     },
     {
       "label": "data_ai",
@@ -109,9 +113,9 @@
   "ai": {
     "n_enriched": 43,
     "n_ai_focus": 14,
-    "n_ai_skills": 14,
+    "n_ai_skills": 13,
     "ai_focus_pct": 33,
-    "ai_skills_pct": 33
+    "ai_skills_pct": 30
   },
   "source": [
     {
@@ -162,11 +166,11 @@
         "count": 2
       },
       {
-        "label": "DOCMAiTE",
+        "label": "encoway GmbH",
         "count": 1
       },
       {
-        "label": "encoway GmbH",
+        "label": "DOCMAiTE",
         "count": 1
       },
       {
