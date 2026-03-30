@@ -1,0 +1,80 @@
+export interface Metadata {
+  last_updated: string
+  generated_at: string
+  scope: string
+  role_type: string
+}
+
+export interface Overview {
+  last_updated: string
+  n_active: number
+  n_new_week: number
+  senior_pct: number
+  median_age_days: number
+  accessible_pct: number
+  entry_pct: number
+  language: {
+    en_none: number
+    en_plus: number
+    en_must: number
+    de: number
+  }
+  location: {
+    berlin: number
+    remote_germany: number
+    unclear: number
+  }
+}
+
+export interface DistributionItem {
+  label: string
+  count: number
+}
+
+export interface Distributions {
+  seniority: DistributionItem[]
+  work_mode: DistributionItem[]
+  language: DistributionItem[]
+  german_requirement: DistributionItem[]
+  pm_type: DistributionItem[]
+  industry: DistributionItem[]
+  ai: {
+    n_enriched: number
+    n_ai_focus: number
+    n_ai_skills: number
+    ai_focus_pct: number
+    ai_skills_pct: number
+  }
+  source: DistributionItem[]
+  companies: {
+    top20: DistributionItem[]
+    n_companies: number
+    top10_share: number
+    top10_pct: number
+    multi_hiring: number
+  }
+}
+
+export interface TimeseriesPoint {
+  date: string
+  count: number
+}
+
+export interface Timeseries {
+  new_per_day: TimeseriesPoint[]
+  active_per_day: TimeseriesPoint[]
+  lifespan?: {
+    median_days: number
+    mean_days: number
+    pct_gone_week: number
+    n_inactive: number
+  }
+  seniority_mix?: {
+    dates: string[]
+    series: Record<string, number[]>
+  }
+  german_req_mix?: {
+    dates: string[]
+    series: Record<string, number[]>
+  }
+}
