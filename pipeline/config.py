@@ -30,6 +30,7 @@ JSEARCH_QUERIES = [
     "Senior Product Manager remote Germany",
 ]
 JSEARCH_MAX_PAGES = int(os.getenv("JSEARCH_MAX_PAGES", "3"))  # pages per query
+JSEARCH_DATE_POSTED = os.getenv("JSEARCH_DATE_POSTED", "3days")
 
 # --- Arbeitnow config ---
 ARBEITNOW_TAGS = ["product-management"]  # tag filter on Arbeitnow API

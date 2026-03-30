@@ -9,7 +9,7 @@ extra keys injected for traceability:
 """
 import logging
 import requests
-from pipeline.config import RAPIDAPI_KEY, JSEARCH_HOST, JSEARCH_QUERIES, JSEARCH_MAX_PAGES
+from pipeline.config import RAPIDAPI_KEY, JSEARCH_HOST, JSEARCH_QUERIES, JSEARCH_MAX_PAGES, JSEARCH_DATE_POSTED
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ def fetch() -> list[dict]:
                         "page": page,
                         "num_pages": 1,
                         "country": "de",
-                        "date_posted": "3days",
+                        "date_posted": JSEARCH_DATE_POSTED,
                     },
                     timeout=30,
                 )

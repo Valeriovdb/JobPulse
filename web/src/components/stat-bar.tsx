@@ -4,6 +4,44 @@ interface StatBarItem {
   color?: string
 }
 
+export function StackedBar({ items, total }: { items: StatBarItem[]; total?: number }) {
+  if (!items.length) return null
+  const sum = total ?? items.reduce((acc, i) => acc + i.count, 0)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex h-2.5 rounded-full overflow-hidden gap-px">
+        {items.map((item) => {
+          const pct = sum > 0 ? (item.count / sum) * 100 : 0
+          if (pct === 0) return null
+          return (
+            <div
+              key={item.label}
+              title={`${item.label}: ${Math.round(pct)}%`}
+              style={{ width: `${pct}%`, backgroundColor: item.color ?? '#818cf8' }}
+            />
+          )
+        })}
+      </div>
+      <div className="flex flex-wrap gap-x-5 gap-y-2">
+        {items.map((item) => {
+          const pct = sum > 0 ? Math.round((item.count / sum) * 100) : 0
+          return (
+            <div key={item.label} className="flex items-center gap-2">
+              <span
+                className="w-2 h-2 rounded-full shrink-0"
+                style={{ backgroundColor: item.color ?? '#818cf8' }}
+              />
+              <span className="text-xs text-muted">{item.label}</span>
+              <span className="text-xs text-white font-medium tabular-nums">{pct}%</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 interface StatBarProps {
   items: StatBarItem[]
   total?: number

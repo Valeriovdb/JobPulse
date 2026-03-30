@@ -14,7 +14,7 @@ const config: Config = {
         'accent-dim': '#4f46e5',
         positive: '#4ade80',
         warning: '#fb923c',
-        muted: '#737373',
+        muted: '#8a8a8a',
         subtle: '#404040',
       },
       fontFamily: {

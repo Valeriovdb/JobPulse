@@ -1,15 +1,19 @@
 interface SectionProps {
   title: string
   description?: string
+  meta?: string
   children: React.ReactNode
   className?: string
 }
 
-export function Section({ title, description, children, className }: SectionProps) {
+export function Section({ title, description, meta, children, className }: SectionProps) {
   return (
     <section className={['mt-12', className].filter(Boolean).join(' ')}>
       <div className="mb-5">
-        <h2 className="text-base font-semibold text-white">{title}</h2>
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="text-base font-semibold text-white">{title}</h2>
+          {meta && <span className="text-2xs text-subtle shrink-0">{meta}</span>}
+        </div>
         {description && (
           <p className="text-sm text-muted mt-1">{description}</p>
         )}

@@ -12,6 +12,12 @@ on:
         default: "false"
         type: choice
         options: ["true", "false"]
+      date_posted:
+        description: "JSearch date window — use 'week' to backfill last 7 days"
+        required: false
+        default: "3days"
+        type: choice
+        options: ["today", "3days", "week", "month"]
 
 jobs:
   ingest:
@@ -43,6 +49,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          JSEARCH_DATE_POSTED: ${{ github.event.inputs.date_posted || '3days' }}
           CLASSIFIER_VERSION: "v1"
           ACTIVE_GRACE_DAYS: "1"
         run: python -m pipeline.ingest

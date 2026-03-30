@@ -53,7 +53,7 @@ export function Nav({ lastUpdated }: NavProps) {
 
         {lastUpdated && (
           <span className="text-2xs text-muted shrink-0 hidden sm:block">
-            Updated {formatUpdated(lastUpdated)}
+            Last refresh: {formatUpdated(lastUpdated)}
           </span>
         )}
       </div>

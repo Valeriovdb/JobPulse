@@ -276,6 +276,11 @@ def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
         .rename(columns={"first_seen_date": "date", "job_id": "count"})
         .sort_values("date")
     )
+    # Drop the first date if it looks like a bulk import (count > 2× median of subsequent days)
+    if len(new_per_day) > 2:
+        rest_median = new_per_day.iloc[1:]["count"].median()
+        if rest_median > 0 and new_per_day.iloc[0]["count"] > 2 * rest_median:
+            new_per_day = new_per_day.iloc[1:]
     result["new_per_day"] = [
         {"date": row["date"].date().isoformat(), "count": int(row["count"])}
         for _, row in new_per_day.iterrows()
@@ -291,6 +296,11 @@ def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
             .rename(columns={"job_id": "count"})
             .sort_values("snapshot_date")
         )
+        # Drop the first snapshot date if it aligns with a bulk import spike
+        if len(active_per_day) > 2:
+            rest_median = active_per_day.iloc[1:]["count"].median()
+            if rest_median > 0 and active_per_day.iloc[0]["count"] > 2 * rest_median:
+                active_per_day = active_per_day.iloc[1:]
         result["active_per_day"] = [
             {"date": row["snapshot_date"].date().isoformat(), "count": int(row["count"])}
             for _, row in active_per_day.iterrows()
