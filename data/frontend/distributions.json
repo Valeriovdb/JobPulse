@@ -2,45 +2,45 @@
   "seniority": [
     {
       "label": "senior",
-      "count": 4
+      "count": 2
     },
     {
       "label": "unknown",
-      "count": 10
+      "count": 12
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 13
+      "count": 12
     },
     {
       "label": "remote",
-      "count": 1
+      "count": 2
     }
   ],
   "language": [
     {
-      "label": "en",
-      "count": 9
+      "label": "de",
+      "count": 8
     },
     {
-      "label": "de",
-      "count": 5
+      "label": "en",
+      "count": 6
     }
   ],
   "german_requirement": [
     {
       "label": "must",
-      "count": 6
+      "count": 8
     },
     {
       "label": "not_mentioned",
-      "count": 5
+      "count": 4
     },
     {
       "label": "plus",
-      "count": 3
+      "count": 2
     }
   ],
   "pm_type": [
@@ -50,56 +50,39 @@
     },
     {
       "label": "technical",
-      "count": 6
-    },
-    {
-      "label": "other",
-      "count": 1
+      "count": 7
     }
   ],
-  "industry": [
-    {
-      "label": "mobility",
-      "count": 1
-    }
-  ],
+  "industry": [],
   "ai": {
     "n_enriched": 14,
-    "n_ai_focus": 6,
-    "n_ai_skills": 6,
-    "ai_focus_pct": 43,
-    "ai_skills_pct": 43
+    "n_ai_focus": 5,
+    "n_ai_skills": 5,
+    "ai_focus_pct": 36,
+    "ai_skills_pct": 36
   },
   "source": [
     {
       "label": "arbeitnow",
-      "count": 9
+      "count": 12
     },
     {
       "label": "jsearch",
-      "count": 5
+      "count": 2
     }
   ],
   "companies": {
     "top20": [
       {
+        "label": "Epikur Software GmbH & Co. KG",
+        "count": 2
+      },
+      {
         "label": "Flix",
         "count": 2
       },
       {
-        "label": "Personio",
-        "count": 1
-      },
-      {
-        "label": "Doctolib",
-        "count": 1
-      },
-      {
         "label": "AVS Services GmbH",
-        "count": 1
-      },
-      {
-        "label": "Visable GmbH",
         "count": 1
       },
       {
@@ -107,19 +90,19 @@
         "count": 1
       },
       {
-        "label": "Privatize",
-        "count": 1
-      },
-      {
         "label": "K-tronik GmbH",
         "count": 1
       },
       {
-        "label": "IP Pilot",
+        "label": "Privatize",
         "count": 1
       },
       {
         "label": "Forward Education GmbH",
+        "count": 1
+      },
+      {
+        "label": "IP Pilot",
         "count": 1
       },
       {
@@ -131,13 +114,17 @@
         "count": 1
       },
       {
-        "label": "PALTRON GmbH",
+        "label": "Otark GmbH",
+        "count": 1
+      },
+      {
+        "label": "Insurgo GmbH",
         "count": 1
       }
     ],
-    "n_companies": 13,
-    "top10_share": 11,
-    "top10_pct": 79,
-    "multi_hiring": 1
+    "n_companies": 12,
+    "top10_share": 12,
+    "top10_pct": 86,
+    "multi_hiring": 2
   }
 }
