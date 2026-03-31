@@ -55,6 +55,25 @@ export interface Distributions {
   }
 }
 
+// --- Job (job-level records for drill-down) ---
+
+export interface Job {
+  id: string
+  title?: string
+  company?: string
+  url?: string
+  location: 'berlin' | 'remote_germany' | 'unclear'
+  work_mode: string
+  seniority: string
+  language: 'en' | 'de' | 'unknown'
+  german_req: 'not_mentioned' | 'plus' | 'must' | 'unclassified'
+  pm_type: string | null
+  ai_focus: boolean
+  ai_skills: boolean
+  first_seen_date: string | null
+  industry: string | null
+}
+
 // --- Experience tags ---
 
 export interface ExperienceTag {
