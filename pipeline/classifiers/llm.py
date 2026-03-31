@@ -126,9 +126,10 @@ Definitions:
   - "hybrid_2d": hybrid with 2 days/week in office — "2 Tage im Büro", "twice a week in office", "2 days per week on-site"
   - "hybrid_3d": hybrid with 3 days/week in office — "3 Tage im Büro", "3 days per week on-site"
   - "hybrid_4d": hybrid with 4 days/week in office — "4 Tage im Büro", "4 days per week on-site"
-  - "hybrid": hybrid but days per week not specified — "hybrid", "flexibles Arbeiten", "Homeoffice möglich", "teilweise remote"
-  - "onsite": fully in-office, on-site required, "vor Ort", "im Büro", "Präsenz erforderlich", "office-based", no remote option mentioned
-  - "unknown": work arrangement is not mentioned or cannot be determined from the posting
+  - "hybrid": hybrid but days per week not specified — "hybrid", "flexibles Arbeiten", "Homeoffice möglich", "teilweise remote", "flexible working", "work from home options"
+  - "onsite": fully in-office, on-site required, "vor Ort", "im Büro", "Präsenz erforderlich", "office-based", no remote option mentioned. Also use this if the posting describes office perks, mentions a specific office location (e.g. "our Berlin office"), or describes in-person collaboration without mentioning any remote/hybrid option.
+  - "unknown": use ONLY as a last resort when the posting truly contains zero clues about work arrangement. Try hard to infer from indirect signals before defaulting to unknown.
+  Inference tips: mentions of "office", "team lunches", "on-site perks", "commuter benefits", "Büro" suggest onsite. Mentions of "flexibility", "work from anywhere some days", "Homeoffice" suggest hybrid. If a Berlin office is mentioned and no remote option is stated, lean toward onsite rather than unknown.
 - pm_type:
   - "core_pm": general product management, no strong specialization
   - "technical": strong technical/engineering focus, deep API or systems work
