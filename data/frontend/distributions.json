@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 25
+      "count": 34
     },
     {
       "label": "mid_senior",
@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 22
+      "count": 24
     },
     {
       "label": "lead",
@@ -22,7 +22,7 @@
     },
     {
       "label": "staff",
-      "count": 1
+      "count": 2
     },
     {
       "label": "group",
@@ -34,35 +34,35 @@
     },
     {
       "label": "unknown",
-      "count": 1
+      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 46
+      "count": 54
     },
     {
       "label": "hybrid",
-      "count": 18
+      "count": 20
     },
     {
       "label": "onsite",
       "count": 4
     },
     {
-      "label": "hybrid_3d",
-      "count": 2
+      "label": "remote",
+      "count": 4
     },
     {
-      "label": "remote",
-      "count": 1
+      "label": "hybrid_3d",
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 37
+      "count": 44
     },
     {
       "label": "unknown",
@@ -70,13 +70,13 @@
     },
     {
       "label": "de",
-      "count": 5
+      "count": 11
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 36
+      "count": 42
     },
     {
       "label": "unclassified",
@@ -84,7 +84,7 @@
     },
     {
       "label": "must",
-      "count": 5
+      "count": 12
     },
     {
       "label": "plus",
@@ -94,11 +94,11 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 9
+      "count": 15
     },
     {
       "label": "technical",
-      "count": 5
+      "count": 7
     },
     {
       "label": "customer_facing",
@@ -106,11 +106,11 @@
     },
     {
       "label": "platform",
-      "count": 6
+      "count": 7
     },
     {
       "label": "data_ai",
-      "count": 11
+      "count": 15
     },
     {
       "label": "growth",
@@ -119,11 +119,11 @@
   ],
   "industry": [],
   "ai": {
-    "n_enriched": 43,
-    "n_ai_focus": 14,
-    "n_ai_skills": 13,
-    "ai_focus_pct": 33,
-    "ai_skills_pct": 30
+    "n_enriched": 56,
+    "n_ai_focus": 21,
+    "n_ai_skills": 20,
+    "ai_focus_pct": 38,
+    "ai_skills_pct": 36
   },
   "source": [
     {
@@ -131,8 +131,12 @@
       "count": 66
     },
     {
+      "label": "jsearch",
+      "count": 10
+    },
+    {
       "label": "arbeitnow",
-      "count": 5
+      "count": 8
     }
   ],
   "companies": {
@@ -174,7 +178,15 @@
         "count": 2
       },
       {
+        "label": "Insurgo GmbH",
+        "count": 2
+      },
+      {
         "label": "encoway GmbH",
+        "count": 1
+      },
+      {
+        "label": "AVS Services GmbH",
         "count": 1
       },
       {
@@ -184,11 +196,35 @@
       {
         "label": "Otark GmbH",
         "count": 1
+      },
+      {
+        "label": "Ordio GmbH",
+        "count": 1
+      },
+      {
+        "label": "Awin",
+        "count": 1
+      },
+      {
+        "label": "Growing Imaginations GmbH",
+        "count": 1
+      },
+      {
+        "label": "HiBob",
+        "count": 1
+      },
+      {
+        "label": "Project Management Institute",
+        "count": 1
+      },
+      {
+        "label": "Intercom",
+        "count": 1
       }
     ],
-    "n_companies": 12,
-    "top10_share": 69,
-    "top10_pct": 97,
-    "multi_hiring": 9
+    "n_companies": 24,
+    "top10_share": 70,
+    "top10_pct": 83,
+    "multi_hiring": 10
   }
 }

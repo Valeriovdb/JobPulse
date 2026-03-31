@@ -2,13 +2,13 @@
   "new_per_day": [
     {
       "date": "2026-03-31",
-      "count": 71
+      "count": 84
     }
   ],
   "active_per_day": [
     {
       "date": "2026-03-31",
-      "count": 71
+      "count": 84
     }
   ],
   "seniority_mix": {
@@ -16,6 +16,9 @@
       "2026-03-31"
     ],
     "series": {
+      "group": [
+        5
+      ],
       "junior": [
         2
       ],
@@ -23,7 +26,7 @@
         2
       ],
       "mid": [
-        30
+        34
       ],
       "mid_senior": [
         9
@@ -32,13 +35,13 @@
         4
       ],
       "senior": [
-        22
+        24
       ],
       "staff": [
-        1
+        2
       ],
       "unknown": [
-        1
+        2
       ]
     }
   },
@@ -48,10 +51,13 @@
     ],
     "series": {
       "must": [
-        5
+        12
       ],
       "not_mentioned": [
-        37
+        42
+      ],
+      "plus": [
+        1
       ]
     }
   }
