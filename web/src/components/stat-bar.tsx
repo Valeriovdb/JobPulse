@@ -57,11 +57,12 @@ const DEFAULT_LABEL_MAP: Record<string, string> = {
   must: 'German required',
   // Seniority
   junior: 'Junior',
-  mid: 'Mid-level',
+  mid: 'Mid',
   mid_senior: 'Mid / Senior',
   senior: 'Senior',
   lead: 'Lead',
   staff: 'Staff',
+  group: 'Group',
   principal: 'Principal',
   head: 'Head / Director',
   // Work mode

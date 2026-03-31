@@ -77,9 +77,10 @@ class NormalizedJob:
 # Order matters: more specific patterns first
 _SENIORITY_PATTERNS: list[tuple[str, str]] = [
     # Multi-level / range patterns — must precede individual keywords
-    (r"\(senior\)\s+product|product\s+manager\s*/\s*senior\s+product", "mid_senior"),
+    (r"\(senior\)\s+product|product\s+manager\s*/\s*senior\s+product|mid[/-]senior", "mid_senior"),
     # Standard levels
     (r"\bprincipal\b", "principal"),
+    (r"\bgroup\b", "group"),
     (r"\bstaff\b", "staff"),
     (r"\bhead\b", "head"),
     (r"\blead\b", "lead"),

@@ -6,7 +6,11 @@
     },
     {
       "label": "mid",
-      "count": 30
+      "count": 25
+    },
+    {
+      "label": "mid_senior",
+      "count": 9
     },
     {
       "label": "senior",
@@ -19,6 +23,10 @@
     {
       "label": "staff",
       "count": 1
+    },
+    {
+      "label": "group",
+      "count": 5
     },
     {
       "label": "principal",

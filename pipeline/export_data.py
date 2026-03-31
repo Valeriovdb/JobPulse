@@ -134,7 +134,7 @@ def export_overview(jobs: pd.DataFrame, last_run_date: str) -> None:
     accessible_pct = round(len(en_none) / n_active * 100) if n_active else 0
     median_age = int((today - jobs["first_seen_date"]).dt.days.median()) if n_active else 0
 
-    senior_levels = {"senior", "lead", "staff", "principal", "head"}
+    senior_levels = {"senior", "mid_senior", "lead", "staff", "principal", "head", "group"}
     n_senior_plus = int(jobs["seniority"].isin(senior_levels).sum())
     senior_pct = round(n_senior_plus / n_active * 100) if n_active else 0
 
@@ -143,7 +143,7 @@ def export_overview(jobs: pd.DataFrame, last_run_date: str) -> None:
     n_unclear = max(n_active - n_berlin - n_remote, 0)
 
     entry_pct = round(
-        (jobs["seniority"].eq("junior").sum() + jobs["seniority"].eq("mid").sum())
+        (jobs["seniority"].eq("junior").sum() + jobs["seniority"].isin(["mid", "middle"]).sum())
         / n_active * 100
     ) if n_active else 0
 
@@ -173,7 +173,7 @@ def export_distributions(jobs: pd.DataFrame) -> None:
     n_active = len(jobs)
 
     # Seniority
-    seniority_order = ["junior", "mid", "senior", "lead", "staff", "principal", "head", "unknown"]
+    seniority_order = ["junior", "mid", "mid_senior", "senior", "lead", "staff", "group", "principal", "unknown"]
     sen = jobs["seniority"].fillna("unknown").value_counts()
     seniority = [
         {"label": k, "count": int(sen.get(k, 0))}

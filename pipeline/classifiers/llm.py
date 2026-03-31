@@ -17,6 +17,7 @@ Fields classified by LLM:
 """
 import json
 import logging
+import re
 from typing import Optional
 
 from openai import OpenAI
@@ -53,9 +54,10 @@ USER_PROMPT_TEMPLATE = """Classify this PM job posting. Return JSON with exactly
 
 Definitions:
 - german_requirement:
-  - "must": German is explicitly required
-  - "plus": German mentioned as nice-to-have, advantage, or bonus
-  - "not_mentioned": German not mentioned at all
+  - "must": German fluency (C1/C2/Native) or a specific level (e.g., B2+) is explicitly listed as a requirement or "must-have".
+  - "plus": German is mentioned as "a plus", "nice to have", "an advantage", "beneficial", or "bonus". Also use this if they mention "basic German" or lower levels (A1-B1) without making it a hard requirement.
+  - "not_mentioned": There is no mention of the German language at all in the posting.
+  Note: If the posting is in English, look carefully at the requirements/profile section. Even a single bullet point like "German skills are a plus" counts as "plus".
 - pm_type:
   - "core_pm": general product management, no strong specialization
   - "technical": strong technical/engineering focus, deep API or systems work
@@ -120,6 +122,48 @@ def enrich(
     german_req = result.get("german_requirement")
     if german_req not in ("must", "plus", "not_mentioned"):
         german_req = None
+
+    # --- REGEX FALLBACK ---
+    # If LLM said not_mentioned but we see obvious clues, override it.
+    if german_req == "not_mentioned" and description:
+        desc_lower = description.lower()
+        # Clues for MUST (high threshold to avoid false positives)
+        must_patterns = [
+            r"german.*?required",
+            r"fluent.*?german",
+            r"german.*?fluency",
+            r"german.*?\(c1",
+            r"german.*?\(c2",
+            r"native.*?german",
+            r"german.*?native",
+            r"deutsch.*?muttersprach",
+            r"flie&szlig;end.*?deutsch",
+            r"fließend.*?deutsch",
+        ]
+        # Clues for PLUS
+        plus_patterns = [
+            r"german.*?plus",
+            r"german.*?advantage",
+            r"german.*?beneficial",
+            r"german.*?bonus",
+            r"german.*?nice.*?have",
+            r"basic.*?german",
+            r"german.*?skills",
+            r"german.*?\(b1",
+            r"german.*?\(b2",
+            r"knowledge.*?german",
+            r"deutschkenntnisse",
+            r"deutsch.*?plus",
+        ]
+
+        
+        if any(re.search(p, desc_lower) for p in must_patterns):
+            german_req = "must"
+            logger.info(f"Regex override: must (title={title!r})")
+        elif any(re.search(p, desc_lower) for p in plus_patterns):
+            german_req = "plus"
+            logger.info(f"Regex override: plus (title={title!r})")
+    # ----------------------
 
     _VALID_PM_TYPES = {
         "core_pm", "technical", "customer_facing", "platform",
