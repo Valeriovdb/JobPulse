@@ -14,15 +14,17 @@ const SENIORITY_COLORS: Record<string, string> = {
   unknown: '#404040',
 }
 
+const WORK_MODE_ORDER = ['remote', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d', 'hybrid', 'onsite', 'unknown']
+
 const WORK_MODE_COLORS: Record<string, string> = {
-  remote: '#4ade80',
-  hybrid_1d: '#60a5fa',
-  hybrid_2d: '#60a5fa',
-  hybrid_3d: '#818cf8',
-  hybrid_4d: '#a78bfa',
-  hybrid: '#60a5fa',
-  onsite: '#fb923c',
-  unknown: '#404040',
+  remote:    '#22d3ee',  // cyan — most flexible
+  hybrid_1d: '#60a5fa',  // blue
+  hybrid_2d: '#818cf8',  // indigo
+  hybrid_3d: '#a78bfa',  // violet
+  hybrid_4d: '#c084fc',  // purple
+  hybrid:    '#737373',  // neutral — unspecified hybrid
+  onsite:    '#fb923c',  // orange — fully in-office
+  unknown:   '#404040',
 }
 
 const PM_TYPE_COLORS: Record<string, string> = {
@@ -106,11 +108,14 @@ export default function MarketPage() {
   const senClassified = seniority.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
   const senTotal = seniority.reduce((s, i) => s + i.count, 0)
 
-  // Work mode: classified first, unknown last; with explicit colors
-  const workModeItems = [
-    ...work_mode.filter((i) => i.label !== 'unknown'),
-    ...work_mode.filter((i) => i.label === 'unknown'),
-  ].map((i) => ({ ...i, color: WORK_MODE_COLORS[i.label] ?? '#818cf8' }))
+  // Work mode: remote → onsite spectrum order, with explicit colors
+  const workModeItems = WORK_MODE_ORDER
+    .map((key) => {
+      const item = work_mode.find((m) => m.label === key)
+      if (!item) return null
+      return { ...item, color: WORK_MODE_COLORS[key] ?? '#818cf8' }
+    })
+    .filter((item): item is { label: string; count: number; color: string } => item !== null)
 
   const wmClassified = work_mode.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
   const wmTotal = work_mode.reduce((s, i) => s + i.count, 0)

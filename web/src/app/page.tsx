@@ -80,25 +80,26 @@ function generateInsights(
 }
 
 function workModeItems(modes: { label: string; count: number }[]) {
-  const order = ['onsite', 'hybrid_4d', 'hybrid_3d', 'hybrid_2d', 'hybrid_1d', 'hybrid', 'remote', 'unknown']
+  // remote → onsite: left = most flexible, right = fully in-office
+  const order = ['remote', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d', 'hybrid', 'onsite', 'unknown']
   const labelMap: Record<string, string> = {
-    onsite: 'On-site',
-    hybrid_4d: 'Hybrid · 4d',
-    hybrid_3d: 'Hybrid · 3d',
-    hybrid_2d: 'Hybrid · 2d',
+    remote:    'Remote',
     hybrid_1d: 'Hybrid · 1d',
-    hybrid: 'Hybrid (General)',
-    remote: 'Remote',
-    unknown: 'Unclassified',
+    hybrid_2d: 'Hybrid · 2d',
+    hybrid_3d: 'Hybrid · 3d',
+    hybrid_4d: 'Hybrid · 4d',
+    hybrid:    'Hybrid (General)',
+    onsite:    'On-site',
+    unknown:   'Unclassified',
   }
   const colorMap: Record<string, string> = {
-    onsite:    '#ef4444',
-    hybrid_4d: '#f97316',
-    hybrid_3d: '#facc15',
-    hybrid_2d: '#4ade80',
-    hybrid_1d: '#2dd4bf',
-    hybrid:    '#60a5fa',
-    remote:    '#818cf8',
+    remote:    '#22d3ee',  // cyan — most flexible
+    hybrid_1d: '#60a5fa',  // blue
+    hybrid_2d: '#818cf8',  // indigo
+    hybrid_3d: '#a78bfa',  // violet
+    hybrid_4d: '#c084fc',  // purple
+    hybrid:    '#737373',  // neutral — unspecified hybrid
+    onsite:    '#fb923c',  // orange — fully in-office
     unknown:   '#a3a3a3',
   }
 
