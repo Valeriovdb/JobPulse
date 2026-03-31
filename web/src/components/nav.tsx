@@ -27,7 +27,7 @@ export function Nav({ lastUpdated }: NavProps) {
     <header className="sticky top-0 z-50 border-b border-border bg-bg/90 backdrop-blur-sm">
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between gap-8">
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="w-2 h-2 rounded-full bg-accent" />
+          <span className="w-2 h-2 rounded-full bg-positive" />
           <span className="font-semibold text-sm tracking-tight text-white">JobPulse</span>
         </Link>
 

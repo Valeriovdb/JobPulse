@@ -8,14 +8,14 @@ interface SectionProps {
 
 export function Section({ title, description, meta, children, className }: SectionProps) {
   return (
-    <section className={['mt-12', className].filter(Boolean).join(' ')}>
-      <div className="mb-5">
-        <h2 className="text-base font-semibold text-white">{title}</h2>
+    <section className={['mt-14', className].filter(Boolean).join(' ')}>
+      <div className="mb-4">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-2">{title}</p>
         {description && (
-          <p className="text-sm text-muted mt-1">{description}</p>
+          <p className="text-sm text-white font-medium leading-relaxed">{description}</p>
         )}
         {meta && (
-          <p className="text-xs text-muted mt-1">{meta}</p>
+          <p className="text-xs text-subtle mt-1.5">{meta}</p>
         )}
       </div>
       {children}

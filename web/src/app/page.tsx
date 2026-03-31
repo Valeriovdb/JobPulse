@@ -1,5 +1,4 @@
 import { getOverview, getDistributions } from '@/lib/data'
-import { KpiCard, KpiGrid } from '@/components/kpi-card'
 import { Section, Card } from '@/components/section'
 import { StatBar, StackedBar } from '@/components/stat-bar'
 
@@ -93,14 +92,14 @@ function workModeItems(modes: { label: string; count: number }[]) {
     unknown: 'Unclassified',
   }
   const colorMap: Record<string, string> = {
-    onsite: '#ef4444', // Red-ish for onsite
-    hybrid_4d: '#f97316', // Orange
-    hybrid_3d: '#facc15', // Yellow
-    hybrid_2d: '#4ade80', // Green
-    hybrid_1d: '#2dd4bf', // Teal
-    hybrid: '#60a5fa', // Blue
-    remote: '#818cf8', // Indigo/Purple for remote
-    unknown: '#a3a3a3', // Neutral for unknown (grey is okay for unclassified)
+    onsite:    '#ef4444',
+    hybrid_4d: '#f97316',
+    hybrid_3d: '#facc15',
+    hybrid_2d: '#4ade80',
+    hybrid_1d: '#2dd4bf',
+    hybrid:    '#60a5fa',
+    remote:    '#818cf8',
+    unknown:   '#a3a3a3',
   }
 
   return order.map((key) => {
@@ -116,7 +115,7 @@ function workModeItems(modes: { label: string; count: number }[]) {
 export default function OverviewPage() {
   const overview = getOverview()
   const dist = getDistributions()
-  const { n_active, n_new_week, median_age_days, accessible_pct } = overview
+  const { n_active, n_new_week, median_age_days, accessible_pct, senior_pct } = overview
   const { pm_type, industry, ai, companies, work_mode } = dist
   const insights = generateInsights(overview, dist)
 
@@ -130,61 +129,76 @@ export default function OverviewPage() {
     label: item.label,
     count: item.count,
     color: [
-      '#818cf8',
-      '#60a5fa',
-      '#2dd4bf',
-      '#4ade80',
-      '#fb923c',
-      '#f472b6',
-      '#a78bfa',
-      '#34d399',
+      '#818cf8', '#60a5fa', '#2dd4bf', '#4ade80',
+      '#fb923c', '#f472b6', '#a78bfa', '#34d399',
     ][i % 8],
   }))
 
   const classifiedLocation = overview.location.berlin + overview.location.remote_germany
 
+  const signalMetrics: Array<{ value: string | number; label: string }> = [
+    { value: n_active,                                                          label: 'Active roles'  },
+    { value: n_new_week,                                                        label: 'New this week' },
+    { value: companies.n_companies > 0 ? companies.n_companies : '—',          label: 'Companies'     },
+    { value: median_age_days > 0      ? `${median_age_days}d`  : '—',          label: 'Median age'    },
+  ]
+
   return (
     <>
-      <div className="pt-2 pb-2">
-        <h1 className="text-2xl font-bold tracking-tight text-white">
-          Berlin PM Market
-        </h1>
-        <p className="text-muted mt-1.5 text-sm max-w-xl">
-          Daily intelligence on product management roles in Berlin and remote Germany.
+      {/* ------------------------------------------------------------------ */}
+      {/* Hero                                                                */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="pt-2 pb-14 border-b border-border">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-10">
+          Berlin · PM Market
         </p>
-        {n_active > 0 && (
-          <p className="text-2xs text-subtle mt-2">
-            Snapshot: {n_active} active roles · Berlin + remote Germany
-          </p>
-        )}
+
+        {/* Dominant number */}
+        <div className="flex items-end gap-5 mb-5">
+          <span className="text-8xl font-bold text-positive tracking-tighter leading-none tabular-nums">
+            {accessible_pct}%
+          </span>
+          <div className="mb-2">
+            <p className="text-xl text-white font-medium leading-snug">accessible market</p>
+            <p className="text-sm text-muted leading-snug mt-0.5">English · no German required</p>
+          </div>
+        </div>
+
+        {/* Annotation */}
+        <p className="text-sm text-subtle max-w-lg leading-relaxed mb-12">
+          {n_active} active roles in Berlin and remote Germany.
+          {senior_pct > 0 && (
+            <> The market skews senior — {senior_pct}% of classified roles at Senior level or above.</>
+          )}{' '}
+          The headline number overstates your real competition pool.
+        </p>
+
+        {/* Signal strip */}
+        <div className="flex items-start">
+          {signalMetrics.map((metric, i) => (
+            <div
+              key={i}
+              className={`flex-1 ${i > 0 ? 'pl-8 border-l border-border' : 'pr-8'}`}
+            >
+              <p className="text-2xl font-bold text-white tracking-tight tabular-nums leading-none">
+                {metric.value}
+              </p>
+              <p className="text-2xs text-subtle uppercase tracking-wider mt-2">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="mt-8">
-        <KpiGrid>
-          <KpiCard value={n_active} label="Active roles" sub="in tracker" />
-          <KpiCard
-            value={n_new_week}
-            label="New this week"
-            sub={n_new_week >= n_active && n_active > 0 ? 'tracker building history' : 'past 7 days'}
-          />
-          <KpiCard
-            value={companies.n_companies > 0 ? companies.n_companies : '—'}
-            label="Unique companies"
-            sub="actively hiring"
-          />
-          <KpiCard
-            value={median_age_days > 0 ? `${median_age_days}d` : '—'}
-            label="Median role age"
-            sub="in tracker"
-          />
-        </KpiGrid>
-      </div>
-
+      {/* ------------------------------------------------------------------ */}
+      {/* Market access                                                       */}
+      {/* ------------------------------------------------------------------ */}
       <Section
         title="Market access"
         description={
           accessible_pct > 0
-            ? `${accessible_pct}% of active roles require no German.`
+            ? `${accessible_pct}% of active roles require no German — your real competition pool.`
             : 'Language requirement breakdown for active roles.'
         }
       >
@@ -193,28 +207,35 @@ export default function OverviewPage() {
         </Card>
       </Section>
 
-      <Section
-        title="Location distribution"
-        meta={
-          classifiedLocation < n_active && n_active > 0
-            ? `Coverage: ${classifiedLocation} of ${n_active} classified`
-            : undefined
-        }
-      >
-        <Card>
-          <StackedBar items={locationItems(overview.location)} />
-        </Card>
-      </Section>
+      {/* ------------------------------------------------------------------ */}
+      {/* Location + Work style — side by side                               */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="mt-14 grid grid-cols-2 gap-6">
+        <div>
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Location</p>
+          <p className="text-sm text-white font-medium leading-relaxed mb-3">
+            {classifiedLocation > 0 && n_active > 0
+              ? `${Math.round((classifiedLocation / n_active) * 100)}% of roles are explicitly placed.`
+              : 'Where roles are based.'}
+          </p>
+          <Card>
+            <StackedBar items={locationItems(overview.location)} />
+          </Card>
+        </div>
+        <div>
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Work style</p>
+          <p className="text-sm text-white font-medium leading-relaxed mb-3">
+            Flexibility and on-site requirements.
+          </p>
+          <Card>
+            <StackedBar items={workModeItems(work_mode)} alwaysShowLabels />
+          </Card>
+        </div>
+      </div>
 
-      <Section
-        title="Work style"
-        description="Flexibility and on-site requirements."
-      >
-        <Card>
-          <StackedBar items={workModeItems(work_mode)} alwaysShowLabels />
-        </Card>
-      </Section>
-
+      {/* ------------------------------------------------------------------ */}
+      {/* Role type                                                           */}
+      {/* ------------------------------------------------------------------ */}
       {pmTypeItems.length > 0 && (
         <Section
           title="Role type"
@@ -226,6 +247,9 @@ export default function OverviewPage() {
         </Section>
       )}
 
+      {/* ------------------------------------------------------------------ */}
+      {/* AI requirement                                                      */}
+      {/* ------------------------------------------------------------------ */}
       {ai.n_enriched > 0 && (
         <Section
           title="AI requirement"
@@ -246,6 +270,9 @@ export default function OverviewPage() {
         </Section>
       )}
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Industry                                                            */}
+      {/* ------------------------------------------------------------------ */}
       {industryItems.length > 0 && (
         <Section
           title="Industry"
@@ -257,24 +284,33 @@ export default function OverviewPage() {
         </Section>
       )}
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Analyst notes                                                       */}
+      {/* ------------------------------------------------------------------ */}
       {insights.length > 0 && (
-        <Section
-          title="Read before you search"
-          description="Signals from the current dataset worth knowing."
-        >
-          <div className="space-y-3">
+        <section className="mt-16 pt-14 border-t border-border">
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Analyst notes</p>
+          <div>
             {insights.map((text, i) => (
-              <div key={i} className="bg-surface border border-border rounded-xl p-4 flex gap-3">
-                <span className="text-accent mt-0.5 shrink-0 text-sm">→</span>
-                <p className="text-sm text-white leading-relaxed">{text}</p>
+              <div
+                key={i}
+                className="flex gap-6 py-5 border-b border-border last:border-b-0"
+              >
+                <span className="text-2xs text-subtle font-mono tabular-nums leading-none mt-0.5 w-5 shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
-        </Section>
+        </section>
       )}
 
+      {/* ------------------------------------------------------------------ */}
+      {/* Empty state                                                         */}
+      {/* ------------------------------------------------------------------ */}
       {n_active === 0 && (
-        <div className="mt-12 bg-surface border border-border rounded-xl p-10 text-center">
+        <div className="mt-16 bg-surface border border-border rounded-xl p-10 text-center">
           <p className="text-muted text-sm">
             No data available yet. The pipeline runs daily — check back tomorrow.
           </p>
