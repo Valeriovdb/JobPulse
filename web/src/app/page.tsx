@@ -80,11 +80,44 @@ function generateInsights(
   return insights.slice(0, 3)
 }
 
+function workModeItems(modes: { label: string; count: number }[]) {
+  const order = ['onsite', 'hybrid_4d', 'hybrid_3d', 'hybrid_2d', 'hybrid_1d', 'hybrid', 'remote', 'unknown']
+  const labelMap: Record<string, string> = {
+    onsite: 'On-site',
+    hybrid_4d: 'Hybrid · 4d',
+    hybrid_3d: 'Hybrid · 3d',
+    hybrid_2d: 'Hybrid · 2d',
+    hybrid_1d: 'Hybrid · 1d',
+    hybrid: 'Hybrid (General)',
+    remote: 'Remote',
+    unknown: 'Unclassified',
+  }
+  const colorMap: Record<string, string> = {
+    onsite: '#ef4444', // Red-ish for onsite
+    hybrid_4d: '#f97316', // Orange
+    hybrid_3d: '#facc15', // Yellow
+    hybrid_2d: '#4ade80', // Green
+    hybrid_1d: '#2dd4bf', // Teal
+    hybrid: '#60a5fa', // Blue
+    remote: '#818cf8', // Indigo/Purple for remote
+    unknown: '#a3a3a3', // Neutral for unknown (grey is okay for unclassified)
+  }
+
+  return order.map((key) => {
+    const item = modes.find((m) => m.label === key)
+    return {
+      label: labelMap[key],
+      count: item?.count ?? 0,
+      color: colorMap[key],
+    }
+  })
+}
+
 export default function OverviewPage() {
   const overview = getOverview()
   const dist = getDistributions()
   const { n_active, n_new_week, median_age_days, accessible_pct } = overview
-  const { pm_type, industry, ai, companies } = dist
+  const { pm_type, industry, ai, companies, work_mode } = dist
   const insights = generateInsights(overview, dist)
 
   const pmTypeItems = pm_type.map((item, i) => ({
@@ -170,6 +203,15 @@ export default function OverviewPage() {
       >
         <Card>
           <StackedBar items={locationItems(overview.location)} />
+        </Card>
+      </Section>
+
+      <Section
+        title="Work style"
+        description="Flexibility and on-site requirements."
+      >
+        <Card>
+          <StackedBar items={workModeItems(work_mode)} alwaysShowLabels />
         </Card>
       </Section>
 

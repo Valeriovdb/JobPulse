@@ -4,7 +4,15 @@ interface StatBarItem {
   color?: string
 }
 
-export function StackedBar({ items, total }: { items: StatBarItem[]; total?: number }) {
+export function StackedBar({
+  items,
+  total,
+  alwaysShowLabels = false,
+}: {
+  items: StatBarItem[]
+  total?: number
+  alwaysShowLabels?: boolean
+}) {
   if (!items.length) return null
   const sum = total ?? items.reduce((acc, i) => acc + i.count, 0)
 
@@ -26,6 +34,7 @@ export function StackedBar({ items, total }: { items: StatBarItem[]; total?: num
       <div className="flex flex-wrap gap-x-5 gap-y-2">
         {items.map((item) => {
           const pct = sum > 0 ? Math.round((item.count / sum) * 100) : 0
+          if (pct === 0 && !alwaysShowLabels) return null
           return (
             <div key={item.label} className="flex items-center gap-2">
               <span
