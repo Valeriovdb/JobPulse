@@ -59,27 +59,27 @@ def fetch_jobs_needing_enrichment(limit: int = 0, force: bool = False) -> list[d
     r1 = q1.execute()
     missing_all = r1.data
 
-    # Second pass: enriched but missing industry (added later)
+    # Second pass: enriched but work_mode is still unknown (work_mode was added to LLM later)
     remaining = limit - len(missing_all) if limit else 0
     q2 = (
         db.table("jobs")
         .select("job_id, job_title_raw, company_name, location_normalized, description_text")
         .not_.is_("pm_type", "null")
-        .is_("industry", "null")
+        .eq("work_mode", "unknown")
         .not_.is_("description_text", "null")
     )
     if limit and remaining <= 0:
-        missing_industry = []
+        missing_work_mode = []
     else:
         if limit and remaining > 0:
             q2 = q2.limit(remaining)
         r2 = q2.execute()
-        missing_industry = r2.data
+        missing_work_mode = r2.data
 
-    combined = missing_all + missing_industry
+    combined = missing_all + missing_work_mode
     logger.info(
         f"Found {len(missing_all)} jobs with no enrichment, "
-        f"{len(missing_industry)} jobs missing industry only. "
+        f"{len(missing_work_mode)} jobs missing work_mode classification. "
         f"Total to process: {len(combined)}"
     )
     return combined
@@ -115,7 +115,7 @@ def enrich_and_update(jobs: list[dict], dry_run: bool = False) -> tuple[int, int
         if dry_run:
             logger.info(
                 f"  [DRY RUN] pm_type={result.get('pm_type')}, "
-                f"industry={result.get('industry')}, "
+                f"work_mode={result.get('work_mode')}, "
                 f"ai_focus={result.get('ai_focus')}, "
                 f"ai_skills={result.get('ai_skills')}"
             )
@@ -124,8 +124,8 @@ def enrich_and_update(jobs: list[dict], dry_run: bool = False) -> tuple[int, int
 
         update_payload = {
             "german_requirement": result.get("german_requirement"),
+            "work_mode": result.get("work_mode"),
             "pm_type": result.get("pm_type"),
-            "industry": result.get("industry"),
             "b2b_saas": result.get("b2b_saas"),
             "ai_focus": result.get("ai_focus"),
             "ai_skills": result.get("ai_skills"),
@@ -139,7 +139,7 @@ def enrich_and_update(jobs: list[dict], dry_run: bool = False) -> tuple[int, int
 
         db.table("jobs").update(update_payload).eq("job_id", job_id).execute()
         logger.info(
-            f"  → pm_type={result.get('pm_type')}, industry={result.get('industry')}, "
+            f"  → pm_type={result.get('pm_type')}, work_mode={result.get('work_mode')}, "
             f"ai_focus={result.get('ai_focus')}"
         )
         enriched += 1

@@ -6,23 +6,19 @@
     },
     {
       "label": "mid",
-      "count": 25
+      "count": 18
     },
     {
       "label": "mid_senior",
-      "count": 9
+      "count": 7
     },
     {
       "label": "senior",
-      "count": 22
+      "count": 12
     },
     {
       "label": "lead",
       "count": 2
-    },
-    {
-      "label": "staff",
-      "count": 1
     },
     {
       "label": "group",
@@ -30,61 +26,65 @@
     },
     {
       "label": "principal",
-      "count": 4
+      "count": 1
     },
     {
       "label": "unknown",
-      "count": 1
+      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 46
-    },
-    {
-      "label": "hybrid",
-      "count": 18
+      "count": 30
     },
     {
       "label": "onsite",
-      "count": 4
-    },
-    {
-      "label": "hybrid_3d",
-      "count": 2
+      "count": 10
     },
     {
       "label": "remote",
+      "count": 4
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 2
+    },
+    {
+      "label": "hybrid",
+      "count": 2
+    },
+    {
+      "label": "hybrid_3d",
       "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 37
+      "count": 27
     },
     {
       "label": "unknown",
-      "count": 29
+      "count": 15
     },
     {
       "label": "de",
-      "count": 5
+      "count": 7
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 36
+      "count": 26
     },
     {
       "label": "unclassified",
-      "count": 29
+      "count": 15
     },
     {
       "label": "must",
-      "count": 5
+      "count": 7
     },
     {
       "label": "plus",
@@ -94,67 +94,63 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 9
+      "count": 12
     },
     {
       "label": "technical",
-      "count": 5
-    },
-    {
-      "label": "customer_facing",
-      "count": 10
-    },
-    {
-      "label": "platform",
       "count": 6
     },
     {
-      "label": "data_ai",
-      "count": 11
+      "label": "customer_facing",
+      "count": 8
     },
     {
-      "label": "growth",
+      "label": "platform",
       "count": 2
+    },
+    {
+      "label": "data_ai",
+      "count": 7
     }
   ],
   "industry": [],
   "ai": {
-    "n_enriched": 43,
-    "n_ai_focus": 14,
-    "n_ai_skills": 13,
-    "ai_focus_pct": 33,
-    "ai_skills_pct": 30
+    "n_enriched": 35,
+    "n_ai_focus": 12,
+    "n_ai_skills": 11,
+    "ai_focus_pct": 34,
+    "ai_skills_pct": 31
   },
   "source": [
     {
       "label": "ats",
-      "count": 66
+      "count": 38
+    },
+    {
+      "label": "jsearch",
+      "count": 7
     },
     {
       "label": "arbeitnow",
-      "count": 5
+      "count": 4
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 17
+        "count": 9
       },
       {
         "label": "Contentful",
-        "count": 13
-      },
-      {
-        "label": "Scalable Capital",
-        "count": 12
-      },
-      {
-        "label": "SumUp",
-        "count": 7
+        "count": 9
       },
       {
         "label": "Raisin",
+        "count": 6
+      },
+      {
+        "label": "Scalable Capital",
         "count": 6
       },
       {
@@ -162,33 +158,53 @@
         "count": 4
       },
       {
-        "label": "N26",
-        "count": 4
+        "label": "SumUp",
+        "count": 2
       },
       {
-        "label": "HelloFresh",
-        "count": 3
+        "label": "N26",
+        "count": 2
       },
       {
         "label": "Epikur Software GmbH & Co. KG",
         "count": 2
       },
       {
-        "label": "encoway GmbH",
-        "count": 1
-      },
-      {
-        "label": "DOCMAiTE",
-        "count": 1
+        "label": "Insurgo GmbH",
+        "count": 2
       },
       {
         "label": "Otark GmbH",
         "count": 1
+      },
+      {
+        "label": "Awin",
+        "count": 1
+      },
+      {
+        "label": "HiBob",
+        "count": 1
+      },
+      {
+        "label": "Project Management Institute",
+        "count": 1
+      },
+      {
+        "label": "Westconnect GmbH",
+        "count": 1
+      },
+      {
+        "label": "Agoda",
+        "count": 1
+      },
+      {
+        "label": "Growing Imaginations GmbH",
+        "count": 1
       }
     ],
-    "n_companies": 12,
-    "top10_share": 69,
-    "top10_pct": 97,
+    "n_companies": 16,
+    "top10_share": 43,
+    "top10_pct": 88,
     "multi_hiring": 9
   }
 }

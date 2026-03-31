@@ -43,6 +43,7 @@ USER_PROMPT_TEMPLATE = """Classify this PM job posting. Return JSON with exactly
 
 {{
   "german_requirement": "must" | "plus" | "not_mentioned",
+  "work_mode": "remote" | "hybrid_1d" | "hybrid_2d" | "hybrid_3d" | "hybrid_4d" | "hybrid" | "onsite" | "unknown",
   "pm_type": "core_pm" | "technical" | "customer_facing" | "platform" | "data_ai" | "growth" | "internal_ops" | "unclassified",
   "b2b_saas": true | false,
   "ai_focus": true | false,
@@ -58,6 +59,15 @@ Definitions:
   - "plus": German is mentioned as "a plus", "nice to have", "an advantage", "beneficial", or "bonus". Also use this if they mention "basic German" or lower levels (A1-B1) without making it a hard requirement.
   - "not_mentioned": There is no mention of the German language at all in the posting.
   Note: If the posting is in English, look carefully at the requirements/profile section. Even a single bullet point like "German skills are a plus" counts as "plus".
+- work_mode (translate German terms to English before classifying):
+  - "remote": fully remote, 100% remote, remote-first, remote-only, "vollständig remote", "komplett remote", "100% Homeoffice"
+  - "hybrid_1d": hybrid with 1 day/week in office — "1 Tag im Büro", "once a week in office", "1 day per week on-site"
+  - "hybrid_2d": hybrid with 2 days/week in office — "2 Tage im Büro", "twice a week in office", "2 days per week on-site"
+  - "hybrid_3d": hybrid with 3 days/week in office — "3 Tage im Büro", "3 days per week on-site"
+  - "hybrid_4d": hybrid with 4 days/week in office — "4 Tage im Büro", "4 days per week on-site"
+  - "hybrid": hybrid but days per week not specified — "hybrid", "flexibles Arbeiten", "Homeoffice möglich", "teilweise remote"
+  - "onsite": fully in-office, on-site required, "vor Ort", "im Büro", "Präsenz erforderlich", "office-based", no remote option mentioned
+  - "unknown": work arrangement is not mentioned or cannot be determined from the posting
 - pm_type:
   - "core_pm": general product management, no strong specialization
   - "technical": strong technical/engineering focus, deep API or systems work
@@ -165,6 +175,11 @@ def enrich(
             logger.info(f"Regex override: plus (title={title!r})")
     # ----------------------
 
+    _VALID_WORK_MODES = {"remote", "hybrid", "hybrid_1d", "hybrid_2d", "hybrid_3d", "hybrid_4d", "onsite", "unknown"}
+    work_mode = result.get("work_mode")
+    if work_mode not in _VALID_WORK_MODES:
+        work_mode = "unknown"
+
     _VALID_PM_TYPES = {
         "core_pm", "technical", "customer_facing", "platform",
         "data_ai", "growth", "internal_ops", "unclassified",
@@ -182,6 +197,7 @@ def enrich(
 
     return {
         "german_requirement": german_req,
+        "work_mode": work_mode,
         "pm_type": pm_type,
         "b2b_saas": bool(result.get("b2b_saas")),
         "ai_focus": bool(result.get("ai_focus")),

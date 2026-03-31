@@ -130,15 +130,17 @@ def _normalize_location(raw: str) -> tuple[str, bool, bool]:
 
     Heuristics:
     - is_berlin: location text contains 'berlin'
-    - is_remote_germany: location contains 'remote' and ('germany' or 'deutschland' or 'de')
+    - is_remote_germany:
+        - "remote" + Germany indicator (germany / deutschland / \bde\b / german), OR
+        - "homeoffice" / "home office" (German-language term, implies Germany context)
     """
     if not raw:
         return ("unknown", False, False)
     r = raw.lower()
     is_berlin = "berlin" in r
     is_remote_germany = bool(
-        re.search(r"remote", r)
-        and re.search(r"germany|deutschland|\bde\b|german", r)
+        (re.search(r"remote", r) and re.search(r"germany|deutschland|\bde\b|german", r))
+        or re.search(r"homeoffice|home[\s\-]office", r)
     )
     if is_berlin:
         loc = "berlin"
@@ -149,9 +151,19 @@ def _normalize_location(raw: str) -> tuple[str, bool, bool]:
     return (loc, is_berlin, is_remote_germany)
 
 
+# Locations that are ambiguous for scope — could plausibly be Berlin or remote Germany.
+# Used as a fallback for ATS jobs from known Berlin-HQ companies.
+_ATS_AMBIGUOUS_LOCATION = re.compile(
+    r"^(germany|deutschland|\bde\b|remote|homeoffice|home[\s\-]office|"
+    r"anywhere|europe|worldwide|international|flexible|distributed|hybrid)$",
+    re.IGNORECASE,
+)
+
+
 # ---------------------------------------------------------------------------
 # Work mode normalization
 # ---------------------------------------------------------------------------
+
 
 def _extract_hybrid_days(description: str) -> Optional[str]:
     """Try to extract hybrid office-days-per-week from description text."""
@@ -170,6 +182,10 @@ def _extract_hybrid_days(description: str) -> Optional[str]:
 
 
 def _normalize_work_mode(raw: str, description: str = "") -> str:
+    """
+    Heuristic fallback for jobs without a description (no LLM enrichment).
+    For jobs with descriptions the LLM result overwrites this value.
+    """
     if not raw:
         raw = ""
     r = raw.lower()
@@ -179,16 +195,14 @@ def _normalize_work_mode(raw: str, description: str = "") -> str:
         return "remote"
 
     if "hybrid" in r or "hybrid" in d:
-        freq = _extract_hybrid_days(d)
-        return freq if freq else "hybrid"
+        return _extract_hybrid_days(d) or "hybrid"
 
     if any(w in r for w in ("onsite", "on-site", "on site", "office", "presence")):
         return "onsite"
 
     # Check description for work mode clues when raw is uninformative
     if re.search(r"\bhybrid\b", d):
-        freq = _extract_hybrid_days(d)
-        return freq if freq else "hybrid"
+        return _extract_hybrid_days(d) or "hybrid"
     if re.search(r"\bfully\s+remote\b|\b100%\s+remote\b|\bremote\s+first\b|\bremote[\s\-]only\b", d):
         return "remote"
     if re.search(r"\bin[\s\-]office\b|\bon[\s\-]site\b|\bonsite\b", d):
@@ -366,9 +380,12 @@ def _from_jsearch(raw: dict) -> NormalizedJob:
     publisher_type = _normalize_publisher_type(canonical_url or "", publisher_raw)
 
     work_mode_raw = raw.get("job_employment_type") or ""
-    # JSearch has is_remote field
+    # JSearch queries always use country=de, so job_is_remote=True means remote Germany
     if raw.get("job_is_remote"):
         work_mode = "remote"
+        is_remote_germany = True
+        if not is_berlin:
+            location_norm = "remote_germany"
     else:
         work_mode = _normalize_work_mode(work_mode_raw, description)
 
@@ -476,6 +493,15 @@ def _from_ats(raw: dict) -> NormalizedJob:
     location_norm, is_berlin, is_remote_germany = _normalize_location(location_raw)
     work_mode = _normalize_work_mode(location_raw, description)
 
+    # ATS companies are curated Berlin-HQ companies. If location is empty or
+    # generic (e.g. "Germany", "Remote", "Hybrid"), treat as Berlin rather than
+    # discarding — the company context is enough to confirm in-scope.
+    if not is_berlin and not is_remote_germany:
+        loc_stripped = location_raw.strip()
+        if not loc_stripped or _ATS_AMBIGUOUS_LOCATION.match(loc_stripped):
+            is_berlin = True
+            location_norm = "berlin"
+
     return NormalizedJob(
         external_job_key=raw["_external_job_key"],
         source_provider="ats",
@@ -563,7 +589,10 @@ _EXTRACTORS = {
 def normalize(raw: dict) -> Optional[NormalizedJob]:
     """
     Normalize a raw job dict from any fetcher.
-    Returns None if the record should be skipped (missing key identity fields).
+    Returns None if the record should be skipped.
+
+    Scope filter: only Berlin and remote-Germany jobs are in scope.
+    Anything that resolves to neither is logged and dropped.
     """
     provider = raw.get("_source_provider", "")
     extractor = _EXTRACTORS.get(provider)
@@ -571,7 +600,16 @@ def normalize(raw: dict) -> Optional[NormalizedJob]:
         logger.warning(f"No extractor for provider {provider!r}, skipping")
         return None
     try:
-        return extractor(raw)
+        job = extractor(raw)
     except Exception as e:
         logger.error(f"Normalization failed for {raw.get('_external_job_key')}: {e}")
         return None
+
+    if job and not job.is_berlin and not job.is_remote_germany:
+        logger.debug(
+            f"Out of scope — dropping {job.external_job_key} "
+            f"(location={job.location_normalized!r}, company={job.company_name!r})"
+        )
+        return None
+
+    return job

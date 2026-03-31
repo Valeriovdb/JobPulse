@@ -530,6 +530,7 @@ def run(dry_run: bool = False) -> None:
             )
             if result:
                 job.german_requirement = result.get("german_requirement")
+                job.work_mode = result.get("work_mode")
                 job.pm_type = result.get("pm_type")
                 job.b2b_saas = result.get("b2b_saas")
                 job.ai_focus = result.get("ai_focus")
