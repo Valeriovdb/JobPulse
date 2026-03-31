@@ -16,14 +16,14 @@ export default function AboutPage() {
       <Section title="What this is">
         <Card>
           <p className="text-sm text-white leading-relaxed">
-            JobPulse is a daily tracker for product management roles in Berlin and remote Germany.
-            It aggregates postings from multiple job boards, classifies them using an LLM, and
-            surfaces patterns that would be tedious to extract manually — language requirements,
-            seniority distribution, company concentration, and how quickly roles disappear.
+            JobPulse tracks the Berlin PM market across market size, role mix, hiring expectations,
+            and employer activity. It aggregates postings from multiple job boards, classifies them
+            using an LLM, and surfaces patterns that would be tedious to extract manually — language
+            requirements, seniority distribution, company concentration, and how quickly roles disappear.
           </p>
           <p className="text-sm text-muted leading-relaxed mt-3">
-            It was built to answer a specific question: what does the PM market in Berlin actually
-            look like for someone navigating a job search? The goal is signal, not volume.
+            The goal is signal, not volume — a clear picture of what the PM market in Berlin
+            actually looks like right now.
           </p>
         </Card>
       </Section>

@@ -35,19 +35,15 @@ function generateInsights(
   const { accessible_pct, senior_pct, n_active, language, location } = overview
   const { ai } = dist
 
-  if (accessible_pct >= 20) {
+  if (accessible_pct > 0) {
     insights.push(
-      `${accessible_pct}% of roles in the current snapshot list no German requirement — English-accessible coverage is a meaningful share of the market.`
-    )
-  } else if (accessible_pct > 0) {
-    insights.push(
-      `Only ${accessible_pct}% of active roles list no German requirement. The current sample suggests German fluency significantly widens market access.`
+      `${accessible_pct}% of roles in the current snapshot do not explicitly require German — a meaningful share of the market.`
     )
   }
 
   if (senior_pct >= 60) {
     insights.push(
-      `${senior_pct}% of classified roles are Senior or above in this snapshot. Mid-level and below roles represent a smaller share of current postings.`
+      `${senior_pct}% of classified roles are Senior or above. Mid-level and below roles represent a smaller share of current postings.`
     )
   } else if (senior_pct > 0) {
     insights.push(
@@ -66,13 +62,13 @@ function generateInsights(
     : 0
   if (remotePct >= 15 && insights.length < 3) {
     insights.push(
-      `${remotePct}% of roles in this snapshot are explicitly remote-friendly — a notable share for a Berlin-focused search.`
+      `${remotePct}% of roles in this snapshot are explicitly remote-friendly — a notable share for a Berlin-focused market.`
     )
   }
 
   if (language.de > language.en_none + language.en_plus + language.en_must && insights.length < 3) {
     insights.push(
-      `German-language postings account for most active roles in the current sample, making German-source coverage important for full market visibility.`
+      `German-language postings account for most active roles in the current sample, highlighting the importance of German-source coverage for full market visibility.`
     )
   }
 
@@ -116,7 +112,7 @@ function workModeItems(modes: { label: string; count: number }[]) {
 export default function OverviewPage() {
   const overview = getOverview()
   const dist = getDistributions()
-  const { n_active, n_new_week, median_age_days, accessible_pct, senior_pct } = overview
+  const { n_active, n_new_week, median_age_days, senior_pct } = overview
   const { pm_type, industry, ai, companies, work_mode } = dist
   const insights = generateInsights(overview, dist)
 
@@ -154,24 +150,17 @@ export default function OverviewPage() {
           Berlin · PM Market
         </p>
 
-        {/* Dominant number */}
-        <div className="flex items-end gap-5 mb-5">
-          <span className="text-8xl font-bold text-positive tracking-tighter leading-none tabular-nums">
-            {accessible_pct}%
-          </span>
-          <div className="mb-2">
-            <p className="text-xl text-white font-medium leading-snug">accessible market</p>
-            <p className="text-sm text-muted leading-snug mt-0.5">English · no German required</p>
-          </div>
+        {/* Headline */}
+        <div className="mb-5">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tighter leading-none">
+            Berlin PM market snapshot
+          </h1>
         </div>
 
         {/* Annotation */}
         <p className="text-sm text-subtle max-w-lg leading-relaxed mb-12">
-          {n_active} active roles in Berlin and remote Germany.
-          {senior_pct > 0 && (
-            <> The market skews senior — {senior_pct}% of classified roles at Senior level or above.</>
-          )}{' '}
-          The headline number overstates your real competition pool.
+          {n_active} active PM roles across Berlin and remote Germany.
+          {' '}The current snapshot highlights market size, role mix, and hiring signals.
         </p>
 
         {/* Signal strip */}
@@ -193,15 +182,11 @@ export default function OverviewPage() {
       </div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Market access                                                       */}
+      {/* Language requirements                                               */}
       {/* ------------------------------------------------------------------ */}
       <Section
-        title="Market access"
-        description={
-          accessible_pct > 0
-            ? `${accessible_pct}% of active roles require no German — your real competition pool.`
-            : 'Language requirement breakdown for active roles.'
-        }
+        title="Language requirements"
+        description="Posting language and German requirement across active roles."
       >
         <Card>
           <StackedBar items={languageItems(overview.language)} />
