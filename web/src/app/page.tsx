@@ -169,7 +169,7 @@ export default function OverviewPage() {
         }
       >
         <Card>
-          <StatBar items={locationItems(overview.location)} showPct />
+          <StackedBar items={locationItems(overview.location)} />
         </Card>
       </Section>
 
