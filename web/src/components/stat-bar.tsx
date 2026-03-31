@@ -2,16 +2,21 @@ interface StatBarItem {
   label: string
   count: number
   color?: string
+  drillKey?: string
 }
 
 export function StackedBar({
   items,
   total,
   alwaysShowLabels = false,
+  onSegmentClick,
+  activeKey,
 }: {
   items: StatBarItem[]
   total?: number
   alwaysShowLabels?: boolean
+  onSegmentClick?: (key: string, label: string) => void
+  activeKey?: string | null
 }) {
   if (!items.length) return null
   const sum = total ?? items.reduce((acc, i) => acc + i.count, 0)
@@ -57,6 +62,8 @@ interface StatBarProps {
   labelMap?: Record<string, string>
   showPct?: boolean
   barColor?: string
+  onBarClick?: (key: string, label: string) => void
+  activeKey?: string | null
 }
 
 const DEFAULT_LABEL_MAP: Record<string, string> = {
@@ -103,7 +110,7 @@ const DEFAULT_LABEL_MAP: Record<string, string> = {
   arbeitnow: 'Arbeitnow',
 }
 
-export function StatBar({ items, total, labelMap, showPct = true, barColor }: StatBarProps) {
+export function StatBar({ items, total, labelMap, showPct = true, barColor, onBarClick, activeKey }: StatBarProps) {
   if (!items.length) return null
 
   const labels = { ...DEFAULT_LABEL_MAP, ...labelMap }
