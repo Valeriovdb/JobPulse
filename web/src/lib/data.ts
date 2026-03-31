@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import type { Metadata, Overview, Distributions, Timeseries } from '@/types/data'
+import type { Metadata, Overview, Distributions, Timeseries, ExperienceData } from '@/types/data'
 
 // data/frontend/ sits one level above the web/ directory
 const DATA_DIR = path.join(process.cwd(), '..', 'data', 'frontend')
@@ -55,6 +55,15 @@ export function getTimeseries(): Timeseries {
   return readJSON<Timeseries>('timeseries.json', {
     new_per_day: [],
     active_per_day: [],
+  })
+}
+
+export function getExperience(): ExperienceData {
+  return readJSON<ExperienceData>('experience.json', {
+    tags: [],
+    jobs_by_tag: {},
+    n_jobs_with_tags: 0,
+    n_active: 0,
   })
 }
 

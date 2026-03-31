@@ -55,6 +55,33 @@ export interface Distributions {
   }
 }
 
+// --- Experience tags ---
+
+export interface ExperienceTag {
+  tag: string
+  family: 'domain' | 'functional' | 'operating_context'
+  count: number
+}
+
+export interface ExperienceJob {
+  job_id: string
+  company: string
+  title: string
+  seniority: string
+  url: string
+  level: 'required' | 'preferred' | 'not_clear'
+  evidence: string
+}
+
+export interface ExperienceData {
+  tags: ExperienceTag[]
+  jobs_by_tag: Record<string, ExperienceJob[]>
+  n_jobs_with_tags: number
+  n_active: number
+}
+
+// --- Timeseries ---
+
 export interface TimeseriesPoint {
   date: string
   count: number

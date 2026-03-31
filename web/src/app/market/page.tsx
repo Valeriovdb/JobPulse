@@ -1,6 +1,7 @@
-import { getDistributions, getOverview } from '@/lib/data'
+import { getDistributions, getOverview, getExperience } from '@/lib/data'
 import { Section, Card, EmptyState } from '@/components/section'
 import { StatBar } from '@/components/stat-bar'
+import { ExperienceChart } from '@/components/experience-chart'
 
 const SENIORITY_COLORS: Record<string, string> = {
   junior: '#4ade80',
@@ -105,6 +106,7 @@ function generateSummary(
 export default function MarketPage() {
   const dist = getDistributions()
   const overview = getOverview()
+  const experience = getExperience()
   const { seniority, work_mode, pm_type, industry, ai, source, companies } = dist
   const { n_active } = overview
 
@@ -241,6 +243,27 @@ export default function MarketPage() {
         >
           <Card>
             <StatBar items={industry} showPct />
+          </Card>
+        </Section>
+      )}
+
+      {experience.tags.length > 0 && (
+        <Section
+          title="Required experience"
+          description="What background companies want PMs to have."
+          meta={
+            experience.n_jobs_with_tags > 0 && experience.n_active > 0
+              ? `Coverage: ${experience.n_jobs_with_tags} of ${experience.n_active} active roles classified`
+              : undefined
+          }
+        >
+          <Card>
+            <ExperienceChart
+              tags={experience.tags}
+              jobsByTag={experience.jobs_by_tag}
+              nJobsWithTags={experience.n_jobs_with_tags}
+              nActive={experience.n_active}
+            />
           </Card>
         </Section>
       )}

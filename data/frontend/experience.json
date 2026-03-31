@@ -1,0 +1,41 @@
+{
+  "tags": [
+    { "tag": "saas_b2b_software", "family": "domain", "count": 14 },
+    { "tag": "fintech", "family": "domain", "count": 9 },
+    { "tag": "ecommerce_marketplace", "family": "domain", "count": 7 },
+    { "tag": "ai_ml_data_products", "family": "domain", "count": 5 },
+    { "tag": "payments", "family": "domain", "count": 4 },
+    { "tag": "consumer_digital_products", "family": "domain", "count": 3 },
+    { "tag": "healthtech", "family": "domain", "count": 2 },
+    { "tag": "analytics_experimentation", "family": "functional", "count": 11 },
+    { "tag": "growth_acquisition", "family": "functional", "count": 8 },
+    { "tag": "monetization_pricing", "family": "functional", "count": 5 },
+    { "tag": "integrations_apis", "family": "functional", "count": 4 },
+    { "tag": "activation_onboarding", "family": "functional", "count": 3 },
+    { "tag": "retention_engagement", "family": "functional", "count": 3 },
+    { "tag": "b2b", "family": "operating_context", "count": 12 },
+    { "tag": "startup_scaleup", "family": "operating_context", "count": 9 },
+    { "tag": "international_multi_market", "family": "operating_context", "count": 6 },
+    { "tag": "enterprise", "family": "operating_context", "count": 4 },
+    { "tag": "b2c", "family": "operating_context", "count": 3 },
+    { "tag": "regulated_environment", "family": "operating_context", "count": 2 }
+  ],
+  "jobs_by_tag": {
+    "saas_b2b_software": [
+      { "job_id": "1", "company": "Contentful", "title": "Senior Product Manager", "seniority": "senior", "url": "", "level": "required", "evidence": "5+ years in SaaS B2B product management" },
+      { "job_id": "2", "company": "HiBob", "title": "Product Manager", "seniority": "mid", "url": "", "level": "required", "evidence": "Experience with B2B SaaS platforms" }
+    ],
+    "fintech": [
+      { "job_id": "3", "company": "N26", "title": "Senior PM — Core Banking", "seniority": "senior", "url": "", "level": "required", "evidence": "Background in fintech or digital banking" },
+      { "job_id": "4", "company": "Scalable Capital", "title": "Product Manager", "seniority": "mid", "url": "", "level": "preferred", "evidence": "Fintech experience is a strong plus" }
+    ],
+    "analytics_experimentation": [
+      { "job_id": "5", "company": "Delivery Hero", "title": "Senior PM — Growth", "seniority": "senior", "url": "", "level": "required", "evidence": "Strong analytical skills and experience with A/B testing" }
+    ],
+    "b2b": [
+      { "job_id": "6", "company": "Raisin", "title": "Product Manager", "seniority": "mid", "url": "", "level": "not_clear", "evidence": "B2B partnership and platform experience" }
+    ]
+  },
+  "n_jobs_with_tags": 32,
+  "n_active": 49
+}

@@ -462,6 +462,38 @@ def write_snapshots(
     logger.info(f"Wrote {len(rows)} snapshots for {run_date}")
 
 
+def upsert_experience_tags(
+    tags_buffer: list[tuple[str, list[dict]]],
+    job_id_map: dict[str, str],
+) -> None:
+    """Write experience tags to job_experience_tags table."""
+    if not tags_buffer:
+        return
+    db = get_client()
+    rows = []
+    for ext_key, tags in tags_buffer:
+        job_id = job_id_map.get(ext_key)
+        if not job_id:
+            continue
+        for t in tags:
+            rows.append({
+                "job_id": job_id,
+                "experience_tag": t["tag"],
+                "experience_family": t["family"],
+                "required_level": t["level"],
+                "evidence_text": t.get("evidence", ""),
+                "confidence": t.get("confidence"),
+                "classifier_version": config.CLASSIFIER_VERSION,
+            })
+    if rows:
+        for i in range(0, len(rows), 100):
+            db.table("job_experience_tags").upsert(
+                rows[i:i+100],
+                on_conflict="job_id,experience_tag,classifier_version",
+            ).execute()
+        logger.info(f"Wrote {len(rows)} experience tags for {len(tags_buffer)} jobs")
+
+
 def get_job_id_map(keys: list[str]) -> dict[str, str]:
     """Fetch job_id for each external_job_key."""
     db = get_client()
@@ -519,6 +551,7 @@ def run(dry_run: bool = False) -> None:
 
         # 6. LLM enrichment (only jobs with description text)
         enriched_count = 0
+        experience_tags_buffer: list[tuple[str, list[dict]]] = []  # (external_job_key, tags)
         for job in normalized:
             if not job.description_text:
                 continue
@@ -540,6 +573,10 @@ def run(dry_run: bool = False) -> None:
                 job.llm_confidence = result.get("llm_confidence")
                 job.llm_raw_json = result.get("llm_raw_json")
                 enriched_count += 1
+                # Buffer experience tags for DB write after upsert (need job_id)
+                exp_tags = result.get("experience_tags", [])
+                if exp_tags:
+                    experience_tags_buffer.append((job.external_job_key, exp_tags))
         logger.info(f"LLM enrichment complete: {enriched_count}/{len(normalized)} jobs enriched")
 
         # 7. Upsert jobs
@@ -552,6 +589,9 @@ def run(dry_run: bool = False) -> None:
             # 7c. Source appearances
             job_id_map = get_job_id_map([j.external_job_key for j in normalized])
             upsert_source_appearances(normalized, job_id_map, run_id, today, dry_run)
+
+            # 7d. Experience tags
+            upsert_experience_tags(experience_tags_buffer, job_id_map)
 
             # 8. Daily snapshots
             write_snapshots(normalized, job_id_map, run_id, today, dry_run)

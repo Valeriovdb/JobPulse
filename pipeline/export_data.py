@@ -91,6 +91,38 @@ def _fetch_snapshots() -> pd.DataFrame:
     return df
 
 
+def _fetch_experience_tags(active_job_ids: list[str]) -> pd.DataFrame:
+    """Fetch experience tags for active jobs."""
+    if not active_job_ids:
+        return pd.DataFrame()
+    resp = (
+        get_client()
+        .table("job_experience_tags")
+        .select(
+            "job_id, experience_tag, experience_family, required_level, "
+            "evidence_text, confidence"
+        )
+        .in_("job_id", active_job_ids)
+        .execute()
+    )
+    return pd.DataFrame(resp.data)
+
+
+def _fetch_active_jobs_for_experience() -> pd.DataFrame:
+    """Fetch active jobs with fields needed for experience side panel."""
+    resp = (
+        get_client()
+        .table("jobs")
+        .select(
+            "job_id, company_name, job_title_raw, seniority, "
+            "posting_language, german_requirement, canonical_url"
+        )
+        .eq("is_active", True)
+        .execute()
+    )
+    return pd.DataFrame(resp.data)
+
+
 def _fetch_last_run_date() -> str:
     resp = (
         get_client()
@@ -270,6 +302,86 @@ def export_distributions(jobs: pd.DataFrame) -> None:
     })
 
 
+def export_experience(active_jobs: pd.DataFrame) -> None:
+    """Export experience tag data for the Required Experience section."""
+    if active_jobs.empty:
+        _write("experience.json", {
+            "tags": [],
+            "jobs_by_tag": {},
+            "n_jobs_with_tags": 0,
+            "n_active": 0,
+        })
+        return
+
+    active_job_ids = active_jobs["job_id"].tolist()
+    n_active = len(active_jobs)
+
+    # Fetch experience tags
+    tags_df = _fetch_experience_tags(active_job_ids)
+    if tags_df.empty:
+        _write("experience.json", {
+            "tags": [],
+            "jobs_by_tag": {},
+            "n_jobs_with_tags": 0,
+            "n_active": n_active,
+        })
+        return
+
+    # Fetch job details for side panel
+    jobs_detail = _fetch_active_jobs_for_experience()
+    job_lookup = {}
+    if not jobs_detail.empty:
+        job_lookup = jobs_detail.set_index("job_id").to_dict("index")
+
+    # Aggregate: count active jobs per tag
+    tag_counts = (
+        tags_df
+        .groupby(["experience_tag", "experience_family"])
+        .agg(job_count=("job_id", "nunique"))
+        .reset_index()
+        .sort_values("job_count", ascending=False)
+    )
+
+    tags_list = [
+        {
+            "tag": row["experience_tag"],
+            "family": row["experience_family"],
+            "count": int(row["job_count"]),
+        }
+        for _, row in tag_counts.iterrows()
+    ]
+
+    # Build per-tag job lists with evidence (for side panel)
+    jobs_by_tag = {}
+    for tag in tag_counts["experience_tag"].unique():
+        tag_rows = tags_df[tags_df["experience_tag"] == tag]
+        job_entries = []
+        for _, row in tag_rows.iterrows():
+            jid = row["job_id"]
+            detail = job_lookup.get(jid, {})
+            job_entries.append({
+                "job_id": jid,
+                "company": detail.get("company_name", ""),
+                "title": detail.get("job_title_raw", ""),
+                "seniority": detail.get("seniority", ""),
+                "url": detail.get("canonical_url", ""),
+                "level": row.get("required_level", "not_clear"),
+                "evidence": row.get("evidence_text", ""),
+            })
+        # Sort by company name for readability
+        job_entries.sort(key=lambda x: x.get("company", "").lower())
+        jobs_by_tag[tag] = job_entries
+
+    n_jobs_with_tags = int(tags_df["job_id"].nunique())
+
+    _write("experience.json", {
+        "tags": tags_list,
+        "jobs_by_tag": jobs_by_tag,
+        "n_jobs_with_tags": n_jobs_with_tags,
+        "n_active": n_active,
+    })
+
+
 def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
     result: dict = {}
 
@@ -394,6 +506,7 @@ def run() -> None:
     export_metadata(last_run_date)
     export_overview(active_jobs, last_run_date)
     export_distributions(active_jobs)
+    export_experience(active_jobs)
     export_timeseries(all_jobs, snapshots)
 
     logger.info("=== Export complete ===")
