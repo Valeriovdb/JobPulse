@@ -36,11 +36,11 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 30
+      "count": 22
     },
     {
       "label": "onsite",
-      "count": 10
+      "count": 18
     },
     {
       "label": "remote",
@@ -131,10 +131,6 @@
       "count": 7
     },
     {
-      "label": "jsearch",
-      "count": 10
-    },
-    {
       "label": "arbeitnow",
       "count": 4
     }
@@ -186,11 +182,7 @@
         "count": 1
       },
       {
-        "label": "HiBob",
-        "count": 1
-      },
-      {
-        "label": "Project Management Institute",
+        "label": "Agoda",
         "count": 1
       },
       {
@@ -198,7 +190,11 @@
         "count": 1
       },
       {
-        "label": "Agoda",
+        "label": "HiBob",
+        "count": 1
+      },
+      {
+        "label": "Project Management Institute",
         "count": 1
       },
       {
