@@ -4,11 +4,12 @@ interface SectionProps {
   meta?: string
   children: React.ReactNode
   className?: string
+  compact?: boolean
 }
 
-export function Section({ title, description, meta, children, className }: SectionProps) {
+export function Section({ title, description, meta, children, className, compact }: SectionProps) {
   return (
-    <section className={['mt-14', className].filter(Boolean).join(' ')}>
+    <section className={[compact ? 'mt-8' : 'mt-14', className].filter(Boolean).join(' ')}>
       <div className="mb-4">
         <p className="text-2xs text-subtle uppercase tracking-widest mb-2">{title}</p>
         {description && (
@@ -20,6 +21,23 @@ export function Section({ title, description, meta, children, className }: Secti
       </div>
       {children}
     </section>
+  )
+}
+
+interface BlockHeadingProps {
+  title: string
+  description?: string
+  className?: string
+}
+
+export function BlockHeading({ title, description, className }: BlockHeadingProps) {
+  return (
+    <div className={['pt-16 pb-2 border-t border-border', className].filter(Boolean).join(' ')}>
+      <h2 className="text-lg font-semibold tracking-tight text-white">{title}</h2>
+      {description && (
+        <p className="text-sm text-muted mt-1 max-w-lg leading-relaxed">{description}</p>
+      )}
+    </div>
   )
 }
 

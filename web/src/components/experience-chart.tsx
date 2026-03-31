@@ -46,13 +46,16 @@ const TAG_LABELS: Record<string, string> = {
   hardware_software: 'Hardware + Software',
 }
 
+export { TAG_LABELS }
+
 const FAMILY_LABELS: Record<string, string> = {
-  domain: 'Domain experience',
-  functional: 'Functional experience',
+  domain: 'Domain',
+  functional: 'Functional',
   operating_context: 'Operating context',
 }
 
 const FAMILY_ORDER = ['domain', 'functional', 'operating_context'] as const
+const DEFAULT_VISIBLE = 5
 
 const FAMILY_COLORS: Record<string, string> = {
   domain: '#818cf8',
@@ -69,8 +72,18 @@ interface Props {
 
 export function ExperienceChart({ tags, jobsByTag, nJobsWithTags, nActive }: Props) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [expandedFamilies, setExpandedFamilies] = useState<Set<string>>(new Set())
 
   if (!tags.length) return null
+
+  const toggleFamily = (family: string) => {
+    setExpandedFamilies((prev) => {
+      const next = new Set(prev)
+      if (next.has(family)) next.delete(family)
+      else next.add(family)
+      return next
+    })
+  }
 
   // Group tags by family, sorted descending by count within each group
   const grouped = FAMILY_ORDER.map((family) => {
@@ -84,61 +97,71 @@ export function ExperienceChart({ tags, jobsByTag, nJobsWithTags, nActive }: Pro
 
   return (
     <>
-      <div className="space-y-8">
-        {grouped.map(({ family, tags: familyTags }) => (
-          <div key={family}>
-            {/* Family heading */}
-            <p className="text-xs text-muted font-medium mb-3">
-              {FAMILY_LABELS[family] ?? family}
-            </p>
+      <div className="space-y-7">
+        {grouped.map(({ family, tags: familyTags }) => {
+          const isExpanded = expandedFamilies.has(family)
+          const hasMore = familyTags.length > DEFAULT_VISIBLE
+          const visibleTags = isExpanded ? familyTags : familyTags.slice(0, DEFAULT_VISIBLE)
+          const hiddenCount = familyTags.length - DEFAULT_VISIBLE
 
-            {/* Bars */}
-            <div className="space-y-2">
-              {familyTags.map((tag) => {
-                const barWidth = globalMax > 0 ? (tag.count / globalMax) * 100 : 0
-                const label = TAG_LABELS[tag.tag] ?? tag.tag
-                const color = FAMILY_COLORS[family] ?? '#818cf8'
+          return (
+            <div key={family}>
+              {/* Family heading */}
+              <div className="flex items-center gap-2 mb-3">
+                <span
+                  className="w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ backgroundColor: FAMILY_COLORS[family] }}
+                />
+                <p className="text-xs text-muted font-medium">
+                  {FAMILY_LABELS[family] ?? family}
+                </p>
+              </div>
 
-                return (
-                  <button
-                    key={tag.tag}
-                    onClick={() => setSelectedTag(tag.tag)}
-                    className="w-full flex items-center gap-3 group text-left hover:bg-surface-elevated/50 rounded-lg px-1 py-0.5 -mx-1 transition-colors"
-                  >
-                    <span className="text-sm text-muted w-48 shrink-0 truncate group-hover:text-white transition-colors">
-                      {label}
-                    </span>
-                    <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all"
-                        style={{
-                          width: `${barWidth}%`,
-                          backgroundColor: color,
-                        }}
-                      />
-                    </div>
-                    <span className="text-xs text-right shrink-0 tabular-nums w-8">
-                      <span className="text-white font-medium">{tag.count}</span>
-                    </span>
-                  </button>
-                )
-              })}
+              {/* Bars */}
+              <div className="space-y-1.5">
+                {visibleTags.map((tag) => {
+                  const barWidth = globalMax > 0 ? (tag.count / globalMax) * 100 : 0
+                  const label = TAG_LABELS[tag.tag] ?? tag.tag
+                  const color = FAMILY_COLORS[family] ?? '#818cf8'
+
+                  return (
+                    <button
+                      key={tag.tag}
+                      onClick={() => setSelectedTag(tag.tag)}
+                      className="w-full flex items-center gap-3 group text-left hover:bg-surface-elevated/50 rounded-lg px-1 py-0.5 -mx-1 transition-colors"
+                    >
+                      <span className="text-xs sm:text-sm text-muted w-32 sm:w-48 shrink-0 truncate group-hover:text-white transition-colors">
+                        {label}
+                      </span>
+                      <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all"
+                          style={{
+                            width: `${barWidth}%`,
+                            backgroundColor: color,
+                          }}
+                        />
+                      </div>
+                      <span className="text-xs text-right shrink-0 tabular-nums w-8">
+                        <span className="text-white font-medium">{tag.count}</span>
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Expand / collapse toggle */}
+              {hasMore && (
+                <button
+                  onClick={() => toggleFamily(family)}
+                  className="mt-2 text-xs text-accent hover:text-white transition-colors"
+                >
+                  {isExpanded ? 'Show less' : `+${hiddenCount} more`}
+                </button>
+              )}
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Legend */}
-      <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6">
-        {FAMILY_ORDER.filter((f) => grouped.some((g) => g.family === f)).map((family) => (
-          <div key={family} className="flex items-center gap-2">
-            <span
-              className="w-2 h-2 rounded-full shrink-0"
-              style={{ backgroundColor: FAMILY_COLORS[family] }}
-            />
-            <span className="text-xs text-muted">{FAMILY_LABELS[family]}</span>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       {/* Side panel */}

@@ -1,7 +1,11 @@
 import { getDistributions, getOverview, getExperience } from '@/lib/data'
-import { Section, Card, EmptyState } from '@/components/section'
-import { StatBar } from '@/components/stat-bar'
+import { Section, Card, EmptyState, BlockHeading } from '@/components/section'
+import { StatBar, StackedBar } from '@/components/stat-bar'
 import { ExperienceChart } from '@/components/experience-chart'
+
+// ---------------------------------------------------------------------------
+// Color / label maps
+// ---------------------------------------------------------------------------
 
 const SENIORITY_COLORS: Record<string, string> = {
   junior: '#4ade80',
@@ -29,13 +33,13 @@ const WORK_MODE_LABELS: Record<string, string> = {
 }
 
 const WORK_MODE_COLORS: Record<string, string> = {
-  remote:    '#22d3ee',  // cyan — most flexible
-  hybrid_1d: '#60a5fa',  // blue
-  hybrid_2d: '#818cf8',  // indigo
-  hybrid_3d: '#a78bfa',  // violet
-  hybrid_4d: '#c084fc',  // purple
-  hybrid:    '#737373',  // neutral — unspecified hybrid
-  onsite:    '#fb923c',  // orange — fully in-office
+  remote:    '#22d3ee',
+  hybrid_1d: '#60a5fa',
+  hybrid_2d: '#818cf8',
+  hybrid_3d: '#a78bfa',
+  hybrid_4d: '#c084fc',
+  hybrid:    '#737373',
+  onsite:    '#fb923c',
   unknown:   '#404040',
 }
 
@@ -53,66 +57,34 @@ const PM_TYPE_COLORS: Record<string, string> = {
   unknown: '#404040',
 }
 
-function generateSummary(
-  dist: ReturnType<typeof getDistributions>,
-  n_active: number,
-): string[] {
-  const summaries: string[] = []
-  const { seniority, work_mode, pm_type, companies } = dist
+function languageItems(lang: { label: string; count: number }[], germanReq: { label: string; count: number }[]) {
+  // Combine posting language + german requirement into a clear stacked bar
+  const enCount = lang.find((l) => l.label === 'en')?.count ?? 0
+  const deCount = lang.find((l) => l.label === 'de')?.count ?? 0
+  const enNone = germanReq.find((g) => g.label === 'not_mentioned')?.count ?? 0
+  const enPlus = germanReq.find((g) => g.label === 'plus')?.count ?? 0
+  const enMust = germanReq.find((g) => g.label === 'must')?.count ?? 0
 
-  // Work-style coverage
-  const wm_unknown = work_mode.find((i) => i.label === 'unknown')?.count ?? 0
-  if (n_active > 0 && wm_unknown > 0) {
-    const unclassified_pct = Math.round((wm_unknown / n_active) * 100)
-    if (unclassified_pct >= 30) {
-      summaries.push(
-        `Work-style data is sparse — ${unclassified_pct}% of roles don't specify an arrangement. Treat the distribution as directional.`
-      )
-    }
-  }
-
-  // Seniority coverage
-  const sen_unknown = seniority.find((i) => i.label === 'unknown')?.count ?? 0
-  if (n_active > 0 && sen_unknown > 0) {
-    const unclassified_pct = Math.round((sen_unknown / n_active) * 100)
-    if (unclassified_pct >= 20) {
-      summaries.push(
-        `${unclassified_pct}% of titles didn't yield a seniority signal — treat the level split as directional, not precise.`
-      )
-    }
-  }
-
-  // Company concentration
-  if (companies.top10_pct >= 50 && companies.n_companies > 0) {
-    summaries.push(
-      `Hiring is moderately concentrated — top 10 companies account for ${companies.top10_pct}% of active roles across ${companies.n_companies} unique employers.`
-    )
-  }
-
-  // Role type coverage
-  const pm_classified = pm_type.reduce((s, i) => s + i.count, 0)
-  if (n_active > 0 && pm_classified < n_active) {
-    const enriched_pct = Math.round((pm_classified / n_active) * 100)
-    if (enriched_pct < 80) {
-      summaries.push(
-        `Role type is classified for ${pm_classified} of ${n_active} active roles (${enriched_pct}%) — the remainder are pending enrichment.`
-      )
-    }
-  }
-
-  return summaries.slice(0, 4)
+  return [
+    { label: 'English · No German', count: enNone, color: '#4ade80' },
+    { label: 'English · German a Plus', count: enPlus, color: '#2dd4bf' },
+    { label: 'English · German Required', count: enMust, color: '#60a5fa' },
+    { label: 'German Posting', count: deCount, color: '#818cf8' },
+  ].filter((i) => i.count > 0)
 }
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
 
 export default function MarketPage() {
   const dist = getDistributions()
   const overview = getOverview()
   const experience = getExperience()
-  const { seniority, work_mode, pm_type, industry, ai, source, companies } = dist
+  const { seniority, work_mode, pm_type, industry, ai, source, companies, language, german_requirement } = dist
   const { n_active } = overview
 
-  const summaries = generateSummary(dist, n_active)
-
-  // Seniority: classified first, unknown last; with explicit colors
+  // --- Seniority ---
   const seniorityItems = [
     ...seniority.filter((i) => i.label !== 'unknown'),
     ...seniority.filter((i) => i.label === 'unknown'),
@@ -121,7 +93,7 @@ export default function MarketPage() {
   const senClassified = seniority.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
   const senTotal = seniority.reduce((s, i) => s + i.count, 0)
 
-  // Work mode: remote → onsite spectrum order, with explicit labels and colors
+  // --- Work mode ---
   const workModeItems = WORK_MODE_ORDER
     .map((key) => {
       const item = work_mode.find((m) => m.label === key)
@@ -136,16 +108,19 @@ export default function MarketPage() {
 
   const wmClassified = work_mode.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
   const wmTotal = work_mode.reduce((s, i) => s + i.count, 0)
+  const wmCoverageLow = wmTotal > 0 && (wmTotal - wmClassified) / wmTotal > 0.3
 
-  // Role type: with explicit colors
+  // --- Role type ---
   const pmTypeItems = pm_type.map((i) => ({
     ...i,
     color: PM_TYPE_COLORS[i.label] ?? '#818cf8',
   }))
-
   const pmClassified = pm_type.reduce((s, i) => s + i.count, 0)
 
-  // Companies: top 10 as ranked bar
+  // --- Language ---
+  const langItems = languageItems(language, german_requirement)
+
+  // --- Companies ---
   const companyItems = companies.top20.slice(0, 10).map((c) => ({
     ...c,
     color: '#818cf8',
@@ -153,29 +128,29 @@ export default function MarketPage() {
 
   return (
     <>
+      {/* ================================================================== */}
+      {/* Page header                                                        */}
+      {/* ================================================================== */}
       <div className="pt-2 pb-2">
         <h1 className="text-2xl font-bold tracking-tight text-white">Market shape</h1>
         <p className="text-muted mt-1.5 text-sm max-w-xl">
-          What the active market looks like — seniority, work style, role type, and who is hiring.
+          Structure, demand signals, and employer landscape for {n_active > 0 ? n_active : '—'} active PM roles.
         </p>
       </div>
 
-      {summaries.length > 0 && (
-        <div className="mt-6 space-y-2">
-          {summaries.map((text, i) => (
-            <div key={i} className="bg-surface border border-border rounded-lg px-4 py-2.5 flex gap-3">
-              <span className="text-subtle shrink-0 text-sm mt-0.5">↳</span>
-              <p className="text-sm text-muted leading-relaxed">{text}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* ================================================================== */}
+      {/* A. Market composition                                              */}
+      {/* ================================================================== */}
+      <BlockHeading
+        title="Market composition"
+        description="How the active market breaks down by level, role type, language, and work style."
+      />
 
       <Section
         title="Seniority"
         meta={
           senTotal > 0 && senClassified < senTotal
-            ? `Coverage: ${senClassified} of ${senTotal} classified`
+            ? `${senClassified} of ${senTotal} classified`
             : undefined
         }
       >
@@ -189,10 +164,43 @@ export default function MarketPage() {
       </Section>
 
       <Section
+        title="Role type"
+        meta={
+          n_active > 0 && pmClassified < n_active
+            ? `${pmClassified} of ${n_active} enriched`
+            : undefined
+        }
+      >
+        {pmTypeItems.length > 0 ? (
+          <Card>
+            <StatBar items={pmTypeItems} showPct total={n_active > 0 ? n_active : undefined} />
+          </Card>
+        ) : (
+          <EmptyState message="Role type classification building. Roles are classified daily." />
+        )}
+      </Section>
+
+      {langItems.length > 0 && (
+        <Section
+          title="Language requirements"
+          description={
+            langItems.length > 0
+              ? 'Posting language and German requirement combined.'
+              : undefined
+          }
+        >
+          <Card>
+            <StackedBar items={langItems} />
+          </Card>
+        </Section>
+      )}
+
+      <Section
         title="Work style"
+        compact={wmCoverageLow}
         meta={
           wmTotal > 0 && wmClassified < wmTotal
-            ? `Coverage: ${wmClassified} of ${wmTotal} specify an arrangement`
+            ? `${wmClassified} of ${wmTotal} specify an arrangement — treat as directional`
             : undefined
         }
       >
@@ -201,59 +209,25 @@ export default function MarketPage() {
             <StatBar items={workModeItems} showPct total={n_active > 0 ? n_active : undefined} />
           </Card>
         ) : (
-          <EmptyState message="Work mode data is building up. Check back as more roles are tracked." />
+          <EmptyState message="Work mode data is building up." />
         )}
       </Section>
 
-      <Section
-        title="Role type"
-        meta={
-          n_active > 0 && pmClassified < n_active
-            ? `Coverage: ${pmClassified} of ${n_active} enriched`
-            : undefined
-        }
-      >
-        {pmTypeItems.length > 0 ? (
-          <div className="space-y-3">
-            <Card>
-              <StatBar items={pmTypeItems} showPct total={n_active > 0 ? n_active : undefined} />
-            </Card>
-            {ai.n_enriched > 0 && (
-              <div className="bg-surface border border-border rounded-xl px-4 py-3 flex flex-wrap gap-x-6 gap-y-1">
-                <p className="text-xs text-muted">
-                  <span className="text-white font-medium">{ai.n_ai_focus}</span>
-                  {' '}roles ({ai.ai_focus_pct}%) have AI as core focus
-                </p>
-                <p className="text-xs text-muted">
-                  <span className="text-white font-medium">{ai.n_ai_skills}</span>
-                  {' '}roles ({ai.ai_skills_pct}%) require AI skills
-                </p>
-              </div>
-            )}
-          </div>
-        ) : (
-          <EmptyState message="Role type classification building. Roles are classified daily." />
-        )}
-      </Section>
-
-      {industry.length > 0 && (
-        <Section
-          title="Industry"
-          description="Which sectors are hiring product managers."
-        >
-          <Card>
-            <StatBar items={industry} showPct />
-          </Card>
-        </Section>
-      )}
+      {/* ================================================================== */}
+      {/* B. What companies look for                                         */}
+      {/* ================================================================== */}
+      <BlockHeading
+        title="What companies look for"
+        description="Domain background, functional skills, and operating context companies expect from PMs."
+      />
 
       {experience.tags.length > 0 && (
         <Section
           title="Required experience"
-          description="What background companies want PMs to have."
+          description="Extracted from job descriptions — click any bar to see matching roles."
           meta={
             experience.n_jobs_with_tags > 0 && experience.n_active > 0
-              ? `Coverage: ${experience.n_jobs_with_tags} of ${experience.n_active} active roles classified`
+              ? `${experience.n_jobs_with_tags} of ${experience.n_active} active roles classified`
               : undefined
           }
         >
@@ -268,11 +242,49 @@ export default function MarketPage() {
         </Section>
       )}
 
+      {/* AI demand signals — adjacent to experience */}
+      {ai.n_enriched > 0 && (
+        <Section title="AI demand" compact>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-2xl font-bold text-white tabular-nums">{ai.ai_focus_pct}%</p>
+              <p className="text-sm text-muted mt-1">AI as core focus</p>
+              <p className="text-2xs text-subtle mt-0.5">{ai.n_ai_focus} of {ai.n_enriched} classified roles</p>
+            </div>
+            <div className="bg-surface border border-border rounded-xl p-4">
+              <p className="text-2xl font-bold text-white tabular-nums">{ai.ai_skills_pct}%</p>
+              <p className="text-sm text-muted mt-1">AI skills expected</p>
+              <p className="text-2xs text-subtle mt-0.5">{ai.n_ai_skills} of {ai.n_enriched} classified roles</p>
+            </div>
+          </div>
+        </Section>
+      )}
+
+      {industry.length > 0 && (
+        <Section
+          title="Industry"
+          description="Which sectors are hiring product managers."
+          compact
+        >
+          <Card>
+            <StatBar items={industry} showPct />
+          </Card>
+        </Section>
+      )}
+
+      {/* ================================================================== */}
+      {/* C. Employer landscape                                              */}
+      {/* ================================================================== */}
+      <BlockHeading
+        title="Employer landscape"
+        description="Who is hiring and how concentrated the market is."
+      />
+
       <Section
-        title="Company landscape"
+        title="Companies"
         description={
           companies.n_companies > 0
-            ? `${companies.n_companies} unique companies · ${companies.multi_hiring} hiring 2+ roles · top 10 account for ${companies.top10_pct}%`
+            ? `${companies.n_companies} unique employers · ${companies.multi_hiring} hiring 2+ roles · top 10 account for ${companies.top10_pct}%`
             : undefined
         }
       >
@@ -290,12 +302,12 @@ export default function MarketPage() {
       </Section>
 
       {source.length > 0 && (
-        <section className="mt-12">
-          <p className="text-xs text-subtle uppercase tracking-wider mb-2">Data sources</p>
+        <section className="mt-8">
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Data sources</p>
           <div className="flex gap-5 flex-wrap">
-            {source.map((s) => (
-              <span key={s.label} className="text-xs text-muted">
-                {s.label === 'jsearch' ? 'JSearch' : s.label === 'arbeitnow' ? 'Arbeitnow' : s.label}:
+            {source.map((s, i) => (
+              <span key={`${s.label}-${i}`} className="text-xs text-muted">
+                {s.label === 'jsearch' ? 'JSearch' : s.label === 'arbeitnow' ? 'Arbeitnow' : s.label === 'ats' ? 'ATS' : s.label}:
                 {' '}{s.count} roles
               </span>
             ))}
