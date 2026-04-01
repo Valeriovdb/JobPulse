@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import type { Overview, Distributions } from '@/types/data'
-import { Section, Card } from '@/components/section'
 import { StatBar, StackedBar } from '@/components/stat-bar'
 import { DEFAULT_FILTERS } from '@/components/filter-bar'
 import { DrillDownPanel, type DrillTarget } from '@/components/drill-down-panel'
@@ -171,6 +170,153 @@ function collapseWorkMode(modes: { label: string; count: number }[]) {
 }
 
 // ---------------------------------------------------------------------------
+// Inline sub-components
+// ---------------------------------------------------------------------------
+
+function StatChip({ value, label }: { value: string | number; label: string }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-elevated border border-border">
+      <span className="text-sm font-bold text-white tabular-nums">{value}</span>
+      <span className="text-xs text-muted">{label}</span>
+    </div>
+  )
+}
+
+const HERO_LANG_SHORT: Record<string, string> = {
+  en_none: 'No German',
+  en_plus: 'German +',
+  en_must: 'Required',
+  de: 'German-only',
+}
+
+function HeroAccessBar({
+  items,
+  total,
+  onSegmentClick,
+  activeKey,
+}: {
+  items: { label: string; count: number; color?: string; drillKey?: string }[]
+  total?: number
+  onSegmentClick?: (key: string, label: string) => void
+  activeKey?: string | null
+}) {
+  const sum = total ?? items.reduce((acc, i) => acc + i.count, 0)
+  const visibleItems = items.filter((i) => sum > 0 && i.count > 0)
+
+  return (
+    <div>
+      {/* Tall segmented bar */}
+      <div className="flex h-8 rounded-lg overflow-hidden gap-0.5 mb-4">
+        {visibleItems.map((item) => {
+          const pct = (item.count / sum) * 100
+          const key = item.drillKey ?? item.label
+          const isActive = activeKey === key
+          return (
+            <div
+              key={key}
+              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
+              style={{ width: `${pct}%`, backgroundColor: item.color ?? '#818cf8' }}
+              className={[
+                'transition-opacity',
+                onSegmentClick ? 'cursor-pointer' : '',
+                activeKey && !isActive ? 'opacity-20' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            />
+          )
+        })}
+      </div>
+      {/* Labels row — always visible */}
+      <div
+        className="grid gap-x-3 gap-y-1"
+        style={{ gridTemplateColumns: `repeat(${visibleItems.length}, 1fr)` }}
+      >
+        {visibleItems.map((item) => {
+          const pct = Math.round((item.count / sum) * 100)
+          const key = item.drillKey ?? item.label
+          const isActive = activeKey === key
+          return (
+            <div
+              key={key}
+              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
+              className={[
+                onSegmentClick ? 'cursor-pointer' : '',
+                activeKey && !isActive ? 'opacity-30' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
+              <div
+                className="w-2 h-2 rounded-full mb-1.5"
+                style={{ backgroundColor: item.color ?? '#818cf8' }}
+              />
+              <p className="text-sm font-bold text-white tabular-nums leading-none">{pct}%</p>
+              <p className="text-2xs text-muted mt-0.5 leading-tight">
+                {HERO_LANG_SHORT[key] ?? item.label}
+              </p>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function DrillModule({
+  label,
+  value,
+  insight,
+  isActive,
+  onClick,
+}: {
+  label: string
+  value: string | number
+  insight: string
+  isActive: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={[
+        'text-left w-full rounded-xl border p-5 transition-colors group',
+        isActive
+          ? 'bg-surface-elevated border-border-strong'
+          : 'bg-surface border-border hover:bg-surface-elevated hover:border-border-strong',
+      ].join(' ')}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="text-2xs text-muted uppercase tracking-wider leading-none">{label}</p>
+          <p className="text-2xl font-bold text-white tabular-nums leading-none mt-2.5">{value}</p>
+          <p className="text-xs text-muted mt-2 leading-snug">{insight}</p>
+        </div>
+        <div
+          className={[
+            'shrink-0 w-6 h-6 rounded-full border flex items-center justify-center mt-0.5 transition-colors',
+            isActive
+              ? 'border-accent text-accent bg-accent/10'
+              : 'border-border text-subtle group-hover:border-border-strong group-hover:text-muted',
+          ].join(' ')}
+        >
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path
+              d="M2 5H8M8 5L5.5 2.5M8 5L5.5 7.5"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 
@@ -184,7 +330,7 @@ export default function OverviewClient({ overview, dist }: Props) {
   const [apiDrillParams, setApiDrillParams] = useState<{ chart_id: string; segment_key: string } | null>(null)
   const [activeKey, setActiveKey] = useState<string | null>(null)
 
-  const { n_active, n_new_week, senior_pct, accessible_pct } = overview
+  const { n_active, senior_pct, accessible_pct } = overview
   const { ai } = dist
 
   const insights = generateInsights(
@@ -227,25 +373,12 @@ export default function OverviewClient({ overview, dist }: Props) {
     { label: 'German posting',     count: overview.language.de,      color: '#818cf8', drillKey: 'de'      },
   ].filter((i) => i.count > 0)
 
-  const locationItems = [
-    { label: 'Berlin',            count: overview.location.berlin,           color: '#818cf8', drillKey: 'berlin'          },
-    { label: 'Remote Germany',    count: overview.location.remote_germany,   color: '#60a5fa', drillKey: 'remote_germany'  },
-    { label: 'Location unclear',  count: overview.location.unclear,          color: '#fb923c', drillKey: 'unclear'         },
-  ].filter((i) => i.count > 0)
-
   const workModeItems = collapseWorkMode(dist.work_mode)
 
   const pmTypeItems = dist.pm_type.map((item) => ({
     label: PM_TYPE_LABELS[item.label] ?? item.label,
     count: item.count,
     color: PM_TYPE_COLORS[item.label] ?? '#818cf8',
-    drillKey: item.label,
-  }))
-
-  const industryItems = dist.industry.slice(0, 8).map((item, i) => ({
-    label: item.label,
-    count: item.count,
-    color: ['#818cf8','#60a5fa','#2dd4bf','#4ade80','#fb923c','#f472b6','#a78bfa','#34d399'][i % 8],
     drillKey: item.label,
   }))
 
@@ -259,200 +392,297 @@ export default function OverviewClient({ overview, dist }: Props) {
     }))
 
   const n_companies = dist.companies.n_companies
-  const classifiedLocation = overview.location.berlin + overview.location.remote_germany
 
-  const kpis = [
-    { value: n_active,      label: 'Active roles' },
-    n_new_week > 0 && n_new_week !== n_active ? { value: n_new_week, label: 'New this week' } : null,
-    n_companies > 0 ? { value: n_companies, label: 'Companies' } : null,
-    overview.median_age_days > 0 ? { value: `${overview.median_age_days}d`, label: 'Median age' } : null,
-  ].filter(Boolean) as { value: string | number; label: string }[]
+  // ---------------------------------------------------------------------------
+  // Derived values
+  // ---------------------------------------------------------------------------
+
+  const remoteCount = workModeItems.find((i) => i.drillKey === 'remote')?.count ?? 0
+  const remotePct = n_active > 0 ? Math.round((remoteCount / n_active) * 100) : 0
+
+  const SENIOR_PLUS_KEYS = new Set(['senior', 'mid_senior', 'lead', 'staff', 'group', 'principal', 'head'])
+  const seniorPlusCount = dist.seniority
+    .filter((i) => SENIOR_PLUS_KEYS.has(i.label))
+    .reduce((acc, i) => acc + i.count, 0)
+
+  // Group seniority: keep core levels, merge lead+ into one row to reduce noise
+  const coreSeniorityItems = seniorityItems.filter((i) =>
+    ['junior', 'mid', 'mid_senior', 'senior'].includes(i.drillKey ?? '')
+  )
+  const leadAboveCount = seniorityItems
+    .filter((i) => ['lead', 'staff', 'group', 'principal', 'head'].includes(i.drillKey ?? ''))
+    .reduce((acc, i) => acc + i.count, 0)
+  const groupedSeniorityItems = [
+    ...coreSeniorityItems,
+    ...(leadAboveCount > 0
+      ? [{ label: 'Lead & above', count: leadAboveCount, color: '#a78bfa', drillKey: 'lead' }]
+      : []),
+  ]
 
   return (
     <>
       {/* ------------------------------------------------------------------ */}
-      {/* Hero                                                                */}
+      {/* Section A — Hero                                                    */}
       {/* ------------------------------------------------------------------ */}
-      <div className="pt-2 pb-14 border-b border-border">
-        <p className="text-2xs text-subtle uppercase tracking-widest mb-8">
-          Berlin · PM Market
-        </p>
+      <div className="pt-2 pb-16 border-b border-border">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
 
-        <h1 className="text-3xl font-bold text-white tracking-tight leading-tight mb-3">
-          {getMarketCharacter(senior_pct, accessible_pct, n_active)}
-        </h1>
-
-        <p className="text-sm text-muted max-w-lg leading-relaxed mb-8">
-          {n_active} active roles in Berlin and remote Germany.
-          {senior_pct > 0 && <> {senior_pct}% are Senior level or above.</>}
-          {accessible_pct > 0 && <> {accessible_pct}% list no German requirement.</>}
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-10">
-          {senior_pct >= 50 && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border text-xs text-white/80">
-              Senior-heavy
-            </span>
-          )}
-          {accessible_pct > 0 && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border text-xs text-white/80">
-              {accessible_pct}% English-accessible
-            </span>
-          )}
-          {n_companies > 0 && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border text-xs text-white/80">
-              {n_companies} companies hiring
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-start">
-          {kpis.map((metric, i) => (
-            <div
-              key={i}
-              className={`flex-1 min-w-0 ${i > 0 ? 'pl-8 border-l border-border' : 'pr-8'}`}
-            >
-              <p className="text-3xl font-bold text-white tracking-tight tabular-nums leading-none">
-                {metric.value}
-              </p>
-              <p className="text-2xs text-muted uppercase tracking-wider mt-2">
-                {metric.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Language access                                                     */}
-      {/* ------------------------------------------------------------------ */}
-      <Section
-        title="Language access"
-        description="Language requirements shape access to the market."
-      >
-        <Card>
-          <StackedBar
-            items={languageItems}
-            onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
-            activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
-          />
-        </Card>
-      </Section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Location + Work style                                               */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="mt-16 grid grid-cols-2 gap-6">
-        <div>
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Location</p>
-          <p className="text-sm text-white font-medium leading-relaxed mb-3">
-            {classifiedLocation > 0 && n_active > 0
-              ? `${Math.round((classifiedLocation / n_active) * 100)}% of roles are explicitly placed.`
-              : 'Where roles are based.'}
-          </p>
-          <Card>
-            <StackedBar
-              items={locationItems}
-              onSegmentClick={(key, label) => handleDrill('location', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'location' ? activeKey : null}
-            />
-          </Card>
-        </div>
-        <div>
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Work style</p>
-          <p className="text-sm text-white font-medium leading-relaxed mb-3">
-            Flexibility and on-site requirements.
-          </p>
-          <Card>
-            <StackedBar
-              items={workModeItems}
-              onSegmentClick={(key, label) => handleDrill('work_mode', key === 'hybrid' ? [...HYBRID_KEYS] : [key], label, key)}
-              activeKey={drillTarget?.dimension === 'work_mode' ? activeKey : null}
-            />
-          </Card>
-        </div>
-      </div>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Seniority                                                           */}
-      {/* ------------------------------------------------------------------ */}
-      {seniorityItems.length > 0 && (
-        <Section title="Seniority" description="Experience level distribution across active roles.">
-          <Card>
-            <StatBar
-              items={seniorityItems}
-              showPct
-              onBarClick={(key, label) => handleDrill('seniority', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'seniority' ? activeKey : null}
-            />
-          </Card>
-        </Section>
-      )}
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Role type                                                           */}
-      {/* ------------------------------------------------------------------ */}
-      {pmTypeItems.length > 0 && (
-        <Section title="Role type" description="What kind of PM work is in demand right now.">
-          <Card>
-            <StatBar
-              items={pmTypeItems}
-              showPct
-              onBarClick={(key, label) => handleDrill('pm_type', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'pm_type' ? activeKey : null}
-            />
-          </Card>
-        </Section>
-      )}
-
-      {/* ------------------------------------------------------------------ */}
-      {/* AI requirement                                                      */}
-      {/* ------------------------------------------------------------------ */}
-      {ai.n_enriched > 0 && (
-        <Section
-          title="AI requirement"
-          description={`Based on ${ai.n_enriched} classified roles.`}
-        >
-          <div className="grid grid-cols-2 gap-3">
-            <div
-              className="bg-surface border border-border rounded-xl p-5"
-            >
-              <p className="text-3xl font-bold text-white tabular-nums">{ai.ai_focus_pct}%</p>
-              <p className="text-sm text-white/90 font-medium mt-1.5">AI as core focus</p>
-              <p className="text-xs text-muted mt-1 leading-snug">
-                Product development or AI features as the primary responsibility.
-              </p>
-              <p className="text-2xs text-subtle mt-2">{ai.n_ai_focus} roles</p>
-            </div>
-            <div
-              className="bg-surface border border-border rounded-xl p-5"
-            >
-              <p className="text-3xl font-bold text-white tabular-nums">{ai.ai_skills_pct}%</p>
-              <p className="text-sm text-white/90 font-medium mt-1.5">AI skills required</p>
-              <p className="text-xs text-muted mt-1 leading-snug">
-                AI tools, prompting, or ML familiarity listed as a requirement.
-              </p>
-              <p className="text-2xs text-subtle mt-2">{ai.n_ai_skills} roles</p>
+          {/* Left: editorial text + stat chips */}
+          <div>
+            <p className="text-2xs text-subtle uppercase tracking-widest mb-5">
+              Berlin · PM Market
+            </p>
+            <h1 className="text-3xl font-bold text-white tracking-tight leading-tight mb-4">
+              {getMarketCharacter(senior_pct, accessible_pct, n_active)}
+            </h1>
+            <p className="text-sm text-muted leading-relaxed mb-6">
+              {n_active > 0 ? (
+                <>
+                  {n_active} roles tracked across Berlin and remote Germany.
+                  {senior_pct >= 50
+                    ? ` ${senior_pct}% are Senior-level or above.`
+                    : senior_pct > 0
+                    ? ` Seniority is mixed — ${senior_pct}% Senior or above.`
+                    : ''}
+                  {remotePct <= 10
+                    ? ` Remote is scarce — only ${remotePct}% of roles offer it.`
+                    : ` ${remotePct}% offer remote flexibility.`}
+                </>
+              ) : (
+                'No active roles in the current snapshot.'
+              )}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <StatChip value={n_active} label="active roles" />
+              {accessible_pct > 0 && (
+                <StatChip value={`${accessible_pct}%`} label="English-accessible" />
+              )}
+              <StatChip value={`${remotePct}%`} label="fully remote" />
             </div>
           </div>
-        </Section>
-      )}
+
+          {/* Right: hero access bar */}
+          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+            <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Market access</p>
+            <h2 className="text-[15px] font-semibold text-white leading-snug mb-1">
+              Language is the main access filter
+            </h2>
+            <p className="text-xs text-muted mb-5 leading-relaxed">
+              {accessible_pct}% of postings list no German requirement — the most accessible segment.
+            </p>
+            <HeroAccessBar
+              items={languageItems}
+              total={n_active}
+              onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
+              activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Industry                                                            */}
+      {/* Section B — Access conditions                                       */}
       {/* ------------------------------------------------------------------ */}
-      {industryItems.length > 0 && (
-        <Section title="Industry" description="Where PM roles are concentrating.">
-          <Card>
-            <StatBar
-              items={industryItems}
-              showPct
-              onBarClick={(key, label) => handleDrill('industry', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'industry' ? activeKey : null}
+      <div className="mt-16">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Access conditions</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          {/* Card 1: Language access */}
+          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+            <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+              {accessible_pct >= 50
+                ? 'About half the market is accessible in English'
+                : 'Most of this market requires German'}
+            </h3>
+            <p className="text-xs text-muted mb-5 leading-relaxed">
+              Language requirements determine who can realistically apply.
+            </p>
+            <StackedBar
+              items={languageItems}
+              onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
+              activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
             />
-          </Card>
-        </Section>
-      )}
+          </div>
+
+          {/* Card 2: Work style / remote */}
+          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+            <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+              Remote is the exception, not the norm
+            </h3>
+            <p className="text-xs text-muted mb-4 leading-relaxed">
+              On-site and hybrid arrangements dominate this market.
+            </p>
+            <div className="mb-5 flex items-baseline gap-2.5">
+              <p className="text-4xl font-bold text-white tabular-nums leading-none">{remotePct}%</p>
+              <p className="text-xs text-muted">of roles are fully remote</p>
+            </div>
+            <StatBar
+              items={workModeItems}
+              showPct
+              onBarClick={(key, label) =>
+                handleDrill(
+                  'work_mode',
+                  key === 'hybrid' ? [...HYBRID_KEYS] : [key],
+                  label,
+                  key,
+                )
+              }
+              activeKey={drillTarget?.dimension === 'work_mode' ? activeKey : null}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Section C — Profile fit                                             */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="mt-16">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Profile fit</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          {/* Card 1: Seniority */}
+          {groupedSeniorityItems.length > 0 && (
+            <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+              <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+                Most roles target experienced PMs
+              </h3>
+              <p className="text-xs text-muted mb-5 leading-relaxed">
+                {senior_pct >= 50
+                  ? `${senior_pct}% are Senior-level or above — junior and mid roles are limited.`
+                  : senior_pct > 0
+                  ? `Seniority is distributed — ${senior_pct}% Senior or above.`
+                  : 'Experience level distribution across active roles.'}
+              </p>
+              <StatBar
+                items={groupedSeniorityItems}
+                showPct
+                onBarClick={(key, label) => handleDrill('seniority', [key], label, key)}
+                activeKey={drillTarget?.dimension === 'seniority' ? activeKey : null}
+              />
+            </div>
+          )}
+
+          {/* Card 2: Role focus */}
+          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+            {ai.n_enriched > 0 && ai.ai_focus_pct >= 10 ? (
+              <>
+                <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+                  AI experience is increasingly expected
+                </h3>
+                <p className="text-xs text-muted mb-5 leading-relaxed">
+                  Based on {ai.n_enriched} classified roles.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-3xl font-bold text-white tabular-nums leading-none">
+                      {ai.ai_focus_pct}%
+                    </p>
+                    <p className="text-sm text-white/70 font-medium mt-1.5">AI as core focus</p>
+                    <p className="text-xs text-muted mt-0.5">{ai.n_ai_focus} roles</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-white tabular-nums leading-none">
+                      {ai.ai_skills_pct}%
+                    </p>
+                    <p className="text-sm text-white/70 font-medium mt-1.5">AI skills required</p>
+                    <p className="text-xs text-muted mt-0.5">{ai.n_ai_skills} roles</p>
+                  </div>
+                </div>
+              </>
+            ) : pmTypeItems.length > 0 ? (
+              <>
+                <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+                  What type of PM work is in demand
+                </h3>
+                <p className="text-xs text-muted mb-5 leading-relaxed">
+                  Role focus distribution across active listings.
+                </p>
+                <StatBar
+                  items={pmTypeItems.slice(0, 5)}
+                  showPct
+                  onBarClick={(key, label) => handleDrill('pm_type', [key], label, key)}
+                  activeKey={drillTarget?.dimension === 'pm_type' ? activeKey : null}
+                />
+              </>
+            ) : null}
+          </div>
+        </div>
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Section D — Drill-down entry points                                */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="mt-16">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Explore further</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <DrillModule
+            label="English-accessible roles"
+            value={overview.language.en_none}
+            insight="No German requirement listed"
+            isActive={
+              apiDrillParams?.chart_id === 'german_requirement' &&
+              apiDrillParams?.segment_key === 'not_mentioned'
+            }
+            onClick={() => {
+              if (
+                apiDrillParams?.chart_id === 'german_requirement' &&
+                apiDrillParams?.segment_key === 'not_mentioned'
+              ) {
+                handleClose()
+              } else {
+                setDrillTarget({ dimension: 'language', keys: ['en_none'], label: 'English-accessible roles' })
+                setApiDrillParams({ chart_id: 'german_requirement', segment_key: 'not_mentioned' })
+                setActiveKey('en_none')
+              }
+            }}
+          />
+
+          <DrillModule
+            label="Senior+ roles"
+            value={seniorPlusCount}
+            insight={`Senior, Lead, Staff & above${senior_pct > 0 ? ` · ${senior_pct}% of market` : ''}`}
+            isActive={
+              apiDrillParams?.chart_id === 'seniority' &&
+              apiDrillParams?.segment_key === 'senior'
+            }
+            onClick={() => {
+              if (
+                apiDrillParams?.chart_id === 'seniority' &&
+                apiDrillParams?.segment_key === 'senior'
+              ) {
+                handleClose()
+              } else {
+                setDrillTarget({ dimension: 'seniority', keys: ['senior'], label: 'Senior+ roles' })
+                setApiDrillParams({ chart_id: 'seniority', segment_key: 'senior' })
+                setActiveKey('senior')
+              }
+            }}
+          />
+
+          <DrillModule
+            label="Companies hiring now"
+            value={n_companies}
+            insight={`${n_active} open roles total`}
+            isActive={
+              apiDrillParams?.chart_id === 'location' &&
+              apiDrillParams?.segment_key === 'berlin'
+            }
+            onClick={() => {
+              if (
+                apiDrillParams?.chart_id === 'location' &&
+                apiDrillParams?.segment_key === 'berlin'
+              ) {
+                handleClose()
+              } else {
+                setDrillTarget({ dimension: 'location', keys: ['berlin'], label: 'Companies hiring now' })
+                setApiDrillParams({ chart_id: 'location', segment_key: 'berlin' })
+                setActiveKey('berlin')
+              }
+            }}
+          />
+        </div>
+      </div>
 
       {/* ------------------------------------------------------------------ */}
       {/* Analyst notes                                                       */}
@@ -469,7 +699,7 @@ export default function OverviewClient({ overview, dist }: Props) {
                 <span className="text-2xs text-subtle font-mono tabular-nums leading-none mt-0.5 w-5 shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-sm text-white/88 leading-relaxed">{text}</p>
+                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
