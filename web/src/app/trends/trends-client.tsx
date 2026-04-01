@@ -17,7 +17,7 @@ interface TrendsClientProps {
 export default function TrendsClient({ timeseries }: TrendsClientProps) {
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
 
-  const filteredMarketActivity = useMemo(() => {
+  const commonFiltered = useMemo(() => {
     if (!timeseries.market_activity) return []
 
     let filtered = timeseries.market_activity
@@ -37,7 +37,7 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
       filtered = filtered.filter((row) => row.location === target)
     }
 
-    // 3. Seniority filter
+    // 3. Seniority filter (only apply if NOT 'all' - for Mix charts we might want to see the mix within a filtered seniority but usually Mix charts are best with all seniorities)
     if (filters.seniority !== 'all') {
       const map: Record<string, string[]> = {
         junior: ['junior'],
@@ -60,8 +60,12 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
       }
     }
 
-    // 5. Aggregate by date
-    const grouped = filtered.reduce((acc, row) => {
+    return filtered
+  }, [timeseries.market_activity, filters])
+
+  const filteredMarketActivity = useMemo(() => {
+    // Aggregate commonFiltered by date
+    const grouped = commonFiltered.reduce((acc, row) => {
       if (!acc[row.date]) {
         acc[row.date] = { date: row.date, active_jobs: 0, jobs_added: 0, jobs_removed: 0, net_change: 0 }
       }
@@ -74,7 +78,41 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
     return Object.values(grouped)
       .map(d => ({ ...d, net_change: d.jobs_added - d.jobs_removed }))
       .sort((a, b) => a.date.localeCompare(b.date))
-  }, [timeseries.market_activity, filters])
+  }, [commonFiltered])
+
+  const seniorityMix = useMemo(() => {
+    const dates = Array.from(new Set(commonFiltered.map(r => r.date))).sort()
+    const series: Record<string, number[]> = {}
+    
+    dates.forEach((date, i) => {
+      const dayRows = commonFiltered.filter(r => r.date === date)
+      dayRows.forEach(row => {
+        if (!series[row.seniority]) {
+          series[row.seniority] = new Array(dates.length).fill(0)
+        }
+        series[row.seniority][i] += row.active_jobs
+      })
+    })
+
+    return { dates, series }
+  }, [commonFiltered])
+
+  const germanReqMix = useMemo(() => {
+    const dates = Array.from(new Set(commonFiltered.map(r => r.date))).sort()
+    const series: Record<string, number[]> = {}
+    
+    dates.forEach((date, i) => {
+      const dayRows = commonFiltered.filter(r => r.date === date)
+      dayRows.forEach(row => {
+        if (!series[row.german_req]) {
+          series[row.german_req] = new Array(dates.length).fill(0)
+        }
+        series[row.german_req][i] += row.active_jobs
+      })
+    })
+
+    return { dates, series }
+  }, [commonFiltered])
 
   // Simple aggregations for the other legacy charts if no filters applied
   // In a real app, we'd probably want to filter them too, but the prompt focuses on the new chart.
@@ -182,11 +220,11 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
         title="Seniority mix"
         description="How the seniority composition of active roles has changed."
       >
-        {timeseries.seniority_mix && timeseries.seniority_mix.dates.length >= 3 ? (
+        {seniorityMix.dates.length >= 3 ? (
           <Card>
             <StackedArea
-              dates={timeseries.seniority_mix.dates}
-              series={timeseries.seniority_mix.series}
+              dates={seniorityMix.dates}
+              series={seniorityMix.series}
             />
           </Card>
         ) : (
@@ -198,11 +236,11 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
         title="German requirement over time"
         description="Trend in language requirements across active roles."
       >
-        {timeseries.german_req_mix && timeseries.german_req_mix.dates.length >= 3 ? (
+        {germanReqMix.dates.length >= 3 ? (
           <Card>
             <StackedArea
-              dates={timeseries.german_req_mix.dates}
-              series={timeseries.german_req_mix.series}
+              dates={germanReqMix.dates}
+              series={germanReqMix.series}
             />
           </Card>
         ) : (
