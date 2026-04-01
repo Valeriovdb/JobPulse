@@ -480,7 +480,7 @@ def upsert_experience_tags(
                 "job_id": job_id,
                 "experience_tag": t["tag"],
                 "experience_family": t["family"],
-                "required_level": t["level"],
+                "required_level": t["required_level"],
                 "evidence_text": t.get("evidence", ""),
                 "confidence": t.get("confidence"),
                 "classifier_version": config.CLASSIFIER_VERSION,
