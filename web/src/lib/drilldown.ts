@@ -48,7 +48,15 @@ const ROLE_TYPE_KEYS = new Set([
   'data_ai', 'growth', 'internal_ops', 'other',
 ])
 
-const SUPPORTED_CHARTS = new Set(['german_requirement', 'seniority', 'role_type'])
+const LOCATION_KEYS = new Set(['berlin', 'remote_germany', 'unclear'])
+
+const WORK_MODE_HYBRID_VALUES = ['hybrid', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d']
+const WORK_MODE_KEYS = new Set(['remote', 'hybrid', 'onsite', 'unknown'])
+
+const SUPPORTED_CHARTS = new Set([
+  'german_requirement', 'seniority', 'role_type',
+  'posting_language', 'location', 'work_mode',
+])
 
 // ---------------------------------------------------------------------------
 // Validation
@@ -85,6 +93,18 @@ function validateChartSegment(chart_id: string, segment_key: string): void {
       `Invalid segment_key "${segment_key}" for chart role_type. Valid: ${[...ROLE_TYPE_KEYS].join(', ')}`
     )
   }
+
+  if (chart_id === 'location' && !LOCATION_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart location. Valid: ${[...LOCATION_KEYS].join(', ')}`
+    )
+  }
+
+  if (chart_id === 'work_mode' && !WORK_MODE_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart work_mode. Valid: ${[...WORK_MODE_KEYS].join(', ')}`
+    )
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -107,8 +127,23 @@ function applyChartCondition(query: AnyQuery, chart_id: string, segment_key: str
     }
     return query.eq('seniority', segment_key)
   }
-  // role_type → pm_type column
-  return query.eq('pm_type', segment_key)
+  if (chart_id === 'role_type') {
+    return query.eq('pm_type', segment_key)
+  }
+  if (chart_id === 'posting_language') {
+    return query.eq('posting_language', segment_key)
+  }
+  if (chart_id === 'location') {
+    if (segment_key === 'berlin')         return query.eq('is_berlin', true)
+    if (segment_key === 'remote_germany') return query.eq('is_remote_germany', true)
+    // unclear = neither berlin nor remote
+    return query.eq('is_berlin', false).eq('is_remote_germany', false)
+  }
+  if (chart_id === 'work_mode') {
+    if (segment_key === 'hybrid') return query.in('work_mode', WORK_MODE_HYBRID_VALUES)
+    return query.eq('work_mode', segment_key)
+  }
+  return query
 }
 
 function applyUserFilters(query: AnyQuery, filters: DrilldownFilters): AnyQuery {

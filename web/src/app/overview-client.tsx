@@ -36,8 +36,55 @@ const PM_TYPE_COLORS: Record<string, string> = {
   unknown: '#404040',
 }
 
+const SENIORITY_LABELS: Record<string, string> = {
+  junior: 'Junior',
+  mid: 'Mid',
+  mid_senior: 'Mid–Senior',
+  senior: 'Senior',
+  lead: 'Lead',
+  staff: 'Staff',
+  group: 'Group PM',
+  principal: 'Principal',
+  head: 'Head of PM',
+  unknown: 'Unclassified',
+}
+
+const SENIORITY_COLORS: Record<string, string> = {
+  junior: '#4ade80',
+  mid: '#60a5fa',
+  mid_senior: '#38bdf8',
+  senior: '#818cf8',
+  lead: '#a78bfa',
+  staff: '#c084fc',
+  group: '#e879f9',
+  principal: '#f472b6',
+  head: '#fb7185',
+  unknown: '#404040',
+}
+
 const SENIOR_LEVELS = new Set(['senior', 'mid_senior', 'lead', 'staff', 'group', 'principal', 'head'])
 const HYBRID_KEYS = new Set(['hybrid', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d'])
+
+// ---------------------------------------------------------------------------
+// Drill-down API mapping
+// ---------------------------------------------------------------------------
+
+function toApiParams(
+  dimension: string,
+  segKey: string,
+): { chart_id: string; segment_key: string } | null {
+  if (dimension === 'seniority') return { chart_id: 'seniority', segment_key: segKey }
+  if (dimension === 'pm_type')   return { chart_id: 'role_type', segment_key: segKey }
+  if (dimension === 'location')  return { chart_id: 'location', segment_key: segKey }
+  if (dimension === 'work_mode') return { chart_id: 'work_mode', segment_key: segKey }
+  if (dimension === 'language') {
+    if (segKey === 'en_none') return { chart_id: 'german_requirement', segment_key: 'not_mentioned' }
+    if (segKey === 'en_plus') return { chart_id: 'german_requirement', segment_key: 'plus' }
+    if (segKey === 'en_must') return { chart_id: 'german_requirement', segment_key: 'must' }
+    if (segKey === 'de')      return { chart_id: 'posting_language',   segment_key: 'de' }
+  }
+  return null
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -124,46 +171,8 @@ function collapseWorkMode(modes: { label: string; count: number }[]) {
   ].filter((i) => i.count > 0)
 }
 
-function getJobsForDrill(target: DrillTarget, jobs: Job[]): Job[] {
-  const { dimension, keys } = target
-  const keySet = new Set(keys)
-  switch (dimension) {
-    case 'language':
-      if (keySet.has('en_none'))   return jobs.filter((j) => j.language === 'en' && j.german_req === 'not_mentioned')
-      if (keySet.has('en_plus'))   return jobs.filter((j) => j.german_req === 'plus')
-      if (keySet.has('en_must'))   return jobs.filter((j) => j.language === 'en' && j.german_req === 'must')
-      if (keySet.has('de'))        return jobs.filter((j) => j.language === 'de')
-      return []
-    case 'work_mode': {
-      const allHybrid = [...HYBRID_KEYS]
-      if (keySet.has('hybrid'))  return jobs.filter((j) => allHybrid.includes(j.work_mode))
-      if (keySet.has('remote'))  return jobs.filter((j) => j.work_mode === 'remote')
-      if (keySet.has('onsite'))  return jobs.filter((j) => j.work_mode === 'onsite')
-      if (keySet.has('unknown')) return jobs.filter((j) => !allHybrid.includes(j.work_mode) && j.work_mode !== 'remote' && j.work_mode !== 'onsite')
-      return jobs.filter((j) => keySet.has(j.work_mode))
-    }
-    case 'location':
-      if (keySet.has('berlin')) return jobs.filter((j) => j.location === 'berlin')
-      if (keySet.has('remote_germany')) return jobs.filter((j) => j.location === 'remote_germany')
-      if (keySet.has('unclear')) return jobs.filter((j) => j.location === 'unclear')
-      return []
-    case 'pm_type':
-      return jobs.filter((j) => j.pm_type && keySet.has(j.pm_type))
-    case 'seniority':
-      return jobs.filter((j) => keySet.has(j.seniority))
-    case 'ai_focus':
-      return jobs.filter((j) => j.ai_focus)
-    case 'ai_skills':
-      return jobs.filter((j) => j.ai_skills)
-    case 'industry':
-      return jobs.filter((j) => j.industry && keySet.has(j.industry))
-    default:
-      return []
-  }
-}
-
 // ---------------------------------------------------------------------------
-// Filter logic
+// Filter logic (client-side, for chart distribution recalculation)
 // ---------------------------------------------------------------------------
 
 function applyFilters(jobs: Job[], filters: FilterState): Job[] {
@@ -290,6 +299,7 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
 
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [drillTarget, setDrillTarget] = useState<DrillTarget | null>(null)
+  const [apiDrillParams, setApiDrillParams] = useState<{ chart_id: string; segment_key: string } | null>(null)
   const [activeKey, setActiveKey] = useState<string | null>(null)
 
   const filteredJobs = useMemo(
@@ -307,11 +317,6 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
     [filteredJobs, dist]
   )
 
-  const drillJobs = useMemo(
-    () => (drillTarget && hasJobData ? getJobsForDrill(drillTarget, filteredJobs) : []),
-    [drillTarget, filteredJobs, hasJobData]
-  )
-
   const insights = generateInsights(
     stats.n_active,
     stats.senior_pct,
@@ -322,17 +327,24 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
   )
 
   function handleDrill(dimension: string, keys: string[], label: string, segKey: string) {
+    // Toggle off if already active
     if (activeKey === segKey) {
       setDrillTarget(null)
+      setApiDrillParams(null)
       setActiveKey(null)
-    } else {
-      setDrillTarget({ dimension, keys, label })
-      setActiveKey(segKey)
+      return
     }
+    // Only open panel for API-enabled charts
+    const apiParams = toApiParams(dimension, segKey)
+    if (!apiParams) return
+    setDrillTarget({ dimension, keys, label })
+    setApiDrillParams(apiParams)
+    setActiveKey(segKey)
   }
 
   function handleClose() {
     setDrillTarget(null)
+    setApiDrillParams(null)
     setActiveKey(null)
   }
 
@@ -369,11 +381,19 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
     drillKey: item.label,
   }))
 
+  const seniorityItems = dist.seniority
+    .filter((item) => item.label !== 'unknown' && item.count > 0)
+    .map((item) => ({
+      label: SENIORITY_LABELS[item.label] ?? item.label,
+      count: item.count,
+      color: SENIORITY_COLORS[item.label] ?? '#818cf8',
+      drillKey: item.label,
+    }))
+
   const { n_active, n_new_week, senior_pct, accessible_pct, n_companies } = stats
   const { ai } = activeDist
   const classifiedLocation = stats.location.berlin + stats.location.remote_germany
 
-  // KPI strip: hide median_age when 0, hide n_new_week when it equals n_active (avoids confusing duplication)
   const kpis = [
     { value: n_active,      label: 'Active roles' },
     n_new_week > 0 && n_new_week !== n_active ? { value: n_new_week, label: 'New this week' } : null,
@@ -396,19 +416,16 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
           Berlin · PM Market
         </p>
 
-        {/* Market character */}
         <h1 className="text-3xl font-bold text-white tracking-tight leading-tight mb-3">
           {getMarketCharacter(senior_pct, accessible_pct, n_active)}
         </h1>
 
-        {/* Supporting sentence */}
         <p className="text-sm text-muted max-w-lg leading-relaxed mb-8">
           {n_active} active roles in Berlin and remote Germany.
           {senior_pct > 0 && <> {senior_pct}% are Senior level or above.</>}
           {accessible_pct > 0 && <> {accessible_pct}% list no German requirement.</>}
         </p>
 
-        {/* Signal chips */}
         <div className="flex flex-wrap gap-2 mb-10">
           {senior_pct >= 50 && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-border text-xs text-white/80">
@@ -427,7 +444,6 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
           )}
         </div>
 
-        {/* KPI strip */}
         <div className="flex items-start">
           {kpis.map((metric, i) => (
             <div
@@ -446,7 +462,7 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
       </div>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Market access                                                       */}
+      {/* Language access                                                     */}
       {/* ------------------------------------------------------------------ */}
       <Section
         title="Language access"
@@ -496,6 +512,22 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
       </div>
 
       {/* ------------------------------------------------------------------ */}
+      {/* Seniority                                                           */}
+      {/* ------------------------------------------------------------------ */}
+      {seniorityItems.length > 0 && (
+        <Section title="Seniority" description="Experience level distribution across active roles.">
+          <Card>
+            <StatBar
+              items={seniorityItems}
+              showPct
+              onBarClick={(key, label) => handleDrill('seniority', [key], label, key)}
+              activeKey={drillTarget?.dimension === 'seniority' ? activeKey : null}
+            />
+          </Card>
+        </Section>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
       {/* Role type                                                           */}
       {/* ------------------------------------------------------------------ */}
       {pmTypeItems.length > 0 && (
@@ -521,12 +553,7 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
         >
           <div className="grid grid-cols-2 gap-3">
             <div
-              onClick={() => handleDrill('ai_focus', ['ai_focus'], 'AI as core focus', 'ai_focus')}
-              className={[
-                'bg-surface border rounded-xl p-5 transition-colors',
-                hasJobData ? 'cursor-pointer hover:bg-surface-elevated' : '',
-                activeKey === 'ai_focus' ? 'border-border-strong bg-surface-elevated' : 'border-border',
-              ].join(' ')}
+              className="bg-surface border border-border rounded-xl p-5"
             >
               <p className="text-3xl font-bold text-white tabular-nums">{ai.ai_focus_pct}%</p>
               <p className="text-sm text-white/90 font-medium mt-1.5">AI as core focus</p>
@@ -536,12 +563,7 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
               <p className="text-2xs text-subtle mt-2">{ai.n_ai_focus} roles</p>
             </div>
             <div
-              onClick={() => handleDrill('ai_skills', ['ai_skills'], 'AI skills required', 'ai_skills')}
-              className={[
-                'bg-surface border rounded-xl p-5 transition-colors',
-                hasJobData ? 'cursor-pointer hover:bg-surface-elevated' : '',
-                activeKey === 'ai_skills' ? 'border-border-strong bg-surface-elevated' : 'border-border',
-              ].join(' ')}
+              className="bg-surface border border-border rounded-xl p-5"
             >
               <p className="text-3xl font-bold text-white tabular-nums">{ai.ai_skills_pct}%</p>
               <p className="text-sm text-white/90 font-medium mt-1.5">AI skills required</p>
@@ -608,7 +630,8 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
       {/* ------------------------------------------------------------------ */}
       <DrillDownPanel
         target={drillTarget}
-        jobs={drillJobs}
+        apiParams={apiDrillParams}
+        filters={filters}
         onClose={handleClose}
       />
     </>
