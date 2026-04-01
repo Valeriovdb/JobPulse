@@ -7,16 +7,16 @@ interface KpiCardProps {
 
 export function KpiCard({ value, label, sub, accent }: KpiCardProps) {
   return (
-    <div className="bg-surface border border-border rounded-xl p-5 flex flex-col gap-1">
+    <div className="bg-surface border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-1">
       <span
         className={[
-          'text-3xl font-bold tracking-tight leading-none',
+          'text-4xl font-bold tracking-tight leading-none',
           accent ? 'text-accent' : 'text-white',
         ].join(' ')}
       >
         {value}
       </span>
-      <span className="text-sm text-muted mt-1">{label}</span>
+      <span className="text-sm text-muted mt-2">{label}</span>
       {sub && <span className="text-2xs text-subtle mt-0.5">{sub}</span>}
     </div>
   )

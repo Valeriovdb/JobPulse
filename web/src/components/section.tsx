@@ -9,7 +9,7 @@ interface SectionProps {
 
 export function Section({ title, description, meta, children, className, compact }: SectionProps) {
   return (
-    <section className={[compact ? 'mt-8' : 'mt-14', className].filter(Boolean).join(' ')}>
+    <section className={[compact ? 'mt-8' : 'mt-16', className].filter(Boolean).join(' ')}>
       <div className="mb-4">
         <p className="text-2xs text-subtle uppercase tracking-widest mb-2">{title}</p>
         {description && (
@@ -32,7 +32,7 @@ interface BlockHeadingProps {
 
 export function BlockHeading({ title, description, className }: BlockHeadingProps) {
   return (
-    <div className={['pt-16 pb-2 border-t border-border', className].filter(Boolean).join(' ')}>
+    <div className={['pt-16 pb-3 border-t border-border', className].filter(Boolean).join(' ')}>
       <h2 className="text-lg font-semibold tracking-tight text-white">{title}</h2>
       {description && (
         <p className="text-sm text-muted mt-1 max-w-lg leading-relaxed">{description}</p>
@@ -43,7 +43,7 @@ export function BlockHeading({ title, description, className }: BlockHeadingProp
 
 export function Card({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={['bg-surface border border-border rounded-xl p-5', className].filter(Boolean).join(' ')}>
+    <div className={['bg-surface border border-border rounded-xl p-4 sm:p-5', className].filter(Boolean).join(' ')}>
       {children}
     </div>
   )

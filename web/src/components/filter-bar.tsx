@@ -24,9 +24,9 @@ interface FilterBarProps {
 }
 
 const selectBase =
-  'appearance-none bg-surface border rounded-full pl-3.5 pr-7 py-1.5 text-xs cursor-pointer focus:outline-none transition-colors shrink-0'
-const selectDefault = 'border-border text-muted hover:border-border-strong hover:text-white'
-const selectActive = 'border-accent/60 text-white bg-surface-elevated'
+  'appearance-none bg-surface border rounded-full pl-4 pr-8 py-2 text-xs font-medium cursor-pointer focus:outline-none transition-colors shrink-0'
+const selectDefault = 'border-white/20 text-white/65 hover:border-white/35 hover:text-white/90'
+const selectActive = 'border-accent/75 text-white bg-accent/10'
 
 function FilterSelect<K extends keyof FilterState>({
   id,
@@ -68,7 +68,8 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
   const isActive = hasActiveFilter(filters)
 
   return (
-    <div className="relative mb-8">
+    <div className="sticky top-16 z-40 bg-bg -mx-6 px-6 pt-2 pb-3 mb-2 sm:static sm:bg-transparent sm:mx-0 sm:px-0 sm:pt-0 sm:pb-0 sm:mb-8">
+      <div className="relative">
       {/* Scrollable row */}
       <div className="flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <FilterSelect
@@ -127,9 +128,10 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
 
       {/* Right-edge fade for mobile scroll hint */}
       <div
-        className="absolute right-0 top-0 h-full w-12 pointer-events-none"
+        className="absolute right-0 top-0 h-full w-16 pointer-events-none"
         style={{ background: 'linear-gradient(to right, transparent, #0a0a0a)' }}
       />
+      </div>
     </div>
   )
 }

@@ -312,10 +312,10 @@ export default function OverviewClient({ overview, dist }: Props) {
               key={i}
               className={`flex-1 min-w-0 ${i > 0 ? 'pl-8 border-l border-border' : 'pr-8'}`}
             >
-              <p className="text-2xl font-bold text-white tracking-tight tabular-nums leading-none">
+              <p className="text-3xl font-bold text-white tracking-tight tabular-nums leading-none">
                 {metric.value}
               </p>
-              <p className="text-2xs text-subtle uppercase tracking-wider mt-2">
+              <p className="text-2xs text-muted uppercase tracking-wider mt-2">
                 {metric.label}
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function OverviewClient({ overview, dist }: Props) {
       {/* ------------------------------------------------------------------ */}
       {/* Location + Work style                                               */}
       {/* ------------------------------------------------------------------ */}
-      <div className="mt-14 grid grid-cols-2 gap-6">
+      <div className="mt-16 grid grid-cols-2 gap-6">
         <div>
           <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Location</p>
           <p className="text-sm text-white font-medium leading-relaxed mb-3">
@@ -458,18 +458,18 @@ export default function OverviewClient({ overview, dist }: Props) {
       {/* Analyst notes                                                       */}
       {/* ------------------------------------------------------------------ */}
       {insights.length > 0 && (
-        <section className="mt-16 pt-14 border-t border-border">
+        <section className="mt-20 pt-16 border-t border-border">
           <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Analyst notes</p>
           <div>
             {insights.map((text, i) => (
               <div
                 key={i}
-                className="flex gap-6 py-5 border-b border-border last:border-b-0"
+                className="flex gap-8 py-5 border-b border-border last:border-b-0"
               >
                 <span className="text-2xs text-subtle font-mono tabular-nums leading-none mt-0.5 w-5 shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
+                <p className="text-sm text-white/88 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>

@@ -23,12 +23,12 @@ body {
 }
 
 .recharts-text {
-  fill: #737373;
+  fill: #9a9a9a;
   font-size: 11px;
 }
 
 .recharts-cartesian-axis-tick-value {
-  fill: #737373;
+  fill: #9a9a9a;
 }
 
 .recharts-cartesian-grid line {
