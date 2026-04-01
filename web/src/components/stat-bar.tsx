@@ -27,11 +27,19 @@ export function StackedBar({
         {items.map((item) => {
           const pct = sum > 0 ? (item.count / sum) * 100 : 0
           if (pct === 0) return null
+          const key = item.drillKey ?? item.label
+          const isActive = activeKey === key
           return (
             <div
               key={item.label}
               title={`${item.label}: ${Math.round(pct)}%`}
-              style={{ width: `${pct}%`, backgroundColor: item.color ?? '#818cf8' }}
+              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
+              style={{
+                width: `${pct}%`,
+                backgroundColor: item.color ?? '#818cf8',
+                opacity: activeKey && !isActive ? 0.4 : 1,
+              }}
+              className={onSegmentClick ? 'cursor-pointer transition-opacity' : ''}
             />
           )
         })}
@@ -40,8 +48,18 @@ export function StackedBar({
         {items.map((item) => {
           const pct = sum > 0 ? Math.round((item.count / sum) * 100) : 0
           if (pct === 0 && !alwaysShowLabels) return null
+          const key = item.drillKey ?? item.label
+          const isActive = activeKey === key
           return (
-            <div key={item.label} className="flex items-center gap-2">
+            <div
+              key={item.label}
+              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
+              className={[
+                'flex items-center gap-2',
+                onSegmentClick ? 'cursor-pointer' : '',
+                activeKey && !isActive ? 'opacity-40' : '',
+              ].join(' ')}
+            >
               <span
                 className="w-2 h-2 rounded-full shrink-0"
                 style={{ backgroundColor: item.color ?? '#818cf8' }}
@@ -123,9 +141,20 @@ export function StatBar({ items, total, labelMap, showPct = true, barColor, onBa
         const pct = sum > 0 ? Math.round((item.count / sum) * 100) : 0
         const barWidth = max > 0 ? (item.count / max) * 100 : 0
         const label = labels[item.label] ?? item.label
+        const key = item.drillKey ?? item.label
+        const isActive = activeKey === key
 
         return (
-          <div key={item.label} className="flex items-center gap-3">
+          <div
+            key={item.label}
+            onClick={onBarClick ? () => onBarClick(key, label) : undefined}
+            className={[
+              'flex items-center gap-3 rounded-lg transition-colors',
+              onBarClick ? 'cursor-pointer hover:bg-surface-elevated px-2 -mx-2 py-0.5' : '',
+              activeKey && !isActive ? 'opacity-40' : '',
+              isActive ? 'bg-surface-elevated' : '',
+            ].join(' ')}
+          >
             <span className="text-sm text-muted w-40 shrink-0 truncate">{label}</span>
             <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
               <div
