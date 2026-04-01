@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import type { FilterState } from '@/components/filter-bar'
+import { SidePanel } from '@/components/side-panel'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -18,7 +19,11 @@ interface ApiJob {
   title: string | null
   company_name: string | null
   location_normalized: string | null
+  seniority: string | null
+  german_requirement: string | null
+  work_mode: string | null
   canonical_url: string | null
+  first_seen_date: string | null
 }
 
 interface DrillDownPanelProps {
@@ -29,7 +34,7 @@ interface DrillDownPanelProps {
 }
 
 // ---------------------------------------------------------------------------
-// Helpers
+// Label maps
 // ---------------------------------------------------------------------------
 
 const SENIORITY_API_MAP: Record<string, string> = {
@@ -37,6 +42,41 @@ const SENIORITY_API_MAP: Record<string, string> = {
   mid: 'mid',
   senior: 'senior,mid_senior',
   lead: 'lead,staff,group,principal,head',
+}
+
+const SENIORITY_LABELS: Record<string, string> = {
+  junior: 'Junior', mid: 'Mid', mid_senior: 'Mid–Senior',
+  senior: 'Senior', lead: 'Lead', staff: 'Staff',
+  group: 'Group PM', principal: 'Principal', head: 'Head of Product',
+}
+
+const WORK_MODE_LABELS: Record<string, string> = {
+  remote: 'Remote', onsite: 'On-site',
+  hybrid: 'Hybrid', hybrid_1d: 'Hybrid', hybrid_2d: 'Hybrid',
+  hybrid_3d: 'Hybrid', hybrid_4d: 'Hybrid',
+}
+
+const GERMAN_REQ_LABELS: Record<string, string> = {
+  not_mentioned: 'No German',
+  plus: 'German +',
+  must: 'German req.',
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function normalizeTitle(raw: string | null): string {
+  if (!raw) return 'Untitled role'
+  return raw.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
+function freshnessLabel(dateStr: string | null): string | null {
+  if (!dateStr) return null
+  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86_400_000)
+  if (days <= 1) return 'New'
+  if (days <= 7) return `${days}d ago`
+  return null
 }
 
 function buildApiUrl(
@@ -51,13 +91,11 @@ function buildApiUrl(
     offset: String(offset),
   })
 
-  // Seniority filter — skip when drilling by seniority (would conflict)
   if (filters.seniority !== 'all' && apiParams.chart_id !== 'seniority') {
     const mapped = SENIORITY_API_MAP[filters.seniority]
     if (mapped) params.set('seniority', mapped)
   }
 
-  // Time filter
   if (filters.time !== 'all') {
     const days = filters.time === '7d' ? 7 : 30
     const cutoff = new Date()
@@ -66,23 +104,6 @@ function buildApiUrl(
   }
 
   return `/api/jobs/drilldown?${params.toString()}`
-}
-
-function buildFilterSummary(filters: FilterState, chartId: string): string | null {
-  const parts: string[] = []
-
-  if (filters.seniority !== 'all' && chartId !== 'seniority') {
-    const labels: Record<string, string> = {
-      junior: 'Junior', mid: 'Mid', senior: 'Senior', lead: 'Lead+',
-    }
-    parts.push(labels[filters.seniority] ?? filters.seniority)
-  }
-
-  if (filters.time !== 'all') {
-    parts.push(filters.time === '7d' ? 'Last 7 days' : 'Last 30 days')
-  }
-
-  return parts.length > 0 ? parts.join(' · ') : null
 }
 
 // ---------------------------------------------------------------------------
@@ -97,15 +118,6 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
   const [total, setTotal] = useState(0)
   const [loadingMore, setLoadingMore] = useState(false)
 
-  // Close on Escape
-  useEffect(() => {
-    if (!target) return
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [target, onClose])
-
-  // Fetch initial page when apiParams or filters change
   useEffect(() => {
     if (!apiParams) {
       setStatus('idle')
@@ -127,9 +139,7 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
         setTotal(data.meta?.total_jobs ?? 0)
         setStatus('loaded')
       })
-      .catch(() => {
-        if (!cancelled) setStatus('error')
-      })
+      .catch(() => { if (!cancelled) setStatus('error') })
 
     return () => { cancelled = true }
   }, [apiParams, filters])
@@ -137,9 +147,7 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
   const loadMore = useCallback(() => {
     if (!apiParams || loadingMore) return
     setLoadingMore(true)
-    const nextOffset = jobs.length
-
-    fetch(buildApiUrl(apiParams, filters, nextOffset))
+    fetch(buildApiUrl(apiParams, filters, jobs.length))
       .then((r) => r.json())
       .then((data) => {
         setJobs((prev) => [...prev, ...(data.jobs ?? [])])
@@ -148,106 +156,146 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
       .catch(() => setLoadingMore(false))
   }, [apiParams, filters, jobs.length, loadingMore])
 
+  const grouped = useMemo(() => {
+    const map = new Map<string, ApiJob[]>()
+    for (const job of jobs) {
+      const key = job.company_name ?? 'Unknown company'
+      if (!map.has(key)) map.set(key, [])
+      map.get(key)!.push(job)
+    }
+    return Array.from(map.entries()).map(([company, roles]) => ({ company, roles }))
+  }, [jobs])
+
   const isOpen = target !== null && apiParams !== null
-  const filterSummary = apiParams ? buildFilterSummary(filters, apiParams.chart_id) : null
+  const companiesCount = grouped.length
+  const subtitle = status === 'loaded'
+    ? `${total} role${total !== 1 ? 's' : ''} · ${companiesCount} compan${companiesCount !== 1 ? 'ies' : 'y'}`
+    : undefined
 
   return (
-    <div
-      className={[
-        'fixed inset-y-0 right-0 z-50 w-80 flex flex-col',
-        'bg-[#0f0f0f] border-l border-border shadow-2xl',
-        'transition-transform duration-200 ease-out',
-        isOpen ? 'translate-x-0' : 'translate-x-full',
-      ].join(' ')}
+    <SidePanel
+      isOpen={isOpen}
+      onClose={onClose}
+      title={target?.label ?? ''}
+      subtitle={subtitle}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between px-5 py-4 border-b border-border shrink-0">
-        <div className="min-w-0 pr-4">
-          <p className="text-sm font-medium text-white truncate">{target?.label ?? ''}</p>
-          {filterSummary && (
-            <p className="text-2xs text-subtle mt-0.5">{filterSummary}</p>
-          )}
-        </div>
-        <button
-          onClick={onClose}
-          className="shrink-0 w-6 h-6 flex items-center justify-center rounded text-subtle hover:text-white hover:bg-surface-elevated transition-colors text-xs mt-0.5"
-          aria-label="Close panel"
-        >
-          ✕
-        </button>
-      </div>
-
-      {/* Count */}
-      {status === 'loaded' && (
-        <div className="px-5 pt-3 pb-1 shrink-0">
-          <span className="text-2xs text-subtle uppercase tracking-wider">
-            {total} role{total !== 1 ? 's' : ''}
-          </span>
+      {status === 'loading' && (
+        <div className="flex justify-center pt-12">
+          <div className="w-5 h-5 rounded-full border-2 border-border border-t-white/60 animate-spin" />
         </div>
       )}
 
-      {/* Body */}
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
-        {status === 'loading' && (
-          <div className="flex justify-center mt-8">
-            <div className="w-5 h-5 rounded-full border-2 border-border border-t-white/60 animate-spin" />
-          </div>
-        )}
+      {status === 'error' && (
+        <p className="px-5 pt-8 text-sm text-muted">Couldn&apos;t load jobs. Try again.</p>
+      )}
 
-        {status === 'error' && (
-          <p className="text-xs text-subtle mt-6 leading-relaxed">
-            Couldn&apos;t load jobs. Try again.
-          </p>
-        )}
+      {status === 'loaded' && jobs.length === 0 && (
+        <p className="px-5 pt-8 text-sm text-muted">No jobs match this selection.</p>
+      )}
 
-        {status === 'loaded' && jobs.length === 0 && (
-          <p className="text-xs text-subtle mt-6 leading-relaxed">
-            No jobs match this selection.
-          </p>
-        )}
+      {status === 'loaded' && grouped.length > 0 && (
+        <div className="px-4 py-5 space-y-3">
+          {grouped.map(({ company, roles }) => (
+            <CompanyBlock key={company} company={company} roles={roles} />
+          ))}
 
-        {status === 'loaded' && jobs.length > 0 && (
-          <ul className="divide-y divide-border">
-            {jobs.map((job) => (
-              <li key={job.job_id} className="py-3">
-                {job.canonical_url ? (
-                  <a
-                    href={job.canonical_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/90 hover:text-white leading-snug block transition-colors"
-                  >
-                    {job.title || 'Untitled role'}
-                  </a>
-                ) : (
-                  <span className="text-sm text-white/90 leading-snug block">
-                    {job.title || 'Untitled role'}
-                  </span>
-                )}
-                <p className="text-xs text-subtle mt-0.5">
-                  {[job.company_name, job.location_normalized].filter(Boolean).join(' · ')}
-                </p>
-              </li>
-            ))}
-          </ul>
+          {jobs.length < total && (
+            <div className="pt-2">
+              <button
+                onClick={loadMore}
+                disabled={loadingMore}
+                className="w-full py-2.5 text-xs text-muted border border-border rounded-lg hover:border-border-strong hover:text-white transition-colors disabled:opacity-50"
+              >
+                {loadingMore ? 'Loading…' : `Load more (${total - jobs.length} remaining)`}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </SidePanel>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Company block
+// ---------------------------------------------------------------------------
+
+function CompanyBlock({ company, roles }: { company: string; roles: ApiJob[] }) {
+  return (
+    <div className="rounded-xl border border-border overflow-hidden bg-surface">
+      <div className="px-4 pt-4 pb-3 flex items-baseline justify-between gap-3 border-b border-border">
+        <span className="text-[15px] font-semibold text-white leading-snug">{company}</span>
+        {roles.length > 1 && (
+          <span className="shrink-0 text-2xs font-medium text-muted bg-white/[0.06] px-2 py-0.5 rounded-full tabular-nums">
+            {roles.length}
+          </span>
         )}
       </div>
+      <div className="divide-y divide-border">
+        {roles.map((job) => (
+          <JobRow key={job.job_id} job={job} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
-      {/* Footer */}
-      {isOpen && (
-        <div className="shrink-0 px-5 pb-5 border-t border-border pt-3 space-y-3">
-          {status === 'loaded' && jobs.length < total && (
-            <button
-              onClick={loadMore}
-              disabled={loadingMore}
-              className="w-full py-2 text-xs text-subtle border border-border rounded-lg hover:border-border-strong hover:text-white transition-colors disabled:opacity-50"
+// ---------------------------------------------------------------------------
+// Job row
+// ---------------------------------------------------------------------------
+
+function JobRow({ job }: { job: ApiJob }) {
+  const title = normalizeTitle(job.title)
+  const seniority = job.seniority ? (SENIORITY_LABELS[job.seniority] ?? null) : null
+  const germanTag = job.german_requirement ? (GERMAN_REQ_LABELS[job.german_requirement] ?? null) : null
+  const workModeTag = job.work_mode ? (WORK_MODE_LABELS[job.work_mode] ?? null) : null
+  const fresh = freshnessLabel(job.first_seen_date)
+
+  const tags = [
+    germanTag  ? { key: 'german',    label: germanTag,   accent: false } : null,
+    seniority  ? { key: 'seniority', label: seniority,   accent: false } : null,
+    workModeTag? { key: 'work_mode', label: workModeTag, accent: false } : null,
+    fresh      ? { key: 'fresh',     label: fresh,        accent: true  } : null,
+  ].filter(Boolean) as { key: string; label: string; accent: boolean }[]
+
+  const content = (
+    <div className="px-4 py-3 transition-colors group-hover:bg-white/[0.025]">
+      <p className="text-sm font-medium text-white/85 leading-snug">{title}</p>
+      {job.location_normalized && (
+        <p className="text-xs text-muted mt-0.5">{job.location_normalized}</p>
+      )}
+      {tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          {tags.map((t) => (
+            <span
+              key={t.key}
+              className={[
+                'text-2xs px-1.5 py-0.5 rounded border',
+                t.accent
+                  ? 'text-accent border-accent/30 bg-accent/10'
+                  : 'text-muted border-border',
+              ].join(' ')}
             >
-              {loadingMore ? 'Loading…' : `Load more (${total - jobs.length} remaining)`}
-            </button>
-          )}
-          <p className="text-2xs text-subtle/60">Results based on extracted job data</p>
+              {t.label}
+            </span>
+          ))}
         </div>
       )}
     </div>
   )
+
+  if (job.canonical_url) {
+    return (
+      <a
+        href={job.canonical_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block"
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <div className="group">{content}</div>
 }

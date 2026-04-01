@@ -164,15 +164,13 @@ export function ExperienceChart({ tags, jobsByTag, nJobsWithTags, nActive }: Pro
         })}
       </div>
 
-      {/* Side panel */}
-      {selectedTag && (
-        <ExperiencePanel
-          tag={selectedTag}
-          tagLabel={TAG_LABELS[selectedTag] ?? selectedTag}
-          jobs={jobsByTag[selectedTag] ?? []}
-          onClose={() => setSelectedTag(null)}
-        />
-      )}
+      {/* Side panel — always mounted so the close animation plays */}
+      <ExperiencePanel
+        isOpen={selectedTag !== null}
+        tagLabel={selectedTag ? (TAG_LABELS[selectedTag] ?? selectedTag) : ''}
+        jobs={selectedTag ? (jobsByTag[selectedTag] ?? []) : []}
+        onClose={() => setSelectedTag(null)}
+      />
     </>
   )
 }

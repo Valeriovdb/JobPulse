@@ -1,7 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { SidePanel } from '@/components/side-panel'
 import type { ExperienceJob } from '@/types/data'
+
+// ---------------------------------------------------------------------------
+// Label maps
+// ---------------------------------------------------------------------------
 
 const LEVEL_LABELS: Record<string, string> = {
   required: 'Required',
@@ -9,126 +13,136 @@ const LEVEL_LABELS: Record<string, string> = {
   not_clear: 'Mentioned',
 }
 
-const LEVEL_COLORS: Record<string, string> = {
-  required: 'text-positive',
-  preferred: 'text-accent',
-  not_clear: 'text-muted',
+const LEVEL_STYLES: Record<string, string> = {
+  required: 'text-[#4ade80] border-[#4ade80]/30',
+  preferred: 'text-accent border-accent/30',
+  not_clear: 'text-muted border-border',
 }
 
+const SENIORITY_LABELS: Record<string, string> = {
+  junior: 'Junior', mid: 'Mid', mid_senior: 'Mid–Senior',
+  senior: 'Senior', lead: 'Lead', staff: 'Staff',
+  group: 'Group PM', principal: 'Principal', head: 'Head of Product',
+}
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
 interface ExperiencePanelProps {
-  tag: string
+  isOpen: boolean
   tagLabel: string
   jobs: ExperienceJob[]
   onClose: () => void
 }
 
-export function ExperiencePanel({ tag, tagLabel, jobs, onClose }: ExperiencePanelProps) {
-  const panelRef = useRef<HTMLDivElement>(null)
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
 
-  useEffect(() => {
-    function handleEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
-    }
-    function handleClickOutside(e: MouseEvent) {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        onClose()
-      }
-    }
-    document.addEventListener('keydown', handleEsc)
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('keydown', handleEsc)
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [onClose])
+export function ExperiencePanel({ isOpen, tagLabel, jobs, onClose }: ExperiencePanelProps) {
+  // Group jobs by company
+  const grouped = buildCompanyGroups(jobs)
+
+  const subtitle = jobs.length > 0
+    ? `${jobs.length} role${jobs.length !== 1 ? 's' : ''} · ${grouped.length} compan${grouped.length !== 1 ? 'ies' : 'y'}`
+    : undefined
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-
-      {/* Panel */}
-      <div
-        ref={panelRef}
-        className="relative w-full max-w-lg bg-bg border-l border-border overflow-y-auto animate-slide-in"
-      >
-        {/* Header */}
-        <div className="sticky top-0 bg-bg/95 backdrop-blur-sm border-b border-border px-6 py-4 flex items-start justify-between gap-4 z-10">
-          <div>
-            <p className="text-2xs text-subtle uppercase tracking-widest mb-1">
-              Required experience
-            </p>
-            <h2 className="text-base font-semibold text-white leading-snug">
-              Jobs mentioning {tagLabel.toLowerCase()} experience
-            </h2>
-            <p className="text-xs text-muted mt-1">
-              {jobs.length} {jobs.length === 1 ? 'role' : 'roles'}
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-muted hover:text-white transition-colors p-1 -mr-1 shrink-0"
-            aria-label="Close panel"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M5 5L15 15M15 5L5 15"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Job list */}
-        <div className="px-6 py-4 space-y-1">
-          {jobs.map((job) => (
-            <div
-              key={job.job_id}
-              className="border-b border-border py-4 last:border-b-0"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  {job.url ? (
-                    <a
-                      href={job.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-medium text-white hover:text-accent transition-colors leading-snug block truncate"
-                    >
-                      {job.title || 'Untitled role'}
-                    </a>
-                  ) : (
-                    <p className="text-sm font-medium text-white leading-snug truncate">
-                      {job.title || 'Untitled role'}
-                    </p>
-                  )}
-                  <p className="text-xs text-muted mt-0.5">{job.company || 'Unknown company'}</p>
-                </div>
-                <span
-                  className={`text-2xs shrink-0 mt-0.5 ${LEVEL_COLORS[job.level] ?? 'text-muted'}`}
-                >
-                  {LEVEL_LABELS[job.level] ?? job.level}
-                </span>
+    <SidePanel
+      isOpen={isOpen}
+      onClose={onClose}
+      title={`${tagLabel} experience`}
+      subtitle={subtitle}
+    >
+      {jobs.length === 0 ? (
+        <p className="px-5 pt-8 text-sm text-muted">No matching jobs found.</p>
+      ) : (
+        <div className="px-4 py-5 space-y-3">
+          {grouped.map(({ company, jobs: companyJobs }) => (
+            <div key={company} className="rounded-xl border border-border overflow-hidden bg-surface">
+              {/* Company header */}
+              <div className="px-4 pt-4 pb-3 flex items-baseline justify-between gap-3 border-b border-border">
+                <span className="text-[15px] font-semibold text-white leading-snug">{company}</span>
+                {companyJobs.length > 1 && (
+                  <span className="shrink-0 text-2xs font-medium text-muted bg-white/[0.06] px-2 py-0.5 rounded-full tabular-nums">
+                    {companyJobs.length}
+                  </span>
+                )}
               </div>
 
-              {/* Evidence snippet */}
-              {job.evidence && (
-                <p className="text-xs text-subtle mt-2 leading-relaxed italic">
-                  &ldquo;{job.evidence}&rdquo;
-                </p>
-              )}
+              {/* Roles */}
+              <div className="divide-y divide-border">
+                {companyJobs.map((job) => (
+                  <ExperienceJobRow key={job.job_id} job={job} />
+                ))}
+              </div>
             </div>
           ))}
         </div>
+      )}
+    </SidePanel>
+  )
+}
 
-        {jobs.length === 0 && (
-          <div className="px-6 py-12 text-center">
-            <p className="text-sm text-muted">No matching jobs found.</p>
-          </div>
+// ---------------------------------------------------------------------------
+// Job row
+// ---------------------------------------------------------------------------
+
+function ExperienceJobRow({ job }: { job: ExperienceJob }) {
+  const seniority = job.seniority ? (SENIORITY_LABELS[job.seniority] ?? null) : null
+  const levelLabel = LEVEL_LABELS[job.level] ?? job.level
+  const levelStyle = LEVEL_STYLES[job.level] ?? LEVEL_STYLES.not_clear
+
+  const content = (
+    <div className="px-4 py-3 transition-colors group-hover:bg-white/[0.025]">
+      <p className="text-sm font-medium text-white/85 leading-snug">
+        {job.title || 'Untitled role'}
+      </p>
+      <div className="flex flex-wrap gap-1.5 mt-2">
+        {seniority && (
+          <span className="text-2xs px-1.5 py-0.5 rounded border text-muted border-border">
+            {seniority}
+          </span>
         )}
+        <span className={`text-2xs px-1.5 py-0.5 rounded border ${levelStyle}`}>
+          {levelLabel}
+        </span>
       </div>
+      {job.evidence && (
+        <p className="mt-2.5 text-xs text-subtle leading-relaxed italic">
+          &ldquo;{job.evidence}&rdquo;
+        </p>
+      )}
     </div>
   )
+
+  if (job.url) {
+    return (
+      <a
+        href={job.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block"
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <div className="group">{content}</div>
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function buildCompanyGroups(jobs: ExperienceJob[]): { company: string; jobs: ExperienceJob[] }[] {
+  const map = new Map<string, ExperienceJob[]>()
+  for (const job of jobs) {
+    const key = job.company || 'Unknown company'
+    if (!map.has(key)) map.set(key, [])
+    map.get(key)!.push(job)
+  }
+  return Array.from(map.entries()).map(([company, jobs]) => ({ company, jobs }))
 }
