@@ -170,7 +170,7 @@ function collapseWorkMode(modes: { label: string; count: number }[]) {
 }
 
 // ---------------------------------------------------------------------------
-// Inline sub-components
+// Sub-components
 // ---------------------------------------------------------------------------
 
 function StatChip({ value, label }: { value: string | number; label: string }) {
@@ -182,87 +182,71 @@ function StatChip({ value, label }: { value: string | number; label: string }) {
   )
 }
 
-const HERO_LANG_SHORT: Record<string, string> = {
-  en_none: 'No German',
-  en_plus: 'German +',
-  en_must: 'Required',
-  de: 'German-only',
-}
-
-function HeroAccessBar({
+// One waffle chart on the page — used in the language/access section only.
+function WaffleChart({
   items,
   total,
-  onSegmentClick,
+  onCellClick,
   activeKey,
 }: {
-  items: { label: string; count: number; color?: string; drillKey?: string }[]
-  total?: number
-  onSegmentClick?: (key: string, label: string) => void
+  items: { count: number; color: string; drillKey: string; label: string }[]
+  total: number
+  onCellClick?: (key: string, label: string) => void
   activeKey?: string | null
 }) {
-  const sum = total ?? items.reduce((acc, i) => acc + i.count, 0)
-  const visibleItems = items.filter((i) => sum > 0 && i.count > 0)
+  const CELLS = 100
+  const cells: { color: string; key: string; label: string }[] = []
+  let assigned = 0
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+    const n =
+      i === items.length - 1
+        ? CELLS - assigned
+        : Math.round((item.count / total) * CELLS)
+    const bounded = Math.max(0, Math.min(n, CELLS - assigned))
+    assigned += bounded
+    for (let j = 0; j < bounded; j++) {
+      cells.push({ color: item.color, key: item.drillKey, label: item.label })
+    }
+  }
+
+  // Fill remainder with empty cells
+  while (cells.length < CELLS) {
+    cells.push({ color: 'rgba(255,255,255,0.04)', key: '', label: '' })
+  }
 
   return (
-    <div>
-      {/* Tall segmented bar */}
-      <div className="flex h-8 rounded-lg overflow-hidden gap-0.5 mb-4">
-        {visibleItems.map((item) => {
-          const pct = (item.count / sum) * 100
-          const key = item.drillKey ?? item.label
-          const isActive = activeKey === key
-          return (
-            <div
-              key={key}
-              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
-              style={{ width: `${pct}%`, backgroundColor: item.color ?? '#818cf8' }}
-              className={[
-                'transition-opacity',
-                onSegmentClick ? 'cursor-pointer' : '',
-                activeKey && !isActive ? 'opacity-20' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            />
-          )
-        })}
-      </div>
-      {/* Labels row — always visible */}
-      <div
-        className="grid gap-x-3 gap-y-1"
-        style={{ gridTemplateColumns: `repeat(${visibleItems.length}, 1fr)` }}
-      >
-        {visibleItems.map((item) => {
-          const pct = Math.round((item.count / sum) * 100)
-          const key = item.drillKey ?? item.label
-          const isActive = activeKey === key
-          return (
-            <div
-              key={key}
-              onClick={onSegmentClick ? () => onSegmentClick(key, item.label) : undefined}
-              className={[
-                onSegmentClick ? 'cursor-pointer' : '',
-                activeKey && !isActive ? 'opacity-30' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            >
-              <div
-                className="w-2 h-2 rounded-full mb-1.5"
-                style={{ backgroundColor: item.color ?? '#818cf8' }}
-              />
-              <p className="text-sm font-bold text-white tabular-nums leading-none">{pct}%</p>
-              <p className="text-2xs text-muted mt-0.5 leading-tight">
-                {HERO_LANG_SHORT[key] ?? item.label}
-              </p>
-            </div>
-          )
-        })}
-      </div>
+    <div
+      className="grid gap-[3px]"
+      style={{ gridTemplateColumns: 'repeat(10, 1fr)' }}
+    >
+      {cells.map((cell, i) => {
+        const isActive = cell.key && activeKey === cell.key
+        return (
+          <div
+            key={i}
+            onClick={
+              cell.key && onCellClick
+                ? () => onCellClick(cell.key, cell.label)
+                : undefined
+            }
+            style={{ backgroundColor: cell.color, aspectRatio: '1' }}
+            className={[
+              'rounded-[2px] transition-opacity duration-150',
+              cell.key && onCellClick ? 'cursor-pointer' : '',
+              activeKey && cell.key && !isActive ? 'opacity-[0.12]' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          />
+        )
+      })}
     </div>
   )
 }
 
+// Compact drill-down support module — lighter treatment than chart cards.
 function DrillModule({
   label,
   value,
@@ -281,37 +265,36 @@ function DrillModule({
       type="button"
       onClick={onClick}
       className={[
-        'text-left w-full rounded-xl border p-5 transition-colors group',
+        'text-left w-full rounded-xl border px-4 py-4 transition-all group',
         isActive
           ? 'bg-surface-elevated border-border-strong'
-          : 'bg-surface border-border hover:bg-surface-elevated hover:border-border-strong',
+          : 'border-[rgba(255,255,255,0.06)] hover:bg-surface/80 hover:border-border',
       ].join(' ')}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0 flex-1">
-          <p className="text-2xs text-muted uppercase tracking-wider leading-none">{label}</p>
-          <p className="text-2xl font-bold text-white tabular-nums leading-none mt-2.5">{value}</p>
-          <p className="text-xs text-muted mt-2 leading-snug">{insight}</p>
-        </div>
-        <div
+      <div className="flex items-start justify-between gap-2 mb-2.5">
+        <p className="text-2xs text-subtle uppercase tracking-wider leading-none">{label}</p>
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
           className={[
-            'shrink-0 w-6 h-6 rounded-full border flex items-center justify-center mt-0.5 transition-colors',
-            isActive
-              ? 'border-accent text-accent bg-accent/10'
-              : 'border-border text-subtle group-hover:border-border-strong group-hover:text-muted',
+            'shrink-0 transition-colors mt-0.5',
+            isActive ? 'text-accent' : 'text-subtle group-hover:text-muted',
           ].join(' ')}
         >
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-            <path
-              d="M2 5H8M8 5L5.5 2.5M8 5L5.5 7.5"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+          <path
+            d="M2.5 6H9.5M9.5 6L7 3.5M9.5 6L7 8.5"
+            stroke="currentColor"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
+      <p className="text-2xl font-bold text-white tabular-nums leading-none">{value}</p>
+      <p className="text-xs text-muted mt-1.5 leading-snug">{insight}</p>
     </button>
   )
 }
@@ -327,7 +310,10 @@ interface Props {
 
 export default function OverviewClient({ overview, dist }: Props) {
   const [drillTarget, setDrillTarget] = useState<DrillTarget | null>(null)
-  const [apiDrillParams, setApiDrillParams] = useState<{ chart_id: string; segment_key: string } | null>(null)
+  const [apiDrillParams, setApiDrillParams] = useState<{
+    chart_id: string
+    segment_key: string
+  } | null>(null)
   const [activeKey, setActiveKey] = useState<string | null>(null)
 
   const { n_active, senior_pct, accessible_pct } = overview
@@ -400,12 +386,14 @@ export default function OverviewClient({ overview, dist }: Props) {
   const remoteCount = workModeItems.find((i) => i.drillKey === 'remote')?.count ?? 0
   const remotePct = n_active > 0 ? Math.round((remoteCount / n_active) * 100) : 0
 
-  const SENIOR_PLUS_KEYS = new Set(['senior', 'mid_senior', 'lead', 'staff', 'group', 'principal', 'head'])
+  const SENIOR_PLUS_KEYS = new Set([
+    'senior', 'mid_senior', 'lead', 'staff', 'group', 'principal', 'head',
+  ])
   const seniorPlusCount = dist.seniority
     .filter((i) => SENIOR_PLUS_KEYS.has(i.label))
     .reduce((acc, i) => acc + i.count, 0)
 
-  // Group seniority: keep core levels, merge lead+ into one row to reduce noise
+  // Group seniority: merge lead+ into one row
   const coreSeniorityItems = seniorityItems.filter((i) =>
     ['junior', 'mid', 'mid_senior', 'senior'].includes(i.drillKey ?? '')
   )
@@ -419,23 +407,31 @@ export default function OverviewClient({ overview, dist }: Props) {
       : []),
   ]
 
+  // Waffle items — same shape as languageItems but required by WaffleChart
+  const waffleItems = languageItems.map((i) => ({
+    count: i.count,
+    color: i.color ?? '#818cf8',
+    drillKey: i.drillKey ?? i.label,
+    label: i.label,
+  }))
+
   return (
     <>
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {/* Section A — Hero                                                    */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="pt-2 pb-16 border-b border-border">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
+      {/* ================================================================== */}
+      <div className="pt-6 pb-20 md:pb-28 border-b border-border">
+        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-10 md:gap-14 items-start">
 
-          {/* Left: editorial text + stat chips */}
+          {/* Left: dominant editorial block */}
           <div>
-            <p className="text-2xs text-subtle uppercase tracking-widest mb-5">
+            <p className="text-2xs text-subtle uppercase tracking-widest mb-8">
               Berlin · PM Market
             </p>
-            <h1 className="text-3xl font-bold text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-4xl sm:text-[2.75rem] font-bold text-white tracking-tight leading-[1.1] mb-5">
               {getMarketCharacter(senior_pct, accessible_pct, n_active)}
             </h1>
-            <p className="text-sm text-muted leading-relaxed mb-6">
+            <p className="text-sm text-muted leading-relaxed mb-8 max-w-[26rem]">
               {n_active > 0 ? (
                 <>
                   {n_active} roles tracked across Berlin and remote Germany.
@@ -461,41 +457,14 @@ export default function OverviewClient({ overview, dist }: Props) {
             </div>
           </div>
 
-          {/* Right: hero access bar */}
-          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
-            <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Market access</p>
-            <h2 className="text-[15px] font-semibold text-white leading-snug mb-1">
+          {/* Right: supporting access module — lighter, non-competing */}
+          <div className="md:mt-10 bg-white/[0.025] border border-white/[0.07] rounded-2xl p-5 sm:p-6 transition-colors hover:border-white/[0.10]">
+            <p className="text-2xs text-subtle uppercase tracking-widest mb-3">Market access</p>
+            <p className="text-sm font-medium text-white/80 leading-snug mb-1">
               Language is the main access filter
-            </h2>
-            <p className="text-xs text-muted mb-5 leading-relaxed">
-              {accessible_pct}% of postings list no German requirement — the most accessible segment.
             </p>
-            <HeroAccessBar
-              items={languageItems}
-              total={n_active}
-              onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Section B — Access conditions                                       */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="mt-16">
-        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Access conditions</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
-          {/* Card 1: Language access */}
-          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
-            <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
-              {accessible_pct >= 50
-                ? 'About half the market is accessible in English'
-                : 'Most of this market requires German'}
-            </h3>
             <p className="text-xs text-muted mb-5 leading-relaxed">
-              Language requirements determine who can realistically apply.
+              {accessible_pct}% of postings list no German requirement.
             </p>
             <StackedBar
               items={languageItems}
@@ -503,16 +472,59 @@ export default function OverviewClient({ overview, dist }: Props) {
               activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
             />
           </div>
+        </div>
+      </div>
 
-          {/* Card 2: Work style / remote */}
-          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
-            <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+      {/* ================================================================== */}
+      {/* Section B — Access conditions                                       */}
+      {/* ================================================================== */}
+      <div className="mt-24">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Access conditions</p>
+
+        {/* Group for sibling-dimming on hover */}
+        <div className="group/access grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6">
+
+          {/* PRIMARY chart card — language access + waffle */}
+          <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-2xl p-6 sm:p-8 hover:border-border-strong hover:shadow-[0_0_28px_rgba(129,140,248,0.06)]">
+            <h3 className="text-base font-semibold text-white leading-snug mb-1">
+              {accessible_pct >= 50
+                ? 'About half the market is accessible in English'
+                : 'Most of this market requires German'}
+            </h3>
+            <p className="text-xs text-muted mb-6 leading-relaxed">
+              Language requirements determine who can realistically apply.
+            </p>
+
+            {/* Side-by-side: bar chart + waffle */}
+            <div className="grid grid-cols-1 sm:grid-cols-[3fr_2fr] gap-6 items-start">
+              <StackedBar
+                items={languageItems}
+                onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
+                activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
+              />
+              <div>
+                <p className="text-2xs text-subtle uppercase tracking-widest mb-3">
+                  Share of market
+                </p>
+                <WaffleChart
+                  items={waffleItems}
+                  total={n_active}
+                  onCellClick={(key, label) => handleDrill('language', [key], label, key)}
+                  activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* SECONDARY statement card — work mode / remote */}
+          <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-5 sm:p-6 hover:border-border-strong">
+            <h3 className="text-base font-semibold text-white leading-snug mb-1">
               Remote is the exception, not the norm
             </h3>
-            <p className="text-xs text-muted mb-4 leading-relaxed">
+            <p className="text-xs text-muted mb-5 leading-relaxed">
               On-site and hybrid arrangements dominate this market.
             </p>
-            <div className="mb-5 flex items-baseline gap-2.5">
+            <div className="mb-6 flex items-baseline gap-2.5">
               <p className="text-4xl font-bold text-white tabular-nums leading-none">{remotePct}%</p>
               <p className="text-xs text-muted">of roles are fully remote</p>
             </div>
@@ -533,17 +545,19 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       </div>
 
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {/* Section C — Profile fit                                             */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="mt-16">
-        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Profile fit</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {/* ================================================================== */}
+      <div className="mt-24">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Profile fit</p>
 
-          {/* Card 1: Seniority */}
+        {/* Reversed ratio: seniority chart (narrower left) + AI/role focus statement (wider right) */}
+        <div className="group/profile grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6">
+
+          {/* CHART MODULE — seniority distribution */}
           {groupedSeniorityItems.length > 0 && (
-            <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
-              <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+            <div className="group-hover/profile:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-5 sm:p-6 hover:border-border-strong">
+              <h3 className="text-base font-semibold text-white leading-snug mb-1">
                 Most roles target experienced PMs
               </h3>
               <p className="text-xs text-muted mb-5 leading-relaxed">
@@ -562,36 +576,36 @@ export default function OverviewClient({ overview, dist }: Props) {
             </div>
           )}
 
-          {/* Card 2: Role focus */}
-          <div className="bg-surface border border-border rounded-xl p-5 sm:p-6">
+          {/* STATEMENT MODULE — AI expectations or role focus */}
+          <div className="group-hover/profile:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-[#0f0f0f] border border-white/[0.07] rounded-xl p-5 sm:p-7 hover:border-border">
             {ai.n_enriched > 0 && ai.ai_focus_pct >= 10 ? (
               <>
-                <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+                <h3 className="text-base font-semibold text-white leading-snug mb-1">
                   AI experience is increasingly expected
                 </h3>
-                <p className="text-xs text-muted mb-5 leading-relaxed">
+                <p className="text-xs text-muted mb-7 leading-relaxed">
                   Based on {ai.n_enriched} classified roles.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-6">
                   <div>
-                    <p className="text-3xl font-bold text-white tabular-nums leading-none">
+                    <p className="text-4xl font-bold text-white tabular-nums leading-none">
                       {ai.ai_focus_pct}%
                     </p>
-                    <p className="text-sm text-white/70 font-medium mt-1.5">AI as core focus</p>
+                    <p className="text-sm text-white/60 font-medium mt-2">AI as core focus</p>
                     <p className="text-xs text-muted mt-0.5">{ai.n_ai_focus} roles</p>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold text-white tabular-nums leading-none">
+                    <p className="text-4xl font-bold text-white tabular-nums leading-none">
                       {ai.ai_skills_pct}%
                     </p>
-                    <p className="text-sm text-white/70 font-medium mt-1.5">AI skills required</p>
+                    <p className="text-sm text-white/60 font-medium mt-2">AI skills required</p>
                     <p className="text-xs text-muted mt-0.5">{ai.n_ai_skills} roles</p>
                   </div>
                 </div>
               </>
             ) : pmTypeItems.length > 0 ? (
               <>
-                <h3 className="text-[15px] font-semibold text-white leading-snug mb-1">
+                <h3 className="text-base font-semibold text-white leading-snug mb-1">
                   What type of PM work is in demand
                 </h3>
                 <p className="text-xs text-muted mb-5 leading-relaxed">
@@ -609,12 +623,12 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       </div>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Section D — Drill-down entry points                                */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="mt-16">
-        <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Explore further</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {/* ================================================================== */}
+      {/* Section D — Further breakdown / drill-down                          */}
+      {/* ================================================================== */}
+      <div className="mt-24">
+        <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Further breakdown</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
           <DrillModule
             label="English-accessible roles"
@@ -684,31 +698,31 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       </div>
 
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {/* Analyst notes                                                       */}
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {insights.length > 0 && (
-        <section className="mt-20 pt-16 border-t border-border">
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-6">Analyst notes</p>
+        <section className="mt-28 pt-20 border-t border-border">
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Analyst notes</p>
           <div>
             {insights.map((text, i) => (
               <div
                 key={i}
-                className="flex gap-8 py-5 border-b border-border last:border-b-0"
+                className="flex gap-8 py-6 border-b border-border last:border-b-0"
               >
                 <span className="text-2xs text-subtle font-mono tabular-nums leading-none mt-0.5 w-5 shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
+                <p className="text-sm text-white/75 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {/* Empty state                                                         */}
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {n_active === 0 && (
         <div className="mt-16 bg-surface border border-border rounded-xl p-10 text-center">
           <p className="text-muted text-sm">
@@ -717,9 +731,9 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       )}
 
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       {/* Drill-down panel                                                    */}
-      {/* ------------------------------------------------------------------ */}
+      {/* ================================================================== */}
       <DrillDownPanel
         target={drillTarget}
         apiParams={apiDrillParams}
