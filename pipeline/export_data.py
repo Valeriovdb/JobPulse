@@ -19,6 +19,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from pipeline.config import CLASSIFIER_VERSION
 from pipeline.db import get_client
 
 logging.basicConfig(
@@ -100,12 +101,13 @@ def _fetch_experience_tags(active_job_ids: list[str]) -> pd.DataFrame:
         return pd.DataFrame()
     resp = (
         get_client()
-        .table("job_experience_tags")
+        .table("job_experience_requirements")
         .select(
             "job_id, experience_tag, experience_family, required_level, "
             "evidence_text, confidence"
         )
         .in_("job_id", active_job_ids)
+        .eq("classifier_version", CLASSIFIER_VERSION)
         .execute()
     )
     return pd.DataFrame(resp.data)

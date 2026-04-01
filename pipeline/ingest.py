@@ -466,7 +466,7 @@ def upsert_experience_tags(
     tags_buffer: list[tuple[str, list[dict]]],
     job_id_map: dict[str, str],
 ) -> None:
-    """Write experience tags to job_experience_tags table."""
+    """Write experience tags to job_experience_requirements table."""
     if not tags_buffer:
         return
     db = get_client()
@@ -487,11 +487,11 @@ def upsert_experience_tags(
             })
     if rows:
         for i in range(0, len(rows), 100):
-            db.table("job_experience_tags").upsert(
+            db.table("job_experience_requirements").upsert(
                 rows[i:i+100],
                 on_conflict="job_id,experience_tag,classifier_version",
             ).execute()
-        logger.info(f"Wrote {len(rows)} experience tags for {len(tags_buffer)} jobs")
+        logger.info(f"Wrote {len(rows)} experience requirements for {len(tags_buffer)} jobs")
 
 
 def get_job_id_map(keys: list[str]) -> dict[str, str]:

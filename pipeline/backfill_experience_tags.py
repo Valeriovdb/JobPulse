@@ -3,7 +3,7 @@ Backfill experience tags for existing jobs.
 
 Fetches all active jobs that have a description_text, runs the LLM enricher
 (which now includes experience_tags extraction), and writes the tags to
-the job_experience_tags table.
+the job_experience_requirements table.
 
 Only writes experience tags — does not re-update other enrichment fields
 unless --full-update is passed.
@@ -38,7 +38,7 @@ def fetch_jobs(limit: int = 0) -> list[dict]:
 
     # Get job_ids that already have experience tags
     existing_resp = (
-        db.table("job_experience_tags")
+        db.table("job_experience_requirements")
         .select("job_id")
         .eq("classifier_version", CLASSIFIER_VERSION)
         .execute()
@@ -122,7 +122,7 @@ def backfill(jobs: list[dict], dry_run: bool = False, full_update: bool = False)
                     "confidence": t.get("confidence"),
                     "classifier_version": CLASSIFIER_VERSION,
                 })
-            db.table("job_experience_tags").upsert(
+            db.table("job_experience_requirements").upsert(
                 rows,
                 on_conflict="job_id,experience_tag,classifier_version",
             ).execute()
