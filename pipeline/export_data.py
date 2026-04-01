@@ -392,6 +392,111 @@ def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
         _write("timeseries.json", result)
         return
 
+    # 1. Market Activity (Added, Removed, Active with churn)
+    # Grouped by dimensions to support filtering
+    if not snapshots.empty:
+        # Prepare snapshots df
+        df = snapshots.copy()
+        df["date"] = df["snapshot_date"].dt.date
+        run_dates = sorted(df["date"].unique())
+        date_to_idx = {d: i for i, d in enumerate(run_dates)}
+
+        # Active jobs per dimension per day
+        # location normalization to match FilterBar (berlin | remote_germany | unclear)
+        def get_loc(row):
+            if row["is_berlin"]: return "berlin"
+            if row["is_remote_germany"]: return "remote_germany"
+            return "unclear"
+        df["location"] = df.apply(get_loc, axis=1)
+        
+        active_grouped = df.groupby([
+            "date", "seniority", "location", "posting_language", "german_requirement"
+        ]).size().reset_index(name="active_jobs")
+
+        # Prepare job metadata for attributes on added/removed dates
+        job_meta = all_jobs.set_index("job_id")
+        
+        # Track job lifecycle for Added/Removed
+        events = []
+        job_groups = df.sort_values("date").groupby("job_id")
+        for job_id, group in job_groups:
+            dates = group["date"].tolist()
+            sens = group["seniority"].tolist()
+            locs = group["location"].tolist()
+            langs = group["posting_language"].tolist()
+            greqs = group["german_requirement"].tolist()
+            
+            # 1. Added: only if first_seen_date is within our range and matches the first day we saw it in snapshots
+            if job_id in job_meta.index:
+                actual_first_seen = job_meta.loc[job_id, "first_seen_date"].date()
+                if actual_first_seen == dates[0]:
+                    events.append({
+                        "date": dates[0],
+                        "seniority": sens[0],
+                        "location": locs[0],
+                        "language": langs[0],
+                        "german_req": greqs[0],
+                        "event": "added"
+                    })
+            
+            # 2. Gaps between snapshots (historical removals)
+            for i in range(len(dates) - 1):
+                curr_date, next_date = dates[i], dates[i+1]
+                curr_idx, next_idx = date_to_idx[curr_date], date_to_idx[next_date]
+                if next_idx > curr_idx + 1:
+                    # Removed on first run it was missing
+                    events.append({
+                        "date": run_dates[curr_idx + 1],
+                        "seniority": sens[i],
+                        "location": locs[i],
+                        "language": langs[i],
+                        "german_req": greqs[i],
+                        "event": "removed"
+                    })
+            
+            # 3. Final removal if not in latest run
+            last_date, last_idx = dates[-1], date_to_idx[dates[-1]]
+            if last_idx < len(run_dates) - 1:
+                events.append({
+                    "date": run_dates[last_idx + 1],
+                    "seniority": sens[-1],
+                    "location": locs[-1],
+                    "language": langs[-1],
+                    "german_req": greqs[-1],
+                    "event": "removed"
+                })
+
+        events_df = pd.DataFrame(events)
+        if not events_df.empty:
+            added_grouped = events_df[events_df["event"] == "added"].groupby([
+                "date", "seniority", "location", "language", "german_req"
+            ]).size().reset_index(name="jobs_added")
+            removed_grouped = events_df[events_df["event"] == "removed"].groupby([
+                "date", "seniority", "location", "language", "german_req"
+            ]).size().reset_index(name="jobs_removed")
+        else:
+            added_grouped = pd.DataFrame(columns=["date", "seniority", "location", "language", "german_req", "jobs_added"])
+            removed_grouped = pd.DataFrame(columns=["date", "seniority", "location", "language", "german_req", "jobs_removed"])
+
+        active_grouped = active_grouped.rename(columns={"posting_language": "language", "german_requirement": "german_req"})
+        merged = pd.merge(active_grouped, added_grouped, on=["date", "seniority", "location", "language", "german_req"], how="outer")
+        merged = pd.merge(merged, removed_grouped, on=["date", "seniority", "location", "language", "german_req"], how="outer")
+        merged = merged.fillna(0)
+        
+        result["market_activity"] = [
+            {
+                "date": str(row["date"]),
+                "seniority": str(row["seniority"]),
+                "location": str(row["location"]),
+                "language": str(row["language"]),
+                "german_req": str(row["german_req"]),
+                "active_jobs": int(row["active_jobs"]),
+                "jobs_added": int(row["jobs_added"]),
+                "jobs_removed": int(row["jobs_removed"])
+            }
+            for _, row in merged.iterrows()
+        ]
+
     # New roles per day
     new_per_day = (
         all_jobs

@@ -55,6 +55,7 @@ export function getTimeseries(): Timeseries {
   return readJSON<Timeseries>('timeseries.json', {
     new_per_day: [],
     active_per_day: [],
+    market_activity: [],
   })
 }
 

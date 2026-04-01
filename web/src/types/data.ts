@@ -101,6 +101,17 @@ export interface ExperienceData {
 
 // --- Timeseries ---
 
+export interface MarketActivityRow {
+  date: string
+  seniority: string
+  location: string
+  language: string
+  german_req: string
+  active_jobs: number
+  jobs_added: number
+  jobs_removed: number
+}
+
 export interface TimeseriesPoint {
   date: string
   count: number
@@ -109,6 +120,7 @@ export interface TimeseriesPoint {
 export interface Timeseries {
   new_per_day: TimeseriesPoint[]
   active_per_day: TimeseriesPoint[]
+  market_activity?: MarketActivityRow[]
   lifespan?: {
     median_days: number
     mean_days: number
