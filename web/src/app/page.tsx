@@ -1,4 +1,4 @@
-import { getOverview, getDistributions } from '@/lib/data'
+import { getOverview, getDistributions, getChartInsights } from '@/lib/data'
 import { Card } from '@/components/section'
 import { StatBar, StackedBar } from '@/components/stat-bar'
 
@@ -81,6 +81,7 @@ const SEN_COLORS = [
 export default function OverviewPage() {
   const overview = getOverview()
   const dist = getDistributions()
+  const insights = getChartInsights()
 
   const { n_active, n_new_week, median_age_days } = overview
   const { pm_type, seniority, ai, companies, german_requirement } = dist
@@ -170,11 +171,10 @@ export default function OverviewPage() {
         <section className="mt-10">
           <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Market Access</p>
           <p className="text-base font-semibold text-white mb-1">
-            How restrictive is the market right now?
+            {insights.charts.german_requirement?.title ?? 'How restrictive is the market right now?'}
           </p>
           <p className="text-xs text-subtle mb-4 max-w-lg leading-relaxed">
-            Share of active roles by explicit German requirement. This shows explicit language
-            constraint, not assumed candidate fit.
+            {insights.charts.german_requirement?.subtitle ?? 'Share of active roles by explicit German requirement.'}
           </p>
           <Card>
             <StackedBar items={germanReqItems} />
@@ -191,10 +191,10 @@ export default function OverviewPage() {
           <div>
             <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Role Mix</p>
             <p className="text-sm font-semibold text-white mb-1">
-              What kind of PM roles dominate?
+              {insights.charts.pm_type?.title ?? 'What kind of PM roles dominate?'}
             </p>
             <p className="text-xs text-subtle mb-4 leading-relaxed">
-              Distribution of active roles by role type, showing where demand is concentrated today.
+              {insights.charts.pm_type?.subtitle ?? 'Distribution of active roles by role type.'}
             </p>
             <Card>
               <StatBar items={pmTypeItems} showPct />
@@ -207,10 +207,10 @@ export default function OverviewPage() {
           <div>
             <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Seniority</p>
             <p className="text-sm font-semibold text-white mb-1">
-              At what level is the market concentrated?
+              {insights.charts.seniority?.title ?? 'At what level is the market concentrated?'}
             </p>
             <p className="text-xs text-subtle mb-4 leading-relaxed">
-              Distribution of active roles by seniority, highlighting where hiring demand is strongest.
+              {insights.charts.seniority?.subtitle ?? 'Distribution of active roles by seniority.'}
             </p>
             <Card>
               <StatBar items={senItems} showPct />
@@ -224,7 +224,14 @@ export default function OverviewPage() {
       {/* ------------------------------------------------------------------ */}
       {ai.n_enriched > 0 && (
         <section className="mt-10">
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-3">AI Signal</p>
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-1">AI Signal</p>
+          {insights.charts.ai && (
+            <>
+              <p className="text-sm font-semibold text-white mb-1">{insights.charts.ai.title}</p>
+              <p className="text-xs text-subtle mb-3 max-w-lg leading-relaxed">{insights.charts.ai.subtitle}</p>
+            </>
+          )}
+          {!insights.charts.ai && <div className="mb-3" />}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-surface border border-border rounded-xl p-4">
               <p className="text-2xl font-bold text-white tabular-nums">{ai.ai_focus_pct}%</p>

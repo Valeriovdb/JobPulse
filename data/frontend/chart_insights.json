@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-04-01T08:06:06.981505+00:00",
+  "data_version": "sha256:4cb0918a65b26c24",
+  "charts": {
+    "german_requirement": {
+      "title": "Majority of Roles Do Not Require German Skills",
+      "subtitle": "A significant gap exists, with over half of positions accessible without German proficiency.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:05:54.861004+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "pm_type": {
+      "title": "Core PMs Dominate, Leaving Customer-Facing Roles Behind",
+      "subtitle": "A significant gap exists between Core PMs and Customer-facing PMs, indicating a concentration in product management roles.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:05:56.428913+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "seniority": {
+      "title": "Mid-level Roles Are Most Prevalent",
+      "subtitle": "Mid-level positions account for 37% of the workforce, while senior roles make up 45%.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:06:00.370526+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "work_mode": {
+      "title": "On-site Work Dominates Despite Mixed Preferences",
+      "subtitle": "A significant portion of roles remains unclassified, indicating uncertainty in flexibility and remote options.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:06:01.655931+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "location": {
+      "title": "Berlin Dominates Job Market Concentration",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:06:03.186619+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "ai": {
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "34% of roles require AI as a core responsibility, indicating high demand for AI skills.",
+      "source": "llm",
+      "generated_at": "2026-04-01T08:06:04.322678+00:00",
+      "model": "gpt-4o-mini"
+    },
+    "industry": {
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-04-01T08:06:05.763743+00:00",
+      "model": null
+    }
+  }
+}

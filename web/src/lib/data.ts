@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import type { Metadata, Overview, Distributions, Timeseries, ExperienceData } from '@/types/data'
+import type { Metadata, Overview, Distributions, Timeseries, ExperienceData, ChartInsights } from '@/types/data'
 
 // data/frontend/ sits one level above the web/ directory
 const DATA_DIR = path.join(process.cwd(), '..', 'data', 'frontend')
@@ -64,6 +64,14 @@ export function getExperience(): ExperienceData {
     jobs_by_tag: {},
     n_jobs_with_tags: 0,
     n_active: 0,
+  })
+}
+
+export function getChartInsights(): ChartInsights {
+  return readJSON<ChartInsights>('chart_insights.json', {
+    generated_at: '',
+    data_version: '',
+    charts: {},
   })
 }
 

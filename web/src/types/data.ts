@@ -124,3 +124,19 @@ export interface Timeseries {
     series: Record<string, number[]>
   }
 }
+
+// --- Chart insights ---
+
+export interface ChartInsight {
+  title: string
+  subtitle: string
+  source: 'llm' | 'fallback'
+  generated_at: string
+  model: string | null
+}
+
+export interface ChartInsights {
+  generated_at: string
+  data_version: string
+  charts: Record<string, ChartInsight>
+}

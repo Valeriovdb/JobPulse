@@ -7,7 +7,10 @@ these files instead of querying the database at render time.
 
 Usage:
   python -m pipeline.export_data
+  python -m pipeline.export_data --force-insights   # bypass insight cache
 """
+import argparse
+import hashlib
 import json
 import logging
 import sys
@@ -481,10 +484,110 @@ def export_timeseries(all_jobs: pd.DataFrame, snapshots: pd.DataFrame) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Chart insights export
+# ---------------------------------------------------------------------------
+
+def _data_version(paths: list[Path]) -> str:
+    """SHA-256 of the concatenated content of the given JSON files."""
+    h = hashlib.sha256()
+    for p in paths:
+        if p.exists():
+            h.update(p.read_bytes())
+    return f"sha256:{h.hexdigest()[:16]}"
+
+
+def export_insights(force: bool = False) -> None:
+    """
+    Generate LLM-powered chart titles and subtitles for the four supported
+    charts and write chart_insights.json to OUT_DIR.
+
+    Uses a content hash of distributions.json + timeseries.json as a cache
+    key. The LLM is only called when the data has changed since the last run
+    (or when force=True).
+    """
+    from pipeline.insights.chart_summary import (
+        build_german_requirement_summary,
+        build_pm_type_summary,
+        build_seniority_summary,
+        build_work_mode_summary,
+        build_location_summary,
+        build_ai_summary,
+        build_industry_summary,
+    )
+    from pipeline.insights.copy_service import ChartInsightCopyService
+
+    insights_path = OUT_DIR / "chart_insights.json"
+    dist_path     = OUT_DIR / "distributions.json"
+    ts_path       = OUT_DIR / "timeseries.json"
+    overview_path = OUT_DIR / "overview.json"
+
+    current_version = _data_version([dist_path, ts_path])
+
+    # Check cache
+    if not force and insights_path.exists():
+        try:
+            cached = json.loads(insights_path.read_text())
+            if cached.get("data_version") == current_version:
+                logger.info("chart_insights.json is up to date (data unchanged) — skipping LLM calls")
+                return
+        except Exception:
+            pass  # corrupt cache — regenerate
+
+    # Load source data
+    try:
+        dist   = json.loads(dist_path.read_text())
+        ov     = json.loads(overview_path.read_text())
+    except Exception as e:
+        logger.error(f"export_insights: failed to read source JSON — {e}")
+        return
+
+    n_active = ov.get("n_active", 0)
+
+    # Build summaries for all Overview tab charts
+    summaries = {
+        "german_requirement": build_german_requirement_summary(
+            dist.get("german_requirement", []), n_active
+        ),
+        "pm_type": build_pm_type_summary(
+            dist.get("pm_type", [])
+        ),
+        "seniority": build_seniority_summary(
+            dist.get("seniority", [])
+        ),
+        "work_mode": build_work_mode_summary(
+            dist.get("work_mode", [])
+        ),
+        "location": build_location_summary(
+            ov.get("location", {}), n_active
+        ),
+        "ai": build_ai_summary(
+            dist.get("ai", {})
+        ),
+        "industry": build_industry_summary(
+            dist.get("industry", [])
+        ),
+    }
+
+    # Generate copy
+    service = ChartInsightCopyService()
+    charts: dict[str, dict] = {}
+    for chart_id, summary in summaries.items():
+        logger.info(f"Generating copy for chart: {chart_id}")
+        charts[chart_id] = service.generate(summary)
+
+    result = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "data_version": current_version,
+        "charts": charts,
+    }
+    _write("chart_insights.json", result)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
-def run() -> None:
+def run(force_insights: bool = False) -> None:
     logger.info("=== JobPulse frontend data export ===")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -508,13 +611,22 @@ def run() -> None:
     export_distributions(active_jobs)
     export_experience(active_jobs)
     export_timeseries(all_jobs, snapshots)
+    export_insights(force=force_insights)
 
     logger.info("=== Export complete ===")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="JobPulse frontend data export")
+    parser.add_argument(
+        "--force-insights",
+        action="store_true",
+        default=False,
+        help="Bypass the insight cache and regenerate chart copy even if data hasn't changed",
+    )
+    args = parser.parse_args()
     try:
-        run()
+        run(force_insights=args.force_insights)
     except Exception as e:
         logger.exception(f"Fatal error: {e}")
         sys.exit(1)
