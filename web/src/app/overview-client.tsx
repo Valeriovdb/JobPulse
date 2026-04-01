@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import type { Overview, Distributions, Job } from '@/types/data'
+import { useState } from 'react'
+import type { Overview, Distributions } from '@/types/data'
 import { Section, Card } from '@/components/section'
 import { StatBar, StackedBar } from '@/components/stat-bar'
-import { FilterBar, DEFAULT_FILTERS, type FilterState } from '@/components/filter-bar'
+import { DEFAULT_FILTERS } from '@/components/filter-bar'
 import { DrillDownPanel, type DrillTarget } from '@/components/drill-down-panel'
 
 // ---------------------------------------------------------------------------
@@ -62,7 +62,6 @@ const SENIORITY_COLORS: Record<string, string> = {
   unknown: '#404040',
 }
 
-const SENIOR_LEVELS = new Set(['senior', 'mid_senior', 'lead', 'staff', 'group', 'principal', 'head'])
 const HYBRID_KEYS = new Set(['hybrid', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d'])
 
 // ---------------------------------------------------------------------------
@@ -172,169 +171,38 @@ function collapseWorkMode(modes: { label: string; count: number }[]) {
 }
 
 // ---------------------------------------------------------------------------
-// Filter logic (client-side, for chart distribution recalculation)
-// ---------------------------------------------------------------------------
-
-function applyFilters(jobs: Job[], filters: FilterState): Job[] {
-  let result = jobs
-
-  if (filters.time !== 'all') {
-    const days = filters.time === '7d' ? 7 : 30
-    const cutoff = new Date()
-    cutoff.setDate(cutoff.getDate() - days)
-    result = result.filter((j) => j.first_seen_date && new Date(j.first_seen_date) >= cutoff)
-  }
-
-  if (filters.location !== 'all') {
-    if (filters.location === 'berlin') result = result.filter((j) => j.location === 'berlin')
-    else result = result.filter((j) => j.location === 'remote_germany')
-  }
-
-  if (filters.seniority !== 'all') {
-    const map: Record<string, string[]> = {
-      junior: ['junior'],
-      mid: ['mid'],
-      senior: ['senior', 'mid_senior'],
-      lead: ['lead', 'staff', 'group', 'principal', 'head'],
-    }
-    const targets = new Set(map[filters.seniority] ?? [])
-    result = result.filter((j) => targets.has(j.seniority))
-  }
-
-  if (filters.language !== 'all') {
-    if (filters.language === 'en_only')     result = result.filter((j) => j.language === 'en' && j.german_req === 'not_mentioned')
-    else if (filters.language === 'en_plus')result = result.filter((j) => j.german_req === 'plus')
-    else                                    result = result.filter((j) => j.german_req === 'must' || j.language === 'de')
-  }
-
-  return result
-}
-
-function deriveStats(jobs: Job[], overview: Overview, dist: Distributions) {
-  if (!jobs.length) {
-    return {
-      n_active: overview.n_active,
-      n_new_week: overview.n_new_week,
-      senior_pct: overview.senior_pct,
-      accessible_pct: overview.accessible_pct,
-      n_companies: dist.companies.n_companies,
-      language: overview.language,
-      location: overview.location,
-    }
-  }
-
-  const n_active = jobs.length
-  const n_senior = jobs.filter((j) => SENIOR_LEVELS.has(j.seniority)).length
-  const senior_pct = n_active ? Math.round((n_senior / n_active) * 100) : 0
-
-  const en_none = jobs.filter((j) => j.language === 'en' && j.german_req === 'not_mentioned').length
-  const en_plus = jobs.filter((j) => j.german_req === 'plus').length
-  const en_must = jobs.filter((j) => j.language === 'en' && j.german_req === 'must').length
-  const de     = jobs.filter((j) => j.language === 'de').length
-  const accessible_pct = n_active ? Math.round((en_none / n_active) * 100) : 0
-
-  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-  const n_new_week = jobs.filter((j) => j.first_seen_date && new Date(j.first_seen_date) >= weekAgo).length
-
-  const n_companies = new Set(jobs.map((j) => j.company).filter(Boolean)).size
-  const n_berlin    = jobs.filter((j) => j.location === 'berlin').length
-  const n_remote    = jobs.filter((j) => j.location === 'remote_germany').length
-
-  return {
-    n_active,
-    n_new_week,
-    senior_pct,
-    accessible_pct,
-    n_companies,
-    language: { en_none, en_plus, en_must, de },
-    location: { berlin: n_berlin, remote_germany: n_remote, unclear: Math.max(n_active - n_berlin - n_remote, 0) },
-  }
-}
-
-function deriveDist(jobs: Job[], baseDist: Distributions): Distributions {
-  if (!jobs.length) return baseDist
-
-  const wm: Record<string, number> = {}
-  const pm: Record<string, number> = {}
-  let n_enriched = 0, n_ai_focus = 0, n_ai_skills = 0
-
-  for (const j of jobs) {
-    const wmKey = HYBRID_KEYS.has(j.work_mode) ? 'hybrid' : j.work_mode
-    wm[wmKey] = (wm[wmKey] || 0) + 1
-
-    if (j.pm_type) {
-      pm[j.pm_type] = (pm[j.pm_type] || 0) + 1
-      n_enriched++
-    }
-    if (j.ai_focus) n_ai_focus++
-    if (j.ai_skills) n_ai_skills++
-  }
-
-  return {
-    ...baseDist,
-    work_mode: Object.entries(wm).map(([label, count]) => ({ label, count })),
-    pm_type: Object.entries(pm).map(([label, count]) => ({ label, count })).sort((a, b) => b.count - a.count),
-    ai: {
-      n_enriched,
-      n_ai_focus,
-      n_ai_skills,
-      ai_focus_pct: n_enriched ? Math.round((n_ai_focus / n_enriched) * 100) : 0,
-      ai_skills_pct: n_enriched ? Math.round((n_ai_skills / n_enriched) * 100) : 0,
-    },
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 
 interface Props {
   overview: Overview
   dist: Distributions
-  jobs: Job[]
 }
 
-export default function OverviewClient({ overview, dist, jobs }: Props) {
-  const hasJobData = jobs.length > 0
-
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
+export default function OverviewClient({ overview, dist }: Props) {
   const [drillTarget, setDrillTarget] = useState<DrillTarget | null>(null)
   const [apiDrillParams, setApiDrillParams] = useState<{ chart_id: string; segment_key: string } | null>(null)
   const [activeKey, setActiveKey] = useState<string | null>(null)
 
-  const filteredJobs = useMemo(
-    () => (hasJobData ? applyFilters(jobs, filters) : jobs),
-    [jobs, filters, hasJobData]
-  )
-
-  const stats = useMemo(
-    () => deriveStats(filteredJobs, overview, dist),
-    [filteredJobs, overview, dist]
-  )
-
-  const activeDist = useMemo(
-    () => deriveDist(filteredJobs, dist),
-    [filteredJobs, dist]
-  )
+  const { n_active, n_new_week, senior_pct, accessible_pct } = overview
+  const { ai } = dist
 
   const insights = generateInsights(
-    stats.n_active,
-    stats.senior_pct,
-    stats.accessible_pct,
-    stats.location,
-    activeDist.ai,
-    stats.language,
+    n_active,
+    senior_pct,
+    accessible_pct,
+    overview.location,
+    ai,
+    overview.language,
   )
 
   function handleDrill(dimension: string, keys: string[], label: string, segKey: string) {
-    // Toggle off if already active
     if (activeKey === segKey) {
       setDrillTarget(null)
       setApiDrillParams(null)
       setActiveKey(null)
       return
     }
-    // Only open panel for API-enabled charts
     const apiParams = toApiParams(dimension, segKey)
     if (!apiParams) return
     setDrillTarget({ dimension, keys, label })
@@ -353,21 +221,21 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
   // ---------------------------------------------------------------------------
 
   const languageItems = [
-    { label: 'No German required', count: stats.language.en_none, color: '#4ade80', drillKey: 'en_none' },
-    { label: 'German a plus',      count: stats.language.en_plus, color: '#2dd4bf', drillKey: 'en_plus' },
-    { label: 'German required',    count: stats.language.en_must, color: '#60a5fa', drillKey: 'en_must' },
-    { label: 'German posting',     count: stats.language.de,      color: '#818cf8', drillKey: 'de'      },
+    { label: 'No German required', count: overview.language.en_none, color: '#4ade80', drillKey: 'en_none' },
+    { label: 'German a plus',      count: overview.language.en_plus, color: '#2dd4bf', drillKey: 'en_plus' },
+    { label: 'German required',    count: overview.language.en_must, color: '#60a5fa', drillKey: 'en_must' },
+    { label: 'German posting',     count: overview.language.de,      color: '#818cf8', drillKey: 'de'      },
   ].filter((i) => i.count > 0)
 
   const locationItems = [
-    { label: 'Berlin',            count: stats.location.berlin,           color: '#818cf8', drillKey: 'berlin'          },
-    { label: 'Remote Germany',    count: stats.location.remote_germany,   color: '#60a5fa', drillKey: 'remote_germany'  },
-    { label: 'Location unclear',  count: stats.location.unclear,          color: '#fb923c', drillKey: 'unclear'         },
+    { label: 'Berlin',            count: overview.location.berlin,           color: '#818cf8', drillKey: 'berlin'          },
+    { label: 'Remote Germany',    count: overview.location.remote_germany,   color: '#60a5fa', drillKey: 'remote_germany'  },
+    { label: 'Location unclear',  count: overview.location.unclear,          color: '#fb923c', drillKey: 'unclear'         },
   ].filter((i) => i.count > 0)
 
-  const workModeItems = collapseWorkMode(activeDist.work_mode)
+  const workModeItems = collapseWorkMode(dist.work_mode)
 
-  const pmTypeItems = activeDist.pm_type.map((item) => ({
+  const pmTypeItems = dist.pm_type.map((item) => ({
     label: PM_TYPE_LABELS[item.label] ?? item.label,
     count: item.count,
     color: PM_TYPE_COLORS[item.label] ?? '#818cf8',
@@ -390,9 +258,8 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
       drillKey: item.label,
     }))
 
-  const { n_active, n_new_week, senior_pct, accessible_pct, n_companies } = stats
-  const { ai } = activeDist
-  const classifiedLocation = stats.location.berlin + stats.location.remote_germany
+  const n_companies = dist.companies.n_companies
+  const classifiedLocation = overview.location.berlin + overview.location.remote_germany
 
   const kpis = [
     { value: n_active,      label: 'Active roles' },
@@ -403,11 +270,6 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
 
   return (
     <>
-      {/* Filters */}
-      {hasJobData && (
-        <FilterBar filters={filters} onChange={setFilters} />
-      )}
-
       {/* ------------------------------------------------------------------ */}
       {/* Hero                                                                */}
       {/* ------------------------------------------------------------------ */}
@@ -631,7 +493,7 @@ export default function OverviewClient({ overview, dist, jobs }: Props) {
       <DrillDownPanel
         target={drillTarget}
         apiParams={apiDrillParams}
-        filters={filters}
+        filters={DEFAULT_FILTERS}
         onClose={handleClose}
       />
     </>
