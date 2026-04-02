@@ -227,13 +227,15 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
       )}
 
       {status === 'loaded' && grouped.length > 0 && (
-        <div className="px-4 py-5 space-y-3">
-          {grouped.map(({ company, roles }) => (
-            <CompanyBlock key={company} company={company} roles={roles} />
-          ))}
+        <div className="py-3">
+          <div className="divide-y divide-white/[0.06]">
+            {grouped.map(({ company, roles }) => (
+              <CompanyBlock key={company} company={company} roles={roles} />
+            ))}
+          </div>
 
           {jobs.length < total && (
-            <div className="pt-2">
+            <div className="px-4 pt-3">
               <button
                 onClick={loadMore}
                 disabled={loadingMore}
@@ -255,16 +257,16 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
 
 function CompanyBlock({ company, roles }: { company: string; roles: ApiJob[] }) {
   return (
-    <div className="rounded-xl border border-border overflow-hidden bg-surface">
-      <div className="px-4 pt-4 pb-3 flex items-baseline justify-between gap-3 border-b border-border">
-        <span className="text-[15px] font-semibold text-white leading-snug">{company}</span>
+    <div className="px-4 py-3">
+      <div className="flex items-baseline gap-2 mb-1.5">
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-white/40 leading-none">
+          {company}
+        </span>
         {roles.length > 1 && (
-          <span className="shrink-0 text-2xs font-medium text-muted bg-white/[0.06] px-2 py-0.5 rounded-full tabular-nums">
-            {roles.length}
-          </span>
+          <span className="text-[10px] text-subtle tabular-nums">{roles.length}</span>
         )}
       </div>
-      <div className="divide-y divide-border/60">
+      <div>
         {roles.map((job) => (
           <JobRow key={job.job_id} job={job} />
         ))}
@@ -285,22 +287,16 @@ function JobRow({ job }: { job: ApiJob }) {
     ? Math.floor((Date.now() - new Date(job.first_seen_date + 'T00:00:00Z').getTime()) / 86_400_000)
     : null
 
+  const meta = [
+    location,
+    daysLive !== null && daysLive >= 0 ? (daysLive === 0 ? 'today' : `${daysLive}d`) : null,
+    sourceLabel,
+  ].filter(Boolean).join(' · ')
+
   const content = (
-    <div className="px-4 py-3.5 transition-colors group-hover:bg-white/[0.025]">
-      <p className="text-sm font-medium text-white/90 leading-snug">{displayTitle}</p>
-      {location && (
-        <p className="text-xs text-muted mt-1">{location}</p>
-      )}
-      <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
-        <span className="text-2xs px-1.5 py-0.5 rounded border text-subtle border-border/70">
-          {sourceLabel}
-        </span>
-        {daysLive !== null && daysLive >= 0 && (
-          <span className="text-2xs px-1.5 py-0.5 rounded border text-subtle border-border/70">
-            {daysLive === 0 ? 'today' : `${daysLive}d`}
-          </span>
-        )}
-      </div>
+    <div className="py-1.5 px-2 -mx-2 rounded transition-colors group-hover:bg-white/[0.05]">
+      <p className="text-[13px] font-medium text-white/90 leading-snug">{displayTitle}</p>
+      {meta && <p className="text-[11px] text-white/35 mt-0.5 leading-none">{meta}</p>}
     </div>
   )
 
