@@ -88,17 +88,71 @@ function toApiParams(
 // Helpers
 // ---------------------------------------------------------------------------
 
-function getMarketCharacter(senior_pct: number, accessible_pct: number, n_active: number): string {
+function generateHeroTitle(
+  senior_pct: number,
+  accessible_pct: number,
+  remotePct: number,
+  n_active: number,
+): string {
   if (n_active === 0) return 'No active roles in the current snapshot.'
-  const seniority =
-    senior_pct >= 60 ? 'senior-heavy' : senior_pct >= 40 ? 'mid-to-senior' : 'balanced'
-  const access =
-    accessible_pct >= 50
-      ? 'broadly accessible'
-      : accessible_pct >= 30
-      ? 'moderately accessible'
-      : 'language-constrained'
-  return `A ${seniority}, ${access} market.`
+
+  const isSeniorHeavy = senior_pct >= 60
+  const isMidSenior  = senior_pct >= 40 && senior_pct < 60
+  const isLanguageConstrained = accessible_pct < 30
+  const isLimitedAccess       = accessible_pct >= 30 && accessible_pct < 50
+  const isRemoteScarce        = remotePct <= 8
+
+  if (isSeniorHeavy) {
+    if (isLanguageConstrained)
+      return 'A senior-heavy market with limited English-only access.'
+    if (isLimitedAccess && isRemoteScarce)
+      return 'Senior-leaning, language-filtered, and mostly on-site.'
+    if (isLimitedAccess)
+      return 'A senior-leaning market — German opens most of the pipeline.'
+    return 'A senior-heavy market, broadly accessible across languages.'
+  }
+
+  if (isMidSenior) {
+    if (isLanguageConstrained)
+      return 'A competitive market where German is the main barrier.'
+    if (isLimitedAccess && isRemoteScarce)
+      return 'A mid-to-senior market with real language and location constraints.'
+    if (isLimitedAccess)
+      return 'A competitive market tilted toward experienced PMs.'
+    return 'A mid-to-senior market, competitive but broadly accessible.'
+  }
+
+  // Balanced seniority
+  if (isLanguageConstrained)
+    return 'Language is the primary barrier — German unlocks most roles.'
+  if (isLimitedAccess)
+    return 'A mixed market with moderate language constraints.'
+  return 'A broadly accessible market with distributed seniority.'
+}
+
+function generateHeroBody(
+  n_active: number,
+  senior_pct: number,
+  accessible_pct: number,
+  remotePct: number,
+): string {
+  if (n_active === 0) return 'No active roles in the current snapshot.'
+
+  const base = `${n_active} roles tracked across Berlin and remote Germany.`
+
+  if (senior_pct >= 50 && accessible_pct < 50) {
+    return `${base} ${senior_pct}% are Senior-level or above, and only ${accessible_pct}% list no German requirement.`
+  }
+  if (senior_pct >= 50) {
+    const remoteClause = remotePct <= 8
+      ? `Remote is scarce — only ${remotePct}% of roles offer it.`
+      : `Remote accounts for ${remotePct}% of listings.`
+    return `${base} ${senior_pct}% are Senior-level or above. ${remoteClause}`
+  }
+  if (accessible_pct < 40) {
+    return `${base} Only ${accessible_pct}% list no German requirement — language is the clearest access constraint.`
+  }
+  return `${base} ${accessible_pct}% are accessible without German. Remote accounts for ${remotePct}% of listings.`
 }
 
 function generateImplications(
@@ -475,24 +529,10 @@ export default function OverviewClient({ overview, dist }: Props) {
               Berlin · PM Market
             </p>
             <h1 className="text-5xl sm:text-[3.5rem] md:text-[4.25rem] font-bold text-white tracking-tight leading-[1.05] mb-7">
-              {getMarketCharacter(senior_pct, accessible_pct, n_active)}
+              {generateHeroTitle(senior_pct, accessible_pct, remotePct, n_active)}
             </h1>
             <p className="text-sm text-muted leading-relaxed mb-10 max-w-[26rem]">
-              {n_active > 0 ? (
-                <>
-                  {n_active} roles tracked across Berlin and remote Germany.
-                  {senior_pct >= 50
-                    ? ` ${senior_pct}% are Senior-level or above.`
-                    : senior_pct > 0
-                    ? ` Seniority is mixed — ${senior_pct}% Senior or above.`
-                    : ''}
-                  {remotePct <= 10
-                    ? ` Remote is scarce — only ${remotePct}% of roles offer it.`
-                    : ` ${remotePct}% offer remote flexibility.`}
-                </>
-              ) : (
-                'No active roles in the current snapshot.'
-              )}
+              {generateHeroBody(n_active, senior_pct, accessible_pct, remotePct)}
             </p>
             <div className="flex flex-wrap gap-2">
               <StatChip value={n_active} label="active roles" />
