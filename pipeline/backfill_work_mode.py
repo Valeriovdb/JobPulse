@@ -21,6 +21,7 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s — %(message)s",
     datefmt="%H:%M:%S",
 )
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger("backfill_work_mode")
 
 

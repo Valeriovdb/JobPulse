@@ -32,11 +32,11 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 20
+      "count": 21
     },
     {
       "label": "onsite",
-      "count": 16
+      "count": 15
     },
     {
       "label": "hybrid",
@@ -86,11 +86,11 @@
     },
     {
       "label": "customer_facing",
-      "count": 10
+      "count": 11
     },
     {
       "label": "platform",
-      "count": 2
+      "count": 1
     },
     {
       "label": "data_ai",
@@ -98,6 +98,76 @@
     }
   ],
   "industry": [],
+  "industry_normalized": [
+    {
+      "label": "saas_b2b_software",
+      "count": 9
+    },
+    {
+      "label": "fintech_payments",
+      "count": 9
+    },
+    {
+      "label": "ecommerce_marketplace",
+      "count": 4
+    },
+    {
+      "label": "cybersecurity",
+      "count": 2
+    }
+  ],
+  "visa_sponsorship": [
+    {
+      "label": "unclear",
+      "count": 39
+    }
+  ],
+  "relocation_support": [
+    {
+      "label": "unclear",
+      "count": 39
+    }
+  ],
+  "domain_req_strength": [
+    {
+      "label": "hard",
+      "count": 17
+    },
+    {
+      "label": "unclear",
+      "count": 15
+    },
+    {
+      "label": "none",
+      "count": 5
+    },
+    {
+      "label": "soft",
+      "count": 2
+    }
+  ],
+  "years_experience": {
+    "median": 5.0,
+    "buckets": [
+      {
+        "label": "0-2",
+        "count": 1
+      },
+      {
+        "label": "3-5",
+        "count": 5
+      },
+      {
+        "label": "6-8",
+        "count": 2
+      },
+      {
+        "label": "9+",
+        "count": 1
+      }
+    ],
+    "n_extractable": 9
+  },
   "ai": {
     "n_enriched": 25,
     "n_ai_focus": 8,
@@ -146,11 +216,11 @@
         "count": 1
       },
       {
-        "label": "TechBiz Global GmbH",
+        "label": "Cygrid GmbH",
         "count": 1
       },
       {
-        "label": "Cygrid GmbH",
+        "label": "TechBiz Global GmbH",
         "count": 1
       }
     ],

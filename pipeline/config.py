@@ -27,7 +27,7 @@ JSEARCH_HOST = os.getenv("JSEARCH_HOST", "jsearch.p.rapidapi.com")
 # --- Pipeline behaviour ---
 DRY_RUN = os.getenv("DRY_RUN", "false").lower() == "true"
 ACTIVE_GRACE_DAYS = int(os.getenv("ACTIVE_GRACE_DAYS", "1"))
-CLASSIFIER_VERSION = os.getenv("CLASSIFIER_VERSION", "v2")
+CLASSIFIER_VERSION = os.getenv("CLASSIFIER_VERSION", "v3")
 
 # --- JSearch budget ---
 # Free tier: 200 requests/month. Reserve 40 for debugging/manual use.

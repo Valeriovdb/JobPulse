@@ -69,6 +69,18 @@ class NormalizedJob:
     ai_skills: Optional[bool] = None
     tools_skills: Optional[list] = None
 
+    # New LLM-enriched fields (v3 classifier)
+    industry_normalized: Optional[str] = None
+    candidate_domain_requirement_strength: Optional[str] = None
+    candidate_domain_requirement_normalized: Optional[str] = None
+    candidate_domain_requirement_raw: Optional[str] = None
+    years_experience_min: Optional[int] = None
+    years_experience_raw: Optional[str] = None
+    visa_sponsorship_status: Optional[str] = None
+    visa_sponsorship_raw: Optional[str] = None
+    relocation_support_status: Optional[str] = None
+    relocation_support_raw: Optional[str] = None
+
 
 # ---------------------------------------------------------------------------
 # Seniority normalization

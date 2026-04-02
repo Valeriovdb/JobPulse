@@ -29,6 +29,7 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s — %(message)s",
     datefmt="%H:%M:%S",
 )
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger("backfill_experience")
 
 

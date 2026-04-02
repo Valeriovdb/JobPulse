@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-04-02T08:13:16.719941+00:00",
-  "data_version": "sha256:36ca4cf88ce4278b",
+  "generated_at": "2026-04-02T21:13:42.607040+00:00",
+  "data_version": "sha256:4e2515493c930d79",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Mostly Unnecessary",
-      "subtitle": "A significant majority of roles do not require German, highlighting accessibility challenges.",
+      "title": "German Language Requirement is Not a Barrier",
+      "subtitle": "Most roles do not require German, highlighting accessibility despite significant unclassified positions.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:04.993968+00:00",
+      "generated_at": "2026-04-02T21:13:32.653962+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
       "title": "Customer-facing PMs Dominate Role Landscape",
-      "subtitle": "A significant gap exists between customer-facing and core PM roles, highlighting a concentration in specialized positions.",
+      "subtitle": "A significant gap exists, with specialized roles heavily favoring customer-facing positions over core PMs.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:06.300349+00:00",
+      "generated_at": "2026-04-02T21:13:34.768869+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
       "title": "Senior Roles Dominate the Market",
       "subtitle": "Over half of the positions are filled by senior-level professionals, indicating a strong demand for experienced talent.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:07.691423+00:00",
+      "generated_at": "2026-04-02T21:13:36.773081+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
       "title": "On-site Work Dominates with Limited Flexibility",
       "subtitle": "A significant majority of roles require on-site presence, with minimal remote options available.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:09.750101+00:00",
+      "generated_at": "2026-04-02T21:13:37.920553+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "All opportunities are concentrated in Berlin, with no remote or unclear options available.",
+      "subtitle": "All opportunities are concentrated in Berlin, with no remote options available.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:13.704783+00:00",
+      "generated_at": "2026-04-02T21:13:39.077649+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
       "title": "AI Expertise is Now Mainstream in Job Market",
-      "subtitle": "32% of roles require AI as a core responsibility or skill.",
+      "subtitle": "32% of roles demand AI as a core responsibility or skill.",
       "source": "llm",
-      "generated_at": "2026-04-02T08:13:14.779880+00:00",
+      "generated_at": "2026-04-02T21:13:40.177558+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Strong Balance and Diversity",
-      "subtitle": "No single role dominates, but unclassified positions limit overall accessibility.",
-      "source": "llm",
-      "generated_at": "2026-04-02T08:13:15.878808+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-04-02T21:13:41.311571+00:00",
+      "model": null
     }
   }
 }

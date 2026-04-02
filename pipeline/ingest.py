@@ -36,6 +36,8 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s — %(message)s",
     datefmt="%H:%M:%S",
 )
+# Force INFO level even if basicConfig was a no-op (happens when hashlib fires first)
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger("ingest")
 
 
@@ -275,6 +277,17 @@ def _job_to_db_row(job: NormalizedJob, run_date: date) -> dict:
         "llm_extracted_at": datetime.now(timezone.utc).isoformat() if job.german_requirement else None,
         "llm_confidence": job.llm_confidence if hasattr(job, "llm_confidence") else None,
         "llm_raw_json": json.dumps(job.llm_raw_json) if hasattr(job, "llm_raw_json") and job.llm_raw_json else None,
+        # New v3 enrichment fields
+        "industry_normalized": job.industry_normalized,
+        "candidate_domain_requirement_strength": job.candidate_domain_requirement_strength,
+        "candidate_domain_requirement_normalized": job.candidate_domain_requirement_normalized,
+        "candidate_domain_requirement_raw": job.candidate_domain_requirement_raw,
+        "years_experience_min": job.years_experience_min,
+        "years_experience_raw": job.years_experience_raw,
+        "visa_sponsorship_status": job.visa_sponsorship_status,
+        "visa_sponsorship_raw": job.visa_sponsorship_raw,
+        "relocation_support_status": job.relocation_support_status,
+        "relocation_support_raw": job.relocation_support_raw,
         "first_seen_date": run_date.isoformat(),
         "last_seen_date": run_date.isoformat(),
         "is_active": True,
@@ -452,6 +465,11 @@ def write_snapshots(
             "raw_posted_at": job.raw_posted_at.isoformat() if job.raw_posted_at else None,
             "has_linkedin_apply_option": job.has_linkedin_apply_option,
             "has_company_site_apply_option": job.has_company_site_apply_option,
+            # New v3 dimension columns
+            "industry_normalized": job.industry_normalized,
+            "visa_sponsorship_status": job.visa_sponsorship_status,
+            "relocation_support_status": job.relocation_support_status,
+            "candidate_domain_requirement_strength": job.candidate_domain_requirement_strength,
         })
 
     for i in range(0, len(rows), 100):
@@ -572,6 +590,17 @@ def run(dry_run: bool = False) -> None:
                 job.llm_version = result.get("llm_version")
                 job.llm_confidence = result.get("llm_confidence")
                 job.llm_raw_json = result.get("llm_raw_json")
+                # New v3 enrichment fields
+                job.industry_normalized = result.get("industry_normalized")
+                job.candidate_domain_requirement_strength = result.get("candidate_domain_requirement_strength")
+                job.candidate_domain_requirement_normalized = result.get("candidate_domain_requirement_normalized")
+                job.candidate_domain_requirement_raw = result.get("candidate_domain_requirement_raw")
+                job.years_experience_min = result.get("years_experience_min")
+                job.years_experience_raw = result.get("years_experience_raw")
+                job.visa_sponsorship_status = result.get("visa_sponsorship_status")
+                job.visa_sponsorship_raw = result.get("visa_sponsorship_raw")
+                job.relocation_support_status = result.get("relocation_support_status")
+                job.relocation_support_raw = result.get("relocation_support_raw")
                 enriched_count += 1
                 # Buffer experience tags for DB write after upsert (need job_id)
                 exp_tags = result.get("experience_tags", [])

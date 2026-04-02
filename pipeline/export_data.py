@@ -27,6 +27,8 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s — %(message)s",
     datefmt="%H:%M:%S",
 )
+# Force INFO level even if basicConfig was a no-op (happens when hashlib fires first)
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger("export_data")
 
 OUT_DIR = Path(__file__).parent.parent / "data" / "frontend"
@@ -49,7 +51,9 @@ def _fetch_active_jobs() -> pd.DataFrame:
         .select(
             "job_id, company_name, seniority, is_berlin, is_remote_germany, "
             "work_mode, posting_language, german_requirement, pm_type, industry, "
-            "b2b_saas, ai_focus, ai_skills, first_seen_date, source_provider"
+            "industry_normalized, b2b_saas, ai_focus, ai_skills, first_seen_date, "
+            "source_provider, visa_sponsorship_status, relocation_support_status, "
+            "candidate_domain_requirement_normalized, candidate_domain_requirement_strength, years_experience_min"
         )
         .eq("is_active", True)
         .execute()
@@ -253,10 +257,121 @@ def export_distributions(jobs: pd.DataFrame) -> None:
         if pm_counts.get(k, 0) > 0
     ]
 
-    # Industry
+    # Industry (legacy — preserved for backward compatibility)
     ind_jobs = jobs[jobs["industry"].notna()]
     ind_counts = ind_jobs["industry"].value_counts()
     industry = [{"label": k, "count": int(v)} for k, v in ind_counts.items()]
+
+    # Industry normalized (v3)
+    ind_norm_jobs = jobs[jobs["industry_normalized"].notna()] if "industry_normalized" in jobs.columns else pd.DataFrame()
+    ind_norm_counts = ind_norm_jobs["industry_normalized"].value_counts() if not ind_norm_jobs.empty else pd.Series(dtype=int)
+    industry_normalized = [{"label": k, "count": int(v)} for k, v in ind_norm_counts.items()]
+
+    # Visa sponsorship status
+    visa_counts = jobs["visa_sponsorship_status"].fillna("unclear").value_counts() if "visa_sponsorship_status" in jobs.columns else pd.Series(dtype=int)
+    visa_sponsorship = [{"label": k, "count": int(v)} for k, v in visa_counts.items()]
+
+    # Relocation support status
+    reloc_counts = jobs["relocation_support_status"].fillna("unclear").value_counts() if "relocation_support_status" in jobs.columns else pd.Series(dtype=int)
+    relocation_support = [{"label": k, "count": int(v)} for k, v in reloc_counts.items()]
+
+    # Candidate domain requirement strength
+    domain_strength_col = "candidate_domain_requirement_strength"
+    domain_strength_counts = (
+        jobs[domain_strength_col].fillna("unclear").value_counts()
+        if domain_strength_col in jobs.columns else pd.Series(dtype=int)
+    )
+    domain_req_strength = [{"label": k, "count": int(v)} for k, v in domain_strength_counts.items()]
+
+    # Years experience summary
+    years_experience: dict = {}
+    if "years_experience_min" in jobs.columns:
+        exp_jobs = jobs[jobs["years_experience_min"].notna()]
+        if not exp_jobs.empty:
+            yrs = exp_jobs["years_experience_min"].astype(float)
+            years_experience = {
+                "median": round(float(yrs.median()), 1),
+                "buckets": [
+                    {"label": "0-2", "count": int((yrs <= 2).sum())},
+                    {"label": "3-5", "count": int(yrs.between(3, 5).sum())},
+                    {"label": "6-8", "count": int(yrs.between(6, 8).sum())},
+                    {"label": "9+",  "count": int((yrs >= 9).sum())},
+                ],
+                "n_extractable": int(len(exp_jobs)),
+            }
+
+    # Seniority × Years Experience bubble data
+    seniority_experience_bubble: list = []
+    if "years_experience_min" in jobs.columns:
+        exp_sen = jobs[jobs["years_experience_min"].notna() & jobs["seniority"].notna()].copy()
+        if not exp_sen.empty:
+            grouped = (
+                exp_sen
+                .groupby(["seniority", "years_experience_min"])
+                .size()
+                .reset_index(name="count")
+            )
+            seniority_experience_bubble = [
+                {
+                    "seniority": str(row["seniority"]),
+                    "years_min": float(row["years_experience_min"]),
+                    "count": int(row["count"]),
+                }
+                for _, row in grouped.iterrows()
+            ]
+
+    # Industry × Years Experience bubble data
+    industry_experience_bubble: list = []
+    ind_norm_col = "industry_normalized"
+    if "years_experience_min" in jobs.columns and ind_norm_col in jobs.columns:
+        exp_ind = jobs[jobs["years_experience_min"].notna() & jobs[ind_norm_col].notna()].copy()
+        if not exp_ind.empty:
+            grouped_ind = (
+                exp_ind
+                .groupby([ind_norm_col, "years_experience_min"])
+                .size()
+                .reset_index(name="count")
+            )
+            industry_experience_bubble = [
+                {
+                    "industry": str(row[ind_norm_col]),
+                    "years_min": float(row["years_experience_min"]),
+                    "count": int(row["count"]),
+                }
+                for _, row in grouped_ind.iterrows()
+            ]
+
+    # Candidate domain requirement breakdown (domain × hard/soft)
+    domain_req_breakdown: list = []
+    dom_norm_col = "candidate_domain_requirement_normalized"
+    dom_str_col = "candidate_domain_requirement_strength"
+    if dom_norm_col in jobs.columns and dom_str_col in jobs.columns:
+        dom_df = jobs[
+            jobs[dom_norm_col].notna() &
+            jobs[dom_str_col].isin(["hard", "soft"]) &
+            (jobs[dom_norm_col] != "none")
+        ].copy()
+        if not dom_df.empty:
+            pivot = (
+                dom_df
+                .groupby([dom_norm_col, dom_str_col])
+                .size()
+                .unstack(fill_value=0)
+            )
+            for col in ["hard", "soft"]:
+                if col not in pivot.columns:
+                    pivot[col] = 0
+            pivot["total"] = pivot["hard"] + pivot["soft"]
+            pivot = pivot.sort_values("total", ascending=False)
+            domain_req_breakdown = [
+                {
+                    "domain": str(idx),
+                    "hard": int(row.get("hard", 0)),
+                    "soft": int(row.get("soft", 0)),
+                    "total": int(row.get("total", 0)),
+                }
+                for idx, row in pivot.iterrows()
+            ]
 
     # AI signals
     n_enriched = int(jobs["pm_type"].notna().sum())
@@ -301,6 +416,14 @@ def export_distributions(jobs: pd.DataFrame) -> None:
         "german_requirement": german_req,
         "pm_type": pm_type,
         "industry": industry,
+        "industry_normalized": industry_normalized,
+        "visa_sponsorship": visa_sponsorship,
+        "relocation_support": relocation_support,
+        "domain_req_strength": domain_req_strength,
+        "domain_req_breakdown": domain_req_breakdown,
+        "seniority_experience_bubble": seniority_experience_bubble,
+        "industry_experience_bubble": industry_experience_bubble,
+        "years_experience": years_experience,
         "ai": ai,
         "source": source,
         "companies": companies,

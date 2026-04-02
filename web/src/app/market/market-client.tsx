@@ -1,41 +1,79 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import type { Overview, Distributions, ExperienceData, Job, ExperienceTag } from '@/types/data'
-import { Section, Card, EmptyState, BlockHeading } from '@/components/section'
-import { StatBar, StackedBar } from '@/components/stat-bar'
-import { FilterBar, DEFAULT_FILTERS, type FilterState } from '@/components/filter-bar'
-import { ExperienceChart } from '@/components/experience-chart'
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  ZAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from 'recharts'
+import type { Distributions } from '@/types/data'
+import { StatBar } from '@/components/stat-bar'
+import { EmptyState } from '@/components/section'
 
-// ---------------------------------------------------------------------------
-// Color / label maps (preserved from server page)
-// ---------------------------------------------------------------------------
+// ─── Label / order maps ───────────────────────────────────────────────────────
 
-const SENIORITY_COLORS: Record<string, string> = {
-  junior: '#4ade80',
-  mid: '#60a5fa',
-  mid_senior: '#818cf8',
-  senior: '#818cf8',
-  lead: '#a78bfa',
-  staff: '#f472b6',
-  principal: '#fb923c',
-  head: '#ef4444',
-  unknown: '#404040',
+const SENIORITY_ORDER = ['junior', 'mid', 'mid_senior', 'senior', 'lead', 'staff', 'group', 'principal']
+const SENIORITY_LABELS: Record<string, string> = {
+  junior:     'Junior',
+  mid:        'Mid',
+  mid_senior: 'Mid–Senior',
+  senior:     'Senior',
+  lead:       'Lead',
+  staff:      'Staff',
+  group:      'Group PM',
+  principal:  'Principal',
+}
+
+const INDUSTRY_ORDER = [
+  'saas_b2b_software', 'fintech_payments', 'ecommerce_marketplace', 'consumer_apps',
+  'healthtech_biotech', 'mobility_automotive', 'logistics_supply_chain',
+  'media_entertainment', 'cybersecurity', 'hrtech_future_of_work', 'proptech_construction', 'other',
+]
+const INDUSTRY_LABELS: Record<string, string> = {
+  saas_b2b_software:     'SaaS / B2B',
+  fintech_payments:      'Fintech',
+  ecommerce_marketplace: 'E-commerce',
+  consumer_apps:         'Consumer apps',
+  healthtech_biotech:    'Healthtech',
+  mobility_automotive:   'Mobility',
+  logistics_supply_chain:'Logistics',
+  media_entertainment:   'Media',
+  cybersecurity:         'Cybersecurity',
+  hrtech_future_of_work: 'HR tech',
+  proptech_construction: 'Proptech',
+  other:                 'Other',
+}
+
+const DOMAIN_LABELS: Record<string, string> = {
+  payments:                  'Payments',
+  banking_financial_services:'Banking / Financial',
+  fintech:                   'Fintech',
+  ecommerce_marketplace:     'E-commerce',
+  saas_b2b_software:         'SaaS / B2B',
+  mobility_automotive:       'Mobility / Automotive',
+  logistics_supply_chain:    'Logistics',
+  ai_ml_data_products:       'AI / ML / Data',
+  consumer_digital_products: 'Consumer Digital',
+  enterprise_internal_tools: 'Enterprise / Internal Tools',
+  cybersecurity:             'Cybersecurity',
+  healthtech:                'Healthtech',
 }
 
 const WORK_MODE_ORDER = ['remote', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d', 'hybrid', 'onsite', 'unknown']
-
 const WORK_MODE_LABELS: Record<string, string> = {
-  remote:    'Remote',
-  hybrid_1d: 'Hybrid · 1d',
-  hybrid_2d: 'Hybrid · 2d',
-  hybrid_3d: 'Hybrid · 3d',
-  hybrid_4d: 'Hybrid · 4d',
-  hybrid:    'Hybrid (General)',
+  remote:    'Fully remote',
+  hybrid_1d: 'Hybrid · 1 day/week',
+  hybrid_2d: 'Hybrid · 2 days/week',
+  hybrid_3d: 'Hybrid · 3 days/week',
+  hybrid_4d: 'Hybrid · 4 days/week',
+  hybrid:    'Hybrid (flexible)',
   onsite:    'On-site',
-  unknown:   'Unclassified',
+  unknown:   'Not specified',
 }
-
 const WORK_MODE_COLORS: Record<string, string> = {
   remote:    '#22d3ee',
   hybrid_1d: '#60a5fa',
@@ -44,457 +82,371 @@ const WORK_MODE_COLORS: Record<string, string> = {
   hybrid_4d: '#c084fc',
   hybrid:    '#737373',
   onsite:    '#fb923c',
-  unknown:   '#404040',
+  unknown:   '#3a3a3a',
 }
 
-const PM_TYPE_COLORS: Record<string, string> = {
-  core_pm: '#818cf8',
-  technical: '#60a5fa',
-  customer_facing: '#4ade80',
-  platform: '#a78bfa',
-  data_ai: '#f472b6',
-  data: '#f472b6',
-  growth: '#fb923c',
-  internal_ops: '#34d399',
-  other: '#737373',
-  unclassified: '#404040',
-  unknown: '#404040',
+const TRISTATE_ORDER = ['yes', 'no', 'unclear']
+const TRISTATE_LABELS: Record<string, string> = {
+  yes:    'Yes',
+  no:     'No',
+  unclear:'Not specified',
+}
+const TRISTATE_COLORS: Record<string, string> = {
+  yes:    '#4ade80',
+  no:     '#ef4444',
+  unclear:'#404040',
 }
 
-const HYBRID_KEYS = new Set(['hybrid', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d'])
+// ─── Sub-components ───────────────────────────────────────────────────────────
 
-// ---------------------------------------------------------------------------
-// Filter logic
-// ---------------------------------------------------------------------------
-
-function applyFilters(jobs: Job[], filters: FilterState): Job[] {
-  let result = jobs
-
-  if (filters.time !== 'all') {
-    const days = filters.time === '7d' ? 7 : 30
-    const cutoff = new Date()
-    cutoff.setDate(cutoff.getDate() - days)
-    result = result.filter((j) => j.first_seen_date && new Date(j.first_seen_date) >= cutoff)
-  }
-
-  if (filters.location !== 'all') {
-    if (filters.location === 'berlin') result = result.filter((j) => j.location === 'berlin')
-    else result = result.filter((j) => j.location === 'remote_germany')
-  }
-
-  if (filters.seniority !== 'all') {
-    const map: Record<string, string[]> = {
-      junior: ['junior'],
-      mid: ['mid'],
-      senior: ['senior', 'mid_senior'],
-      lead: ['lead', 'staff', 'group', 'principal', 'head'],
-    }
-    const targets = new Set(map[filters.seniority] ?? [])
-    result = result.filter((j) => targets.has(j.seniority))
-  }
-
-  if (filters.language !== 'all') {
-    if (filters.language === 'en_only')     result = result.filter((j) => j.language === 'en' && j.german_req === 'not_mentioned')
-    else if (filters.language === 'en_plus')result = result.filter((j) => j.german_req === 'plus')
-    else                                    result = result.filter((j) => j.german_req === 'must' || j.language === 'de')
-  }
-
-  return result
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="text-base font-semibold text-white tracking-tight mb-6">{children}</h2>
+  )
 }
 
-function deriveDist(jobs: Job[]): Partial<Distributions> {
-  const wm: Record<string, number> = {}
-  const pm: Record<string, number> = {}
-  const sen: Record<string, number> = {}
-  const ind: Record<string, number> = {}
-  let n_enriched = 0, n_ai_focus = 0, n_ai_skills = 0
-  const en_none_count = { v: 0 }, en_plus_count = { v: 0 }, en_must_count = { v: 0 }, de_count = { v: 0 }
-  const ger: Record<string, number> = {}
-  const lang: Record<string, number> = {}
-
-  for (const j of jobs) {
-    // work mode — keep exact key for full breakdown
-    const wmKey = j.work_mode || 'unknown'
-    wm[wmKey] = (wm[wmKey] || 0) + 1
-
-    // seniority
-    sen[j.seniority || 'unknown'] = (sen[j.seniority || 'unknown'] || 0) + 1
-
-    // pm type
-    if (j.pm_type) {
-      pm[j.pm_type] = (pm[j.pm_type] || 0) + 1
-      n_enriched++
-    }
-
-    // ai
-    if (j.ai_focus) n_ai_focus++
-    if (j.ai_skills) n_ai_skills++
-
-    // industry
-    if (j.industry) ind[j.industry] = (ind[j.industry] || 0) + 1
-
-    // language / german req
-    lang[j.language || 'unknown'] = (lang[j.language || 'unknown'] || 0) + 1
-    ger[j.german_req || 'unclassified'] = (ger[j.german_req || 'unclassified'] || 0) + 1
-
-    // derived language access counts
-    if (j.language === 'en' && j.german_req === 'not_mentioned') en_none_count.v++
-    else if (j.german_req === 'plus') en_plus_count.v++
-    else if (j.language === 'en' && j.german_req === 'must') en_must_count.v++
-    else if (j.language === 'de') de_count.v++
-  }
-
-  return {
-    seniority: Object.entries(sen).map(([label, count]) => ({ label, count })).sort((a, b) => b.count - a.count),
-    work_mode: Object.entries(wm).map(([label, count]) => ({ label, count })),
-    pm_type: Object.entries(pm).map(([label, count]) => ({ label, count })).sort((a, b) => b.count - a.count),
-    industry: Object.entries(ind).map(([label, count]) => ({ label, count })).sort((a, b) => b.count - a.count),
-    language: Object.entries(lang).map(([label, count]) => ({ label, count })),
-    german_requirement: Object.entries(ger).map(([label, count]) => ({ label, count })),
-    ai: {
-      n_enriched,
-      n_ai_focus,
-      n_ai_skills,
-      ai_focus_pct: n_enriched ? Math.round((n_ai_focus / n_enriched) * 100) : 0,
-      ai_skills_pct: n_enriched ? Math.round((n_ai_skills / n_enriched) * 100) : 0,
-    },
-  }
+function ChartCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={['bg-surface border border-border rounded-2xl p-6 sm:p-8', className ?? ''].join(' ')}>
+      {children}
+    </div>
+  )
 }
 
-function filterExperience(
-  experience: ExperienceData,
-  filteredJobIds: Set<string>,
-  hasFilter: boolean,
-): { tags: ExperienceTag[]; jobsByTag: ExperienceData['jobs_by_tag']; nJobsWithTags: number; nActive: number } {
-  if (!hasFilter) {
-    return {
-      tags: experience.tags,
-      jobsByTag: experience.jobs_by_tag,
-      nJobsWithTags: experience.n_jobs_with_tags,
-      nActive: experience.n_active,
-    }
-  }
-
-  const filteredJobsByTag: ExperienceData['jobs_by_tag'] = {}
-  const jobsWithAnyTag = new Set<string>()
-
-  for (const [tag, tagJobs] of Object.entries(experience.jobs_by_tag)) {
-    const matching = tagJobs.filter((j) => filteredJobIds.has(j.job_id))
-    if (matching.length > 0) {
-      filteredJobsByTag[tag] = matching
-      matching.forEach((j) => jobsWithAnyTag.add(j.job_id))
-    }
-  }
-
-  const filteredTags: ExperienceTag[] = experience.tags
-    .map((t) => ({ ...t, count: filteredJobsByTag[t.tag]?.length ?? 0 }))
-    .filter((t) => t.count > 0)
-    .sort((a, b) => b.count - a.count)
-
-  return {
-    tags: filteredTags,
-    jobsByTag: filteredJobsByTag,
-    nJobsWithTags: jobsWithAnyTag.size,
-    nActive: filteredJobIds.size,
-  }
+// Hover-dimmable section wrapper.
+// Uses group-hover/breakdown defined on the parent container.
+function EditSection({
+  title,
+  children,
+  className,
+}: {
+  title: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <section
+      className={[
+        'group-hover/breakdown:opacity-[0.45] hover:!opacity-100 transition-opacity duration-200',
+        className ?? '',
+      ].join(' ')}
+    >
+      <SectionTitle>{title}</SectionTitle>
+      {children}
+    </section>
+  )
 }
 
-function languageItems(lang: { label: string; count: number }[], germanReq: { label: string; count: number }[]) {
-  const enNone = germanReq.find((g) => g.label === 'not_mentioned')?.count ?? 0
-  const enPlus = germanReq.find((g) => g.label === 'plus')?.count ?? 0
-  const enMust = germanReq.find((g) => g.label === 'must')?.count ?? 0
-  const deCount = lang.find((l) => l.label === 'de')?.count ?? 0
+// ─── Bubble chart tooltip ─────────────────────────────────────────────────────
 
-  return [
-    { label: 'English · No German', count: enNone, color: '#4ade80' },
-    { label: 'English · German a Plus', count: enPlus, color: '#2dd4bf' },
-    { label: 'English · German Required', count: enMust, color: '#60a5fa' },
-    { label: 'German Posting', count: deCount, color: '#818cf8' },
-  ].filter((i) => i.count > 0)
+function BubbleTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0]?.payload
+  if (!d) return null
+  return (
+    <div className="bg-surface-elevated border border-border-strong rounded-lg px-3 py-2.5 shadow-xl">
+      <p className="text-sm text-white font-medium">{d.xLabel}</p>
+      <p className="text-xs text-muted mt-1">{d.y} years minimum</p>
+      <p className="text-xs text-white/50 mt-0.5">{d.z} {d.z === 1 ? 'role' : 'roles'}</p>
+    </div>
+  )
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
+// ─── Seniority × Experience bubble chart ─────────────────────────────────────
+
+function SeniorityBubbleChart({
+  data,
+}: {
+  data: NonNullable<Distributions['seniority_experience_bubble']>
+}) {
+  if (!data.length) {
+    return (
+      <EmptyState message="Experience data will appear here once enrichment builds up." />
+    )
+  }
+
+  const cats = SENIORITY_ORDER.filter((s) => data.some((d) => d.seniority === s))
+  const chartData = data
+    .filter((d) => cats.includes(d.seniority))
+    .map((d) => ({
+      x: cats.indexOf(d.seniority) + 1,
+      y: d.years_min,
+      z: d.count,
+      xLabel: SENIORITY_LABELS[d.seniority] ?? d.seniority,
+    }))
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <ScatterChart margin={{ top: 10, right: 16, bottom: 20, left: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="0" stroke="rgba(255,255,255,0.04)" />
+        <XAxis
+          type="number"
+          dataKey="x"
+          domain={[0, cats.length + 1]}
+          ticks={cats.map((_, i) => i + 1)}
+          tickFormatter={(v) => {
+            const c = cats[v - 1]
+            return c ? (SENIORITY_LABELS[c] ?? c) : ''
+          }}
+          tick={{ fontSize: 11, fill: '#737373' }}
+          tickLine={false}
+          axisLine={false}
+        />
+        <YAxis
+          type="number"
+          dataKey="y"
+          tick={{ fontSize: 11, fill: '#737373' }}
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={(v) => `${v}y`}
+          width={30}
+        />
+        <ZAxis dataKey="z" range={[50, 700]} />
+        <Tooltip content={<BubbleTooltip />} cursor={false} />
+        <Scatter data={chartData} fill="#818cf8" fillOpacity={0.65} />
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
+}
+
+// ─── Industry × Experience bubble chart ──────────────────────────────────────
+
+function IndustryBubbleChart({
+  data,
+}: {
+  data: NonNullable<Distributions['industry_experience_bubble']>
+}) {
+  if (!data.length) {
+    return (
+      <EmptyState message="Industry × experience data will appear here once enrichment builds up." />
+    )
+  }
+
+  const cats = INDUSTRY_ORDER.filter((i) => data.some((d) => d.industry === i))
+  const chartData = data
+    .filter((d) => cats.includes(d.industry))
+    .map((d) => ({
+      x: cats.indexOf(d.industry) + 1,
+      y: d.years_min,
+      z: d.count,
+      xLabel: INDUSTRY_LABELS[d.industry] ?? d.industry,
+    }))
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <ScatterChart margin={{ top: 10, right: 16, bottom: 20, left: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="0" stroke="rgba(255,255,255,0.04)" />
+        <XAxis
+          type="number"
+          dataKey="x"
+          domain={[0, cats.length + 1]}
+          ticks={cats.map((_, i) => i + 1)}
+          tickFormatter={(v) => {
+            const c = cats[v - 1]
+            return c ? (INDUSTRY_LABELS[c] ?? c) : ''
+          }}
+          tick={{ fontSize: 11, fill: '#737373' }}
+          tickLine={false}
+          axisLine={false}
+        />
+        <YAxis
+          type="number"
+          dataKey="y"
+          tick={{ fontSize: 11, fill: '#737373' }}
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={(v) => `${v}y`}
+          width={30}
+        />
+        <ZAxis dataKey="z" range={[50, 700]} />
+        <Tooltip content={<BubbleTooltip />} cursor={false} />
+        <Scatter data={chartData} fill="#a78bfa" fillOpacity={0.65} />
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
+}
+
+// ─── Domain × Strength stacked bar ───────────────────────────────────────────
+
+function DomainStrengthChart({
+  data,
+}: {
+  data: NonNullable<Distributions['domain_req_breakdown']>
+}) {
+  const meaningful = data.filter((d) => d.hard + d.soft > 0)
+  if (!meaningful.length) {
+    return (
+      <EmptyState message="Domain requirement data will appear here once enrichment builds up." />
+    )
+  }
+
+  const maxTotal = Math.max(...meaningful.map((d) => d.hard + d.soft))
+
+  return (
+    <div>
+      <div className="space-y-3">
+        {meaningful.map((d) => {
+          const total = d.hard + d.soft
+          const hardPct = total > 0 ? (d.hard / total) * 100 : 0
+          const softPct = total > 0 ? (d.soft / total) * 100 : 0
+          const barWidth = maxTotal > 0 ? (total / maxTotal) * 100 : 0
+          return (
+            <div key={d.domain} className="flex items-center gap-3">
+              <span className="text-sm text-muted w-52 shrink-0 truncate">
+                {DOMAIN_LABELS[d.domain] ?? d.domain}
+              </span>
+              <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
+                <div className="h-full flex" style={{ width: `${barWidth}%` }}>
+                  <div className="h-full bg-[#818cf8]" style={{ width: `${hardPct}%` }} />
+                  <div className="h-full bg-[#60a5fa] opacity-60" style={{ width: `${softPct}%` }} />
+                </div>
+              </div>
+              <span className="text-xs tabular-nums text-right shrink-0 w-24">
+                {d.hard > 0 && <span className="text-white/70">{d.hard} req</span>}
+                {d.hard > 0 && d.soft > 0 && <span className="text-white/30"> · </span>}
+                {d.soft > 0 && <span className="text-white/50">{d.soft} pref</span>}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+      <div className="flex gap-5 mt-5 pt-5 border-t border-white/[0.05]">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#818cf8]" />
+          <span className="text-2xs text-muted">Required</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#60a5fa] opacity-60" />
+          <span className="text-2xs text-muted">Preferred</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 interface Props {
   dist: Distributions
-  overview: Overview
-  experience: ExperienceData
-  jobs: Job[]
 }
 
-export default function MarketClient({ dist, overview, experience, jobs }: Props) {
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
+export default function BreakdownClient({ dist }: Props) {
 
-  const hasFilter = Object.values(filters).some((v) => v !== 'all')
-
-  const filteredJobs = useMemo(
-    () => (hasFilter ? applyFilters(jobs, filters) : jobs),
-    [jobs, filters, hasFilter]
-  )
-
-  const activeDist = useMemo(
-    () => (hasFilter ? deriveDist(filteredJobs) : null),
-    [filteredJobs, hasFilter]
-  )
-
-  const filteredJobIds = useMemo(
-    () => (hasFilter ? new Set(filteredJobs.map((j) => j.id)) : new Set<string>()),
-    [filteredJobs, hasFilter]
-  )
-
-  const filteredExp = useMemo(
-    () => filterExperience(experience, filteredJobIds, hasFilter),
-    [experience, filteredJobIds, hasFilter]
-  )
-
-  // Resolve distributions: filtered or base
-  const seniority  = activeDist?.seniority        ?? dist.seniority
-  const work_mode  = activeDist?.work_mode         ?? dist.work_mode
-  const pm_type    = activeDist?.pm_type           ?? dist.pm_type
-  const industry   = activeDist?.industry          ?? dist.industry
-  const language   = activeDist?.language          ?? dist.language
-  const german_req = activeDist?.german_requirement ?? dist.german_requirement
-  const ai         = activeDist?.ai               ?? dist.ai
-  const { source, companies } = dist // always unfiltered
-
-  const n_active = hasFilter ? filteredJobs.length : overview.n_active
-
-  // --- Seniority ---
-  const seniorityItems = [
-    ...seniority.filter((i) => i.label !== 'unknown'),
-    ...seniority.filter((i) => i.label === 'unknown'),
-  ].map((i) => ({ ...i, color: SENIORITY_COLORS[i.label] ?? '#818cf8' }))
-
-  const senClassified = seniority.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
-  const senTotal = seniority.reduce((s, i) => s + i.count, 0)
-
-  // --- Work mode ---
+  // Work mode — intentional order, full hybrid breakdown
   const workModeItems = WORK_MODE_ORDER
     .map((key) => {
-      const item = work_mode.find((m) => m.label === key)
-      if (!item) return null
-      return {
-        label: WORK_MODE_LABELS[key] ?? key,
-        count: item.count,
-        color: WORK_MODE_COLORS[key] ?? '#818cf8',
-      }
+      const item = dist.work_mode.find((m) => m.label === key)
+      if (!item || item.count === 0) return null
+      return { label: WORK_MODE_LABELS[key] ?? key, count: item.count, color: WORK_MODE_COLORS[key] ?? '#818cf8' }
     })
-    .filter((item): item is { label: string; count: number; color: string } => item !== null)
+    .filter((x): x is { label: string; count: number; color: string } => x !== null)
 
-  const wmClassified = work_mode.filter((i) => i.label !== 'unknown').reduce((s, i) => s + i.count, 0)
-  const wmTotal = work_mode.reduce((s, i) => s + i.count, 0)
-  const wmCoverageLow = wmTotal > 0 && (wmTotal - wmClassified) / wmTotal > 0.3
+  // Visa sponsorship
+  const visaItems = TRISTATE_ORDER
+    .map((k) => {
+      const item = (dist.visa_sponsorship ?? []).find((d) => d.label === k)
+      if (!item || item.count === 0) return null
+      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k] }
+    })
+    .filter((x): x is { label: string; count: number; color: string } => x !== null)
 
-  // --- Role type ---
-  const pmTypeItems = pm_type.map((i) => ({
-    ...i,
-    color: PM_TYPE_COLORS[i.label] ?? '#818cf8',
-  }))
-  const pmClassified = pm_type.reduce((s, i) => s + i.count, 0)
+  // Relocation support
+  const relocItems = TRISTATE_ORDER
+    .map((k) => {
+      const item = (dist.relocation_support ?? []).find((d) => d.label === k)
+      if (!item || item.count === 0) return null
+      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k] }
+    })
+    .filter((x): x is { label: string; count: number; color: string } => x !== null)
 
-  // --- Language ---
-  const langItems = languageItems(language, german_req)
-
-  // --- Companies ---
-  const companyItems = companies.top20.slice(0, 10).map((c) => ({
-    ...c,
+  // Companies — top 15 sorted by count (already sorted in export)
+  const companyItems = dist.companies.top20.slice(0, 15).map((c) => ({
+    label: c.label,
+    count: c.count,
     color: '#818cf8',
   }))
 
   return (
     <>
-      {/* Filters */}
-      {jobs.length > 0 && (
-        <FilterBar filters={filters} onChange={setFilters} />
-      )}
-
-      {/* ================================================================== */}
-      {/* Page header                                                        */}
-      {/* ================================================================== */}
-      <div className="pt-2 pb-2">
-        <h1 className="text-2xl font-bold tracking-tight text-white">Market shape</h1>
-        <p className="text-muted mt-1.5 text-sm max-w-xl">
-          Structure, demand signals, and employer landscape for {n_active > 0 ? n_active : '—'} active PM roles.
+      {/* Page header */}
+      <div className="pt-2 pb-14 border-b border-border">
+        <h1 className="text-2xl font-bold tracking-tight text-white mb-2">Breakdown</h1>
+        <p className="text-sm text-muted max-w-xl">
+          Experience expectations, domain signals, hiring concentration, and access constraints.
         </p>
       </div>
 
-      {/* ================================================================== */}
-      {/* A. Market composition                                              */}
-      {/* ================================================================== */}
-      <BlockHeading
-        title="Market composition"
-        description="How the active market breaks down by level, role type, language, and work style."
-      />
+      {/* All sections share a single hover-dim group */}
+      <div className="group/breakdown">
 
-      <Section
-        title="Seniority"
-        meta={
-          senTotal > 0 && senClassified < senTotal
-            ? `${senClassified} of ${senTotal} classified`
-            : undefined
-        }
-      >
-        {seniorityItems.length > 0 ? (
-          <Card>
-            <StatBar items={seniorityItems} showPct total={n_active > 0 ? n_active : undefined} />
-          </Card>
-        ) : (
-          <EmptyState message="No seniority data available yet." />
-        )}
-      </Section>
+        {/* ── 1. Seniority vs required experience ── */}
+        <EditSection title="Seniority vs required experience" className="mt-24">
+          <ChartCard>
+            <SeniorityBubbleChart data={dist.seniority_experience_bubble ?? []} />
+          </ChartCard>
+        </EditSection>
 
-      <Section
-        title="Role type"
-        meta={
-          n_active > 0 && pmClassified < n_active
-            ? `${pmClassified} of ${n_active} enriched`
-            : undefined
-        }
-      >
-        {pmTypeItems.length > 0 ? (
-          <Card>
-            <StatBar items={pmTypeItems} showPct total={n_active > 0 ? n_active : undefined} />
-          </Card>
-        ) : (
-          <EmptyState message="Role type classification building. Roles are classified daily." />
-        )}
-      </Section>
+        {/* ── 2. Which backgrounds companies want ── */}
+        <EditSection title="Which backgrounds companies want" className="mt-28">
+          <ChartCard>
+            <DomainStrengthChart data={dist.domain_req_breakdown ?? []} />
+          </ChartCard>
+        </EditSection>
 
-      {langItems.length > 0 && (
-        <Section
-          title="Language requirements"
-          description="Posting language and German requirement combined."
-        >
-          <Card>
-            <StackedBar items={langItems} />
-          </Card>
-        </Section>
-      )}
+        {/* ── 3. Companies with the most openings ── */}
+        <EditSection title="Companies with the most openings" className="mt-20">
+          {companyItems.length > 0 ? (
+            <ChartCard>
+              <StatBar items={companyItems} showPct={false} />
+            </ChartCard>
+          ) : (
+            <EmptyState message="Company data is building up." />
+          )}
+        </EditSection>
 
-      <Section
-        title="Work style"
-        compact={wmCoverageLow}
-        meta={
-          wmTotal > 0 && wmClassified < wmTotal
-            ? `${wmClassified} of ${wmTotal} specify an arrangement — treat as directional`
-            : undefined
-        }
-      >
-        {workModeItems.length > 0 ? (
-          <Card>
-            <StatBar items={workModeItems} showPct total={n_active > 0 ? n_active : undefined} />
-          </Card>
-        ) : (
-          <EmptyState message="Work mode data is building up." />
-        )}
-      </Section>
+        {/* ── 4. Industry vs required experience ── */}
+        <EditSection title="Industry vs required experience" className="mt-28">
+          <ChartCard>
+            <IndustryBubbleChart data={dist.industry_experience_bubble ?? []} />
+          </ChartCard>
+        </EditSection>
 
-      {/* ================================================================== */}
-      {/* B. What companies look for                                         */}
-      {/* ================================================================== */}
-      <BlockHeading
-        title="What companies look for"
-        description="Domain background, functional skills, and operating context companies expect from PMs."
-      />
+        {/* ── 5 + 6. Visa sponsorship + Relocation support (paired) ── */}
+        <div className="group-hover/breakdown:opacity-[0.45] hover:!opacity-100 transition-opacity duration-200 mt-16 grid grid-cols-1 sm:grid-cols-2 gap-10">
+          <section>
+            <SectionTitle>Visa sponsorship</SectionTitle>
+            {visaItems.length > 0 ? (
+              <ChartCard>
+                <StatBar items={visaItems} showPct={false} />
+              </ChartCard>
+            ) : (
+              <EmptyState message="No visa sponsorship data yet." />
+            )}
+          </section>
+          <section>
+            <SectionTitle>Relocation support</SectionTitle>
+            {relocItems.length > 0 ? (
+              <ChartCard>
+                <StatBar items={relocItems} showPct={false} />
+              </ChartCard>
+            ) : (
+              <EmptyState message="No relocation support data yet." />
+            )}
+          </section>
+        </div>
 
-      {filteredExp.tags.length > 0 && (
-        <Section
-          title="Required experience"
-          description="Extracted from job descriptions — click any bar to see matching roles."
-          meta={
-            filteredExp.nJobsWithTags > 0 && filteredExp.nActive > 0
-              ? `${filteredExp.nJobsWithTags} of ${filteredExp.nActive} active roles classified`
-              : undefined
-          }
-        >
-          <Card>
-            <ExperienceChart
-              tags={filteredExp.tags}
-              jobsByTag={filteredExp.jobsByTag}
-              nJobsWithTags={filteredExp.nJobsWithTags}
-              nActive={filteredExp.nActive}
-            />
-          </Card>
-        </Section>
-      )}
+        {/* ── 7. Work setup ── */}
+        <EditSection title="Work setup" className="mt-24">
+          {workModeItems.length > 0 ? (
+            <ChartCard>
+              <StatBar items={workModeItems} showPct />
+            </ChartCard>
+          ) : (
+            <EmptyState message="Work mode data is building up." />
+          )}
+        </EditSection>
 
-      {/* AI demand signals */}
-      {ai.n_enriched > 0 && (
-        <Section title="AI demand" compact>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-surface border border-border rounded-xl p-4">
-              <p className="text-2xl font-bold text-white tabular-nums">{ai.ai_focus_pct}%</p>
-              <p className="text-sm text-muted mt-1">AI as core focus</p>
-              <p className="text-2xs text-subtle mt-0.5">{ai.n_ai_focus} of {ai.n_enriched} classified roles</p>
-            </div>
-            <div className="bg-surface border border-border rounded-xl p-4">
-              <p className="text-2xl font-bold text-white tabular-nums">{ai.ai_skills_pct}%</p>
-              <p className="text-sm text-muted mt-1">AI skills expected</p>
-              <p className="text-2xs text-subtle mt-0.5">{ai.n_ai_skills} of {ai.n_enriched} classified roles</p>
-            </div>
-          </div>
-        </Section>
-      )}
-
-      {industry.length > 0 && (
-        <Section
-          title="Industry"
-          description="Which sectors are hiring product managers."
-          compact
-        >
-          <Card>
-            <StatBar items={industry.map((i, idx) => ({
-              ...i,
-              color: ['#818cf8','#60a5fa','#2dd4bf','#4ade80','#fb923c','#f472b6','#a78bfa','#34d399'][idx % 8],
-            }))} showPct />
-          </Card>
-        </Section>
-      )}
-
-      {/* ================================================================== */}
-      {/* C. Employer landscape                                              */}
-      {/* ================================================================== */}
-      <BlockHeading
-        title="Employer landscape"
-        description="Who is hiring and how concentrated the market is."
-      />
-
-      <Section
-        title="Companies"
-        description={
-          companies.n_companies > 0
-            ? `${companies.n_companies} unique employers · ${companies.multi_hiring} hiring 2+ roles · top 10 account for ${companies.top10_pct}%`
-            : undefined
-        }
-      >
-        {companyItems.length > 0 ? (
-          <Card>
-            <StatBar
-              items={companyItems}
-              total={n_active > 0 ? n_active : undefined}
-              showPct
-            />
-          </Card>
-        ) : (
-          <EmptyState message="Company data is building up." />
-        )}
-      </Section>
-
-      {source.length > 0 && (
-        <section className="mt-8">
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-2">Data sources</p>
-          <div className="flex gap-5 flex-wrap">
-            {source.map((s, i) => (
-              <span key={`${s.label}-${i}`} className="text-xs text-muted">
-                {s.label === 'jsearch' ? 'JSearch' : s.label === 'arbeitnow' ? 'Arbeitnow' : s.label === 'ats' ? 'ATS' : s.label}:
-                {' '}{s.count} roles
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
+      </div>
     </>
   )
 }

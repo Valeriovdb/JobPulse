@@ -8,12 +8,23 @@ Returns a structured dict of enriched fields. Failures are logged and
 the job is persisted without enrichment rather than dropped.
 
 Fields classified by LLM:
-  german_requirement : must | plus | not_mentioned
-  pm_type            : core_pm | technical | customer_facing | platform | data_ai | growth | internal_ops | unclassified
-  b2b_saas           : true | false
-  ai_focus           : true | false  (role has AI product focus)
-  ai_skills          : true | false  (role requires AI/ML skills)
-  tools_skills       : list of tool names mentioned (e.g. ["Jira", "SQL", "Figma"])
+  german_requirement                     : must | plus | not_mentioned
+  work_mode                              : remote | hybrid_Nd | onsite | unknown
+  pm_type                                : core_pm | technical | customer_facing | platform | data_ai | growth | internal_ops | unclassified
+  b2b_saas                               : true | false
+  ai_focus                               : true | false  (role has AI product focus)
+  ai_skills                              : true | false  (role requires AI/ML skills)
+  tools_skills                           : list of tool names mentioned (e.g. ["Jira", "SQL", "Figma"])
+  industry_normalized                    : employer industry vertical (see taxonomy.py)
+  candidate_domain_requirement_strength  : hard | soft | none | unclear
+  candidate_domain_requirement_normalized: domain background requested of candidate
+  candidate_domain_requirement_raw       : verbatim snippet evidencing domain requirement
+  years_experience_min                   : minimum years explicitly required (integer or null)
+  years_experience_raw                   : verbatim snippet for years requirement
+  visa_sponsorship_status                : yes | no | unclear
+  visa_sponsorship_raw                   : verbatim snippet for visa sponsorship
+  relocation_support_status              : yes | no | unclear
+  relocation_support_raw                 : verbatim snippet for relocation support
 """
 import json
 import logging
@@ -22,6 +33,12 @@ from typing import Optional
 
 from openai import OpenAI
 from pipeline.config import OPENAI_API_KEY, OPENAI_MODEL, CLASSIFIER_VERSION
+from pipeline.classifiers.taxonomy import (
+    INDUSTRY_NORMALIZED_VALUES,
+    DOMAIN_REQ_STRENGTH_VALUES,
+    CANDIDATE_DOMAIN_VALUES,
+    TRISTATE_VALUES,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +75,16 @@ USER_PROMPT_TEMPLATE = """Classify this PM job posting. Return JSON with exactly
       "confidence": 0.9
     }}
   ],
+  "industry_normalized": "fintech_payments" | "ecommerce_marketplace" | "saas_b2b_software" | "healthtech_biotech" | "mobility_automotive" | "logistics_supply_chain" | "media_entertainment" | "cybersecurity" | "hrtech_future_of_work" | "proptech_construction" | "consumer_apps" | "other",
+  "candidate_domain_requirement_strength": "hard" | "soft" | "none" | "unclear",
+  "candidate_domain_requirement_normalized": "<domain tag from taxonomy or 'none'>",
+  "candidate_domain_requirement_raw": "<verbatim snippet or null>",
+  "years_experience_min": "<integer or null>",
+  "years_experience_raw": "<verbatim snippet or null>",
+  "visa_sponsorship_status": "yes" | "no" | "unclear",
+  "visa_sponsorship_raw": "<verbatim snippet or null>",
+  "relocation_support_status": "yes" | "no" | "unclear",
+  "relocation_support_raw": "<verbatim snippet or null>",
   "confidence": 0.0–1.0,
   "rationale_short": "one sentence"
 }}
@@ -95,6 +122,53 @@ Definitions:
 - ai_focus: does this role involve building AI/ML products?
 - ai_skills: does this role require AI/ML knowledge or experience?
 - tools_skills: software tools explicitly named in the posting (max 10)
+- industry_normalized: the EMPLOYER'S primary industry vertical. Pick the single best-fit value from
+  the list above. Prefer specific over "other". This is about what the company does, not the
+  candidate's background.
+  fintech_payments: neobanking, payments, lending, crypto, insurtech
+  ecommerce_marketplace: online retail, marketplaces, delivery, recommerce, food delivery
+  saas_b2b_software: horizontal B2B SaaS (project mgmt, CRM, analytics tools, etc.)
+  healthtech_biotech: digital health, medical devices, pharma, biotech, wellness apps
+  mobility_automotive: automotive tech, ride-hailing, EV, fleet management
+  logistics_supply_chain: freight, last-mile delivery, supply chain software
+  media_entertainment: streaming, gaming, content platforms, social media
+  cybersecurity: security products, identity management, compliance tech
+  hrtech_future_of_work: HR software, recruiting tech, people analytics, workforce management
+  proptech_construction: real estate tech, construction software, smart buildings
+  consumer_apps: consumer digital products not covered by other verticals (lifestyle, fitness, etc.)
+  other: does not fit any of the above
+- candidate_domain_requirement_strength: how strongly the posting requires specific industry/domain
+  background FROM THE CANDIDATE (not about the employer's industry):
+  "hard": explicitly required/must-have ("must have X experience", "background in X required")
+  "soft": preferred/nice-to-have/beneficial ("experience in X preferred", "knowledge of X is a plus")
+  "none": no domain background requested — a generalist PM with no specific domain is acceptable
+  "unclear": hints at a domain preference but not enough clarity to classify confidently
+- candidate_domain_requirement_normalized: the domain background requested from the candidate.
+  Use one of: payments | banking_financial_services | fintech | ecommerce_marketplace |
+  saas_b2b_software | mobility_automotive | logistics_supply_chain | ai_ml_data_products |
+  consumer_digital_products | enterprise_internal_tools | cybersecurity | healthtech | none.
+  Use "none" ONLY when candidate_domain_requirement_strength is "none".
+  IMPORTANT: this is what background the CANDIDATE needs, not the employer's industry.
+- candidate_domain_requirement_raw: verbatim snippet from the JD that evidences the domain
+  requirement. Use null if strength is "none".
+- years_experience_min: the MINIMUM years of PM (or relevant) experience explicitly mentioned.
+  Return as an integer. Do NOT infer — only extract when a number is clearly stated.
+  Examples: "3+ years" → 3, "5-8 years" → 5, "minimum 4 years" → 4.
+  Return null if vague ("several years", "extensive experience") or not mentioned at all.
+- years_experience_raw: verbatim snippet supporting years_experience_min. Null if not extractable.
+- visa_sponsorship_status:
+  "yes": ONLY if the posting EXPLICITLY states the company sponsors work visas / permits
+         (e.g. "we sponsor work permits", "visa sponsorship available")
+  "no": ONLY if the posting EXPLICITLY rules it out
+        (e.g. "no visa sponsorship", "candidates must already have right to work")
+  "unclear": in ALL other cases, including when the topic is not mentioned at all
+- visa_sponsorship_raw: verbatim snippet. Null if unclear.
+- relocation_support_status: same conservative rules as visa_sponsorship_status but for
+  relocation assistance/packages.
+  "yes": ONLY if explicitly offered ("relocation package", "we support relocation")
+  "no": ONLY if explicitly ruled out ("no relocation assistance")
+  "unclear": in all other cases
+- relocation_support_raw: verbatim snippet. Null if unclear.
 - experience_requirements: multi-label tags for specific experience.
   Families and allowed tags:
   - Domain (family: domain): payments, banking_financial_services, fintech, ecommerce_marketplace, saas_b2b_software, mobility_automotive, logistics_supply_chain, ai_ml_data_products, consumer_digital_products, enterprise_internal_tools, cybersecurity, healthtech
@@ -145,7 +219,7 @@ def enrich(
                 {"role": "user", "content": prompt},
             ],
             temperature=0,
-            max_tokens=512,
+            max_tokens=900,
             response_format={"type": "json_object"},
         )
         raw_json = response.choices[0].message.content
@@ -221,6 +295,42 @@ def enrich(
         tools = []
     tools = [str(t) for t in tools if t][:10]
 
+    # --- New fields (v3) ---
+
+    industry_norm = result.get("industry_normalized")
+    if industry_norm not in INDUSTRY_NORMALIZED_VALUES:
+        industry_norm = "other"
+
+    domain_strength = result.get("candidate_domain_requirement_strength")
+    if domain_strength not in DOMAIN_REQ_STRENGTH_VALUES:
+        domain_strength = "unclear"
+
+    domain_norm = result.get("candidate_domain_requirement_normalized")
+    if domain_norm not in CANDIDATE_DOMAIN_VALUES:
+        domain_norm = None
+
+    years_min_raw = result.get("years_experience_min")
+    try:
+        years_min = int(years_min_raw) if years_min_raw is not None else None
+        if years_min is not None and (years_min < 0 or years_min > 30):
+            years_min = None
+    except (TypeError, ValueError):
+        years_min = None
+
+    visa_status = result.get("visa_sponsorship_status")
+    if visa_status not in TRISTATE_VALUES:
+        visa_status = "unclear"
+
+    reloc_status = result.get("relocation_support_status")
+    if reloc_status not in TRISTATE_VALUES:
+        reloc_status = "unclear"
+
+    def _raw(key: str) -> Optional[str]:
+        v = result.get(key)
+        if not v or not str(v).strip() or str(v).strip().lower() == "null":
+            return None
+        return str(v).strip()[:500]
+
     return {
         "german_requirement": german_req,
         "work_mode": work_mode,
@@ -228,10 +338,19 @@ def enrich(
         "b2b_saas": bool(result.get("b2b_saas")),
         "ai_focus": bool(result.get("ai_focus")),
         "ai_skills": bool(result.get("ai_skills")),
-    "tools_skills": tools,
-    "experience_requirements": result.get("experience_requirements", []),
-    "llm_confidence": float(result.get("confidence", 0.0)),
-
+        "tools_skills": tools,
+        "experience_requirements": result.get("experience_requirements", []),
+        "industry_normalized": industry_norm,
+        "candidate_domain_requirement_strength": domain_strength,
+        "candidate_domain_requirement_normalized": domain_norm,
+        "candidate_domain_requirement_raw": _raw("candidate_domain_requirement_raw"),
+        "years_experience_min": years_min,
+        "years_experience_raw": _raw("years_experience_raw"),
+        "visa_sponsorship_status": visa_status,
+        "visa_sponsorship_raw": _raw("visa_sponsorship_raw"),
+        "relocation_support_status": reloc_status,
+        "relocation_support_raw": _raw("relocation_support_raw"),
+        "llm_confidence": float(result.get("confidence", 0.0)),
         "llm_version": CLASSIFIER_VERSION,
         "llm_raw_json": result,
     }

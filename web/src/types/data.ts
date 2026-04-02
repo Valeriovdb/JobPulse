@@ -38,6 +38,13 @@ export interface Distributions {
   german_requirement: DistributionItem[]
   pm_type: DistributionItem[]
   industry: DistributionItem[]
+  industry_normalized?: DistributionItem[]
+  visa_sponsorship?: DistributionItem[]
+  relocation_support?: DistributionItem[]
+  domain_req_strength?: DistributionItem[]
+  domain_req_breakdown?: Array<{ domain: string; hard: number; soft: number; total: number }>
+  seniority_experience_bubble?: Array<{ seniority: string; years_min: number; count: number }>
+  industry_experience_bubble?: Array<{ industry: string; years_min: number; count: number }>
   ai: {
     n_enriched: number
     n_ai_focus: number
