@@ -101,56 +101,63 @@ function getMarketCharacter(senior_pct: number, accessible_pct: number, n_active
   return `A ${seniority}, ${access} market.`
 }
 
-function generateInsights(
+function generateImplications(
   n_active: number,
   senior_pct: number,
   accessible_pct: number,
   location: Overview['location'],
   ai: Distributions['ai'],
-  language: Overview['language'],
 ): string[] {
-  const insights: string[] = []
+  if (n_active === 0) return []
+  const remotePct = Math.round((location.remote_germany / n_active) * 100)
+  const implications: string[] = []
 
-  if (senior_pct >= 60) {
-    insights.push(
-      `${senior_pct}% of classified roles are Senior or above. The market is skewed toward experienced candidates, with limited mid-level and entry-level openings in this snapshot.`
+  // Language / access
+  if (accessible_pct >= 50) {
+    implications.push(
+      `English-only candidates can reach about ${accessible_pct}% of active roles. German fluency opens the rest.`
     )
-  } else if (senior_pct > 0) {
-    insights.push(
-      `Seniority is broadly distributed — ${senior_pct}% Senior+, with meaningful mid-level representation in this snapshot.`
-    )
-  }
-
-  if (accessible_pct >= 40) {
-    insights.push(
-      `${accessible_pct}% of active roles list no German requirement. This represents the widest accessible segment for English-speaking candidates.`
+  } else if (accessible_pct >= 25) {
+    implications.push(
+      `Without German, ${accessible_pct}% of roles are reachable. Adding German more than doubles the addressable pool.`
     )
   } else if (accessible_pct > 0) {
-    insights.push(
-      `Only ${accessible_pct}% of active roles list no German requirement. German fluency expands market access considerably in this snapshot.`
+    implications.push(
+      `German is near-essential in this snapshot — only ${accessible_pct}% of roles list no language requirement.`
     )
   }
 
-  if (ai.n_enriched > 0 && ai.ai_focus_pct >= 20) {
-    insights.push(
-      `Among ${ai.n_enriched} classified roles, ${ai.ai_focus_pct}% list AI as a core focus area — a directional signal that AI product experience is increasingly expected.`
+  // Remote
+  if (remotePct <= 10) {
+    implications.push(
+      `Remote-first searches are too restrictive here. Only ${remotePct}% of roles are fully remote — Berlin presence is the practical default.`
+    )
+  } else {
+    implications.push(
+      `${remotePct}% of roles offer full remote — worth filtering for, but not the dominant mode.`
     )
   }
 
-  const remotePct = n_active > 0 ? Math.round((location.remote_germany / n_active) * 100) : 0
-  if (remotePct >= 10 && insights.length < 3) {
-    insights.push(
-      `${remotePct}% of roles are explicitly remote-friendly — a notable share for a primarily Berlin-based search.`
+  // Seniority
+  if (senior_pct >= 60) {
+    implications.push(
+      `Junior candidates will find limited options. ${senior_pct}% of roles are Senior-level or above.`
+    )
+  } else if (senior_pct >= 40) {
+    implications.push(
+      `The accessible pool is weighted toward mid-to-senior. Both levels have meaningful representation at ${senior_pct}% Senior+.`
     )
   }
 
-  if (language.de > language.en_none + language.en_plus + language.en_must && insights.length < 3) {
-    insights.push(
-      `German-language postings account for the majority of active roles in this snapshot. German-source coverage is important for full market visibility.`
+  // AI
+  if (ai.n_enriched > 0 && (ai.ai_focus_pct >= 20 || ai.ai_skills_pct >= 20)) {
+    const pct = Math.max(ai.ai_focus_pct, ai.ai_skills_pct)
+    implications.push(
+      `AI exposure is a practical differentiator — ${pct}% of classified roles list it as a focus or requirement.`
     )
   }
 
-  return insights.slice(0, 3)
+  return implications.slice(0, 4)
 }
 
 function collapseWorkMode(modes: { label: string; count: number }[]) {
@@ -359,13 +366,12 @@ export default function OverviewClient({ overview, dist }: Props) {
   const { n_active, senior_pct, accessible_pct } = overview
   const { ai } = dist
 
-  const insights = generateInsights(
+  const implications = generateImplications(
     n_active,
     senior_pct,
     accessible_pct,
     overview.location,
     ai,
-    overview.language,
   )
 
   function handleDrill(dimension: string, keys: string[], label: string, segKey: string) {
@@ -515,11 +521,13 @@ export default function OverviewClient({ overview, dist }: Props) {
           <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-2xl p-8 sm:p-10 hover:border-border-strong hover:shadow-[0_0_32px_rgba(129,140,248,0.09)]">
             <h3 className="text-base font-semibold text-white leading-snug mb-1">
               {accessible_pct >= 50
-                ? 'About half the market is accessible in English'
-                : 'Most of this market requires German'}
+                ? 'English gets you about half the market'
+                : 'German is the main access filter'}
             </h3>
             <p className="text-xs text-muted mb-8 leading-relaxed">
-              Language is the main filter on who can realistically apply.
+              {accessible_pct >= 50
+                ? `${100 - accessible_pct}% of roles list some German requirement.`
+                : `Only ${accessible_pct}% of roles list no German requirement.`}
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-start gap-6">
@@ -555,10 +563,10 @@ export default function OverviewClient({ overview, dist }: Props) {
           {/* SECONDARY statement card — work mode / remote */}
           <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-5 sm:p-6 hover:border-border-strong">
             <h3 className="text-base font-semibold text-white leading-snug mb-1">
-              Remote is the exception, not the norm
+              Remote roles are scarce
             </h3>
             <p className="text-xs text-muted mb-5 leading-relaxed">
-              On-site and hybrid arrangements dominate this market.
+              On-site and hybrid are the default arrangement.
             </p>
             <div className="mb-6 flex items-baseline gap-2.5">
               <p className="text-4xl font-bold text-white tabular-nums leading-none">{remotePct}%</p>
@@ -594,13 +602,13 @@ export default function OverviewClient({ overview, dist }: Props) {
           {groupedSeniorityItems.length > 0 && (
             <div className="group-hover/profile:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-6 sm:p-7 hover:border-border-strong">
               <h3 className="text-base font-semibold text-white leading-snug mb-1">
-                Most roles target experienced PMs
+                The market skews senior
               </h3>
               <p className="text-xs text-muted mb-5 leading-relaxed">
                 {senior_pct >= 50
-                  ? `${senior_pct}% are Senior-level or above — junior and mid roles are limited.`
+                  ? `${senior_pct}% of roles are Senior-level or above.`
                   : senior_pct > 0
-                  ? `Seniority is distributed — ${senior_pct}% Senior or above.`
+                  ? `${senior_pct}% Senior or above — mid and senior both represented.`
                   : 'Experience level distribution across active roles.'}
               </p>
               <StatBar
@@ -617,7 +625,7 @@ export default function OverviewClient({ overview, dist }: Props) {
             {ai.n_enriched > 0 && ai.ai_focus_pct >= 10 ? (
               <>
                 <h3 className="text-base font-semibold text-white leading-snug mb-1">
-                  AI experience is increasingly expected
+                  AI is already part of the bar
                 </h3>
                 <p className="text-xs text-muted mb-10 leading-relaxed">
                   Based on {ai.n_enriched} classified roles.
@@ -642,7 +650,9 @@ export default function OverviewClient({ overview, dist }: Props) {
             ) : pmTypeItems.length > 0 ? (
               <>
                 <h3 className="text-base font-semibold text-white leading-snug mb-1">
-                  What type of PM work is in demand
+                  {pmTypeItems[0]
+                    ? `${pmTypeItems[0].label} leads role demand`
+                    : 'PM specialisms in this snapshot'}
                 </h3>
                 <p className="text-xs text-muted mb-5 leading-relaxed">
                   Role focus distribution across active listings.
@@ -731,21 +741,18 @@ export default function OverviewClient({ overview, dist }: Props) {
       </div>
 
       {/* ================================================================== */}
-      {/* Analyst notes                                                       */}
+      {/* What this means                                                     */}
       {/* ================================================================== */}
-      {insights.length > 0 && (
+      {implications.length > 0 && (
         <section className="mt-40 pt-24 border-t border-border">
-          <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Analyst notes</p>
-          <div>
-            {insights.map((text, i) => (
+          <p className="text-2xs text-subtle uppercase tracking-widest mb-8">What this means</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {implications.map((text, i) => (
               <div
                 key={i}
-                className="flex gap-8 py-6 border-b border-border last:border-b-0"
+                className="bg-surface border border-white/[0.07] rounded-xl px-5 py-4"
               >
-                <span className="text-2xs text-subtle font-mono tabular-nums leading-none mt-0.5 w-5 shrink-0">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <p className="text-sm text-white/75 leading-relaxed">{text}</p>
+                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
