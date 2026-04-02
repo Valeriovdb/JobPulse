@@ -17,6 +17,7 @@ export interface DrillTarget {
 interface ApiJob {
   job_id: string
   title: string | null
+  job_title_raw: string | null
   company_name: string | null
   location_normalized: string | null
   seniority: string | null
@@ -277,20 +278,28 @@ function CompanyBlock({ company, roles }: { company: string; roles: ApiJob[] }) 
 // ---------------------------------------------------------------------------
 
 function JobRow({ job }: { job: ApiJob }) {
-  const roleTitle = buildRoleTitle(job.title, job.seniority)
-  const location  = formatLocation(job.location_normalized)
-  const sourceLabel = getSourceLabel(job.source)
+  const displayTitle = job.job_title_raw ?? buildRoleTitle(job.title, job.seniority)
+  const location     = formatLocation(job.location_normalized)
+  const sourceLabel  = getSourceLabel(job.source)
+  const daysLive     = job.first_seen_date
+    ? Math.floor((Date.now() - new Date(job.first_seen_date + 'T00:00:00Z').getTime()) / 86_400_000)
+    : null
 
   const content = (
     <div className="px-4 py-3.5 transition-colors group-hover:bg-white/[0.025]">
-      <p className="text-sm font-medium text-white/90 leading-snug">{roleTitle}</p>
+      <p className="text-sm font-medium text-white/90 leading-snug">{displayTitle}</p>
       {location && (
         <p className="text-xs text-muted mt-1">{location}</p>
       )}
-      <div className="mt-2.5">
+      <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
         <span className="text-2xs px-1.5 py-0.5 rounded border text-subtle border-border/70">
           {sourceLabel}
         </span>
+        {daysLive !== null && daysLive >= 0 && (
+          <span className="text-2xs px-1.5 py-0.5 rounded border text-subtle border-border/70">
+            {daysLive === 0 ? 'today' : `${daysLive}d`}
+          </span>
+        )}
       </div>
     </div>
   )

@@ -15,6 +15,7 @@ export interface DrilldownFilters {
 export interface DrilldownJob {
   job_id: string
   title: string | null
+  job_title_raw: string | null
   company_name: string | null
   location_normalized: string | null
   seniority: string | null
@@ -172,7 +173,7 @@ function applyUserFilters(query: AnyQuery, filters: DrilldownFilters): AnyQuery 
 // ---------------------------------------------------------------------------
 
 const SELECT_FIELDS =
-  'job_id, job_title_normalized, company_name, location_normalized, seniority, german_requirement, work_mode, canonical_url, first_seen_date, source_provider'
+  'job_id, job_title_raw, job_title_normalized, company_name, location_normalized, seniority, german_requirement, work_mode, canonical_url, first_seen_date, source_provider'
 
 export async function queryDrilldown(
   chart_id: string,
@@ -214,6 +215,7 @@ export async function queryDrilldown(
     (row: Record<string, unknown>) => ({
       job_id: row.job_id as string,
       title: (row.job_title_normalized as string) ?? null,
+      job_title_raw: (row.job_title_raw as string) ?? null,
       company_name: (row.company_name as string) ?? null,
       location_normalized: (row.location_normalized as string) ?? null,
       seniority: (row.seniority as string) ?? null,
