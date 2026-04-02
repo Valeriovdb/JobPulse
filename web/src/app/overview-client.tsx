@@ -522,14 +522,7 @@ export default function OverviewClient({ overview, dist }: Props) {
               Language is the main filter on who can realistically apply.
             </p>
 
-            {/* Stacked: full-width bar, then waffle below with breathing room */}
-            <StackedBar
-              items={languageItems}
-              onSegmentClick={(key, label) => handleDrill('language', [key], label, key)}
-              activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
-            />
-
-            <div className="mt-10 flex flex-col sm:flex-row sm:items-start gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-6">
               <div className="sm:flex-1">
                 <p className="text-2xs text-subtle uppercase tracking-widest mb-4">
                   Share of market
