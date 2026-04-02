@@ -729,78 +729,8 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       </div>
 
-      {/* ================================================================== */}
-      {/* Section D — Further breakdown / drill-down                          */}
-      {/* ================================================================== */}
-      <div className="mt-28">
-        <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Further breakdown</p>
-        <SummaryStrip
-          items={[
-            {
-              label: 'English-accessible roles',
-              value: overview.language.en_none,
-              descriptor: 'No German requirement listed',
-              isActive:
-                apiDrillParams?.chart_id === 'german_requirement' &&
-                apiDrillParams?.segment_key === 'not_mentioned',
-              onClick: () => {
-                if (
-                  apiDrillParams?.chart_id === 'german_requirement' &&
-                  apiDrillParams?.segment_key === 'not_mentioned'
-                ) {
-                  handleClose()
-                } else {
-                  setDrillTarget({ dimension: 'language', keys: ['en_none'], label: 'English-accessible roles' })
-                  setApiDrillParams({ chart_id: 'german_requirement', segment_key: 'not_mentioned' })
-                  setActiveKey('en_none')
-                }
-              },
-            },
-            {
-              label: 'Senior+ roles',
-              value: seniorPlusCount,
-              descriptor: `Senior, Lead, Staff & above${senior_pct > 0 ? ` · ${senior_pct}% of market` : ''}`,
-              isActive:
-                apiDrillParams?.chart_id === 'seniority' &&
-                apiDrillParams?.segment_key === 'senior',
-              onClick: () => {
-                if (
-                  apiDrillParams?.chart_id === 'seniority' &&
-                  apiDrillParams?.segment_key === 'senior'
-                ) {
-                  handleClose()
-                } else {
-                  setDrillTarget({ dimension: 'seniority', keys: ['senior'], label: 'Senior+ roles' })
-                  setApiDrillParams({ chart_id: 'seniority', segment_key: 'senior' })
-                  setActiveKey('senior')
-                }
-              },
-            },
-            {
-              label: 'Companies hiring now',
-              value: n_companies,
-              descriptor: `${n_active} open roles total`,
-              isActive:
-                apiDrillParams?.chart_id === 'location' &&
-                apiDrillParams?.segment_key === 'berlin',
-              onClick: () => {
-                if (
-                  apiDrillParams?.chart_id === 'location' &&
-                  apiDrillParams?.segment_key === 'berlin'
-                ) {
-                  handleClose()
-                } else {
-                  setDrillTarget({ dimension: 'location', keys: ['berlin'], label: 'Companies hiring now' })
-                  setApiDrillParams({ chart_id: 'location', segment_key: 'berlin' })
-                  setActiveKey('berlin')
-                }
-              },
-            },
-          ]}
-        />
-      </div>
 
-      {/* ================================================================== */}
+{/* ================================================================== */}
       {/* What this means                                                     */}
       {/* ================================================================== */}
       {implications.length > 0 && (
