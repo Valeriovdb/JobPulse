@@ -24,6 +24,7 @@ interface ApiJob {
   work_mode: string | null
   canonical_url: string | null
   first_seen_date: string | null
+  source: string | null
 }
 
 interface DrillDownPanelProps {
@@ -50,33 +51,64 @@ const SENIORITY_LABELS: Record<string, string> = {
   group: 'Group PM', principal: 'Principal', head: 'Head of Product',
 }
 
-const WORK_MODE_LABELS: Record<string, string> = {
-  remote: 'Remote', onsite: 'On-site',
-  hybrid: 'Hybrid', hybrid_1d: 'Hybrid', hybrid_2d: 'Hybrid',
-  hybrid_3d: 'Hybrid', hybrid_4d: 'Hybrid',
+// Prefixes to strip from normalized title before prepending seniority label,
+// to avoid constructions like "Senior Senior Product Manager".
+const SENIORITY_STRIP_PREFIXES = [
+  'junior ', 'mid ', 'mid-senior ', 'mid–senior ',
+  'senior ', 'lead ', 'staff ', 'principal ',
+]
+
+const SOURCE_LABELS: Record<string, string> = {
+  jsearch: 'JSearch',
+  arbeitnow: 'Arbeitnow',
+  ats: 'ATS',
 }
 
-const GERMAN_REQ_LABELS: Record<string, string> = {
-  not_mentioned: 'No German',
-  plus: 'German +',
-  must: 'German req.',
+const LOCATION_MAP: Record<string, string> = {
+  berlin: 'Berlin',
+  remote_germany: 'Remote Germany',
+  unclear: '',
 }
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function normalizeTitle(raw: string | null): string {
-  if (!raw) return 'Untitled role'
+function buildRoleTitle(title: string | null, seniority: string | null): string {
+  const raw = title ? title.replace(/_/g, ' ') : 'Product Manager'
+  // Strip any existing seniority prefix to avoid duplication
+  const lower = raw.toLowerCase()
+  let base = raw
+  for (const prefix of SENIORITY_STRIP_PREFIXES) {
+    if (lower.startsWith(prefix)) {
+      base = raw.slice(prefix.length)
+      break
+    }
+  }
+  const senLabel = seniority ? (SENIORITY_LABELS[seniority] ?? null) : null
+  // For multi-word seniority labels (e.g. "Group PM", "Head of Product"),
+  // they become the full title rather than a prefix.
+  if (senLabel) {
+    if (senLabel === 'Group PM' || senLabel === 'Head of Product') {
+      // Keep base if it contains more info than just "Product Manager"
+      const isGeneric = base.trim().toLowerCase() === 'product manager'
+      return isGeneric ? senLabel : `${senLabel} · ${base}`
+    }
+    return `${senLabel} ${base}`
+  }
+  return base
+}
+
+function formatLocation(raw: string | null): string | null {
+  if (!raw) return null
+  const mapped = LOCATION_MAP[raw.toLowerCase()]
+  if (mapped !== undefined) return mapped || null
   return raw.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
-function freshnessLabel(dateStr: string | null): string | null {
-  if (!dateStr) return null
-  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86_400_000)
-  if (days <= 1) return 'New'
-  if (days <= 7) return `${days}d ago`
-  return null
+function getSourceLabel(source: string | null): string {
+  if (!source) return 'ATS'
+  return SOURCE_LABELS[source.toLowerCase()] ?? 'ATS'
 }
 
 function buildApiUrl(
@@ -231,7 +263,7 @@ function CompanyBlock({ company, roles }: { company: string; roles: ApiJob[] }) 
           </span>
         )}
       </div>
-      <div className="divide-y divide-border">
+      <div className="divide-y divide-border/60">
         {roles.map((job) => (
           <JobRow key={job.job_id} job={job} />
         ))}
@@ -245,42 +277,21 @@ function CompanyBlock({ company, roles }: { company: string; roles: ApiJob[] }) 
 // ---------------------------------------------------------------------------
 
 function JobRow({ job }: { job: ApiJob }) {
-  const title = normalizeTitle(job.title)
-  const seniority = job.seniority ? (SENIORITY_LABELS[job.seniority] ?? null) : null
-  const germanTag = job.german_requirement ? (GERMAN_REQ_LABELS[job.german_requirement] ?? null) : null
-  const workModeTag = job.work_mode ? (WORK_MODE_LABELS[job.work_mode] ?? null) : null
-  const fresh = freshnessLabel(job.first_seen_date)
-
-  const tags = [
-    germanTag  ? { key: 'german',    label: germanTag,   accent: false } : null,
-    seniority  ? { key: 'seniority', label: seniority,   accent: false } : null,
-    workModeTag? { key: 'work_mode', label: workModeTag, accent: false } : null,
-    fresh      ? { key: 'fresh',     label: fresh,        accent: true  } : null,
-  ].filter(Boolean) as { key: string; label: string; accent: boolean }[]
+  const roleTitle = buildRoleTitle(job.title, job.seniority)
+  const location  = formatLocation(job.location_normalized)
+  const sourceLabel = getSourceLabel(job.source)
 
   const content = (
-    <div className="px-4 py-3 transition-colors group-hover:bg-white/[0.025]">
-      <p className="text-sm font-medium text-white/85 leading-snug">{title}</p>
-      {job.location_normalized && (
-        <p className="text-xs text-muted mt-0.5">{job.location_normalized}</p>
+    <div className="px-4 py-3.5 transition-colors group-hover:bg-white/[0.025]">
+      <p className="text-sm font-medium text-white/90 leading-snug">{roleTitle}</p>
+      {location && (
+        <p className="text-xs text-muted mt-1">{location}</p>
       )}
-      {tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mt-2">
-          {tags.map((t) => (
-            <span
-              key={t.key}
-              className={[
-                'text-2xs px-1.5 py-0.5 rounded border',
-                t.accent
-                  ? 'text-accent border-accent/30 bg-accent/10'
-                  : 'text-muted border-border',
-              ].join(' ')}
-            >
-              {t.label}
-            </span>
-          ))}
-        </div>
-      )}
+      <div className="mt-2.5">
+        <span className="text-2xs px-1.5 py-0.5 rounded border text-subtle border-border/70">
+          {sourceLabel}
+        </span>
+      </div>
     </div>
   )
 

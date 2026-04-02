@@ -22,6 +22,7 @@ export interface DrilldownJob {
   work_mode: string | null
   canonical_url: string | null
   first_seen_date: string | null
+  source: string | null
 }
 
 export interface DrilldownResult {
@@ -171,7 +172,7 @@ function applyUserFilters(query: AnyQuery, filters: DrilldownFilters): AnyQuery 
 // ---------------------------------------------------------------------------
 
 const SELECT_FIELDS =
-  'job_id, job_title_normalized, company_name, location_normalized, seniority, german_requirement, work_mode, canonical_url, first_seen_date'
+  'job_id, job_title_normalized, company_name, location_normalized, seniority, german_requirement, work_mode, canonical_url, first_seen_date, source'
 
 export async function queryDrilldown(
   chart_id: string,
@@ -220,6 +221,7 @@ export async function queryDrilldown(
       work_mode: (row.work_mode as string) ?? null,
       canonical_url: (row.canonical_url as string) ?? null,
       first_seen_date: (row.first_seen_date as string) ?? null,
+      source: (row.source as string) ?? null,
     })
   )
 

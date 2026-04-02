@@ -54,7 +54,7 @@ export function SidePanel({ isOpen, onClose, title, subtitle, children }: SidePa
         ].join(' ')}
       >
         {/* Sticky header */}
-        <div className="shrink-0 bg-[#0f0f0f] border-b border-border px-5 py-4 flex items-start justify-between gap-4">
+        <div className="sticky top-0 z-10 shrink-0 bg-[#0f0f0f] border-b border-border px-5 py-4 flex items-center justify-between gap-4">
           <div className="min-w-0">
             <h2 className="text-[15px] font-semibold text-white leading-snug">{title}</h2>
             {subtitle && (
@@ -64,13 +64,13 @@ export function SidePanel({ isOpen, onClose, title, subtitle, children }: SidePa
           <button
             onClick={onClose}
             aria-label="Close panel"
-            className="shrink-0 mt-0.5 w-7 h-7 flex items-center justify-center rounded-md text-muted hover:text-white hover:bg-white/[0.07] transition-colors"
+            className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg text-white/80 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] transition-colors"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
-                d="M2.5 2.5L11.5 11.5M11.5 2.5L2.5 11.5"
+                d="M3 3L13 13M13 3L3 13"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="1.75"
                 strokeLinecap="round"
               />
             </svg>
