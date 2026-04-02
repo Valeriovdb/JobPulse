@@ -244,6 +244,7 @@ function StatChip({ value, label }: { value: string | number; label: string }) {
 }
 
 // One waffle chart on the page — used in the language/access section only.
+// Uses largest-remainder (Hamilton) method for accurate proportional allocation.
 function WaffleChart({
   items,
   total,
@@ -256,30 +257,34 @@ function WaffleChart({
   activeKey?: string | null
 }) {
   const CELLS = 100
-  const cells: { color: string; key: string; label: string }[] = []
-  let assigned = 0
 
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const n =
-      i === items.length - 1
-        ? CELLS - assigned
-        : Math.round((item.count / total) * CELLS)
-    const bounded = Math.max(0, Math.min(n, CELLS - assigned))
-    assigned += bounded
-    for (let j = 0; j < bounded; j++) {
-      cells.push({ color: item.color, key: item.drillKey, label: item.label })
-    }
+  // Largest-remainder method: floors first, then give extras to highest remainders
+  const exactShares = items.map((i) => (total > 0 ? (i.count / total) * CELLS : 0))
+  const floors = exactShares.map(Math.floor)
+  const remainders = exactShares.map((exact, i) => exact - floors[i])
+  let remaining = CELLS - floors.reduce((a, b) => a + b, 0)
+  const sortedByRemainder = remainders
+    .map((r, i) => ({ r, i }))
+    .sort((a, b) => b.r - a.r)
+  const allocations = [...floors]
+  for (let k = 0; k < remaining; k++) {
+    allocations[sortedByRemainder[k].i] += 1
   }
 
-  // Fill remainder with empty cells
+  const cells: { color: string; key: string; label: string }[] = []
+  items.forEach((item, idx) => {
+    for (let j = 0; j < allocations[idx]; j++) {
+      cells.push({ color: item.color, key: item.drillKey, label: item.label })
+    }
+  })
+  // Fill any remaining with empty cells (handles edge cases)
   while (cells.length < CELLS) {
     cells.push({ color: 'rgba(255,255,255,0.04)', key: '', label: '' })
   }
 
   return (
     <div
-      className="grid gap-[3px]"
+      className="grid gap-[2px]"
       style={{ gridTemplateColumns: 'repeat(10, 1fr)' }}
     >
       {cells.map((cell, i) => {
@@ -294,8 +299,8 @@ function WaffleChart({
             }
             style={{ backgroundColor: cell.color, aspectRatio: '1' }}
             className={[
-              'rounded-[2px] transition-opacity duration-150',
-              cell.key && onCellClick ? 'cursor-pointer' : '',
+              'rounded-[2px] transition-all duration-150',
+              cell.key && onCellClick ? 'cursor-pointer hover:brightness-125' : '',
               activeKey && cell.key && !isActive ? 'opacity-[0.12]' : '',
             ]
               .filter(Boolean)
@@ -551,7 +556,7 @@ export default function OverviewClient({ overview, dist }: Props) {
       {/* ================================================================== */}
       {/* Section B — Access conditions                                       */}
       {/* ================================================================== */}
-      <div className="mt-24">
+      <div className="mt-28">
         <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Access conditions</p>
 
         {/* Group for sibling-dimming on hover */}
@@ -601,7 +606,7 @@ export default function OverviewClient({ overview, dist }: Props) {
           </div>
 
           {/* SECONDARY statement card — work mode / remote */}
-          <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-5 sm:p-6 hover:border-border-strong">
+          <div className="group-hover/access:opacity-[0.85] hover:!opacity-100 transition-opacity duration-200 bg-surface border border-border rounded-xl p-6 sm:p-7 hover:border-border-strong">
             <h3 className="text-base font-semibold text-white leading-snug mb-1">
               Remote roles are scarce
             </h3>
@@ -632,7 +637,7 @@ export default function OverviewClient({ overview, dist }: Props) {
       {/* ================================================================== */}
       {/* Section C — Profile fit                                             */}
       {/* ================================================================== */}
-      <div className="mt-24">
+      <div className="mt-32">
         <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Profile fit</p>
 
         {/* Seniority dominant (left, wider) + AI/role focus supporting (right, narrower) */}
@@ -670,22 +675,29 @@ export default function OverviewClient({ overview, dist }: Props) {
                 <p className="text-xs text-muted mb-10 leading-relaxed">
                   Based on {ai.n_enriched} classified roles.
                 </p>
-                <div className="flex flex-col gap-8">
-                  <div>
-                    <p className="text-4xl font-bold text-white tabular-nums leading-none">
-                      {ai.ai_focus_pct}%
-                    </p>
-                    <p className="text-sm text-white/60 font-medium mt-2.5">AI as core focus</p>
-                    <p className="text-xs text-muted mt-1">{ai.n_ai_focus} roles</p>
-                  </div>
-                  <div className="pt-8 border-t border-white/[0.06]">
-                    <p className="text-4xl font-bold text-white tabular-nums leading-none">
-                      {ai.ai_skills_pct}%
-                    </p>
-                    <p className="text-sm text-white/60 font-medium mt-2.5">AI skills required</p>
-                    <p className="text-xs text-muted mt-1">{ai.n_ai_skills} roles</p>
-                  </div>
-                </div>
+                {(() => {
+                  const focusIsPrimary = ai.ai_focus_pct >= ai.ai_skills_pct
+                  const primary   = focusIsPrimary ? { pct: ai.ai_focus_pct,  n: ai.n_ai_focus,  label: 'AI as core focus' }  : { pct: ai.ai_skills_pct, n: ai.n_ai_skills, label: 'AI skills required' }
+                  const secondary = focusIsPrimary ? { pct: ai.ai_skills_pct, n: ai.n_ai_skills, label: 'AI skills required' } : { pct: ai.ai_focus_pct,  n: ai.n_ai_focus,  label: 'AI as core focus' }
+                  return (
+                    <div className="flex flex-col gap-8">
+                      <div>
+                        <p className="text-5xl font-bold text-white tabular-nums leading-none">
+                          {primary.pct}%
+                        </p>
+                        <p className="text-sm text-white/70 font-medium mt-3">{primary.label}</p>
+                        <p className="text-xs text-muted mt-1">{primary.n} roles</p>
+                      </div>
+                      <div className="pt-8 border-t border-white/[0.06]">
+                        <p className="text-3xl font-semibold text-white/60 tabular-nums leading-none">
+                          {secondary.pct}%
+                        </p>
+                        <p className="text-sm text-white/40 font-medium mt-2.5">{secondary.label}</p>
+                        <p className="text-xs text-subtle mt-1">{secondary.n} roles</p>
+                      </div>
+                    </div>
+                  )
+                })()}
               </>
             ) : pmTypeItems.length > 0 ? (
               <>
@@ -712,7 +724,7 @@ export default function OverviewClient({ overview, dist }: Props) {
       {/* ================================================================== */}
       {/* Section D — Further breakdown / drill-down                          */}
       {/* ================================================================== */}
-      <div className="mt-24">
+      <div className="mt-28">
         <p className="text-2xs text-subtle uppercase tracking-widest mb-8">Further breakdown</p>
         <SummaryStrip
           items={[
@@ -786,13 +798,11 @@ export default function OverviewClient({ overview, dist }: Props) {
       {implications.length > 0 && (
         <section className="mt-40 pt-24 border-t border-border">
           <p className="text-2xs text-subtle uppercase tracking-widest mb-8">What this means</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-6 max-w-3xl">
             {implications.map((text, i) => (
-              <div
-                key={i}
-                className="bg-surface border border-white/[0.07] rounded-xl px-5 py-4"
-              >
-                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
+              <div key={i} className="flex gap-3 items-start">
+                <span className="w-1 h-1 rounded-full bg-accent shrink-0 mt-[0.45rem]" />
+                <p className="text-sm text-white/75 leading-relaxed">{text}</p>
               </div>
             ))}
           </div>

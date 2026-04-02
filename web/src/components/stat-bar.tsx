@@ -144,24 +144,30 @@ export function StatBar({ items, total, labelMap, showPct = true, barColor, onBa
         const key = item.drillKey ?? item.label
         const isActive = activeKey === key
 
+        const isDominant = item.count === max
+        const barOpacity = activeKey
+          ? isActive ? 1 : 0.25
+          : isDominant ? 1 : 0.55
+
         return (
           <div
             key={item.label}
             onClick={onBarClick ? () => onBarClick(key, label) : undefined}
             className={[
-              'flex items-center gap-3 rounded-lg transition-colors',
+              'flex items-center gap-3 rounded-lg transition-all duration-150',
               onBarClick ? 'cursor-pointer hover:bg-surface-elevated px-2 -mx-2 py-0.5' : '',
               activeKey && !isActive ? 'opacity-40' : '',
               isActive ? 'bg-surface-elevated' : '',
             ].join(' ')}
           >
-            <span className="text-sm text-muted w-40 shrink-0 truncate">{label}</span>
+            <span className={['text-sm w-40 shrink-0 truncate transition-colors', isDominant && !activeKey ? 'text-white/75' : 'text-muted'].join(' ')}>{label}</span>
             <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all"
+                className="h-full rounded-full transition-all duration-150"
                 style={{
                   width: `${barWidth}%`,
                   backgroundColor: item.color ?? barColor ?? '#818cf8',
+                  opacity: barOpacity,
                 }}
               />
             </div>
