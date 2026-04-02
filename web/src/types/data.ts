@@ -45,6 +45,11 @@ export interface Distributions {
   domain_req_breakdown?: Array<{ domain: string; hard: number; soft: number; total: number }>
   seniority_experience_bubble?: Array<{ seniority: string; years_min: number; count: number }>
   industry_experience_bubble?: Array<{ industry: string; years_min: number; count: number }>
+  years_experience?: {
+    median: number
+    buckets: DistributionItem[]
+    n_extractable: number
+  }
   ai: {
     n_enriched: number
     n_ai_focus: number

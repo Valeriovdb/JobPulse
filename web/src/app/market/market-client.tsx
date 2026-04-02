@@ -366,6 +366,44 @@ export default function BreakdownClient({ dist }: Props) {
     color: '#818cf8',
   }))
 
+  // Fallback: years_experience buckets (section 1)
+  const EXP_BUCKET_COLORS = ['#4ade80', '#60a5fa', '#818cf8', '#a78bfa']
+  const yearsExpFallback = (dist.years_experience?.buckets ?? [])
+    .filter((b) => b.count > 0)
+    .map((b, i) => ({ label: b.label, count: b.count, color: EXP_BUCKET_COLORS[i] ?? '#818cf8' }))
+
+  // Fallback: domain req strength (section 2)
+  const STRENGTH_LABELS: Record<string, string> = {
+    hard:    'Required',
+    soft:    'Preferred',
+    unclear: 'Unclear',
+    none:    'No requirement',
+  }
+  const STRENGTH_COLORS: Record<string, string> = {
+    hard:    '#818cf8',
+    soft:    '#60a5fa',
+    unclear: '#404040',
+    none:    '#3a3a3a',
+  }
+  const STRENGTH_ORDER = ['hard', 'soft', 'unclear', 'none']
+  const domainStrengthFallback = STRENGTH_ORDER
+    .map((k) => {
+      const item = (dist.domain_req_strength ?? []).find((d) => d.label === k)
+      if (!item || item.count === 0) return null
+      return { label: STRENGTH_LABELS[k], count: item.count, color: STRENGTH_COLORS[k] }
+    })
+    .filter((x): x is { label: string; count: number; color: string } => x !== null)
+
+  // Fallback: industry_normalized (section 4)
+  const INDUSTRY_PALETTE = ['#818cf8', '#60a5fa', '#2dd4bf', '#4ade80', '#fb923c', '#f472b6', '#a78bfa', '#34d399']
+  const industryFallback = (dist.industry_normalized ?? [])
+    .filter((i) => i.count > 0)
+    .map((i, idx) => ({
+      label: INDUSTRY_LABELS[i.label] ?? i.label,
+      count: i.count,
+      color: INDUSTRY_PALETTE[idx % INDUSTRY_PALETTE.length],
+    }))
+
   return (
     <>
       {/* Page header */}
@@ -381,16 +419,32 @@ export default function BreakdownClient({ dist }: Props) {
 
         {/* ── 1. Seniority vs required experience ── */}
         <EditSection title="Seniority vs required experience" className="mt-24">
-          <ChartCard>
-            <SeniorityBubbleChart data={dist.seniority_experience_bubble ?? []} />
-          </ChartCard>
+          {(dist.seniority_experience_bubble ?? []).length > 0 ? (
+            <ChartCard>
+              <SeniorityBubbleChart data={dist.seniority_experience_bubble!} />
+            </ChartCard>
+          ) : yearsExpFallback.length > 0 ? (
+            <ChartCard>
+              <StatBar items={yearsExpFallback} showPct />
+            </ChartCard>
+          ) : (
+            <EmptyState message="Experience data will appear here once enrichment builds up." />
+          )}
         </EditSection>
 
         {/* ── 2. Which backgrounds companies want ── */}
         <EditSection title="Which backgrounds companies want" className="mt-28">
-          <ChartCard>
-            <DomainStrengthChart data={dist.domain_req_breakdown ?? []} />
-          </ChartCard>
+          {(dist.domain_req_breakdown ?? []).filter((d) => d.hard + d.soft > 0).length > 0 ? (
+            <ChartCard>
+              <DomainStrengthChart data={dist.domain_req_breakdown!} />
+            </ChartCard>
+          ) : domainStrengthFallback.length > 0 ? (
+            <ChartCard>
+              <StatBar items={domainStrengthFallback} showPct />
+            </ChartCard>
+          ) : (
+            <EmptyState message="Domain requirement data will appear here once enrichment builds up." />
+          )}
         </EditSection>
 
         {/* ── 3. Companies with the most openings ── */}
@@ -406,9 +460,17 @@ export default function BreakdownClient({ dist }: Props) {
 
         {/* ── 4. Industry vs required experience ── */}
         <EditSection title="Industry vs required experience" className="mt-28">
-          <ChartCard>
-            <IndustryBubbleChart data={dist.industry_experience_bubble ?? []} />
-          </ChartCard>
+          {(dist.industry_experience_bubble ?? []).length > 0 ? (
+            <ChartCard>
+              <IndustryBubbleChart data={dist.industry_experience_bubble!} />
+            </ChartCard>
+          ) : industryFallback.length > 0 ? (
+            <ChartCard>
+              <StatBar items={industryFallback} showPct />
+            </ChartCard>
+          ) : (
+            <EmptyState message="Industry data will appear here once enrichment builds up." />
+          )}
         </EditSection>
 
         {/* ── 5 + 6. Visa sponsorship + Relocation support (paired) ── */}
