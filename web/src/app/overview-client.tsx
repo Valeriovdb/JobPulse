@@ -244,50 +244,21 @@ function StatChip({ value, label }: { value: string | number; label: string }) {
 }
 
 // One waffle chart on the page — used in the language/access section only.
-// Uses largest-remainder (Hamilton) method for accurate proportional allocation.
+// Each cell represents exactly one job — no scaling, no empty cells.
 function WaffleChart({
   items,
-  total,
   onCellClick,
   activeKey,
 }: {
   items: { count: number; color: string; drillKey: string; label: string }[]
-  total: number
   onCellClick?: (key: string, label: string) => void
   activeKey?: string | null
 }) {
-  const CELLS = 100
-
-  // Largest-remainder method: floors first, then give extras to highest remainders.
-  // Use sum of item counts (not total) so proportions reflect classified data only;
-  // unclassified roles render as empty cells via the fill loop below.
-  const classifiedSum = items.reduce((a, i) => a + i.count, 0)
-  const base = classifiedSum > 0 ? classifiedSum : 1
-  const filledCells = total > 0 ? Math.round((classifiedSum / total) * CELLS) : 0
-  const exactShares = items.map((i) => (i.count / base) * filledCells)
-  const floors = exactShares.map(Math.floor)
-  const remainders = exactShares.map((exact, i) => exact - floors[i])
-  const remaining = Math.min(
-    Math.max(0, filledCells - floors.reduce((a, b) => a + b, 0)),
-    items.length,
-  )
-  const sortedByRemainder = remainders
-    .map((r, i) => ({ r, i }))
-    .sort((a, b) => b.r - a.r)
-  const allocations = [...floors]
-  for (let k = 0; k < remaining; k++) {
-    allocations[sortedByRemainder[k].i] += 1
-  }
-
   const cells: { color: string; key: string; label: string }[] = []
-  items.forEach((item, idx) => {
-    for (let j = 0; j < allocations[idx]; j++) {
+  for (const item of items) {
+    for (let j = 0; j < item.count; j++) {
       cells.push({ color: item.color, key: item.drillKey, label: item.label })
     }
-  })
-  // Fill any remaining with empty cells (handles edge cases)
-  while (cells.length < CELLS) {
-    cells.push({ color: 'rgba(255,255,255,0.04)', key: '', label: '' })
   }
 
   return (
@@ -296,20 +267,16 @@ function WaffleChart({
       style={{ gridTemplateColumns: 'repeat(10, 1fr)' }}
     >
       {cells.map((cell, i) => {
-        const isActive = cell.key && activeKey === cell.key
+        const isActive = activeKey === cell.key
         return (
           <div
             key={i}
-            onClick={
-              cell.key && onCellClick
-                ? () => onCellClick(cell.key, cell.label)
-                : undefined
-            }
+            onClick={onCellClick ? () => onCellClick(cell.key, cell.label) : undefined}
             style={{ backgroundColor: cell.color, aspectRatio: '1' }}
             className={[
               'rounded-[2px] transition-all duration-150',
-              cell.key && onCellClick ? 'cursor-pointer hover:brightness-125' : '',
-              activeKey && cell.key && !isActive ? 'opacity-[0.12]' : '',
+              onCellClick ? 'cursor-pointer hover:brightness-125' : '',
+              activeKey && !isActive ? 'opacity-[0.12]' : '',
             ]
               .filter(Boolean)
               .join(' ')}
@@ -590,7 +557,6 @@ export default function OverviewClient({ overview, dist }: Props) {
                 </p>
                 <WaffleChart
                   items={waffleItems}
-                  total={n_active}
                   onCellClick={(key, label) => handleDrill('language', [key], label, key)}
                   activeKey={drillTarget?.dimension === 'language' ? activeKey : null}
                 />
