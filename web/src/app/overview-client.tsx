@@ -258,11 +258,19 @@ function WaffleChart({
 }) {
   const CELLS = 100
 
-  // Largest-remainder method: floors first, then give extras to highest remainders
-  const exactShares = items.map((i) => (total > 0 ? (i.count / total) * CELLS : 0))
+  // Largest-remainder method: floors first, then give extras to highest remainders.
+  // Use sum of item counts (not total) so proportions reflect classified data only;
+  // unclassified roles render as empty cells via the fill loop below.
+  const classifiedSum = items.reduce((a, i) => a + i.count, 0)
+  const base = classifiedSum > 0 ? classifiedSum : 1
+  const filledCells = total > 0 ? Math.round((classifiedSum / total) * CELLS) : 0
+  const exactShares = items.map((i) => (i.count / base) * filledCells)
   const floors = exactShares.map(Math.floor)
   const remainders = exactShares.map((exact, i) => exact - floors[i])
-  let remaining = CELLS - floors.reduce((a, b) => a + b, 0)
+  const remaining = Math.min(
+    Math.max(0, filledCells - floors.reduce((a, b) => a + b, 0)),
+    items.length,
+  )
   const sortedByRemainder = remainders
     .map((r, i) => ({ r, i }))
     .sort((a, b) => b.r - a.r)
