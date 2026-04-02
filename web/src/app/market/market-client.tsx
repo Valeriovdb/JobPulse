@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   ScatterChart,
   Scatter,
@@ -13,6 +14,8 @@ import {
 import type { Distributions } from '@/types/data'
 import { StatBar } from '@/components/stat-bar'
 import { EmptyState } from '@/components/section'
+import { DrillDownPanel, type DrillTarget } from '@/components/drill-down-panel'
+import { DEFAULT_FILTERS } from '@/components/filter-bar'
 
 // ─── Label / order maps ───────────────────────────────────────────────────────
 
@@ -46,6 +49,14 @@ const INDUSTRY_LABELS: Record<string, string> = {
   hrtech_future_of_work: 'HR tech',
   proptech_construction: 'Proptech',
   other:                 'Other',
+  // taxonomy values
+  fintech:                    'Fintech',
+  payments:                   'Payments',
+  banking_financial_services: 'Banking / Financial',
+  ai_ml_data_products:        'AI / ML / Data',
+  consumer_digital_products:  'Consumer Digital',
+  enterprise_internal_tools:  'Enterprise / Internal',
+  healthtech:                 'Healthtech',
 }
 
 const DOMAIN_LABELS: Record<string, string> = {
@@ -84,6 +95,8 @@ const WORK_MODE_COLORS: Record<string, string> = {
   onsite:    '#fb923c',
   unknown:   '#3a3a3a',
 }
+// hybrid_Xd variants all map to 'hybrid' for the drilldown API
+const HYBRID_RAW_KEYS = new Set(['hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d'])
 
 const TRISTATE_ORDER = ['yes', 'no', 'unclear']
 const TRISTATE_LABELS: Record<string, string> = {
@@ -156,8 +169,10 @@ function BubbleTooltip({ active, payload }: { active?: boolean; payload?: any[] 
 
 function SeniorityBubbleChart({
   data,
+  onBubbleClick,
 }: {
   data: NonNullable<Distributions['seniority_experience_bubble']>
+  onBubbleClick?: (seniority: string, label: string) => void
 }) {
   if (!data.length) {
     return (
@@ -173,6 +188,7 @@ function SeniorityBubbleChart({
       y: d.years_min,
       z: d.count,
       xLabel: SENIORITY_LABELS[d.seniority] ?? d.seniority,
+      key: d.seniority,
     }))
 
   return (
@@ -203,7 +219,21 @@ function SeniorityBubbleChart({
         />
         <ZAxis dataKey="z" range={[50, 700]} />
         <Tooltip content={<BubbleTooltip />} cursor={false} />
-        <Scatter data={chartData} fill="#818cf8" fillOpacity={0.65} />
+        <Scatter
+          data={chartData}
+          fill="#818cf8"
+          fillOpacity={0.65}
+          onClick={
+            onBubbleClick
+              ? (d: any) => {
+                  const key = d?.key ?? d?.payload?.key
+                  const label = d?.xLabel ?? d?.payload?.xLabel
+                  if (key && label) onBubbleClick(key, label)
+                }
+              : undefined
+          }
+          style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+        />
       </ScatterChart>
     </ResponsiveContainer>
   )
@@ -213,8 +243,10 @@ function SeniorityBubbleChart({
 
 function IndustryBubbleChart({
   data,
+  onBubbleClick,
 }: {
   data: NonNullable<Distributions['industry_experience_bubble']>
+  onBubbleClick?: (industry: string, label: string) => void
 }) {
   if (!data.length) {
     return (
@@ -223,14 +255,17 @@ function IndustryBubbleChart({
   }
 
   const cats = INDUSTRY_ORDER.filter((i) => data.some((d) => d.industry === i))
-  const chartData = data
-    .filter((d) => cats.includes(d.industry))
-    .map((d) => ({
-      x: cats.indexOf(d.industry) + 1,
-      y: d.years_min,
-      z: d.count,
-      xLabel: INDUSTRY_LABELS[d.industry] ?? d.industry,
-    }))
+  // Also include any taxonomy values not in INDUSTRY_ORDER
+  const extraCats = data.map((d) => d.industry).filter((i) => !cats.includes(i))
+  const allCats = [...cats, ...extraCats]
+
+  const chartData = data.map((d) => ({
+    x: allCats.indexOf(d.industry) + 1,
+    y: d.years_min,
+    z: d.count,
+    xLabel: INDUSTRY_LABELS[d.industry] ?? d.industry,
+    key: d.industry,
+  }))
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -239,10 +274,10 @@ function IndustryBubbleChart({
         <XAxis
           type="number"
           dataKey="x"
-          domain={[0, cats.length + 1]}
-          ticks={cats.map((_, i) => i + 1)}
+          domain={[0, allCats.length + 1]}
+          ticks={allCats.map((_, i) => i + 1)}
           tickFormatter={(v) => {
-            const c = cats[v - 1]
+            const c = allCats[v - 1]
             return c ? (INDUSTRY_LABELS[c] ?? c) : ''
           }}
           tick={{ fontSize: 11, fill: '#737373' }}
@@ -260,7 +295,21 @@ function IndustryBubbleChart({
         />
         <ZAxis dataKey="z" range={[50, 700]} />
         <Tooltip content={<BubbleTooltip />} cursor={false} />
-        <Scatter data={chartData} fill="#a78bfa" fillOpacity={0.65} />
+        <Scatter
+          data={chartData}
+          fill="#a78bfa"
+          fillOpacity={0.65}
+          onClick={
+            onBubbleClick
+              ? (d: any) => {
+                  const key = d?.key ?? d?.payload?.key
+                  const label = d?.xLabel ?? d?.payload?.xLabel
+                  if (key && label) onBubbleClick(key, label)
+                }
+              : undefined
+          }
+          style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+        />
       </ScatterChart>
     </ResponsiveContainer>
   )
@@ -270,8 +319,10 @@ function IndustryBubbleChart({
 
 function DomainStrengthChart({
   data,
+  onRowClick,
 }: {
   data: NonNullable<Distributions['domain_req_breakdown']>
+  onRowClick?: (domain: string, label: string) => void
 }) {
   const meaningful = data.filter((d) => d.hard + d.soft > 0)
   if (!meaningful.length) {
@@ -290,11 +341,17 @@ function DomainStrengthChart({
           const hardPct = total > 0 ? (d.hard / total) * 100 : 0
           const softPct = total > 0 ? (d.soft / total) * 100 : 0
           const barWidth = maxTotal > 0 ? (total / maxTotal) * 100 : 0
+          const label = DOMAIN_LABELS[d.domain] ?? d.domain
           return (
-            <div key={d.domain} className="flex items-center gap-3">
-              <span className="text-sm text-muted w-52 shrink-0 truncate">
-                {DOMAIN_LABELS[d.domain] ?? d.domain}
-              </span>
+            <div
+              key={d.domain}
+              onClick={onRowClick ? () => onRowClick(d.domain, label) : undefined}
+              className={[
+                'flex items-center gap-3 rounded-lg transition-all duration-150',
+                onRowClick ? 'cursor-pointer hover:bg-surface-elevated px-2 -mx-2 py-1' : '',
+              ].join(' ')}
+            >
+              <span className="text-sm text-muted w-52 shrink-0 truncate">{label}</span>
               <div className="flex-1 h-1.5 bg-surface-elevated rounded-full overflow-hidden">
                 <div className="h-full flex" style={{ width: `${barWidth}%` }}>
                   <div className="h-full bg-[#818cf8]" style={{ width: `${hardPct}%` }} />
@@ -331,39 +388,75 @@ interface Props {
 }
 
 export default function BreakdownClient({ dist }: Props) {
+  const [drillTarget, setDrillTarget] = useState<DrillTarget | null>(null)
+  const [apiDrillParams, setApiDrillParams] = useState<{
+    chart_id: string
+    segment_key: string
+  } | null>(null)
+  const [activeChartId, setActiveChartId] = useState<string | null>(null)
+  const [activeKey, setActiveKey] = useState<string | null>(null)
+
+  function handleDrill(chartId: string, segKey: string, label: string, uiKey?: string) {
+    const uiActiveKey = uiKey ?? segKey
+    // Toggle off if same segment clicked again
+    if (activeChartId === chartId && activeKey === uiActiveKey) {
+      setDrillTarget(null)
+      setApiDrillParams(null)
+      setActiveChartId(null)
+      setActiveKey(null)
+      return
+    }
+    setDrillTarget({ dimension: chartId, keys: [segKey], label })
+    setApiDrillParams({ chart_id: chartId, segment_key: segKey })
+    setActiveChartId(chartId)
+    setActiveKey(uiActiveKey)
+  }
+
+  function handleClose() {
+    setDrillTarget(null)
+    setApiDrillParams(null)
+    setActiveChartId(null)
+    setActiveKey(null)
+  }
 
   // Work mode — intentional order, full hybrid breakdown
   const workModeItems = WORK_MODE_ORDER
     .map((key) => {
       const item = dist.work_mode.find((m) => m.label === key)
       if (!item || item.count === 0) return null
-      return { label: WORK_MODE_LABELS[key] ?? key, count: item.count, color: WORK_MODE_COLORS[key] ?? '#818cf8' }
+      return {
+        label: WORK_MODE_LABELS[key] ?? key,
+        count: item.count,
+        color: WORK_MODE_COLORS[key] ?? '#818cf8',
+        drillKey: key,
+      }
     })
-    .filter((x): x is { label: string; count: number; color: string } => x !== null)
+    .filter((x): x is { label: string; count: number; color: string; drillKey: string } => x !== null)
 
   // Visa sponsorship
   const visaItems = TRISTATE_ORDER
     .map((k) => {
       const item = (dist.visa_sponsorship ?? []).find((d) => d.label === k)
       if (!item || item.count === 0) return null
-      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k] }
+      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k], drillKey: k }
     })
-    .filter((x): x is { label: string; count: number; color: string } => x !== null)
+    .filter((x): x is { label: string; count: number; color: string; drillKey: string } => x !== null)
 
   // Relocation support
   const relocItems = TRISTATE_ORDER
     .map((k) => {
       const item = (dist.relocation_support ?? []).find((d) => d.label === k)
       if (!item || item.count === 0) return null
-      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k] }
+      return { label: TRISTATE_LABELS[k], count: item.count, color: TRISTATE_COLORS[k], drillKey: k }
     })
-    .filter((x): x is { label: string; count: number; color: string } => x !== null)
+    .filter((x): x is { label: string; count: number; color: string; drillKey: string } => x !== null)
 
   // Companies — top 15 sorted by count (already sorted in export)
   const companyItems = dist.companies.top20.slice(0, 15).map((c) => ({
     label: c.label,
     count: c.count,
     color: '#818cf8',
+    drillKey: c.label,
   }))
 
   // Fallback: years_experience buckets (section 1)
@@ -390,9 +483,9 @@ export default function BreakdownClient({ dist }: Props) {
     .map((k) => {
       const item = (dist.domain_req_strength ?? []).find((d) => d.label === k)
       if (!item || item.count === 0) return null
-      return { label: STRENGTH_LABELS[k], count: item.count, color: STRENGTH_COLORS[k] }
+      return { label: STRENGTH_LABELS[k], count: item.count, color: STRENGTH_COLORS[k], drillKey: k }
     })
-    .filter((x): x is { label: string; count: number; color: string } => x !== null)
+    .filter((x): x is { label: string; count: number; color: string; drillKey: string } => x !== null)
 
   // Fallback: industry_normalized (section 4)
   const INDUSTRY_PALETTE = ['#818cf8', '#60a5fa', '#2dd4bf', '#4ade80', '#fb923c', '#f472b6', '#a78bfa', '#34d399']
@@ -402,6 +495,7 @@ export default function BreakdownClient({ dist }: Props) {
       label: INDUSTRY_LABELS[i.label] ?? i.label,
       count: i.count,
       color: INDUSTRY_PALETTE[idx % INDUSTRY_PALETTE.length],
+      drillKey: i.label,
     }))
 
   return (
@@ -421,7 +515,12 @@ export default function BreakdownClient({ dist }: Props) {
         <EditSection title="Seniority vs required experience" className="mt-24">
           {(dist.seniority_experience_bubble ?? []).length > 0 ? (
             <ChartCard>
-              <SeniorityBubbleChart data={dist.seniority_experience_bubble!} />
+              <SeniorityBubbleChart
+                data={dist.seniority_experience_bubble!}
+                onBubbleClick={(seniority, label) =>
+                  handleDrill('seniority', seniority, label)
+                }
+              />
             </ChartCard>
           ) : yearsExpFallback.length > 0 ? (
             <ChartCard>
@@ -436,11 +535,21 @@ export default function BreakdownClient({ dist }: Props) {
         <EditSection title="Which backgrounds companies want" className="mt-28">
           {(dist.domain_req_breakdown ?? []).filter((d) => d.hard + d.soft > 0).length > 0 ? (
             <ChartCard>
-              <DomainStrengthChart data={dist.domain_req_breakdown!} />
+              <DomainStrengthChart
+                data={dist.domain_req_breakdown!}
+                onRowClick={(domain, label) =>
+                  handleDrill('domain_requirement', domain, label)
+                }
+              />
             </ChartCard>
           ) : domainStrengthFallback.length > 0 ? (
             <ChartCard>
-              <StatBar items={domainStrengthFallback} showPct />
+              <StatBar
+                items={domainStrengthFallback}
+                showPct
+                onBarClick={(key, label) => handleDrill('domain_req_strength', key, label)}
+                activeKey={activeChartId === 'domain_req_strength' ? activeKey : null}
+              />
             </ChartCard>
           ) : (
             <EmptyState message="Domain requirement data will appear here once enrichment builds up." />
@@ -451,7 +560,12 @@ export default function BreakdownClient({ dist }: Props) {
         <EditSection title="Companies with the most openings" className="mt-20">
           {companyItems.length > 0 ? (
             <ChartCard>
-              <StatBar items={companyItems} showPct={false} />
+              <StatBar
+                items={companyItems}
+                showPct={false}
+                onBarClick={(key, label) => handleDrill('company', key, label)}
+                activeKey={activeChartId === 'company' ? activeKey : null}
+              />
             </ChartCard>
           ) : (
             <EmptyState message="Company data is building up." />
@@ -462,11 +576,21 @@ export default function BreakdownClient({ dist }: Props) {
         <EditSection title="Industry vs required experience" className="mt-28">
           {(dist.industry_experience_bubble ?? []).length > 0 ? (
             <ChartCard>
-              <IndustryBubbleChart data={dist.industry_experience_bubble!} />
+              <IndustryBubbleChart
+                data={dist.industry_experience_bubble!}
+                onBubbleClick={(industry, label) =>
+                  handleDrill('industry', industry, label)
+                }
+              />
             </ChartCard>
           ) : industryFallback.length > 0 ? (
             <ChartCard>
-              <StatBar items={industryFallback} showPct />
+              <StatBar
+                items={industryFallback}
+                showPct
+                onBarClick={(key, label) => handleDrill('industry', key, label)}
+                activeKey={activeChartId === 'industry' ? activeKey : null}
+              />
             </ChartCard>
           ) : (
             <EmptyState message="Industry data will appear here once enrichment builds up." />
@@ -479,7 +603,12 @@ export default function BreakdownClient({ dist }: Props) {
             <SectionTitle>Visa sponsorship</SectionTitle>
             {visaItems.length > 0 ? (
               <ChartCard>
-                <StatBar items={visaItems} showPct={false} />
+                <StatBar
+                  items={visaItems}
+                  showPct={false}
+                  onBarClick={(key, label) => handleDrill('visa_sponsorship', key, label)}
+                  activeKey={activeChartId === 'visa_sponsorship' ? activeKey : null}
+                />
               </ChartCard>
             ) : (
               <EmptyState message="No visa sponsorship data yet." />
@@ -489,7 +618,12 @@ export default function BreakdownClient({ dist }: Props) {
             <SectionTitle>Relocation support</SectionTitle>
             {relocItems.length > 0 ? (
               <ChartCard>
-                <StatBar items={relocItems} showPct={false} />
+                <StatBar
+                  items={relocItems}
+                  showPct={false}
+                  onBarClick={(key, label) => handleDrill('relocation_support', key, label)}
+                  activeKey={activeChartId === 'relocation_support' ? activeKey : null}
+                />
               </ChartCard>
             ) : (
               <EmptyState message="No relocation support data yet." />
@@ -501,7 +635,15 @@ export default function BreakdownClient({ dist }: Props) {
         <EditSection title="Work setup" className="mt-24">
           {workModeItems.length > 0 ? (
             <ChartCard>
-              <StatBar items={workModeItems} showPct />
+              <StatBar
+                items={workModeItems}
+                showPct
+                onBarClick={(rawKey, label) => {
+                  const segKey = HYBRID_RAW_KEYS.has(rawKey) ? 'hybrid' : rawKey
+                  handleDrill('work_mode', segKey, label, rawKey)
+                }}
+                activeKey={activeChartId === 'work_mode' ? activeKey : null}
+              />
             </ChartCard>
           ) : (
             <EmptyState message="Work mode data is building up." />
@@ -509,6 +651,14 @@ export default function BreakdownClient({ dist }: Props) {
         </EditSection>
 
       </div>
+
+      {/* ── Drill-down panel ── */}
+      <DrillDownPanel
+        target={drillTarget}
+        apiParams={apiDrillParams}
+        filters={DEFAULT_FILTERS}
+        onClose={handleClose}
+      />
     </>
   )
 }

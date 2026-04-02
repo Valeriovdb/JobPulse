@@ -56,9 +56,34 @@ const LOCATION_KEYS = new Set(['berlin', 'remote_germany', 'unclear'])
 const WORK_MODE_HYBRID_VALUES = ['hybrid', 'hybrid_1d', 'hybrid_2d', 'hybrid_3d', 'hybrid_4d']
 const WORK_MODE_KEYS = new Set(['remote', 'hybrid', 'onsite', 'unknown'])
 
+const INDUSTRY_KEYS = new Set([
+  // current taxonomy values
+  'payments', 'banking_financial_services', 'fintech', 'ecommerce_marketplace',
+  'saas_b2b_software', 'mobility_automotive', 'logistics_supply_chain',
+  'ai_ml_data_products', 'consumer_digital_products', 'enterprise_internal_tools',
+  'cybersecurity', 'healthtech', 'none',
+  // legacy values that may still be in DB rows from earlier pipeline runs
+  'fintech_payments', 'consumer_apps', 'healthtech_biotech', 'media_entertainment',
+  'hrtech_future_of_work', 'proptech_construction', 'other',
+])
+
+const DOMAIN_REQ_KEYS = new Set([
+  'payments', 'banking_financial_services', 'fintech', 'ecommerce_marketplace',
+  'saas_b2b_software', 'mobility_automotive', 'logistics_supply_chain',
+  'ai_ml_data_products', 'consumer_digital_products', 'enterprise_internal_tools',
+  'cybersecurity', 'healthtech', 'none',
+])
+
+const DOMAIN_STRENGTH_KEYS = new Set(['hard', 'soft', 'none', 'unclear'])
+
+const TRISTATE_KEYS = new Set(['yes', 'no', 'unclear'])
+
 const SUPPORTED_CHARTS = new Set([
   'german_requirement', 'seniority', 'role_type',
   'posting_language', 'location', 'work_mode',
+  // breakdown tab charts
+  'industry', 'domain_requirement', 'domain_req_strength', 'company',
+  'visa_sponsorship', 'relocation_support',
 ])
 
 // ---------------------------------------------------------------------------
@@ -108,6 +133,40 @@ function validateChartSegment(chart_id: string, segment_key: string): void {
       `Invalid segment_key "${segment_key}" for chart work_mode. Valid: ${[...WORK_MODE_KEYS].join(', ')}`
     )
   }
+
+  if (chart_id === 'industry' && !INDUSTRY_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart industry.`
+    )
+  }
+
+  if (chart_id === 'domain_requirement' && !DOMAIN_REQ_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart domain_requirement.`
+    )
+  }
+
+  if (chart_id === 'domain_req_strength' && !DOMAIN_STRENGTH_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart domain_req_strength.`
+    )
+  }
+
+  if (chart_id === 'company' && !segment_key.trim()) {
+    throw new DrilldownValidationError('segment_key must not be empty for chart company.')
+  }
+
+  if (chart_id === 'visa_sponsorship' && !TRISTATE_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart visa_sponsorship. Valid: yes, no, unclear`
+    )
+  }
+
+  if (chart_id === 'relocation_support' && !TRISTATE_KEYS.has(segment_key)) {
+    throw new DrilldownValidationError(
+      `Invalid segment_key "${segment_key}" for chart relocation_support. Valid: yes, no, unclear`
+    )
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -145,6 +204,24 @@ function applyChartCondition(query: AnyQuery, chart_id: string, segment_key: str
   if (chart_id === 'work_mode') {
     if (segment_key === 'hybrid') return query.in('work_mode', WORK_MODE_HYBRID_VALUES)
     return query.eq('work_mode', segment_key)
+  }
+  if (chart_id === 'industry') {
+    return query.eq('industry_normalized', segment_key)
+  }
+  if (chart_id === 'domain_requirement') {
+    return query.eq('candidate_domain_requirement_normalized', segment_key)
+  }
+  if (chart_id === 'domain_req_strength') {
+    return query.eq('candidate_domain_requirement_strength', segment_key)
+  }
+  if (chart_id === 'company') {
+    return query.eq('company_name', segment_key)
+  }
+  if (chart_id === 'visa_sponsorship') {
+    return query.eq('visa_sponsorship_status', segment_key)
+  }
+  if (chart_id === 'relocation_support') {
+    return query.eq('relocation_support_status', segment_key)
   }
   return query
 }
