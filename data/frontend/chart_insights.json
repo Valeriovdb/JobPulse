@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-04-01T10:48:30.905547+00:00",
-  "data_version": "sha256:8ec8f0305cc8f2d1",
+  "generated_at": "2026-04-02T08:13:16.719941+00:00",
+  "data_version": "sha256:36ca4cf88ce4278b",
   "charts": {
     "german_requirement": {
-      "title": "Majority of Roles Do Not Require German Skills",
-      "subtitle": "A significant gap exists, with many positions unclassified and accessible without language constraints.",
+      "title": "German Language Requirement is Mostly Unnecessary",
+      "subtitle": "A significant majority of roles do not require German, highlighting accessibility challenges.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:16.358762+00:00",
+      "generated_at": "2026-04-02T08:13:04.993968+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Customer-facing PMs Lead, Core PMs Trail Behind",
-      "subtitle": "A notable gap exists between customer-facing and core PM roles, indicating potential imbalance in project management focus.",
+      "title": "Customer-facing PMs Dominate Role Landscape",
+      "subtitle": "A significant gap exists between customer-facing and core PM roles, highlighting a concentration in specialized positions.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:18.939864+00:00",
+      "generated_at": "2026-04-02T08:13:06.300349+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Hiring is spread across multiple levels",
-      "subtitle": "No single seniority group clearly dominates the current market.",
-      "source": "fallback",
-      "generated_at": "2026-04-01T10:48:21.419264+00:00",
-      "model": null
+      "title": "Senior Roles Dominate the Market",
+      "subtitle": "Over half of the positions are filled by senior-level professionals, indicating a strong demand for experienced talent.",
+      "source": "llm",
+      "generated_at": "2026-04-02T08:13:07.691423+00:00",
+      "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates Despite Mixed Preferences",
-      "subtitle": "A significant portion of roles remains unclassified, indicating a need for clearer work mode strategies.",
+      "title": "On-site Work Dominates with Limited Flexibility",
+      "subtitle": "A significant majority of roles require on-site presence, with minimal remote options available.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:22.773020+00:00",
+      "generated_at": "2026-04-02T08:13:09.750101+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
+      "subtitle": "All opportunities are concentrated in Berlin, with no remote or unclear options available.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:25.191706+00:00",
+      "generated_at": "2026-04-02T08:13:13.704783+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream",
-      "subtitle": "A significant portion of roles now demand AI responsibilities and skills, indicating a shift in industry requirements.",
+      "title": "AI Expertise is Now Mainstream in Job Market",
+      "subtitle": "32% of roles require AI as a core responsibility or skill.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:26.353194+00:00",
+      "generated_at": "2026-04-02T08:13:14.779880+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Notable Diversity",
-      "subtitle": "A balanced pattern indicates a lack of dominant roles, but unclassified positions raise concerns about accessibility.",
+      "title": "Industry Roles Exhibit Strong Balance and Diversity",
+      "subtitle": "No single role dominates, but unclassified positions limit overall accessibility.",
       "source": "llm",
-      "generated_at": "2026-04-01T10:48:27.436938+00:00",
+      "generated_at": "2026-04-02T08:13:15.878808+00:00",
       "model": "gpt-4o-mini"
     }
   }

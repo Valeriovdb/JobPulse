@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 20
+      "count": 12
     },
     {
       "label": "mid_senior",
@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 12
+      "count": 10
     },
     {
       "label": "lead",
@@ -27,31 +27,19 @@
     {
       "label": "principal",
       "count": 1
-    },
-    {
-      "label": "unknown",
-      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 21
+      "count": 20
     },
     {
       "label": "onsite",
-      "count": 19
-    },
-    {
-      "label": "remote",
-      "count": 4
+      "count": 16
     },
     {
       "label": "hybrid",
-      "count": 4
-    },
-    {
-      "label": "hybrid_2d",
       "count": 2
     },
     {
@@ -62,47 +50,43 @@
   "language": [
     {
       "label": "en",
-      "count": 29
+      "count": 24
     },
     {
       "label": "unknown",
       "count": 15
-    },
-    {
-      "label": "de",
-      "count": 7
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 26
+      "count": 20
     },
     {
       "label": "unclassified",
       "count": 15
     },
     {
-      "label": "must",
-      "count": 8
+      "label": "plus",
+      "count": 2
     },
     {
-      "label": "plus",
+      "label": "must",
       "count": 2
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 9
+      "count": 6
     },
     {
       "label": "technical",
-      "count": 8
+      "count": 4
     },
     {
       "label": "customer_facing",
-      "count": 11
+      "count": 10
     },
     {
       "label": "platform",
@@ -110,47 +94,43 @@
     },
     {
       "label": "data_ai",
-      "count": 7
+      "count": 3
     }
   ],
   "industry": [],
   "ai": {
-    "n_enriched": 37,
-    "n_ai_focus": 14,
-    "n_ai_skills": 13,
-    "ai_focus_pct": 38,
-    "ai_skills_pct": 35
+    "n_enriched": 25,
+    "n_ai_focus": 8,
+    "n_ai_skills": 8,
+    "ai_focus_pct": 32,
+    "ai_skills_pct": 32
   },
   "source": [
     {
       "label": "ats",
-      "count": 38
-    },
-    {
-      "label": "jsearch",
-      "count": 7
+      "count": 37
     },
     {
       "label": "arbeitnow",
-      "count": 6
+      "count": 2
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "Delivery Hero",
-        "count": 9
-      },
-      {
         "label": "Contentful",
         "count": 9
       },
       {
-        "label": "Raisin",
-        "count": 6
+        "label": "Delivery Hero",
+        "count": 9
       },
       {
         "label": "Scalable Capital",
+        "count": 6
+      },
+      {
+        "label": "Raisin",
         "count": 6
       },
       {
@@ -158,23 +138,11 @@
         "count": 4
       },
       {
-        "label": "SumUp",
-        "count": 2
-      },
-      {
         "label": "N26",
         "count": 2
       },
       {
-        "label": "Epikur Software GmbH & Co. KG",
-        "count": 2
-      },
-      {
-        "label": "Insurgo GmbH",
-        "count": 2
-      },
-      {
-        "label": "HiBob",
+        "label": "SumUp",
         "count": 1
       },
       {
@@ -182,37 +150,13 @@
         "count": 1
       },
       {
-        "label": "Growing Imaginations GmbH",
-        "count": 1
-      },
-      {
-        "label": "Project Management Institute",
-        "count": 1
-      },
-      {
-        "label": "Otark GmbH",
-        "count": 1
-      },
-      {
-        "label": "Westconnect GmbH",
-        "count": 1
-      },
-      {
-        "label": "Agoda",
-        "count": 1
-      },
-      {
-        "label": "Awin",
-        "count": 1
-      },
-      {
         "label": "Cygrid GmbH",
         "count": 1
       }
     ],
-    "n_companies": 18,
-    "top10_share": 43,
-    "top10_pct": 84,
-    "multi_hiring": 9
+    "n_companies": 9,
+    "top10_share": 39,
+    "top10_pct": 100,
+    "multi_hiring": 6
   }
 }
