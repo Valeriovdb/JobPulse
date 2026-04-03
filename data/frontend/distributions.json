@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 12
+      "count": 9
     },
     {
       "label": "mid_senior",
@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 10
+      "count": 11
     },
     {
       "label": "lead",
@@ -39,10 +39,6 @@
       "count": 15
     },
     {
-      "label": "hybrid",
-      "count": 2
-    },
-    {
       "label": "hybrid_3d",
       "count": 1
     }
@@ -50,43 +46,43 @@
   "language": [
     {
       "label": "en",
-      "count": 24
+      "count": 23
     },
     {
       "label": "unknown",
-      "count": 15
+      "count": 14
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 20
+      "count": 21
     },
     {
       "label": "unclassified",
-      "count": 15
-    },
-    {
-      "label": "plus",
-      "count": 2
+      "count": 14
     },
     {
       "label": "must",
-      "count": 2
+      "count": 1
+    },
+    {
+      "label": "plus",
+      "count": 1
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 6
+      "count": 8
     },
     {
       "label": "technical",
-      "count": 4
+      "count": 3
     },
     {
       "label": "customer_facing",
-      "count": 11
+      "count": 9
     },
     {
       "label": "platform",
@@ -100,42 +96,38 @@
   "industry": [],
   "industry_normalized": [
     {
-      "label": "saas_b2b_software",
-      "count": 9
+      "label": "fintech_payments",
+      "count": 10
     },
     {
-      "label": "fintech_payments",
+      "label": "saas_b2b_software",
       "count": 9
     },
     {
       "label": "ecommerce_marketplace",
       "count": 4
-    },
-    {
-      "label": "cybersecurity",
-      "count": 2
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 39
+      "count": 37
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 39
+      "count": 37
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 17
+      "count": 16
     },
     {
       "label": "unclear",
-      "count": 15
+      "count": 14
     },
     {
       "label": "none",
@@ -144,6 +136,96 @@
     {
       "label": "soft",
       "count": 2
+    }
+  ],
+  "domain_req_breakdown": [
+    {
+      "domain": "fintech",
+      "hard": 5,
+      "soft": 1,
+      "total": 6
+    },
+    {
+      "domain": "saas_b2b_software",
+      "hard": 6,
+      "soft": 0,
+      "total": 6
+    },
+    {
+      "domain": "payments",
+      "hard": 2,
+      "soft": 0,
+      "total": 2
+    },
+    {
+      "domain": "ecommerce_marketplace",
+      "hard": 1,
+      "soft": 0,
+      "total": 1
+    }
+  ],
+  "seniority_experience_bubble": [
+    {
+      "seniority": "group",
+      "years_min": 8.0,
+      "count": 1
+    },
+    {
+      "seniority": "junior",
+      "years_min": 1.0,
+      "count": 1
+    },
+    {
+      "seniority": "junior",
+      "years_min": 3.0,
+      "count": 1
+    },
+    {
+      "seniority": "lead",
+      "years_min": 7.0,
+      "count": 1
+    },
+    {
+      "seniority": "mid_senior",
+      "years_min": 5.0,
+      "count": 2
+    },
+    {
+      "seniority": "senior",
+      "years_min": 5.0,
+      "count": 2
+    }
+  ],
+  "industry_experience_bubble": [
+    {
+      "industry": "ecommerce_marketplace",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
+      "industry": "ecommerce_marketplace",
+      "years_min": 7.0,
+      "count": 1
+    },
+    {
+      "industry": "ecommerce_marketplace",
+      "years_min": 8.0,
+      "count": 1
+    },
+    {
+      "industry": "fintech_payments",
+      "years_min": 1.0,
+      "count": 1
+    },
+    {
+      "industry": "fintech_payments",
+      "years_min": 3.0,
+      "count": 1
+    },
+    {
+      "industry": "fintech_payments",
+      "years_min": 5.0,
+      "count": 3
     }
   ],
   "years_experience": {
@@ -163,26 +245,22 @@
       },
       {
         "label": "9+",
-        "count": 1
+        "count": 0
       }
     ],
-    "n_extractable": 9
+    "n_extractable": 8
   },
   "ai": {
-    "n_enriched": 25,
-    "n_ai_focus": 8,
-    "n_ai_skills": 8,
-    "ai_focus_pct": 32,
-    "ai_skills_pct": 32
+    "n_enriched": 24,
+    "n_ai_focus": 6,
+    "n_ai_skills": 6,
+    "ai_focus_pct": 25,
+    "ai_skills_pct": 25
   },
   "source": [
     {
       "label": "ats",
       "count": 37
-    },
-    {
-      "label": "arbeitnow",
-      "count": 2
     }
   ],
   "companies": {
@@ -193,7 +271,7 @@
       },
       {
         "label": "Delivery Hero",
-        "count": 9
+        "count": 8
       },
       {
         "label": "Scalable Capital",
@@ -213,20 +291,12 @@
       },
       {
         "label": "SumUp",
-        "count": 1
-      },
-      {
-        "label": "Cygrid GmbH",
-        "count": 1
-      },
-      {
-        "label": "TechBiz Global GmbH",
-        "count": 1
+        "count": 2
       }
     ],
-    "n_companies": 9,
-    "top10_share": 39,
+    "n_companies": 7,
+    "top10_share": 37,
     "top10_pct": 100,
-    "multi_hiring": 6
+    "multi_hiring": 7
   }
 }
