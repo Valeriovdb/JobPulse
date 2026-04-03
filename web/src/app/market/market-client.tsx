@@ -223,15 +223,14 @@ function SeniorityBubbleChart({
           data={chartData}
           fill="#818cf8"
           fillOpacity={0.65}
-          onClick={
-            onBubbleClick
-              ? (d: any) => {
-                  const key = d?.key ?? d?.payload?.key
-                  const label = d?.xLabel ?? d?.payload?.xLabel
-                  if (key && label) onBubbleClick(key, label)
-                }
-              : undefined
-          }
+          onClick={onBubbleClick
+            ? (data: any) => {
+                // Recharts v2: data is the raw entry object {x, y, z, key, xLabel, ...}
+                const key = data?.key ?? data?.payload?.key
+                const label = data?.xLabel ?? data?.payload?.xLabel
+                if (key && label) onBubbleClick(key, label)
+              }
+            : undefined}
           style={onBubbleClick ? { cursor: 'pointer' } : undefined}
         />
       </ScatterChart>

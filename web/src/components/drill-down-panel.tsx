@@ -165,14 +165,22 @@ export function DrillDownPanel({ target, apiParams, filters, onClose }: DrillDow
     setTotal(0)
 
     fetch(buildApiUrl(apiParams, filters, 0))
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
       .then((data) => {
         if (cancelled) return
         setJobs(data.jobs ?? [])
         setTotal(data.meta?.total_jobs ?? 0)
         setStatus('loaded')
       })
-      .catch(() => { if (!cancelled) setStatus('error') })
+      .catch((err) => {
+        if (!cancelled) {
+          console.error('[drilldown] fetch error:', err)
+          setStatus('error')
+        }
+      })
 
     return () => { cancelled = true }
   }, [apiParams, filters])
