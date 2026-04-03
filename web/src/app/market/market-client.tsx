@@ -225,13 +225,23 @@ function SeniorityBubbleChart({
           fillOpacity={0.65}
           onClick={onBubbleClick
             ? (data: any) => {
-                // Recharts v2: data is the raw entry object {x, y, z, key, xLabel, ...}
                 const key = data?.key ?? data?.payload?.key
                 const label = data?.xLabel ?? data?.payload?.xLabel
                 if (key && label) onBubbleClick(key, label)
               }
             : undefined}
           style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+          shape={(props: any) => {
+            const { cx, cy, size, fill, fillOpacity: fo } = props
+            const r = Math.sqrt(Math.max(size, 0) / Math.PI)
+            return (
+              <g>
+                {/* transparent hit area — ensures small bubbles are still clickable */}
+                <circle cx={cx} cy={cy} r={Math.max(r, 14)} fill="transparent" />
+                <circle cx={cx} cy={cy} r={Math.max(r, 1)} fill={fill ?? '#818cf8'} fillOpacity={fo ?? 0.65} />
+              </g>
+            )
+          }}
         />
       </ScatterChart>
     </ResponsiveContainer>
@@ -298,16 +308,24 @@ function IndustryBubbleChart({
           data={chartData}
           fill="#a78bfa"
           fillOpacity={0.65}
-          onClick={
-            onBubbleClick
-              ? (d: any) => {
-                  const key = d?.key ?? d?.payload?.key
-                  const label = d?.xLabel ?? d?.payload?.xLabel
-                  if (key && label) onBubbleClick(key, label)
-                }
-              : undefined
-          }
+          onClick={onBubbleClick
+            ? (d: any) => {
+                const key = d?.key ?? d?.payload?.key
+                const label = d?.xLabel ?? d?.payload?.xLabel
+                if (key && label) onBubbleClick(key, label)
+              }
+            : undefined}
           style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+          shape={(props: any) => {
+            const { cx, cy, size, fill, fillOpacity: fo } = props
+            const r = Math.sqrt(Math.max(size, 0) / Math.PI)
+            return (
+              <g>
+                <circle cx={cx} cy={cy} r={Math.max(r, 14)} fill="transparent" />
+                <circle cx={cx} cy={cy} r={Math.max(r, 1)} fill={fill ?? '#a78bfa'} fillOpacity={fo ?? 0.65} />
+              </g>
+            )
+          }}
         />
       </ScatterChart>
     </ResponsiveContainer>
