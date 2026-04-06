@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 9
+      "count": 8
     },
     {
       "label": "mid_senior",
@@ -36,7 +36,7 @@
     },
     {
       "label": "onsite",
-      "count": 15
+      "count": 14
     },
     {
       "label": "hybrid_3d",
@@ -46,7 +46,7 @@
   "language": [
     {
       "label": "en",
-      "count": 23
+      "count": 22
     },
     {
       "label": "unknown",
@@ -63,10 +63,6 @@
       "count": 14
     },
     {
-      "label": "must",
-      "count": 1
-    },
-    {
       "label": "plus",
       "count": 1
     }
@@ -74,7 +70,7 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 8
+      "count": 9
     },
     {
       "label": "technical",
@@ -82,7 +78,7 @@
     },
     {
       "label": "customer_facing",
-      "count": 9
+      "count": 7
     },
     {
       "label": "platform",
@@ -97,7 +93,7 @@
   "industry_normalized": [
     {
       "label": "fintech_payments",
-      "count": 10
+      "count": 9
     },
     {
       "label": "saas_b2b_software",
@@ -111,19 +107,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 37
+      "count": 36
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 37
+      "count": 36
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 16
+      "count": 15
     },
     {
       "label": "unclear",
@@ -141,15 +137,15 @@
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 5,
+      "hard": 4,
       "soft": 1,
-      "total": 6
+      "total": 5
     },
     {
       "domain": "saas_b2b_software",
-      "hard": 6,
+      "hard": 4,
       "soft": 0,
-      "total": 6
+      "total": 4
     },
     {
       "domain": "payments",
@@ -251,16 +247,16 @@
     "n_extractable": 8
   },
   "ai": {
-    "n_enriched": 24,
+    "n_enriched": 23,
     "n_ai_focus": 6,
     "n_ai_skills": 6,
-    "ai_focus_pct": 25,
-    "ai_skills_pct": 25
+    "ai_focus_pct": 26,
+    "ai_skills_pct": 26
   },
   "source": [
     {
       "label": "ats",
-      "count": 37
+      "count": 36
     }
   ],
   "companies": {
@@ -279,23 +275,23 @@
       },
       {
         "label": "Raisin",
-        "count": 6
+        "count": 5
       },
       {
         "label": "GetYourGuide",
         "count": 4
       },
       {
-        "label": "N26",
+        "label": "SumUp",
         "count": 2
       },
       {
-        "label": "SumUp",
+        "label": "N26",
         "count": 2
       }
     ],
     "n_companies": 7,
-    "top10_share": 37,
+    "top10_share": 36,
     "top10_pct": 100,
     "multi_hiring": 7
   }
