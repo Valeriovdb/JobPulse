@@ -27,10 +27,20 @@ function SourcesContent() {
   return (
     <div className="px-5 py-5 space-y-6">
       <div className="space-y-1.5">
+        <p className="text-sm font-semibold text-white">Direct ATS</p>
+        <p className="text-sm text-muted leading-relaxed">
+          The primary source. The pipeline queries career pages of known Berlin tech
+          companies directly via their ATS APIs — Greenhouse, Ashby, SmartRecruiters,
+          Gem, and Personio. This covers companies like Delivery Hero, GetYourGuide,
+          Contentful, N26, Taxfix, and others. No intermediary, no deduplication noise.
+        </p>
+      </div>
+      <div className="space-y-1.5">
         <p className="text-sm font-semibold text-white">JSearch via RapidAPI</p>
         <p className="text-sm text-muted leading-relaxed">
           Aggregates postings from LinkedIn, Indeed, Glassdoor, and others. Queried daily
-          with targeted searches for Berlin and remote Germany PM roles.
+          with targeted searches for Berlin and remote Germany PM roles. Fills gaps for
+          companies not covered by the ATS list.
         </p>
       </div>
       <div className="space-y-1.5">
@@ -41,18 +51,18 @@ function SourcesContent() {
         </p>
       </div>
       <div className="pt-4 border-t border-border space-y-1.5">
-        <p className="text-xs text-subtle uppercase tracking-widest">Why two sources</p>
+        <p className="text-xs text-subtle uppercase tracking-widest">Source priority</p>
         <p className="text-sm text-muted leading-relaxed">
-          Different boards have uneven coverage of the German market. Combining them
-          reduces blind spots without significantly inflating duplicates — deduplication
-          runs on a stable job key before the data reaches the dashboard.
+          When the same role appears across multiple sources, the direct ATS record
+          takes priority, followed by Arbeitnow, then JSearch. Deduplication runs on a
+          stable job key before any data reaches the dashboard.
         </p>
       </div>
       <div className="space-y-1.5">
         <p className="text-xs text-subtle uppercase tracking-widest">Coverage note</p>
         <p className="text-sm text-muted leading-relaxed">
-          This is a directional sample, not an exhaustive list. Roles posted only on
-          company career pages or niche boards won't appear.
+          This is a directional sample, not an exhaustive list. Companies not in the
+          ATS list and not indexed by the boards we query won't appear.
         </p>
       </div>
     </div>
@@ -83,6 +93,8 @@ function ClassificationContent() {
             'German language requirement (must / plus / not mentioned)',
             'PM role type (Core, Technical, Growth, Data, Other)',
             'Industry vertical (11 categories)',
+            'Minimum years of experience (when explicitly stated)',
+            'Domain background requirements (required vs preferred)',
             'AI focus and AI skills signals',
             'B2B SaaS indicator',
           ].map((item) => (

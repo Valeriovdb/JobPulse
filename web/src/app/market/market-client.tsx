@@ -1,6 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import {
+  ScatterChart, Scatter, XAxis, YAxis, ZAxis,
+  Tooltip, ResponsiveContainer, CartesianGrid,
+} from 'recharts'
 import type { Distributions, Job } from '@/types/data'
 import { StatBar } from '@/components/stat-bar'
 import { EmptyState } from '@/components/section'
@@ -301,6 +305,151 @@ function DomainStrengthChart({
   )
 }
 
+// ─── Bubble chart tooltip ─────────────────────────────────────────────────────
+
+function BubbleTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0]?.payload
+  if (!d) return null
+  return (
+    <div className="bg-surface-elevated border border-border-strong rounded-lg px-3 py-2.5 shadow-xl">
+      <p className="text-sm text-white font-medium">{d.xLabel}</p>
+      <p className="text-xs text-muted mt-1">{d.y} years minimum</p>
+      <p className="text-xs text-white/50 mt-0.5">{d.z} {d.z === 1 ? 'role' : 'roles'}</p>
+    </div>
+  )
+}
+
+// ─── Seniority × Experience bubble chart ─────────────────────────────────────
+
+type SeniorityBubbleRow = { seniority: string; years_min: number; count: number }
+
+function SeniorityBubbleChart({
+  data,
+  onBubbleClick,
+}: {
+  data: SeniorityBubbleRow[]
+  onBubbleClick?: (seniority: string, label: string) => void
+}) {
+  if (!data.length) return <EmptyState message="Experience data will appear here once enrichment builds up." />
+
+  const cats = SENIORITY_ORDER.filter((s) => data.some((d) => d.seniority === s))
+  const chartData = data
+    .filter((d) => cats.includes(d.seniority))
+    .map((d) => ({
+      x: cats.indexOf(d.seniority) + 1,
+      y: d.years_min,
+      z: d.count,
+      xLabel: SENIORITY_LABELS[d.seniority] ?? d.seniority,
+      key: d.seniority,
+    }))
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <ScatterChart margin={{ top: 10, right: 16, bottom: 20, left: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="0" stroke="rgba(255,255,255,0.04)" />
+        <XAxis
+          type="number" dataKey="x"
+          domain={[0, cats.length + 1]}
+          ticks={cats.map((_, i) => i + 1)}
+          tickFormatter={(v) => { const c = cats[v - 1]; return c ? (SENIORITY_LABELS[c] ?? c) : '' }}
+          tick={{ fontSize: 11, fill: '#737373' }} tickLine={false} axisLine={false}
+        />
+        <YAxis
+          type="number" dataKey="y"
+          tick={{ fontSize: 11, fill: '#737373' }} tickLine={false} axisLine={false}
+          tickFormatter={(v) => `${v}y`} width={30}
+        />
+        <ZAxis dataKey="z" range={[50, 700]} />
+        <Tooltip content={<BubbleTooltip />} cursor={false} />
+        <Scatter
+          data={chartData} fill="#818cf8" fillOpacity={0.65}
+          onClick={onBubbleClick ? (d: any) => {
+            const key = d?.key ?? d?.payload?.key
+            const label = d?.xLabel ?? d?.payload?.xLabel
+            if (key && label) onBubbleClick(key, label)
+          } : undefined}
+          style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+          shape={(props: any) => {
+            const { cx, cy, size, fill, fillOpacity: fo } = props
+            const r = Math.sqrt(Math.max(size, 0) / Math.PI)
+            return (
+              <g>
+                <circle cx={cx} cy={cy} r={Math.max(r, 14)} fill="transparent" />
+                <circle cx={cx} cy={cy} r={Math.max(r, 1)} fill={fill ?? '#818cf8'} fillOpacity={fo ?? 0.65} />
+              </g>
+            )
+          }}
+        />
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
+}
+
+// ─── Industry × Experience bubble chart ──────────────────────────────────────
+
+type IndustryBubbleRow = { industry: string; years_min: number; count: number }
+
+function IndustryBubbleChart({
+  data,
+  onBubbleClick,
+}: {
+  data: IndustryBubbleRow[]
+  onBubbleClick?: (industry: string, label: string) => void
+}) {
+  if (!data.length) return <EmptyState message="Industry × experience data will appear here once enrichment builds up." />
+
+  const allCats = Array.from(new Set(data.map((d) => d.industry)))
+  const chartData = data.map((d) => ({
+    x: allCats.indexOf(d.industry) + 1,
+    y: d.years_min,
+    z: d.count,
+    xLabel: INDUSTRY_LABELS[d.industry] ?? d.industry,
+    key: d.industry,
+  }))
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <ScatterChart margin={{ top: 10, right: 16, bottom: 20, left: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="0" stroke="rgba(255,255,255,0.04)" />
+        <XAxis
+          type="number" dataKey="x"
+          domain={[0, allCats.length + 1]}
+          ticks={allCats.map((_, i) => i + 1)}
+          tickFormatter={(v) => { const c = allCats[v - 1]; return c ? (INDUSTRY_LABELS[c] ?? c) : '' }}
+          tick={{ fontSize: 11, fill: '#737373' }} tickLine={false} axisLine={false}
+        />
+        <YAxis
+          type="number" dataKey="y"
+          tick={{ fontSize: 11, fill: '#737373' }} tickLine={false} axisLine={false}
+          tickFormatter={(v) => `${v}y`} width={30}
+        />
+        <ZAxis dataKey="z" range={[50, 700]} />
+        <Tooltip content={<BubbleTooltip />} cursor={false} />
+        <Scatter
+          data={chartData} fill="#a78bfa" fillOpacity={0.65}
+          onClick={onBubbleClick ? (d: any) => {
+            const key = d?.key ?? d?.payload?.key
+            const label = d?.xLabel ?? d?.payload?.xLabel
+            if (key && label) onBubbleClick(key, label)
+          } : undefined}
+          style={onBubbleClick ? { cursor: 'pointer' } : undefined}
+          shape={(props: any) => {
+            const { cx, cy, size, fill, fillOpacity: fo } = props
+            const r = Math.sqrt(Math.max(size, 0) / Math.PI)
+            return (
+              <g>
+                <circle cx={cx} cy={cy} r={Math.max(r, 14)} fill="transparent" />
+                <circle cx={cx} cy={cy} r={Math.max(r, 1)} fill={fill ?? '#a78bfa'} fillOpacity={fo ?? 0.65} />
+              </g>
+            )
+          }}
+        />
+      </ScatterChart>
+    </ResponsiveContainer>
+  )
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 interface Props {
@@ -427,6 +576,28 @@ export default function BreakdownClient({ dist, jobs }: Props) {
         color: INDUSTRY_PALETTE[idx % INDUSTRY_PALETTE.length],
         drillKey: key,
       }))
+  }, [filteredJobs])
+
+  const seniorityBubbleData = useMemo((): SeniorityBubbleRow[] => {
+    const counts: Record<string, SeniorityBubbleRow> = {}
+    for (const j of filteredJobs) {
+      if (!j.seniority || j.years_experience_min == null) continue
+      const key = `${j.seniority}_${j.years_experience_min}`
+      if (!counts[key]) counts[key] = { seniority: j.seniority, years_min: j.years_experience_min, count: 0 }
+      counts[key].count++
+    }
+    return Object.values(counts)
+  }, [filteredJobs])
+
+  const industryBubbleData = useMemo((): IndustryBubbleRow[] => {
+    const counts: Record<string, IndustryBubbleRow> = {}
+    for (const j of filteredJobs) {
+      if (!j.industry || j.years_experience_min == null) continue
+      const key = `${j.industry}_${j.years_experience_min}`
+      if (!counts[key]) counts[key] = { industry: j.industry, years_min: j.years_experience_min, count: 0 }
+      counts[key].count++
+    }
+    return Object.values(counts)
   }, [filteredJobs])
 
   // ── Insight strip metrics ────────────────────────────────────────────────
@@ -599,18 +770,23 @@ export default function BreakdownClient({ dist, jobs }: Props) {
 
         {/* ── 1. Seniority vs required experience ── */}
         <EditSection title="Seniority vs required experience" className="mt-16">
-          {filteredSeniority.length > 0 ? (
-            <ChartCard>
+          <ChartCard>
+            {seniorityBubbleData.length > 0 ? (
+              <SeniorityBubbleChart
+                data={seniorityBubbleData}
+                onBubbleClick={(seniority, label) => handleDrill('seniority', seniority, label)}
+              />
+            ) : filteredSeniority.length > 0 ? (
               <StatBar
                 items={filteredSeniority}
                 showPct
                 onBarClick={(key, label) => handleDrill('seniority', key, label)}
                 activeKey={activeChartId === 'seniority' ? activeKey : null}
               />
-            </ChartCard>
-          ) : (
-            <EmptyState message="No seniority data for this selection." />
-          )}
+            ) : (
+              <EmptyState message="No seniority data for this selection." />
+            )}
+          </ChartCard>
         </EditSection>
 
         {/* ── 2. Which backgrounds companies want ── */}
@@ -668,18 +844,23 @@ export default function BreakdownClient({ dist, jobs }: Props) {
 
         {/* ── 5. Industry vs required experience ── */}
         <EditSection title="Industry vs required experience" className="mt-24">
-          {filteredIndustry.length > 0 ? (
-            <ChartCard>
+          <ChartCard>
+            {industryBubbleData.length > 0 ? (
+              <IndustryBubbleChart
+                data={industryBubbleData}
+                onBubbleClick={(industry, label) => handleDrill('industry', industry, label)}
+              />
+            ) : filteredIndustry.length > 0 ? (
               <StatBar
                 items={filteredIndustry}
                 showPct
                 onBarClick={(key, label) => handleDrill('industry', key, label)}
                 activeKey={activeChartId === 'industry' ? activeKey : null}
               />
-            </ChartCard>
-          ) : (
-            <EmptyState message="No industry data for this selection." />
-          )}
+            ) : (
+              <EmptyState message="No industry data for this selection." />
+            )}
+          </ChartCard>
         </EditSection>
 
         {/* ── 6 + 7. Visa sponsorship + Relocation support (paired, lower priority) ── */}

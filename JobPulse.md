@@ -79,16 +79,14 @@ Everything in the product maps back to one of these:
 
 | Source | Status | Notes |
 |---|---|---|
-| JSearch (via RapidAPI) | Live | Aggregates broadly across job boards |
+| Direct ATS | Live | Primary source. Queries Greenhouse, Ashby, SmartRecruiters, Gem, Personio APIs directly for ~20 known Berlin companies |
+| JSearch (via RapidAPI) | Live | Aggregates LinkedIn, Indeed, Glassdoor, and others |
 | Arbeitnow | Live | Free API, Germany/English-focused, no key needed |
 
-### Why Arbeitnow
-Arbeitnow is specifically focused on Germany and English-speaking roles. It is a strong complement to JSearch. Added after the n8n rebuild.
+**Source priority**: ATS > Arbeitnow > JSearch. When the same role appears across sources, the ATS record wins.
 
-### Source strategy
-- Design supports multiple source types (aggregators, job boards, company pages, ATS)
-- Source priority for attribution: company site first → LinkedIn → others
-- This matters for apply links, overlap logic, and source quality interpretation
+### ATS coverage
+Direct ATS fetcher covers: HelloFresh, GetYourGuide, Contentful, SumUp, Solaris, commercetools, wefox, N26, Raisin, Taxfix, Billie, Ecosia, Delivery Hero, Auto1 Group, Scalable Capital, Omio, sennder, Clark. Additional companies can be added to `pipeline/config.py`.
 
 ### Potential future sources (not implemented)
 - Adzuna (free tier, good German coverage, requires registration)
@@ -102,9 +100,9 @@ Arbeitnow is specifically focused on Germany and English-speaking roles. It is a
 ### Stack
 - **Pipeline**: Python scripts
 - **Scheduler**: GitHub Actions (daily at 07:00 UTC, manual trigger also supported)
-- **Database**: Supabase (existing project reused)
+- **Database**: Supabase
 - **LLM enrichment**: OpenAI (gpt-4o-mini)
-- **Frontend**: Streamlit — local first, then Streamlit Cloud for public deployment
+- **Frontend**: Next.js 16 (App Router) — deployed on Vercel at jobpulse1.vercel.app
 
 ### Repository
 - GitHub: `https://github.com/Valeriovdb/jobpulse`
@@ -113,23 +111,35 @@ Arbeitnow is specifically focused on Germany and English-speaking roles. It is a
 ### File structure
 ```
 jobpulse/
-├── migrations/
-│   └── 001_initial_schema.sql       # Full schema, run once against Supabase
+├── migrations/                      # Supabase schema migrations
 ├── pipeline/
-│   ├── config.py                    # All env var config
+│   ├── config.py                    # All env var config (incl. ATS_COMPANIES list)
 │   ├── db.py                        # Supabase client singleton
-│   ├── ingest.py                    # Main orchestrator
+│   ├── ingest.py                    # Main ingestion orchestrator
+│   ├── export_data.py               # Exports JSON artifacts to data/frontend/
 │   ├── normalize.py                 # Deterministic field normalization
 │   ├── fetchers/
+│   │   ├── ats.py                   # Direct ATS fetcher (Greenhouse, Ashby, SmartRecruiters, Gem, Personio)
 │   │   ├── jsearch.py               # JSearch adapter
 │   │   └── arbeitnow.py             # Arbeitnow adapter (title-filtered)
-│   └── classifiers/
-│       └── llm.py                   # OpenAI enrichment
+│   ├── classifiers/
+│   │   └── llm.py                   # OpenAI enrichment
+│   └── insights/
+│       └── copy_service.py          # LLM-generated chart titles/subtitles
+├── data/frontend/                   # Pre-computed JSON read by the frontend
+│   ├── jobs.json                    # Per-job records (last 180 days, incl. years_experience_min)
+│   ├── distributions.json           # Active-job distributions (seniority, work mode, etc.)
+│   ├── overview.json                # Top-level KPIs
+│   ├── timeseries.json              # Daily snapshot series
+│   ├── experience.json              # Experience tag data
+│   ├── metadata.json                # Last refresh date, scope
+│   └── chart_insights.json          # LLM-generated chart copy
+├── web/                             # Next.js frontend (deployed on Vercel)
+│   └── src/app/                     # App Router pages: /, /market, /trends, /about
 ├── .github/workflows/
 │   └── ingest.yml                   # Daily schedule + manual trigger
 ├── requirements.txt
-├── .env.example
-└── .env                             # Real credentials (gitignored)
+└── .env.example
 ```
 
 ---
@@ -208,61 +218,49 @@ The `mark_stale_jobs_inactive` SQL function is called at the end of each run.
 
 ## Pipeline run flow
 
+**Ingestion** (`pipeline/ingest.py`):
 1. Open `ingestion_runs` record
-2. Fetch from JSearch (4 queries × up to 3 pages)
+2. Fetch from Direct ATS (Greenhouse, Ashby, SmartRecruiters, Gem, Personio — ~20 companies)
 3. Fetch from Arbeitnow (tag: product-management, title-filtered)
-4. Normalize all records (seniority, location, work mode, language, publisher)
-5. LLM-enrich jobs that have description text
-6. Upsert to `jobs` (new → insert, seen before → update last_seen_date + enriched fields)
-7. Insert raw payloads to `raw_job_records`
-8. Upsert to `job_source_appearances`
+4. Fetch from JSearch if monthly budget allows (4 queries × up to 3 pages)
+5. Cross-source deduplication: ATS > Arbeitnow > JSearch
+6. Normalize all records (seniority, location, work mode, language)
+7. LLM-enrich jobs that have description text (≥80 chars)
+8. Upsert to `jobs`, `raw_job_records`, `job_source_appearances`
 9. Write `job_daily_snapshots`
 10. Call `mark_stale_jobs_inactive`
-11. Close `ingestion_runs` record with final status and counts
+11. Close `ingestion_runs` record
+
+**Export** (`pipeline/export_data.py`):
+Runs after ingestion. Writes all `data/frontend/*.json` files read by the Next.js frontend:
+- `jobs.json` — per-job records for last 180 days (used by Breakdown tab filters)
+- `distributions.json` — active-job aggregations
+- `overview.json`, `timeseries.json`, `experience.json`, `metadata.json`
+- `chart_insights.json` — LLM-generated chart titles (cached by data hash)
 
 ---
 
-## Current state (as of 2026-03-25)
+## Current state (as of 2026-04-07)
 
-- Pipeline is live and tested
-- First real run completed: 9 jobs ingested (5 JSearch, 4 Arbeitnow), 4 LLM-enriched
-- GitHub Actions workflow is in place (triggers daily at 07:00 UTC)
-- Supabase schema is live with new 7-table structure
-- Frontend: not yet started
+- Pipeline is live with three sources: Direct ATS (primary), Arbeitnow, JSearch
+- ATS fetcher covers ~20 Berlin tech companies via Greenhouse, Ashby, SmartRecruiters, Gem, Personio
+- GitHub Actions runs daily at 07:00 UTC; export_data.py runs after ingestion
+- Frontend is live at jobpulse1.vercel.app
+- Deployed on Vercel (Next.js 16 App Router, static pages + one API route for drill-down)
 
----
+### Frontend information architecture (4 tabs)
 
-## Frontend plan
+#### Overview
+LLM-generated hero title + body from market snapshot. Shows language access, work mode, seniority distribution, AI signal. Data: currently active jobs only.
 
-**Framework**: Streamlit
-**Deployment**: Local first → Streamlit Cloud (public)
+#### Breakdown
+Structural market patterns with filters (time window 30/60/90/180d, seniority, role family, language, German req, work mode). Charts: seniority × experience bubble, domain backgrounds, company concentration, work setup, industry. Data: jobs posted in selected rolling window, computed from `jobs.json`.
 
-**Important**: Before any frontend implementation, have a strategy and UX discussion. Do not rush into building.
+#### Trends
+Time-series charts: market activity, new roles/day, seniority mix over time, German req over time. Filter: time range, location, seniority, language. Data: historical daily snapshots.
 
-### Planned information architecture (5 pages)
-
-#### Page 1 — Overview
-KPIs: active jobs, new today, new last 7 days, median posting age
-Charts: active jobs over time, daily new jobs, language/German split, seniority split, source split
-
-#### Page 2 — Where to Look
-Active jobs by source, exclusive jobs by source, source overlap, top companies by source mix, company-site-only opportunities
-
-#### Page 3 — When to Apply
-Age distribution, time-online distribution, disappearing-fast indicators, repost analysis, newly seen jobs by filter
-
-#### Page 4 — Market Requirements
-German requirement split, posting language trends, seniority trends, Berlin / remote Germany trends
-
-#### Page 5 — Methodology
-Source list, update cadence, active-status logic, deduplication logic, classification rules, limitations
-
-The methodology page is critical for trust and portfolio quality.
-
-### UX direction
-- Modern, minimal, clean, analytical, intentional
-- Prefer KPI cards, clean line charts, simple distributions, clear text takeaways
-- Avoid: clutter, chart-first design, dashboard-template aesthetics, too many charts
+#### About
+Product description, scope, sources, classification logic, methodology notes.
 
 ---
 

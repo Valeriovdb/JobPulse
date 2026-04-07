@@ -84,6 +84,7 @@ export interface Job {
   ai_skills: boolean
   first_seen_date: string | null
   industry: string | null
+  years_experience_min: number | null
 }
 
 // --- Experience tags ---

@@ -14,7 +14,7 @@ import hashlib
 import json
 import logging
 import sys
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -56,6 +56,29 @@ def _fetch_active_jobs() -> pd.DataFrame:
             "candidate_domain_requirement_normalized, candidate_domain_requirement_strength, years_experience_min"
         )
         .eq("is_active", True)
+        .execute()
+    )
+    df = pd.DataFrame(resp.data)
+    if not df.empty:
+        df["first_seen_date"] = pd.to_datetime(df["first_seen_date"])
+    return df
+
+
+def _fetch_jobs_for_frontend() -> pd.DataFrame:
+    """Fetch all jobs from the last 180 days for per-job frontend JSON export."""
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=180)).date().isoformat()
+    resp = (
+        get_client()
+        .table("jobs")
+        .select(
+            "job_id, company_name, job_title_raw, canonical_url, "
+            "is_berlin, is_remote_germany, "
+            "work_mode, posting_language, german_requirement, "
+            "seniority, pm_type, industry_normalized, "
+            "ai_focus, ai_skills, first_seen_date, "
+            "years_experience_min"
+        )
+        .gte("first_seen_date", cutoff)
         .execute()
     )
     df = pd.DataFrame(resp.data)
@@ -726,6 +749,44 @@ def _data_version(paths: list[Path]) -> str:
     return f"sha256:{h.hexdigest()[:16]}"
 
 
+def export_jobs(df: pd.DataFrame) -> None:
+    """Export per-job records for the Breakdown tab frontend filter."""
+    if df.empty:
+        _write("jobs.json", [])
+        return
+
+    records = []
+    for _, row in df.iterrows():
+        records.append({
+            "id": row["job_id"],
+            "title": row.get("job_title_raw"),
+            "company": row.get("company_name"),
+            "url": row.get("canonical_url"),
+            "location": (
+                "berlin" if row.get("is_berlin")
+                else "remote_germany" if row.get("is_remote_germany")
+                else "unclear"
+            ),
+            "work_mode": row.get("work_mode") or "unknown",
+            "seniority": row.get("seniority") or "unknown",
+            "language": row.get("posting_language") or "unknown",
+            "german_req": row.get("german_requirement") or "unclassified",
+            "pm_type": row.get("pm_type"),
+            "ai_focus": bool(row.get("ai_focus", False)),
+            "ai_skills": bool(row.get("ai_skills", False)),
+            "first_seen_date": (
+                row["first_seen_date"].date().isoformat()
+                if pd.notna(row.get("first_seen_date")) else None
+            ),
+            "industry": row.get("industry_normalized"),
+            "years_experience_min": (
+                int(row["years_experience_min"])
+                if pd.notna(row.get("years_experience_min")) else None
+            ),
+        })
+    _write("jobs.json", records)
+
+
 def export_insights(force: bool = False) -> None:
     """
     Generate LLM-powered chart titles and subtitles for the four supported
@@ -832,6 +893,10 @@ def run(force_insights: bool = False) -> None:
     all_jobs = _fetch_all_jobs()
     logger.info(f"All jobs: {len(all_jobs)}")
 
+    logger.info("Fetching jobs for frontend (last 180 days)…")
+    frontend_jobs = _fetch_jobs_for_frontend()
+    logger.info(f"Frontend jobs: {len(frontend_jobs)}")
+
     logger.info("Fetching snapshots…")
     snapshots = _fetch_snapshots()
     logger.info(f"Snapshot rows: {len(snapshots)}")
@@ -840,6 +905,7 @@ def run(force_insights: bool = False) -> None:
     export_overview(active_jobs, last_run_date)
     export_distributions(active_jobs)
     export_experience(active_jobs)
+    export_jobs(frontend_jobs)
     export_timeseries(all_jobs, snapshots)
     export_insights(force=force_insights)
 
