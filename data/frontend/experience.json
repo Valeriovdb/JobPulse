@@ -1,6 +1,24 @@
 {
-  "tags": [],
-  "jobs_by_tag": {},
-  "n_jobs_with_tags": 0,
+  "tags": [
+    {
+      "tag": "consumer_digital_products",
+      "family": "domain",
+      "count": 1
+    }
+  ],
+  "jobs_by_tag": {
+    "consumer_digital_products": [
+      {
+        "job_id": "cee775c8-a8c7-4af6-9109-509675af3787",
+        "company": "GetYourGuide",
+        "title": "Lead Product Manager, B2C",
+        "seniority": "lead",
+        "url": "https://getyourguide.careers/jobs/7649294?gh_jid=7649294",
+        "level": "required",
+        "evidence": "helping travelers discover the right experiences"
+      }
+    ]
+  },
+  "n_jobs_with_tags": 1,
   "n_active": 37
 }
