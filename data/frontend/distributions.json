@@ -18,7 +18,7 @@
     },
     {
       "label": "lead",
-      "count": 2
+      "count": 3
     },
     {
       "label": "group",
@@ -32,11 +32,11 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 21
+      "count": 19
     },
     {
       "label": "onsite",
-      "count": 14
+      "count": 17
     },
     {
       "label": "hybrid_3d",
@@ -51,6 +51,10 @@
     {
       "label": "unknown",
       "count": 14
+    },
+    {
+      "label": "de",
+      "count": 1
     }
   ],
   "german_requirement": [
@@ -63,6 +67,10 @@
       "count": 14
     },
     {
+      "label": "must",
+      "count": 1
+    },
+    {
       "label": "plus",
       "count": 1
     }
@@ -70,15 +78,15 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 9
+      "count": 8
     },
     {
       "label": "technical",
-      "count": 3
+      "count": 4
     },
     {
       "label": "customer_facing",
-      "count": 7
+      "count": 8
     },
     {
       "label": "platform",
@@ -92,34 +100,38 @@
   "industry": [],
   "industry_normalized": [
     {
+      "label": "saas_b2b_software",
+      "count": 10
+    },
+    {
       "label": "fintech_payments",
       "count": 9
     },
     {
-      "label": "saas_b2b_software",
-      "count": 9
+      "label": "ecommerce_marketplace",
+      "count": 3
     },
     {
-      "label": "ecommerce_marketplace",
-      "count": 4
+      "label": "other",
+      "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 36
+      "count": 37
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 36
+      "count": 37
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 15
+      "count": 17
     },
     {
       "label": "unclear",
@@ -131,21 +143,21 @@
     },
     {
       "label": "soft",
-      "count": 2
+      "count": 1
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 4,
-      "soft": 1,
+      "hard": 5,
+      "soft": 0,
       "total": 5
     },
     {
       "domain": "saas_b2b_software",
-      "hard": 4,
+      "hard": 3,
       "soft": 0,
-      "total": 4
+      "total": 3
     },
     {
       "domain": "payments",
@@ -195,11 +207,6 @@
   "industry_experience_bubble": [
     {
       "industry": "ecommerce_marketplace",
-      "years_min": 5.0,
-      "count": 1
-    },
-    {
-      "industry": "ecommerce_marketplace",
       "years_min": 7.0,
       "count": 1
     },
@@ -222,6 +229,11 @@
       "industry": "fintech_payments",
       "years_min": 5.0,
       "count": 3
+    },
+    {
+      "industry": "other",
+      "years_min": 5.0,
+      "count": 1
     }
   ],
   "years_experience": {
@@ -247,16 +259,20 @@
     "n_extractable": 8
   },
   "ai": {
-    "n_enriched": 23,
-    "n_ai_focus": 6,
-    "n_ai_skills": 6,
-    "ai_focus_pct": 26,
-    "ai_skills_pct": 26
+    "n_enriched": 24,
+    "n_ai_focus": 7,
+    "n_ai_skills": 7,
+    "ai_focus_pct": 29,
+    "ai_skills_pct": 29
   },
   "source": [
     {
       "label": "ats",
       "count": 36
+    },
+    {
+      "label": "arbeitnow",
+      "count": 1
     }
   ],
   "companies": {
@@ -288,10 +304,14 @@
       {
         "label": "N26",
         "count": 2
+      },
+      {
+        "label": "getpress",
+        "count": 1
       }
     ],
-    "n_companies": 7,
-    "top10_share": 36,
+    "n_companies": 8,
+    "top10_share": 37,
     "top10_pct": 100,
     "multi_hiring": 7
   }

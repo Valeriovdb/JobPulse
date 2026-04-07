@@ -679,16 +679,96 @@
       "active_jobs": 9,
       "jobs_added": 0,
       "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "group",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 4,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "junior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "junior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "plus",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "lead",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "lead",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "mid_senior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 3,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "seniority": "senior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 9,
+      "jobs_added": 0,
+      "jobs_removed": 0
     }
   ],
   "new_per_day": [
     {
-      "date": "2026-03-31",
-      "count": 84
-    },
-    {
       "date": "2026-04-01",
       "count": 2
+    },
+    {
+      "date": "2026-04-07",
+      "count": 1
     }
   ],
   "active_per_day": [
@@ -711,6 +791,10 @@
     {
       "date": "2026-04-06",
       "count": 36
+    },
+    {
+      "date": "2026-04-07",
+      "count": 37
     }
   ],
   "lifespan": {
@@ -726,10 +810,12 @@
       "2026-04-02",
       "2026-04-03",
       "2026-04-05",
-      "2026-04-06"
+      "2026-04-06",
+      "2026-04-07"
     ],
     "series": {
       "group": [
+        5,
         5,
         5,
         5,
@@ -743,6 +829,7 @@
         2,
         2,
         2,
+        2,
         2
       ],
       "lead": [
@@ -751,7 +838,8 @@
         2,
         2,
         2,
-        2
+        2,
+        3
       ],
       "mid": [
         34,
@@ -759,10 +847,12 @@
         9,
         8,
         8,
+        8,
         8
       ],
       "mid_senior": [
         9,
+        7,
         7,
         7,
         7,
@@ -775,12 +865,14 @@
         1,
         1,
         1,
+        1,
         1
       ],
       "senior": [
         24,
         10,
         10,
+        11,
         11,
         11,
         11
@@ -791,10 +883,12 @@
         0,
         0,
         0,
+        0,
         0
       ],
       "unknown": [
         2,
+        0,
         0,
         0,
         0,
@@ -810,7 +904,8 @@
       "2026-04-02",
       "2026-04-03",
       "2026-04-05",
-      "2026-04-06"
+      "2026-04-06",
+      "2026-04-07"
     ],
     "series": {
       "must": [
@@ -819,7 +914,8 @@
         1,
         0,
         0,
-        0
+        0,
+        1
       ],
       "not_mentioned": [
         42,
@@ -827,11 +923,13 @@
         20,
         21,
         21,
+        21,
         21
       ],
       "plus": [
         1,
         2,
+        1,
         1,
         1,
         1,
