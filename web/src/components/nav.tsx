@@ -27,7 +27,11 @@ export function Nav({ lastUpdated }: NavProps) {
     <header className="sticky top-0 z-50 border-b border-border-strong bg-[#0f0f0f]/95 backdrop-blur-sm">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="w-2 h-2 rounded-full bg-positive" />
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              <polyline points="6,14 8.5,11 10.5,16 13,12 15,14 18,14" />
+            </svg>
           <span className="font-semibold text-sm tracking-tight text-white">JobPulse</span>
         </Link>
 

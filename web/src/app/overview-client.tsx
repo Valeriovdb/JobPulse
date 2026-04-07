@@ -528,6 +528,24 @@ export default function OverviewClient({ overview, dist }: Props) {
         </div>
       </div>
 
+      {/* Scope chip row */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-4 border-b border-border mb-2">
+        <span className="text-2xs text-subtle">Scope: Currently active PM jobs</span>
+        <span className="text-2xs text-subtle/30">·</span>
+        <span className="text-2xs text-subtle">Region: Berlin + remote Germany</span>
+        {overview.last_updated && (
+          <>
+            <span className="text-2xs text-subtle/30">·</span>
+            <span className="text-2xs text-subtle">
+              Last refresh: {(() => {
+                const d = new Date(overview.last_updated + 'T00:00:00Z')
+                return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+              })()}
+            </span>
+          </>
+        )}
+      </div>
+
       {/* ================================================================== */}
       {/* Section B — Access conditions                                       */}
       {/* ================================================================== */}

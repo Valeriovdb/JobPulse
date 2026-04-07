@@ -167,6 +167,13 @@ export default function TrendsClient({ timeseries }: TrendsClientProps) {
         </div>
       </div>
 
+      {/* Scope chip row */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1 pb-4 mb-2">
+        <span className="text-2xs text-subtle">Scope: Tracked historical jobs and daily snapshots</span>
+        <span className="text-2xs text-subtle/30">·</span>
+        <span className="text-2xs text-subtle">Region: Berlin + remote Germany</span>
+      </div>
+
       <FilterBar filters={filters} onChange={setFilters} />
 
       <Section

@@ -1,7 +1,8 @@
-import { getDistributions } from '@/lib/data'
+import { getDistributions, getJobs } from '@/lib/data'
 import BreakdownClient from './market-client'
 
 export default function MarketPage() {
   const dist = getDistributions()
-  return <BreakdownClient dist={dist} />
+  const jobs = getJobs()
+  return <BreakdownClient dist={dist} jobs={jobs} />
 }
