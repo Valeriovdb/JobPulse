@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 13
+      "count": 11
     },
     {
       "label": "mid_senior",
@@ -22,7 +22,7 @@
     },
     {
       "label": "group",
-      "count": 5
+      "count": 2
     },
     {
       "label": "principal",
@@ -32,11 +32,11 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 22
+      "count": 20
     },
     {
       "label": "onsite",
-      "count": 19
+      "count": 18
     },
     {
       "label": "hybrid_3d",
@@ -50,11 +50,11 @@
   "language": [
     {
       "label": "en",
-      "count": 25
+      "count": 24
     },
     {
       "label": "unknown",
-      "count": 16
+      "count": 14
     },
     {
       "label": "de",
@@ -64,11 +64,11 @@
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 23
+      "count": 22
     },
     {
       "label": "unclassified",
-      "count": 16
+      "count": 14
     },
     {
       "label": "plus",
@@ -82,7 +82,7 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 12
+      "count": 11
     },
     {
       "label": "technical",
@@ -90,15 +90,11 @@
     },
     {
       "label": "customer_facing",
-      "count": 7
+      "count": 10
     },
     {
       "label": "platform",
       "count": 1
-    },
-    {
-      "label": "data_ai",
-      "count": 3
     },
     {
       "label": "growth",
@@ -113,11 +109,15 @@
     },
     {
       "label": "saas_b2b_software",
-      "count": 11
+      "count": 8
     },
     {
       "label": "ecommerce_marketplace",
       "count": 4
+    },
+    {
+      "label": "consumer_apps",
+      "count": 2
     },
     {
       "label": "other",
@@ -127,17 +127,13 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 43
+      "count": 40
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 42
-    },
-    {
-      "label": "no",
-      "count": 1
+      "count": 40
     }
   ],
   "domain_req_strength": [
@@ -147,7 +143,7 @@
     },
     {
       "label": "unclear",
-      "count": 16
+      "count": 14
     },
     {
       "label": "none",
@@ -155,21 +151,21 @@
     },
     {
       "label": "soft",
-      "count": 2
+      "count": 1
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 4,
-      "soft": 1,
+      "hard": 5,
+      "soft": 0,
       "total": 5
     },
     {
-      "domain": "saas_b2b_software",
-      "hard": 3,
+      "domain": "consumer_digital_products",
+      "hard": 2,
       "soft": 0,
-      "total": 3
+      "total": 2
     },
     {
       "domain": "ecommerce_marketplace",
@@ -189,6 +185,11 @@
       "seniority": "group",
       "years_min": 8.0,
       "count": 1
+    },
+    {
+      "seniority": "head",
+      "years_min": 8.0,
+      "count": 2
     },
     {
       "seniority": "junior",
@@ -217,6 +218,11 @@
     }
   ],
   "industry_experience_bubble": [
+    {
+      "industry": "consumer_apps",
+      "years_min": 8.0,
+      "count": 2
+    },
     {
       "industry": "ecommerce_marketplace",
       "years_min": 5.0,
@@ -266,26 +272,26 @@
       },
       {
         "label": "6-8",
-        "count": 2
+        "count": 4
       },
       {
         "label": "9+",
         "count": 0
       }
     ],
-    "n_extractable": 9
+    "n_extractable": 11
   },
   "ai": {
-    "n_enriched": 28,
-    "n_ai_focus": 7,
-    "n_ai_skills": 7,
-    "ai_focus_pct": 25,
-    "ai_skills_pct": 25
+    "n_enriched": 27,
+    "n_ai_focus": 4,
+    "n_ai_skills": 4,
+    "ai_focus_pct": 15,
+    "ai_skills_pct": 15
   },
   "source": [
     {
       "label": "ats",
-      "count": 39
+      "count": 36
     },
     {
       "label": "arbeitnow",
@@ -295,16 +301,16 @@
   "companies": {
     "top20": [
       {
-        "label": "Contentful",
-        "count": 9
-      },
-      {
         "label": "Delivery Hero",
         "count": 8
       },
       {
+        "label": "Contentful",
+        "count": 6
+      },
+      {
         "label": "Scalable Capital",
-        "count": 8
+        "count": 6
       },
       {
         "label": "Raisin",
@@ -320,7 +326,11 @@
       },
       {
         "label": "N26",
-        "count": 2
+        "count": 4
+      },
+      {
+        "label": "getpress",
+        "count": 1
       },
       {
         "label": "VREY",
@@ -329,14 +339,10 @@
       {
         "label": "Every.",
         "count": 1
-      },
-      {
-        "label": "getpress",
-        "count": 1
       }
     ],
     "n_companies": 10,
-    "top10_share": 43,
+    "top10_share": 40,
     "top10_pct": 100,
     "multi_hiring": 7
   }
