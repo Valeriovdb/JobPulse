@@ -1839,6 +1839,306 @@
       "active_jobs": 1,
       "jobs_added": 0,
       "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "group",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "group",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "head",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "junior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "junior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "plus",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "lead",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "lead",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "lead",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 6,
+      "jobs_added": 5,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 7,
+      "jobs_added": 3,
+      "jobs_removed": 2
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "plus",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 2
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "plus",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid_senior",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid_senior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 0,
+      "jobs_removed": 2
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "mid_senior",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "principal",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "senior",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "senior",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 12,
+      "jobs_added": 3,
+      "jobs_removed": 2
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "senior",
+      "location": "remote_germany",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "senior",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 2,
+      "jobs_added": 2,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 4,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "berlin",
+      "language": "de",
+      "german_req": "not_mentioned",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "berlin",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 1,
+      "jobs_added": 0,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "remote_germany",
+      "language": "de",
+      "german_req": "must",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "must",
+      "active_jobs": 1,
+      "jobs_added": 1,
+      "jobs_removed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "seniority": "unknown",
+      "location": "remote_germany",
+      "language": "en",
+      "german_req": "not_mentioned",
+      "active_jobs": 0,
+      "jobs_added": 0,
+      "jobs_removed": 1
     }
   ],
   "new_per_day": [
@@ -1873,6 +2173,10 @@
     {
       "date": "2026-04-16",
       "count": 17
+    },
+    {
+      "date": "2026-04-17",
+      "count": 23
     }
   ],
   "active_per_day": [
@@ -1927,13 +2231,17 @@
     {
       "date": "2026-04-16",
       "count": 58
+    },
+    {
+      "date": "2026-04-17",
+      "count": 62
     }
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 2.3,
-    "pct_gone_week": 88,
-    "n_inactive": 85
+    "mean_days": 2.6,
+    "pct_gone_week": 87,
+    "n_inactive": 91
   },
   "seniority_mix": {
     "dates": [
@@ -1950,7 +2258,8 @@
       "2026-04-13",
       "2026-04-14",
       "2026-04-15",
-      "2026-04-16"
+      "2026-04-16",
+      "2026-04-17"
     ],
     "series": {
       "group": [
@@ -1967,6 +2276,7 @@
         4,
         2,
         2,
+        3,
         3
       ],
       "head": [
@@ -1983,9 +2293,11 @@
         2,
         2,
         2,
+        2,
         2
       ],
       "junior": [
+        2,
         2,
         2,
         2,
@@ -2015,6 +2327,7 @@
         4,
         3,
         2,
+        3,
         3
       ],
       "mid": [
@@ -2031,7 +2344,8 @@
         11,
         14,
         11,
-        16
+        16,
+        21
       ],
       "mid_senior": [
         9,
@@ -2047,6 +2361,7 @@
         7,
         8,
         7,
+        8,
         8
       ],
       "principal": [
@@ -2063,7 +2378,8 @@
         4,
         3,
         2,
-        2
+        2,
+        1
       ],
       "senior": [
         24,
@@ -2079,10 +2395,12 @@
         12,
         11,
         13,
-        14
+        14,
+        15
       ],
       "staff": [
         2,
+        0,
         0,
         0,
         0,
@@ -2111,7 +2429,8 @@
         2,
         0,
         7,
-        8
+        8,
+        7
       ]
     }
   },
@@ -2130,7 +2449,8 @@
       "2026-04-13",
       "2026-04-14",
       "2026-04-15",
-      "2026-04-16"
+      "2026-04-16",
+      "2026-04-17"
     ],
     "series": {
       "must": [
@@ -2147,7 +2467,8 @@
         7,
         6,
         7,
-        10
+        10,
+        15
       ],
       "not_mentioned": [
         42,
@@ -2163,7 +2484,8 @@
         27,
         26,
         28,
-        35
+        35,
+        34
       ],
       "plus": [
         1,
@@ -2176,6 +2498,7 @@
         2,
         2,
         1,
+        2,
         2,
         2,
         2,
