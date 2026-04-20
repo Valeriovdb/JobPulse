@@ -2,23 +2,23 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 2
+      "count": 3
     },
     {
       "label": "mid",
-      "count": 27
-    },
-    {
-      "label": "mid_senior",
-      "count": 12
-    },
-    {
-      "label": "senior",
       "count": 19
     },
     {
+      "label": "mid_senior",
+      "count": 5
+    },
+    {
+      "label": "senior",
+      "count": 18
+    },
+    {
       "label": "lead",
-      "count": 4
+      "count": 3
     },
     {
       "label": "group",
@@ -30,79 +30,79 @@
     },
     {
       "label": "unknown",
-      "count": 10
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "onsite",
-      "count": 32
+      "count": 20
     },
     {
       "label": "unknown",
-      "count": 26
+      "count": 16
     },
     {
       "label": "remote",
-      "count": 17
-    },
-    {
-      "label": "hybrid",
-      "count": 5
+      "count": 11
     },
     {
       "label": "hybrid_3d",
-      "count": 1
+      "count": 4
     },
     {
       "label": "hybrid_2d",
-      "count": 1
+      "count": 4
+    },
+    {
+      "label": "hybrid",
+      "count": 3
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 51
-    },
-    {
-      "label": "de",
-      "count": 18
+      "count": 40
     },
     {
       "label": "unknown",
-      "count": 13
+      "count": 10
+    },
+    {
+      "label": "de",
+      "count": 8
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 47
-    },
-    {
-      "label": "must",
-      "count": 19
+      "count": 33
     },
     {
       "label": "unclassified",
-      "count": 13
+      "count": 10
+    },
+    {
+      "label": "must",
+      "count": 10
     },
     {
       "label": "plus",
-      "count": 3
+      "count": 5
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 35
+      "count": 14
     },
     {
       "label": "technical",
-      "count": 8
+      "count": 10
     },
     {
       "label": "customer_facing",
-      "count": 12
+      "count": 18
     },
     {
       "label": "platform",
@@ -114,38 +114,34 @@
     },
     {
       "label": "growth",
-      "count": 4
-    },
-    {
-      "label": "internal_ops",
-      "count": 2
-    },
-    {
-      "label": "unclassified",
-      "count": 3
+      "count": 1
     }
   ],
   "industry": [],
   "industry_normalized": [
     {
-      "label": "other",
-      "count": 21
-    },
-    {
       "label": "fintech_payments",
-      "count": 20
+      "count": 11
     },
     {
       "label": "saas_b2b_software",
-      "count": 14
+      "count": 9
+    },
+    {
+      "label": "other",
+      "count": 8
+    },
+    {
+      "label": "healthtech_biotech",
+      "count": 8
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 6
+      "count": 7
     },
     {
       "label": "consumer_apps",
-      "count": 3
+      "count": 2
     },
     {
       "label": "mobility_automotive",
@@ -154,111 +150,101 @@
     {
       "label": "media_entertainment",
       "count": 1
-    },
-    {
-      "label": "healthtech_biotech",
-      "count": 1
-    },
-    {
-      "label": "logistics_supply_chain",
-      "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 78
+      "count": 56
+    },
+    {
+      "label": "yes",
+      "count": 1
     },
     {
       "label": "no",
-      "count": 4
+      "count": 1
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 77
+      "count": 57
     },
     {
-      "label": "no",
-      "count": 5
+      "label": "yes",
+      "count": 1
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 32
-    },
-    {
-      "label": "none",
-      "count": 28
+      "count": 36
     },
     {
       "label": "unclear",
-      "count": 13
+      "count": 10
+    },
+    {
+      "label": "none",
+      "count": 9
     },
     {
       "label": "soft",
-      "count": 9
+      "count": 3
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 8,
-      "soft": 1,
-      "total": 9
-    },
-    {
-      "domain": "payments",
       "hard": 6,
       "soft": 0,
       "total": 6
     },
     {
+      "domain": "saas_b2b_software",
+      "hard": 4,
+      "soft": 1,
+      "total": 5
+    },
+    {
+      "domain": "healthtech",
+      "hard": 4,
+      "soft": 0,
+      "total": 4
+    },
+    {
       "domain": "ecommerce_marketplace",
+      "hard": 4,
+      "soft": 0,
+      "total": 4
+    },
+    {
+      "domain": "ai_ml_data_products",
       "hard": 2,
       "soft": 1,
       "total": 3
     },
     {
-      "domain": "banking_financial_services",
-      "hard": 0,
-      "soft": 2,
-      "total": 2
-    },
-    {
-      "domain": "saas_b2b_software",
-      "hard": 2,
-      "soft": 0,
-      "total": 2
-    },
-    {
       "domain": "consumer_digital_products",
-      "hard": 2,
+      "hard": 3,
       "soft": 0,
-      "total": 2
-    },
-    {
-      "domain": "ai_ml_data_products",
-      "hard": 1,
-      "soft": 0,
-      "total": 1
-    },
-    {
-      "domain": "healthtech",
-      "hard": 0,
-      "soft": 1,
-      "total": 1
+      "total": 3
     },
     {
       "domain": "mobility_automotive",
-      "hard": 1,
+      "hard": 2,
       "soft": 0,
-      "total": 1
+      "total": 2
     },
     {
-      "domain": "logistics_supply_chain",
+      "domain": "payments",
+      "hard": 2,
+      "soft": 0,
+      "total": 2
+    },
+    {
+      "domain": "enterprise_internal_tools",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -267,13 +253,8 @@
   "seniority_experience_bubble": [
     {
       "seniority": "group",
-      "years_min": 6.0,
-      "count": 1
-    },
-    {
-      "seniority": "group",
       "years_min": 8.0,
-      "count": 1
+      "count": 3
     },
     {
       "seniority": "head",
@@ -307,18 +288,23 @@
     },
     {
       "seniority": "mid",
-      "years_min": 5.0,
-      "count": 1
+      "years_min": 4.0,
+      "count": 3
     },
     {
       "seniority": "mid",
-      "years_min": 10.0,
-      "count": 1
+      "years_min": 5.0,
+      "count": 3
     },
     {
       "seniority": "mid_senior",
       "years_min": 5.0,
       "count": 2
+    },
+    {
+      "seniority": "principal",
+      "years_min": 8.0,
+      "count": 1
     },
     {
       "seniority": "senior",
@@ -328,7 +314,7 @@
     {
       "seniority": "senior",
       "years_min": 5.0,
-      "count": 3
+      "count": 6
     }
   ],
   "industry_experience_bubble": [
@@ -339,7 +325,7 @@
     },
     {
       "industry": "ecommerce_marketplace",
-      "years_min": 3.0,
+      "years_min": 5.0,
       "count": 1
     },
     {
@@ -350,7 +336,7 @@
     {
       "industry": "ecommerce_marketplace",
       "years_min": 8.0,
-      "count": 1
+      "count": 2
     },
     {
       "industry": "fintech_payments",
@@ -359,13 +345,8 @@
     },
     {
       "industry": "fintech_payments",
-      "years_min": 2.0,
-      "count": 2
-    },
-    {
-      "industry": "fintech_payments",
       "years_min": 3.0,
-      "count": 3
+      "count": 1
     },
     {
       "industry": "fintech_payments",
@@ -374,27 +355,57 @@
     },
     {
       "industry": "fintech_payments",
-      "years_min": 10.0,
+      "years_min": 8.0,
       "count": 1
     },
     {
-      "industry": "logistics_supply_chain",
-      "years_min": 6.0,
+      "industry": "healthtech_biotech",
+      "years_min": 2.0,
+      "count": 1
+    },
+    {
+      "industry": "healthtech_biotech",
+      "years_min": 3.0,
+      "count": 2
+    },
+    {
+      "industry": "healthtech_biotech",
+      "years_min": 4.0,
+      "count": 3
+    },
+    {
+      "industry": "healthtech_biotech",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
+      "industry": "media_entertainment",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
+      "industry": "mobility_automotive",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
+      "industry": "other",
+      "years_min": 2.0,
       "count": 1
     },
     {
       "industry": "other",
       "years_min": 5.0,
-      "count": 2
+      "count": 4
     },
     {
       "industry": "saas_b2b_software",
       "years_min": 3.0,
-      "count": 1
+      "count": 2
     },
     {
       "industry": "saas_b2b_software",
-      "years_min": 5.0,
+      "years_min": 8.0,
       "count": 1
     }
   ],
@@ -407,34 +418,34 @@
       },
       {
         "label": "3-5",
-        "count": 11
+        "count": 19
       },
       {
         "label": "6-8",
-        "count": 5
+        "count": 7
       },
       {
         "label": "9+",
-        "count": 1
+        "count": 0
       }
     ],
-    "n_extractable": 20
+    "n_extractable": 29
   },
   "ai": {
-    "n_enriched": 69,
-    "n_ai_focus": 16,
-    "n_ai_skills": 13,
-    "ai_focus_pct": 23,
-    "ai_skills_pct": 19
+    "n_enriched": 48,
+    "n_ai_focus": 19,
+    "n_ai_skills": 18,
+    "ai_focus_pct": 40,
+    "ai_skills_pct": 38
   },
   "source": [
     {
-      "label": "jsearch",
-      "count": 44
+      "label": "ats",
+      "count": 30
     },
     {
-      "label": "ats",
-      "count": 35
+      "label": "jsearch",
+      "count": 25
     },
     {
       "label": "arbeitnow",
@@ -444,23 +455,19 @@
   "companies": {
     "top20": [
       {
-        "label": "Scalable Capital",
-        "count": 9
-      },
-      {
         "label": "Delivery Hero",
-        "count": 7
+        "count": 6
       },
       {
         "label": "Contentful",
-        "count": 7
-      },
-      {
-        "label": "N26",
         "count": 6
       },
       {
         "label": "GetYourGuide",
+        "count": 5
+      },
+      {
+        "label": "Scalable Capital",
         "count": 4
       },
       {
@@ -468,65 +475,69 @@
         "count": 4
       },
       {
-        "label": "SumUp",
+        "label": "N26",
+        "count": 4
+      },
+      {
+        "label": "Patronus",
         "count": 3
       },
       {
-        "label": "Freenow",
+        "label": "Hireza",
+        "count": 3
+      },
+      {
+        "label": "SumUp",
         "count": 2
       },
       {
-        "label": "Bermark Incoming GmbH",
-        "count": 2
-      },
-      {
-        "label": "Project Management Institute",
-        "count": 2
-      },
-      {
-        "label": "LYNX Berlin",
+        "label": "W\u00fcrth Elektronik GmbH & Co. KG",
         "count": 1
       },
       {
-        "label": "Live Nation",
+        "label": "Conductor LLC",
         "count": 1
       },
       {
-        "label": "Gr\u00f6ner-Schulze",
+        "label": "Luxoft Germany",
         "count": 1
       },
       {
-        "label": "Berliner Verlag GmbH",
+        "label": "Kaufland e-commerce",
         "count": 1
       },
       {
-        "label": "Goodlive GmbH",
+        "label": "eBay",
         "count": 1
       },
       {
-        "label": "Disrupted Cloud",
+        "label": "HERE Technologies",
         "count": 1
       },
       {
-        "label": "Growing Imaginations GmbH",
+        "label": "Recare Deutschland GmbH",
         "count": 1
       },
       {
-        "label": "Next Ventures",
+        "label": "Redcare Pharmacy",
         "count": 1
       },
       {
-        "label": "Klim GmbH",
+        "label": "eRecht24 GmbH & Co. KG",
         "count": 1
       },
       {
-        "label": "Recrudo - Kosmetik Jobs",
+        "label": "gematik GmbH",
+        "count": 1
+      },
+      {
+        "label": "gematik Gesellschaft f\u00fcr Telematikanwendungen der Gesundheitskarte mbH",
         "count": 1
       }
     ],
-    "n_companies": 46,
-    "top10_share": 46,
-    "top10_pct": 56,
-    "multi_hiring": 10
+    "n_companies": 30,
+    "top10_share": 38,
+    "top10_pct": 66,
+    "multi_hiring": 9
   }
 }
