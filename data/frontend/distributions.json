@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 17
+      "count": 23
     },
     {
       "label": "mid_senior",
@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 17
+      "count": 23
     },
     {
       "label": "lead",
@@ -30,49 +30,53 @@
     },
     {
       "label": "unknown",
-      "count": 4
+      "count": 7
     }
   ],
   "work_mode": [
     {
       "label": "onsite",
-      "count": 23
+      "count": 27
     },
     {
       "label": "unknown",
-      "count": 20
+      "count": 22
     },
     {
       "label": "remote",
-      "count": 6
+      "count": 9
     },
     {
       "label": "hybrid",
-      "count": 4
+      "count": 8
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 38
+      "count": 46
+    },
+    {
+      "label": "de",
+      "count": 12
     },
     {
       "label": "unknown",
       "count": 10
-    },
-    {
-      "label": "de",
-      "count": 5
     }
   ],
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 28
+      "count": 36
     },
     {
       "label": "must",
-      "count": 11
+      "count": 18
     },
     {
       "label": "unclassified",
@@ -86,15 +90,15 @@
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 12
+      "count": 19
     },
     {
       "label": "technical",
-      "count": 8
+      "count": 10
     },
     {
       "label": "customer_facing",
-      "count": 18
+      "count": 20
     },
     {
       "label": "platform",
@@ -102,7 +106,7 @@
     },
     {
       "label": "growth",
-      "count": 1
+      "count": 2
     },
     {
       "label": "internal_ops",
@@ -110,40 +114,44 @@
     },
     {
       "label": "unclassified",
-      "count": 2
+      "count": 5
     }
   ],
   "industry": [],
   "industry_normalized": [
     {
+      "label": "other",
+      "count": 16
+    },
+    {
       "label": "fintech_payments",
-      "count": 13
+      "count": 14
     },
     {
       "label": "saas_b2b_software",
-      "count": 10
-    },
-    {
-      "label": "other",
-      "count": 8
+      "count": 11
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 7
+      "count": 8
     },
     {
       "label": "healthtech_biotech",
-      "count": 3
+      "count": 5
     },
     {
       "label": "consumer_apps",
-      "count": 2
+      "count": 3
+    },
+    {
+      "label": "mobility_automotive",
+      "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 51
+      "count": 66
     },
     {
       "label": "no",
@@ -153,7 +161,7 @@
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 51
+      "count": 66
     },
     {
       "label": "no",
@@ -167,11 +175,11 @@
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 27
+      "count": 36
     },
     {
       "label": "none",
-      "count": 10
+      "count": 14
     },
     {
       "label": "unclear",
@@ -179,15 +187,21 @@
     },
     {
       "label": "soft",
-      "count": 6
+      "count": 8
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 7,
-      "soft": 1,
-      "total": 8
+      "hard": 8,
+      "soft": 2,
+      "total": 10
+    },
+    {
+      "domain": "ecommerce_marketplace",
+      "hard": 5,
+      "soft": 0,
+      "total": 5
     },
     {
       "domain": "saas_b2b_software",
@@ -196,16 +210,10 @@
       "total": 4
     },
     {
-      "domain": "ecommerce_marketplace",
-      "hard": 3,
-      "soft": 0,
-      "total": 3
-    },
-    {
       "domain": "healthtech",
-      "hard": 2,
+      "hard": 3,
       "soft": 1,
-      "total": 3
+      "total": 4
     },
     {
       "domain": "ai_ml_data_products",
@@ -214,13 +222,19 @@
       "total": 2
     },
     {
+      "domain": "enterprise_internal_tools",
+      "hard": 1,
+      "soft": 0,
+      "total": 1
+    },
+    {
       "domain": "consumer_digital_products",
       "hard": 1,
       "soft": 0,
       "total": 1
     },
     {
-      "domain": "enterprise_internal_tools",
+      "domain": "mobility_automotive",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -266,7 +280,7 @@
     {
       "seniority": "mid",
       "years_min": 3.0,
-      "count": 2
+      "count": 5
     },
     {
       "seniority": "mid",
@@ -291,12 +305,12 @@
     {
       "seniority": "senior",
       "years_min": 3.0,
-      "count": 2
+      "count": 3
     },
     {
       "seniority": "senior",
       "years_min": 5.0,
-      "count": 5
+      "count": 6
     },
     {
       "seniority": "senior",
@@ -304,9 +318,14 @@
       "count": 1
     },
     {
+      "seniority": "senior",
+      "years_min": 7.0,
+      "count": 1
+    },
+    {
       "seniority": "unknown",
       "years_min": 5.0,
-      "count": 1
+      "count": 2
     }
   ],
   "industry_experience_bubble": [
@@ -322,6 +341,11 @@
     },
     {
       "industry": "ecommerce_marketplace",
+      "years_min": 3.0,
+      "count": 1
+    },
+    {
+      "industry": "ecommerce_marketplace",
       "years_min": 4.0,
       "count": 2
     },
@@ -333,7 +357,7 @@
     {
       "industry": "ecommerce_marketplace",
       "years_min": 7.0,
-      "count": 1
+      "count": 2
     },
     {
       "industry": "fintech_payments",
@@ -343,7 +367,7 @@
     {
       "industry": "fintech_payments",
       "years_min": 3.0,
-      "count": 2
+      "count": 3
     },
     {
       "industry": "fintech_payments",
@@ -352,6 +376,16 @@
     },
     {
       "industry": "healthtech_biotech",
+      "years_min": 3.0,
+      "count": 2
+    },
+    {
+      "industry": "healthtech_biotech",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
+      "industry": "mobility_automotive",
       "years_min": 5.0,
       "count": 1
     },
@@ -363,7 +397,7 @@
     {
       "industry": "other",
       "years_min": 5.0,
-      "count": 2
+      "count": 3
     },
     {
       "industry": "other",
@@ -400,38 +434,38 @@
       },
       {
         "label": "3-5",
-        "count": 16
+        "count": 22
       },
       {
         "label": "6-8",
-        "count": 3
+        "count": 4
       },
       {
         "label": "9+",
         "count": 1
       }
     ],
-    "n_extractable": 24
+    "n_extractable": 31
   },
   "ai": {
-    "n_enriched": 43,
-    "n_ai_focus": 15,
-    "n_ai_skills": 14,
-    "ai_focus_pct": 35,
-    "ai_skills_pct": 33
+    "n_enriched": 58,
+    "n_ai_focus": 18,
+    "n_ai_skills": 15,
+    "ai_focus_pct": 31,
+    "ai_skills_pct": 26
   },
   "source": [
+    {
+      "label": "jsearch",
+      "count": 36
+    },
     {
       "label": "ats",
       "count": 28
     },
     {
-      "label": "jsearch",
-      "count": 22
-    },
-    {
       "label": "arbeitnow",
-      "count": 3
+      "count": 4
     }
   ],
   "companies": {
@@ -449,11 +483,11 @@
         "count": 5
       },
       {
-        "label": "Scalable Capital",
+        "label": "SumUp",
         "count": 4
       },
       {
-        "label": "SumUp",
+        "label": "Scalable Capital",
         "count": 4
       },
       {
@@ -461,16 +495,12 @@
         "count": 3
       },
       {
-        "label": "N26",
-        "count": 2
-      },
-      {
         "label": "Faircado",
         "count": 2
       },
       {
-        "label": "GLS/NXT",
-        "count": 1
+        "label": "N26",
+        "count": 2
       },
       {
         "label": "Outfittery GmbH",
@@ -485,6 +515,10 @@
         "count": 1
       },
       {
+        "label": "GLS/NXT",
+        "count": 1
+      },
+      {
         "label": "Thomann GmbH",
         "count": 1
       },
@@ -493,15 +527,11 @@
         "count": 1
       },
       {
-        "label": "JetBrains",
-        "count": 1
-      },
-      {
         "label": "Spheres",
         "count": 1
       },
       {
-        "label": "Amazon Online Germany GmbH",
+        "label": "JetBrains",
         "count": 1
       },
       {
@@ -515,11 +545,15 @@
       {
         "label": "Klim GmbH",
         "count": 1
+      },
+      {
+        "label": "Amazon Online Germany GmbH",
+        "count": 1
       }
     ],
-    "n_companies": 29,
+    "n_companies": 44,
     "top10_share": 34,
-    "top10_pct": 64,
+    "top10_pct": 50,
     "multi_hiring": 8
   }
 }
