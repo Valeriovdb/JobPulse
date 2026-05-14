@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-05-13T09:53:02.482228+00:00",
-  "data_version": "sha256:0be76dc41bd0cdb2",
+  "generated_at": "2026-05-14T09:41:27.700859+00:00",
+  "data_version": "sha256:55bb1d7c2d657445",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Not Dominant",
-      "subtitle": "A significant portion of roles do not require German, highlighting accessibility issues.",
+      "title": "German Language Skills Are Not Dominant Requirement",
+      "subtitle": "A significant majority of roles do not require German, highlighting accessibility challenges.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:52:20.419553+00:00",
+      "generated_at": "2026-05-14T09:41:19.852221+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PM Roles Dominate, Creating Significant Imbalance",
-      "subtitle": "A substantial gap exists between Core PM and Customer-facing PM roles, highlighting a concentration in product management.",
+      "title": "Core PMs Dominate, Leaving Customer-Facing Roles Limited",
+      "subtitle": "A significant gap exists between Core PMs and Customer-facing PMs, indicating a concentration in product management roles.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:52:21.397772+00:00",
+      "generated_at": "2026-05-14T09:41:21.276390+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
       "title": "Senior Roles Dominate Workforce Composition",
-      "subtitle": "Over half of the workforce is in senior positions, indicating a strong emphasis on experienced talent.",
+      "subtitle": "With 58% of positions held by senior professionals, the market is clearly senior-heavy.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:52:23.170741+00:00",
+      "generated_at": "2026-05-14T09:41:22.838637+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates Despite Remote Options",
-      "subtitle": "A significant portion of the workforce prefers on-site arrangements over hybrid and remote work.",
+      "title": "Work Modes Reflect Diverse Preferences Among Employees",
+      "subtitle": "A significant portion of the workforce favors a mix of remote, hybrid, and on-site arrangements.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:52:59.324000+00:00",
+      "generated_at": "2026-05-14T09:41:24.591803+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, limiting remote access.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:53:00.106457+00:00",
+      "generated_at": "2026-05-14T09:41:25.761546+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream",
-      "subtitle": "36% of roles prioritize AI responsibilities, with 34% requiring AI skills.",
+      "title": "AI Expertise is Now Mainstream in Job Market",
+      "subtitle": "38% of roles require AI as a core responsibility or skill.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:53:00.783408+00:00",
+      "generated_at": "2026-05-14T09:41:26.319552+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Strong Balance and Diversity",
-      "subtitle": "All roles are equally represented, but unclassified positions raise concerns about accessibility.",
+      "title": "Industry Roles Exhibit Notable Balance and Diversity",
+      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
       "source": "llm",
-      "generated_at": "2026-05-13T09:53:01.615753+00:00",
+      "generated_at": "2026-05-14T09:41:26.984734+00:00",
       "model": "gpt-4o-mini"
     }
   }

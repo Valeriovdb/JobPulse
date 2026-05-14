@@ -3769,6 +3769,10 @@
     {
       "date": "2026-05-13",
       "count": 19
+    },
+    {
+      "date": "2026-05-14",
+      "count": 16
     }
   ],
   "active_per_day": [
@@ -3860,8 +3864,8 @@
   "lifespan": {
     "median_days": 1,
     "mean_days": 3.3,
-    "pct_gone_week": 88,
-    "n_inactive": 406
+    "pct_gone_week": 87,
+    "n_inactive": 417
   },
   "seniority_mix": {
     "dates": [
