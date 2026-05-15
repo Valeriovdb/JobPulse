@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-05-14T09:41:27.700859+00:00",
-  "data_version": "sha256:55bb1d7c2d657445",
+  "generated_at": "2026-05-15T09:54:34.123902+00:00",
+  "data_version": "sha256:211f8c98cb60f63e",
   "charts": {
     "german_requirement": {
-      "title": "German Language Skills Are Not Dominant Requirement",
-      "subtitle": "A significant majority of roles do not require German, highlighting accessibility challenges.",
+      "title": "German Language Requirement is Mostly Non-Dominant",
+      "subtitle": "A significant majority of roles do not require German, highlighting accessibility but with a notable share of unclassified positions.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:19.852221+00:00",
+      "generated_at": "2026-05-15T09:54:27.267539+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate, Leaving Customer-Facing Roles Limited",
-      "subtitle": "A significant gap exists between Core PMs and Customer-facing PMs, indicating a concentration in product management roles.",
+      "title": "Core PMs Lead with Slight Edge Over Customer-facing PMs",
+      "subtitle": "A narrow 2-point gap highlights a balanced yet competitive landscape in product management roles.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:21.276390+00:00",
+      "generated_at": "2026-05-15T09:54:28.339293+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
       "title": "Senior Roles Dominate Workforce Composition",
-      "subtitle": "With 58% of positions held by senior professionals, the market is clearly senior-heavy.",
+      "subtitle": "68% of positions are filled by senior-level professionals, indicating a senior-heavy market.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:22.838637+00:00",
+      "generated_at": "2026-05-15T09:54:29.276841+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Work Modes Reflect Diverse Preferences Among Employees",
-      "subtitle": "A significant portion of the workforce favors a mix of remote, hybrid, and on-site arrangements.",
+      "title": "Flexibility in Work Modes Remains Uncertain",
+      "subtitle": "A significant portion of roles lacks clear classification, blending remote, hybrid, and onsite expectations.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:24.591803+00:00",
+      "generated_at": "2026-05-15T09:54:30.705598+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:25.761546+00:00",
+      "generated_at": "2026-05-15T09:54:31.201823+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Now Mainstream in Job Market",
-      "subtitle": "38% of roles require AI as a core responsibility or skill.",
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "40% of roles prioritize AI responsibilities, with 35% requiring AI skills.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:26.319552+00:00",
+      "generated_at": "2026-05-15T09:54:32.574166+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Notable Balance and Diversity",
-      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
+      "title": "Industry Roles Exhibit Strong Balance and Diversity",
+      "subtitle": "No single role dominates, but unclassified positions limit overall accessibility.",
       "source": "llm",
-      "generated_at": "2026-05-14T09:41:26.984734+00:00",
+      "generated_at": "2026-05-15T09:54:33.516694+00:00",
       "model": "gpt-4o-mini"
     }
   }
