@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-05-15T09:54:34.123902+00:00",
-  "data_version": "sha256:211f8c98cb60f63e",
+  "generated_at": "2026-05-18T11:13:35.234749+00:00",
+  "data_version": "sha256:017b4138bf753e11",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Mostly Non-Dominant",
-      "subtitle": "A significant majority of roles do not require German, highlighting accessibility but with a notable share of unclassified positions.",
+      "title": "Majority of Roles Do Not Require German Skills",
+      "subtitle": "A significant gap exists, with most positions accessible without German proficiency.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:27.267539+00:00",
+      "generated_at": "2026-05-18T11:13:27.796421+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Lead with Slight Edge Over Customer-facing PMs",
-      "subtitle": "A narrow 2-point gap highlights a balanced yet competitive landscape in product management roles.",
+      "title": "Customer-facing PMs Dominate Role Landscape",
+      "subtitle": "A significant gap exists between customer-facing and technical PM roles, highlighting a concentration in specialized positions.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:28.339293+00:00",
+      "generated_at": "2026-05-18T11:13:28.758485+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Senior Roles Dominate Workforce Composition",
-      "subtitle": "68% of positions are filled by senior-level professionals, indicating a senior-heavy market.",
+      "title": "Senior Roles Dominate the Market",
+      "subtitle": "With 63% of positions held by senior professionals, the market is clearly senior-heavy.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:29.276841+00:00",
+      "generated_at": "2026-05-18T11:13:29.556582+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Flexibility in Work Modes Remains Uncertain",
-      "subtitle": "A significant portion of roles lacks clear classification, blending remote, hybrid, and onsite expectations.",
+      "title": "On-site Work Dominates with Limited Flexibility",
+      "subtitle": "A significant majority of roles require on-site presence, with minimal remote options available.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:30.705598+00:00",
+      "generated_at": "2026-05-18T11:13:30.665187+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
+      "subtitle": "All job opportunities are concentrated in Berlin, with no remote or unclear options available.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:31.201823+00:00",
+      "generated_at": "2026-05-18T11:13:32.374034+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream in Job Market",
-      "subtitle": "40% of roles prioritize AI responsibilities, with 35% requiring AI skills.",
+      "title": "AI Expertise is Now Mainstream in Job Market",
+      "subtitle": "32% of roles demand AI as a core responsibility or skill.",
       "source": "llm",
-      "generated_at": "2026-05-15T09:54:32.574166+00:00",
+      "generated_at": "2026-05-18T11:13:33.606448+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Strong Balance and Diversity",
-      "subtitle": "No single role dominates, but unclassified positions limit overall accessibility.",
-      "source": "llm",
-      "generated_at": "2026-05-15T09:54:33.516694+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-05-18T11:13:34.468719+00:00",
+      "model": null
     }
   }
 }
