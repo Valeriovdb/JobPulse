@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-06-11T11:29:33.251825+00:00",
-  "data_version": "sha256:ed2da45f08b03519",
+  "generated_at": "2026-06-12T11:09:41.774521+00:00",
+  "data_version": "sha256:2c5faa9d2ab0dfcf",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Not Dominant",
-      "subtitle": "Nearly half of roles do not require German, highlighting accessibility issues.",
+      "title": "German Language Skills Are Not Dominant Requirement",
+      "subtitle": "Half of roles do not require German, highlighting accessibility issues and a significant gap in unclassified positions.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:25.598611+00:00",
+      "generated_at": "2026-06-12T11:09:35.573811+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate, Leaving Technical Roles Behind",
-      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting an imbalance in the product management landscape.",
+      "title": "Core PMs Dominate with Notable Imbalance",
+      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting a concentration in generalist positions.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:27.528289+00:00",
+      "generated_at": "2026-06-12T11:09:36.525005+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Senior Roles Dominate the Market",
-      "subtitle": "Over half of the positions are filled by senior-level professionals, indicating a strong demand for experienced talent.",
+      "title": "Senior Roles Dominate Workforce Composition",
+      "subtitle": "Over half of the workforce consists of senior-level positions, indicating a strong senior-heavy environment.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:28.708178+00:00",
+      "generated_at": "2026-06-12T11:09:37.420489+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Work Modes Reflect Diverse Preferences Among Employees",
-      "subtitle": "A significant portion of the workforce favors hybrid and onsite arrangements, indicating a need for flexible work options.",
+      "title": "Flexibility in Work Modes Remains Uncertain",
+      "subtitle": "A significant portion of roles lacks clear classification, impacting remote and hybrid work expectations.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:29.857391+00:00",
+      "generated_at": "2026-06-12T11:09:38.488061+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
       "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:30.865203+00:00",
+      "generated_at": "2026-06-12T11:09:39.312983+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream",
-      "subtitle": "43% of roles prioritize AI responsibilities, with 40% requiring AI skills.",
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "42% of roles prioritize AI responsibilities, with 39% requiring AI skills.",
       "source": "llm",
-      "generated_at": "2026-06-11T11:29:31.582330+00:00",
+      "generated_at": "2026-06-12T11:09:40.066457+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "PM demand spans multiple industries",
-      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
-      "source": "fallback",
-      "generated_at": "2026-06-11T11:29:32.588503+00:00",
-      "model": null
+      "title": "Industry Roles Are Equally Distributed Across Categories",
+      "subtitle": "No single category dominates, but unclassified roles limit overall accessibility.",
+      "source": "llm",
+      "generated_at": "2026-06-12T11:09:40.960404+00:00",
+      "model": "gpt-4o-mini"
     }
   }
 }
