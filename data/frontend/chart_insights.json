@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-06-17T11:59:16.217174+00:00",
-  "data_version": "sha256:fc7597ac4eb45319",
+  "generated_at": "2026-06-18T11:15:21.222527+00:00",
+  "data_version": "sha256:42fc4ff8d7b52bf4",
   "charts": {
     "german_requirement": {
       "title": "Majority of Roles Do Not Require German Skills",
-      "subtitle": "A significant share of positions remains unclassified, highlighting accessibility challenges for non-German speakers.",
+      "subtitle": "A significant gap exists, with over half of positions accessible without German proficiency.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:10.861273+00:00",
+      "generated_at": "2026-06-18T11:15:14.651260+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate, Leaving Technical Roles Behind",
-      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting an imbalance in the product management landscape.",
+      "title": "Core PMs Lead, But Technical Roles Trail Behind",
+      "subtitle": "A significant gap exists between Core and Technical PM roles, indicating potential constraints in talent accessibility.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:12.041585+00:00",
+      "generated_at": "2026-06-18T11:15:15.681450+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Senior Roles Dominate Workforce Composition",
-      "subtitle": "With 56% of positions held by senior professionals, the market is clearly senior-heavy.",
+      "title": "Senior Roles Dominate the Market",
+      "subtitle": "With 57% of positions held by senior professionals, the market is clearly senior-heavy.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:12.788492+00:00",
+      "generated_at": "2026-06-18T11:15:16.590155+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Remote Work Dominates with Significant Flexibility",
-      "subtitle": "A balanced work mode reveals a strong preference for remote arrangements over hybrid and onsite options.",
+      "title": "On-site Work Dominates Despite Remote Options",
+      "subtitle": "A significant portion of employees still prefer on-site work over hybrid and remote arrangements.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:13.450776+00:00",
+      "generated_at": "2026-06-18T11:15:17.700030+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
       "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:14.146904+00:00",
+      "generated_at": "2026-06-18T11:15:18.536808+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
       "title": "AI Expertise is Becoming Mainstream in Job Market",
-      "subtitle": "Nearly half of roles now demand AI responsibilities or skills.",
+      "subtitle": "A significant portion of roles now prioritize AI responsibilities and skills.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:14.798928+00:00",
+      "generated_at": "2026-06-18T11:15:19.471866+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Are Equally Distributed Across Categories",
-      "subtitle": "No single category dominates, but unclassified roles limit overall accessibility.",
+      "title": "Industry Roles Are Equally Distributed Yet Unclassified",
+      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
       "source": "llm",
-      "generated_at": "2026-06-17T11:59:15.426149+00:00",
+      "generated_at": "2026-06-18T11:15:20.233164+00:00",
       "model": "gpt-4o-mini"
     }
   }

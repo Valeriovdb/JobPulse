@@ -3865,6 +3865,10 @@
     {
       "date": "2026-06-17",
       "count": 17
+    },
+    {
+      "date": "2026-06-18",
+      "count": 9
     }
   ],
   "active_per_day": [
@@ -3957,7 +3961,7 @@
     "median_days": 1,
     "mean_days": 5.2,
     "pct_gone_week": 83,
-    "n_inactive": 772
+    "n_inactive": 784
   },
   "seniority_mix": {
     "dates": [
