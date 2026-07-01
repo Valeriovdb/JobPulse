@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-06-30T10:38:22.940953+00:00",
-  "data_version": "sha256:f7e32b11f74e43fb",
+  "generated_at": "2026-07-01T10:50:26.607142+00:00",
+  "data_version": "sha256:e0aba4fc2d593d9e",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Not Dominant",
-      "subtitle": "A significant portion of roles do not require German, highlighting accessibility issues.",
+      "title": "Majority of Roles Do Not Require German Skills",
+      "subtitle": "A significant share of positions remains unclassified, highlighting accessibility challenges in the job market.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:15.775394+00:00",
+      "generated_at": "2026-07-01T10:50:19.635519+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate with Notable Imbalance",
-      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting a concentration in product management types.",
+      "title": "Core PMs Dominate Despite Fragmented Landscape",
+      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting an imbalance in the market.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:16.753614+00:00",
+      "generated_at": "2026-07-01T10:50:20.778674+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
       "title": "Senior Roles Dominate the Workforce",
-      "subtitle": "Over half of the positions are held by senior professionals, indicating a strong senior-heavy market.",
+      "subtitle": "More than half of positions are held by senior professionals, indicating a strong senior-heavy market.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:17.482384+00:00",
+      "generated_at": "2026-07-01T10:50:21.873074+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Fragmented Work Modes Indicate Uncertain Flexibility",
-      "subtitle": "A significant portion of roles remain unclassified, highlighting mixed expectations for remote and on-site work.",
+      "title": "Flexibility in Work Modes Remains Uncertain",
+      "subtitle": "A significant portion of employees experience mixed work arrangements, with remote and hybrid options leading.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:18.279864+00:00",
+      "generated_at": "2026-07-01T10:50:22.911067+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, limiting remote access.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:19.428077+00:00",
+      "generated_at": "2026-07-01T10:50:23.786576+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream in Job Market",
-      "subtitle": "Nearly half of roles now require AI skills or focus on AI responsibilities.",
+      "title": "AI Expertise is Now Mainstream in Job Market",
+      "subtitle": "Nearly half of roles demand AI as a core responsibility or require related skills.",
       "source": "llm",
-      "generated_at": "2026-06-30T10:38:20.262474+00:00",
+      "generated_at": "2026-07-01T10:50:24.726267+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-06-30T10:38:21.182843+00:00",
+      "generated_at": "2026-07-01T10:50:25.818901+00:00",
       "model": null
     }
   }
