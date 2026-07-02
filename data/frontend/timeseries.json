@@ -147,7 +147,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 10,
-      "jobs_added": 10,
+      "jobs_added": 8,
       "jobs_removed": 0
     },
     {
@@ -1697,7 +1697,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 6,
-      "jobs_added": 2,
+      "jobs_added": 1,
       "jobs_removed": 0
     },
     {
@@ -2687,7 +2687,7 @@
       "language": "de",
       "german_req": "must",
       "active_jobs": 1,
-      "jobs_added": 1,
+      "jobs_added": 0,
       "jobs_removed": 0
     },
     {
@@ -3087,7 +3087,7 @@
       "language": "en",
       "german_req": "must",
       "active_jobs": 1,
-      "jobs_added": 0,
+      "jobs_added": 1,
       "jobs_removed": 0
     },
     {
@@ -3167,7 +3167,7 @@
       "language": "de",
       "german_req": "not_mentioned",
       "active_jobs": 1,
-      "jobs_added": 0,
+      "jobs_added": 1,
       "jobs_removed": 0
     },
     {
@@ -3187,7 +3187,7 @@
       "language": "de",
       "german_req": "must",
       "active_jobs": 1,
-      "jobs_added": 0,
+      "jobs_added": 1,
       "jobs_removed": 0
     },
     {
@@ -3692,7 +3692,7 @@
     },
     {
       "date": "2026-04-16",
-      "count": 17
+      "count": 16
     },
     {
       "date": "2026-04-17",
@@ -3704,7 +3704,7 @@
     },
     {
       "date": "2026-04-21",
-      "count": 18
+      "count": 17
     },
     {
       "date": "2026-04-22",
@@ -3712,7 +3712,7 @@
     },
     {
       "date": "2026-04-23",
-      "count": 17
+      "count": 20
     },
     {
       "date": "2026-04-24",
@@ -3720,7 +3720,7 @@
     },
     {
       "date": "2026-04-27",
-      "count": 22
+      "count": 21
     },
     {
       "date": "2026-04-28",
@@ -3768,7 +3768,7 @@
     },
     {
       "date": "2026-05-13",
-      "count": 19
+      "count": 18
     },
     {
       "date": "2026-05-14",
@@ -3796,7 +3796,7 @@
     },
     {
       "date": "2026-05-22",
-      "count": 19
+      "count": 20
     },
     {
       "date": "2026-05-25",
@@ -3816,7 +3816,7 @@
     },
     {
       "date": "2026-06-01",
-      "count": 21
+      "count": 22
     },
     {
       "date": "2026-06-02",
@@ -3824,7 +3824,7 @@
     },
     {
       "date": "2026-06-03",
-      "count": 17
+      "count": 18
     },
     {
       "date": "2026-06-04",
@@ -3856,7 +3856,7 @@
     },
     {
       "date": "2026-06-15",
-      "count": 18
+      "count": 17
     },
     {
       "date": "2026-06-16",
@@ -3880,19 +3880,19 @@
     },
     {
       "date": "2026-06-23",
-      "count": 14
+      "count": 15
     },
     {
       "date": "2026-06-24",
-      "count": 10
+      "count": 12
     },
     {
       "date": "2026-06-25",
-      "count": 11
+      "count": 17
     },
     {
       "date": "2026-06-26",
-      "count": 7
+      "count": 8
     },
     {
       "date": "2026-06-29",
@@ -3900,11 +3900,15 @@
     },
     {
       "date": "2026-06-30",
-      "count": 28
+      "count": 15
     },
     {
       "date": "2026-07-01",
-      "count": 16
+      "count": 12
+    },
+    {
+      "date": "2026-07-02",
+      "count": 8
     }
   ],
   "active_per_day": [
@@ -3995,9 +3999,9 @@
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 6.0,
-    "pct_gone_week": 83,
-    "n_inactive": 911
+    "mean_days": 6.2,
+    "pct_gone_week": 82,
+    "n_inactive": 929
   },
   "seniority_mix": {
     "dates": [
