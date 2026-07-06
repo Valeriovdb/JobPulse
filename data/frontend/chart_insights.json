@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-07-03T10:13:44.456456+00:00",
-  "data_version": "sha256:844588738495a824",
+  "generated_at": "2026-07-06T11:42:58.394751+00:00",
+  "data_version": "sha256:fb1183f9befd8831",
   "charts": {
     "german_requirement": {
-      "title": "Majority of Roles Do Not Require German Skills",
-      "subtitle": "A significant share of positions remains unclassified, highlighting accessibility challenges in the job market.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:37.495381+00:00",
-      "model": "gpt-4o-mini"
+      "title": "German requirements vary across roles",
+      "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:48.063937+00:00",
+      "model": null
     },
     "pm_type": {
-      "title": "Core PMs Lead, But Technical Roles Close Behind",
-      "subtitle": "A slight gap indicates a competitive landscape for product management roles.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:38.403444+00:00",
-      "model": "gpt-4o-mini"
+      "title": "Growth PM roles lead the market",
+      "subtitle": "Growth PM profiles are the most in-demand PM type right now.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:49.734094+00:00",
+      "model": null
     },
     "seniority": {
-      "title": "Mid-level Roles Are Most Prevalent",
-      "subtitle": "Mid-level positions comprise 33% of the workforce, while senior roles account for 44%.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:39.334594+00:00",
-      "model": "gpt-4o-mini"
+      "title": "Hiring is spread across multiple levels",
+      "subtitle": "No single seniority group clearly dominates the current market.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:51.076236+00:00",
+      "model": null
     },
     "work_mode": {
-      "title": "Fragmented Work Modes Indicate Uncertain Flexibility",
-      "subtitle": "A significant portion of the workforce remains unclassified, highlighting mixed expectations for remote and on-site arrangements.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:40.016181+00:00",
-      "model": "gpt-4o-mini"
+      "title": "Work style is evenly split",
+      "subtitle": "Remote, hybrid, and on-site roles are all represented in the current market.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:52.623751+00:00",
+      "model": null
     },
     "location": {
-      "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:41.528707+00:00",
-      "model": "gpt-4o-mini"
+      "title": "Roles are heavily concentrated in Berlin",
+      "subtitle": "89% of positions are Berlin-based, with limited availability elsewhere.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:54.147577+00:00",
+      "model": null
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream",
-      "subtitle": "Nearly half of roles now prioritize AI responsibilities and skills.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:42.545854+00:00",
-      "model": "gpt-4o-mini"
+      "title": "AI focus remains a niche requirement",
+      "subtitle": "AI-specific roles are present but represent a small share of the market at 0%.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:55.547570+00:00",
+      "model": null
     },
     "industry": {
-      "title": "Industry Roles Are Equally Distributed Yet Unclassified",
-      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
-      "source": "llm",
-      "generated_at": "2026-07-03T10:13:43.489846+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-07-06T11:42:57.016965+00:00",
+      "model": null
     }
   }
 }
