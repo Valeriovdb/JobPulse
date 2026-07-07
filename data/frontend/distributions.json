@@ -1,8 +1,12 @@
 {
   "seniority": [
     {
+      "label": "junior",
+      "count": 1
+    },
+    {
       "label": "mid",
-      "count": 18
+      "count": 22
     },
     {
       "label": "mid_senior",
@@ -10,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 13
+      "count": 19
     },
     {
       "label": "lead",
@@ -22,25 +26,25 @@
     },
     {
       "label": "group",
-      "count": 5
+      "count": 6
     },
     {
       "label": "principal",
-      "count": 3
+      "count": 4
     },
     {
       "label": "unknown",
-      "count": 7
+      "count": 8
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 35
+      "count": 45
     },
     {
       "label": "hybrid",
-      "count": 9
+      "count": 12
     },
     {
       "label": "remote",
@@ -49,32 +53,36 @@
     {
       "label": "hybrid_3d",
       "count": 3
+    },
+    {
+      "label": "onsite",
+      "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
+      "count": 29
+    },
+    {
+      "label": "de",
       "count": 22
     },
     {
       "label": "unknown",
       "count": 17
-    },
-    {
-      "label": "de",
-      "count": 15
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 54
+      "count": 68
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 3
+      "count": 4
     },
     {
       "label": "platform",
@@ -82,11 +90,11 @@
     },
     {
       "label": "data_ai",
-      "count": 2
+      "count": 5
     },
     {
       "label": "growth",
-      "count": 10
+      "count": 14
     }
   ],
   "industry": [],
@@ -94,19 +102,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 68
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 68
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 68
     }
   ],
   "domain_req_breakdown": [],
@@ -114,7 +122,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 16,
+    "n_enriched": 24,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -122,16 +130,16 @@
   },
   "source": [
     {
+      "label": "jsearch",
+      "count": 37
+    },
+    {
       "label": "ats",
       "count": 28
     },
     {
-      "label": "jsearch",
-      "count": 24
-    },
-    {
       "label": "arbeitnow",
-      "count": 2
+      "count": 3
     }
   ],
   "companies": {
@@ -141,85 +149,85 @@
         "count": 14
       },
       {
-        "label": "GetYourGuide",
+        "label": "Disrupted Cloud",
         "count": 4
       },
       {
-        "label": "Scalable Capital",
-        "count": 3
+        "label": "GetYourGuide",
+        "count": 4
       },
       {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "Disrupted Cloud",
-        "count": 2
+        "label": "Scalable Capital",
+        "count": 3
       },
       {
         "label": "Raisin",
         "count": 2
       },
       {
-        "label": "N26",
+        "label": "DIS Deutscher Industrie Service AG",
+        "count": 2
+      },
+      {
+        "label": "bredent GmbH & Co. KG",
         "count": 1
       },
       {
-        "label": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
+        "label": "NewWork Software GmbH",
         "count": 1
       },
       {
-        "label": "Geoplan Touristik GmbH",
+        "label": "hallo theo GmbH",
         "count": 1
       },
       {
-        "label": "Ignite",
+        "label": "Flix",
         "count": 1
       },
       {
-        "label": "grey engineering GmbH",
+        "label": "zollsoft GmbH",
         "count": 1
       },
       {
-        "label": "RIB Software",
-        "count": 1
-      },
-      {
-        "label": "Follmann GmbH & Co. KG",
-        "count": 1
-      },
-      {
-        "label": "CUJU",
-        "count": 1
-      },
-      {
-        "label": "Der OnlineSteuerberater",
-        "count": 1
-      },
-      {
-        "label": "DIS AG",
-        "count": 1
-      },
-      {
-        "label": "tripstack",
-        "count": 1
-      },
-      {
-        "label": "Thermondo GmbH",
-        "count": 1
-      },
-      {
-        "label": "Finmas GmbH",
+        "label": "Amazon Development Center Germany GmbH",
         "count": 1
       },
       {
         "label": "CHAPTR",
         "count": 1
+      },
+      {
+        "label": "McGraw Hill",
+        "count": 1
+      },
+      {
+        "label": "Smartclip",
+        "count": 1
+      },
+      {
+        "label": "mobile.de",
+        "count": 1
+      },
+      {
+        "label": "deltia",
+        "count": 1
+      },
+      {
+        "label": "NXT YOU GmbH",
+        "count": 1
+      },
+      {
+        "label": "CUJU",
+        "count": 1
       }
     ],
-    "n_companies": 32,
-    "top10_share": 32,
-    "top10_pct": 59,
-    "multi_hiring": 6
+    "n_companies": 43,
+    "top10_share": 35,
+    "top10_pct": 51,
+    "multi_hiring": 7
   }
 }
