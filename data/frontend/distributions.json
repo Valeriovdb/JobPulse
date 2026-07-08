@@ -6,19 +6,19 @@
     },
     {
       "label": "mid",
-      "count": 22
+      "count": 18
     },
     {
       "label": "mid_senior",
-      "count": 2
+      "count": 1
     },
     {
       "label": "senior",
-      "count": 19
+      "count": 20
     },
     {
       "label": "lead",
-      "count": 1
+      "count": 3
     },
     {
       "label": "staff",
@@ -30,7 +30,7 @@
     },
     {
       "label": "principal",
-      "count": 4
+      "count": 7
     },
     {
       "label": "unknown",
@@ -40,15 +40,15 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 45
+      "count": 41
     },
     {
       "label": "hybrid",
-      "count": 12
+      "count": 16
     },
     {
       "label": "remote",
-      "count": 7
+      "count": 8
     },
     {
       "label": "hybrid_3d",
@@ -56,17 +56,17 @@
     },
     {
       "label": "onsite",
-      "count": 1
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 29
+      "count": 34
     },
     {
       "label": "de",
-      "count": 22
+      "count": 19
     },
     {
       "label": "unknown",
@@ -76,17 +76,17 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 68
+      "count": 70
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 4
+      "count": 3
     },
     {
       "label": "platform",
-      "count": 1
+      "count": 6
     },
     {
       "label": "data_ai",
@@ -94,7 +94,7 @@
     },
     {
       "label": "growth",
-      "count": 14
+      "count": 15
     }
   ],
   "industry": [],
@@ -102,19 +102,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 68
+      "count": 70
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 68
+      "count": 70
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 68
+      "count": 70
     }
   ],
   "domain_req_breakdown": [],
@@ -122,7 +122,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 24,
+    "n_enriched": 29,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -131,7 +131,7 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 37
+      "count": 41
     },
     {
       "label": "ats",
@@ -139,7 +139,7 @@
     },
     {
       "label": "arbeitnow",
-      "count": 3
+      "count": 1
     }
   ],
   "companies": {
@@ -149,43 +149,31 @@
         "count": 14
       },
       {
-        "label": "Disrupted Cloud",
-        "count": 4
-      },
-      {
         "label": "GetYourGuide",
         "count": 4
-      },
-      {
-        "label": "commercetools",
-        "count": 3
       },
       {
         "label": "Scalable Capital",
         "count": 3
       },
       {
-        "label": "Raisin",
-        "count": 2
+        "label": "commercetools",
+        "count": 3
       },
       {
         "label": "DIS Deutscher Industrie Service AG",
         "count": 2
       },
       {
-        "label": "bredent GmbH & Co. KG",
-        "count": 1
+        "label": "Disrupted Cloud",
+        "count": 2
       },
       {
-        "label": "NewWork Software GmbH",
-        "count": 1
+        "label": "Raisin",
+        "count": 2
       },
       {
-        "label": "hallo theo GmbH",
-        "count": 1
-      },
-      {
-        "label": "Flix",
+        "label": "CHAPTR",
         "count": 1
       },
       {
@@ -193,19 +181,11 @@
         "count": 1
       },
       {
-        "label": "Amazon Development Center Germany GmbH",
+        "label": "hallo theo GmbH",
         "count": 1
       },
       {
-        "label": "CHAPTR",
-        "count": 1
-      },
-      {
-        "label": "McGraw Hill",
-        "count": 1
-      },
-      {
-        "label": "Smartclip",
+        "label": "NewWork Software GmbH",
         "count": 1
       },
       {
@@ -213,21 +193,41 @@
         "count": 1
       },
       {
+        "label": "McGraw Hill",
+        "count": 1
+      },
+      {
+        "label": "Amazon Development Center Germany GmbH",
+        "count": 1
+      },
+      {
+        "label": "bredent GmbH & Co. KG",
+        "count": 1
+      },
+      {
+        "label": "Bolt",
+        "count": 1
+      },
+      {
+        "label": "BJAK",
+        "count": 1
+      },
+      {
+        "label": "Simon-Kucher & Partners",
+        "count": 1
+      },
+      {
+        "label": "Flix",
+        "count": 1
+      },
+      {
         "label": "deltia",
-        "count": 1
-      },
-      {
-        "label": "NXT YOU GmbH",
-        "count": 1
-      },
-      {
-        "label": "CUJU",
         "count": 1
       }
     ],
-    "n_companies": 43,
-    "top10_share": 35,
-    "top10_pct": 51,
+    "n_companies": 47,
+    "top10_share": 33,
+    "top10_pct": 47,
     "multi_hiring": 7
   }
 }
