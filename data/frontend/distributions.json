@@ -2,15 +2,15 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 1
+      "count": 2
     },
     {
       "label": "mid",
-      "count": 17
+      "count": 22
     },
     {
       "label": "mid_senior",
-      "count": 1
+      "count": 2
     },
     {
       "label": "senior",
@@ -26,33 +26,33 @@
     },
     {
       "label": "group",
-      "count": 5
-    },
-    {
-      "label": "principal",
       "count": 6
     },
     {
+      "label": "principal",
+      "count": 4
+    },
+    {
       "label": "unknown",
-      "count": 9
+      "count": 11
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 42
+      "count": 43
     },
     {
       "label": "hybrid",
-      "count": 14
+      "count": 19
     },
     {
       "label": "remote",
-      "count": 9
+      "count": 10
     },
     {
       "label": "onsite",
-      "count": 3
+      "count": 4
     },
     {
       "label": "hybrid_3d",
@@ -66,11 +66,11 @@
   "language": [
     {
       "label": "en",
-      "count": 39
+      "count": 48
     },
     {
       "label": "de",
-      "count": 17
+      "count": 16
     },
     {
       "label": "unknown",
@@ -80,29 +80,29 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 72
+      "count": 80
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 4
-    },
-    {
-      "label": "customer_facing",
-      "count": 2
-    },
-    {
-      "label": "platform",
-      "count": 8
-    },
-    {
-      "label": "data_ai",
       "count": 6
     },
     {
+      "label": "customer_facing",
+      "count": 3
+    },
+    {
+      "label": "platform",
+      "count": 9
+    },
+    {
+      "label": "data_ai",
+      "count": 3
+    },
+    {
       "label": "growth",
-      "count": 14
+      "count": 15
     }
   ],
   "industry": [],
@@ -110,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 72
+      "count": 80
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 72
+      "count": 80
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 72
+      "count": 80
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 34,
+    "n_enriched": 36,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -139,15 +139,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 44
+      "count": 48
     },
     {
       "label": "ats",
-      "count": 27
+      "count": 28
     },
     {
       "label": "arbeitnow",
-      "count": 1
+      "count": 4
     }
   ],
   "companies": {
@@ -155,6 +155,10 @@
       {
         "label": "Delivery Hero",
         "count": 14
+      },
+      {
+        "label": "Finmas GmbH",
+        "count": 4
       },
       {
         "label": "GetYourGuide",
@@ -165,19 +169,27 @@
         "count": 3
       },
       {
+        "label": "SumUp",
+        "count": 3
+      },
+      {
         "label": "commercetools",
         "count": 3
+      },
+      {
+        "label": "United States Digital Space LLC",
+        "count": 2
+      },
+      {
+        "label": "mobile.de",
+        "count": 2
       },
       {
         "label": "N26",
         "count": 2
       },
       {
-        "label": "DIS Deutscher Industrie Service AG",
-        "count": 2
-      },
-      {
-        "label": "United States Digital Space LLC",
+        "label": "Stryker Corporation",
         "count": 2
       },
       {
@@ -185,31 +197,11 @@
         "count": 2
       },
       {
-        "label": "Swarco AG",
+        "label": "SoftServe",
         "count": 1
       },
       {
-        "label": "Bolt",
-        "count": 1
-      },
-      {
-        "label": "NewWork Software GmbH",
-        "count": 1
-      },
-      {
-        "label": "bredent GmbH & Co. KG",
-        "count": 1
-      },
-      {
-        "label": "mobile.de",
-        "count": 1
-      },
-      {
-        "label": "CHAPTR",
-        "count": 1
-      },
-      {
-        "label": "Flix",
+        "label": "Andercore",
         "count": 1
       },
       {
@@ -217,25 +209,33 @@
         "count": 1
       },
       {
-        "label": "on-geo GmbH",
+        "label": "NewWork Software GmbH",
         "count": 1
       },
       {
-        "label": "SoftServe",
+        "label": "Simon-Kucher & Partners",
         "count": 1
       },
       {
-        "label": "Smartclip",
+        "label": "CHAPTR",
         "count": 1
       },
       {
-        "label": "Andercore",
+        "label": "BJAK",
+        "count": 1
+      },
+      {
+        "label": "WEGMANN automotive GmbH",
+        "count": 1
+      },
+      {
+        "label": "Uber",
         "count": 1
       }
     ],
-    "n_companies": 48,
-    "top10_share": 34,
-    "top10_pct": 47,
-    "multi_hiring": 8
+    "n_companies": 50,
+    "top10_share": 39,
+    "top10_pct": 49,
+    "multi_hiring": 11
   }
 }
