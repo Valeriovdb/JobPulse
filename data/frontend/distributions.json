@@ -2,11 +2,11 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 2
+      "count": 3
     },
     {
       "label": "mid",
-      "count": 22
+      "count": 21
     },
     {
       "label": "mid_senior",
@@ -14,11 +14,11 @@
     },
     {
       "label": "senior",
-      "count": 23
+      "count": 25
     },
     {
       "label": "lead",
-      "count": 4
+      "count": 1
     },
     {
       "label": "staff",
@@ -26,37 +26,37 @@
     },
     {
       "label": "group",
-      "count": 6
+      "count": 5
     },
     {
       "label": "principal",
-      "count": 4
+      "count": 3
     },
     {
       "label": "unknown",
-      "count": 11
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 43
+      "count": 32
     },
     {
       "label": "hybrid",
-      "count": 19
+      "count": 14
     },
     {
       "label": "remote",
-      "count": 10
-    },
-    {
-      "label": "onsite",
-      "count": 4
+      "count": 14
     },
     {
       "label": "hybrid_3d",
       "count": 3
+    },
+    {
+      "label": "onsite",
+      "count": 2
     },
     {
       "label": "hybrid_2d",
@@ -66,43 +66,39 @@
   "language": [
     {
       "label": "en",
-      "count": 48
-    },
-    {
-      "label": "de",
-      "count": 16
+      "count": 44
     },
     {
       "label": "unknown",
-      "count": 16
+      "count": 13
+    },
+    {
+      "label": "de",
+      "count": 9
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 80
+      "count": 66
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 6
-    },
-    {
-      "label": "customer_facing",
-      "count": 3
+      "count": 5
     },
     {
       "label": "platform",
-      "count": 9
+      "count": 5
     },
     {
       "label": "data_ai",
-      "count": 3
+      "count": 1
     },
     {
       "label": "growth",
-      "count": 15
+      "count": 14
     }
   ],
   "industry": [],
@@ -110,19 +106,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 80
+      "count": 66
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 80
+      "count": 66
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 80
+      "count": 66
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +126,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 36,
+    "n_enriched": 25,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -139,29 +135,33 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 48
+      "count": 36
     },
     {
       "label": "ats",
-      "count": 28
+      "count": 27
     },
     {
       "label": "arbeitnow",
-      "count": 4
+      "count": 3
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 14
+        "count": 11
       },
       {
-        "label": "Finmas GmbH",
-        "count": 4
+        "label": "remote zest jobs",
+        "count": 6
       },
       {
         "label": "GetYourGuide",
+        "count": 4
+      },
+      {
+        "label": "Raisin",
         "count": 4
       },
       {
@@ -169,43 +169,31 @@
         "count": 3
       },
       {
-        "label": "SumUp",
-        "count": 3
-      },
-      {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "United States Digital Space LLC",
+        "label": "Remotely",
         "count": 2
       },
       {
-        "label": "mobile.de",
+        "label": "Future Demand",
+        "count": 2
+      },
+      {
+        "label": "Aroundhome",
+        "count": 2
+      },
+      {
+        "label": "SumUp",
         "count": 2
       },
       {
         "label": "N26",
-        "count": 2
-      },
-      {
-        "label": "Stryker Corporation",
-        "count": 2
-      },
-      {
-        "label": "Raisin",
-        "count": 2
-      },
-      {
-        "label": "SoftServe",
         "count": 1
       },
       {
-        "label": "Andercore",
-        "count": 1
-      },
-      {
-        "label": "hallo theo GmbH",
+        "label": "NXT YOU GmbH",
         "count": 1
       },
       {
@@ -213,29 +201,37 @@
         "count": 1
       },
       {
-        "label": "Simon-Kucher & Partners",
+        "label": "Confidential company",
         "count": 1
       },
       {
-        "label": "CHAPTR",
+        "label": "traide AI",
         "count": 1
       },
       {
-        "label": "BJAK",
+        "label": "BestSecret Group",
         "count": 1
       },
       {
-        "label": "WEGMANN automotive GmbH",
+        "label": "Taxfix",
         "count": 1
       },
       {
-        "label": "Uber",
+        "label": "AI Transformation Institute",
+        "count": 1
+      },
+      {
+        "label": "remind me GmbH",
+        "count": 1
+      },
+      {
+        "label": "Startup Insider GmbH",
         "count": 1
       }
     ],
-    "n_companies": 50,
+    "n_companies": 37,
     "top10_share": 39,
-    "top10_pct": 49,
-    "multi_hiring": 11
+    "top10_pct": 59,
+    "multi_hiring": 10
   }
 }
