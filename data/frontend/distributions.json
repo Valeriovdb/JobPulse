@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 21
+      "count": 27
     },
     {
       "label": "mid_senior",
@@ -14,11 +14,11 @@
     },
     {
       "label": "senior",
-      "count": 25
+      "count": 31
     },
     {
       "label": "lead",
-      "count": 1
+      "count": 2
     },
     {
       "label": "staff",
@@ -34,21 +34,21 @@
     },
     {
       "label": "unknown",
-      "count": 1
+      "count": 5
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 32
+      "count": 43
     },
     {
       "label": "hybrid",
-      "count": 14
+      "count": 17
     },
     {
       "label": "remote",
-      "count": 14
+      "count": 17
     },
     {
       "label": "hybrid_3d",
@@ -66,31 +66,31 @@
   "language": [
     {
       "label": "en",
-      "count": 44
-    },
-    {
-      "label": "unknown",
-      "count": 13
+      "count": 52
     },
     {
       "label": "de",
-      "count": 9
+      "count": 17
+    },
+    {
+      "label": "unknown",
+      "count": 14
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 66
+      "count": 83
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 5
+      "count": 6
     },
     {
       "label": "platform",
-      "count": 5
+      "count": 6
     },
     {
       "label": "data_ai",
@@ -98,7 +98,7 @@
     },
     {
       "label": "growth",
-      "count": 14
+      "count": 15
     }
   ],
   "industry": [],
@@ -106,19 +106,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 66
+      "count": 83
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 66
+      "count": 83
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 66
+      "count": 83
     }
   ],
   "domain_req_breakdown": [],
@@ -126,7 +126,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 25,
+    "n_enriched": 28,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -135,15 +135,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 36
+      "count": 51
     },
     {
       "label": "ats",
-      "count": 27
+      "count": 28
     },
     {
       "label": "arbeitnow",
-      "count": 3
+      "count": 4
     }
   ],
   "companies": {
@@ -157,27 +157,27 @@
         "count": 6
       },
       {
-        "label": "GetYourGuide",
-        "count": 4
+        "label": "Scalable Capital",
+        "count": 5
       },
       {
         "label": "Raisin",
         "count": 4
       },
       {
-        "label": "Scalable Capital",
-        "count": 3
+        "label": "GetYourGuide",
+        "count": 4
       },
       {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "Remotely",
+        "label": "Future Demand",
         "count": 2
       },
       {
-        "label": "Future Demand",
+        "label": "Remotely",
         "count": 2
       },
       {
@@ -185,15 +185,15 @@
         "count": 2
       },
       {
+        "label": "Experimentation Jobs",
+        "count": 2
+      },
+      {
         "label": "SumUp",
         "count": 2
       },
       {
-        "label": "N26",
-        "count": 1
-      },
-      {
-        "label": "NXT YOU GmbH",
+        "label": "traide AI",
         "count": 1
       },
       {
@@ -201,23 +201,11 @@
         "count": 1
       },
       {
+        "label": "NXT YOU GmbH",
+        "count": 1
+      },
+      {
         "label": "Confidential company",
-        "count": 1
-      },
-      {
-        "label": "traide AI",
-        "count": 1
-      },
-      {
-        "label": "BestSecret Group",
-        "count": 1
-      },
-      {
-        "label": "Taxfix",
-        "count": 1
-      },
-      {
-        "label": "AI Transformation Institute",
         "count": 1
       },
       {
@@ -225,13 +213,25 @@
         "count": 1
       },
       {
+        "label": "AI Transformation Institute",
+        "count": 1
+      },
+      {
         "label": "Startup Insider GmbH",
+        "count": 1
+      },
+      {
+        "label": "N26",
+        "count": 1
+      },
+      {
+        "label": "Camunda",
         "count": 1
       }
     ],
-    "n_companies": 37,
-    "top10_share": 39,
-    "top10_pct": 59,
-    "multi_hiring": 10
+    "n_companies": 51,
+    "top10_share": 41,
+    "top10_pct": 49,
+    "multi_hiring": 11
   }
 }
