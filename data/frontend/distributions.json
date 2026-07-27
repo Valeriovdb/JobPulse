@@ -2,19 +2,19 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 3
-    },
-    {
-      "label": "mid",
-      "count": 27
-    },
-    {
-      "label": "mid_senior",
       "count": 2
     },
     {
+      "label": "mid",
+      "count": 18
+    },
+    {
+      "label": "mid_senior",
+      "count": 1
+    },
+    {
       "label": "senior",
-      "count": 31
+      "count": 18
     },
     {
       "label": "lead",
@@ -26,7 +26,7 @@
     },
     {
       "label": "group",
-      "count": 5
+      "count": 4
     },
     {
       "label": "principal",
@@ -34,63 +34,63 @@
     },
     {
       "label": "unknown",
-      "count": 5
+      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 43
+      "count": 32
     },
     {
       "label": "hybrid",
-      "count": 17
+      "count": 10
     },
     {
       "label": "remote",
-      "count": 17
+      "count": 8
     },
     {
       "label": "hybrid_3d",
-      "count": 3
+      "count": 4
     },
     {
       "label": "onsite",
-      "count": 2
-    },
-    {
-      "label": "hybrid_2d",
       "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 52
-    },
-    {
-      "label": "de",
-      "count": 17
+      "count": 31
     },
     {
       "label": "unknown",
       "count": 14
+    },
+    {
+      "label": "de",
+      "count": 10
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 83
+      "count": 55
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 6
+      "count": 3
+    },
+    {
+      "label": "customer_facing",
+      "count": 2
     },
     {
       "label": "platform",
-      "count": 6
+      "count": 2
     },
     {
       "label": "data_ai",
@@ -98,7 +98,7 @@
     },
     {
       "label": "growth",
-      "count": 15
+      "count": 12
     }
   ],
   "industry": [],
@@ -106,19 +106,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 83
+      "count": 55
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 83
+      "count": 55
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 83
+      "count": 55
     }
   ],
   "domain_req_breakdown": [],
@@ -126,7 +126,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 28,
+    "n_enriched": 20,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -134,104 +134,104 @@
   },
   "source": [
     {
-      "label": "jsearch",
-      "count": 51
+      "label": "ats",
+      "count": 27
     },
     {
-      "label": "ats",
-      "count": 28
+      "label": "jsearch",
+      "count": 22
     },
     {
       "label": "arbeitnow",
-      "count": 4
+      "count": 6
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 11
-      },
-      {
-        "label": "remote zest jobs",
-        "count": 6
+        "count": 10
       },
       {
         "label": "Scalable Capital",
         "count": 5
       },
       {
-        "label": "Raisin",
+        "label": "GetYourGuide",
         "count": 4
       },
       {
-        "label": "GetYourGuide",
-        "count": 4
+        "label": "Raisin",
+        "count": 3
       },
       {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "Future Demand",
-        "count": 2
-      },
-      {
-        "label": "Remotely",
-        "count": 2
-      },
-      {
-        "label": "Aroundhome",
-        "count": 2
-      },
-      {
-        "label": "Experimentation Jobs",
-        "count": 2
-      },
-      {
         "label": "SumUp",
         "count": 2
       },
       {
-        "label": "traide AI",
+        "label": "Nebius",
+        "count": 2
+      },
+      {
+        "label": "celebrate company GmbH",
         "count": 1
       },
       {
-        "label": "NewWork Software GmbH",
+        "label": "blacklane",
         "count": 1
       },
       {
-        "label": "NXT YOU GmbH",
+        "label": "Moss",
         "count": 1
       },
       {
-        "label": "Confidential company",
+        "label": "WTG Holding GmbH",
         "count": 1
       },
       {
-        "label": "remind me GmbH",
+        "label": "7Learnings",
         "count": 1
       },
       {
-        "label": "AI Transformation Institute",
+        "label": "Das kann Bank",
         "count": 1
       },
       {
-        "label": "Startup Insider GmbH",
+        "label": "CYCLE",
         "count": 1
       },
       {
-        "label": "N26",
+        "label": "PPRO",
         "count": 1
       },
       {
-        "label": "Camunda",
+        "label": "meinestadt.de",
+        "count": 1
+      },
+      {
+        "label": "Redcare Pharmacy",
+        "count": 1
+      },
+      {
+        "label": "Energy Market Solutions GmbH - Standort Berlin",
+        "count": 1
+      },
+      {
+        "label": "Aroundhome",
+        "count": 1
+      },
+      {
+        "label": "FORMEL SKIN",
         "count": 1
       }
     ],
-    "n_companies": 51,
-    "top10_share": 41,
-    "top10_pct": 49,
-    "multi_hiring": 11
+    "n_companies": 33,
+    "top10_share": 32,
+    "top10_pct": 58,
+    "multi_hiring": 7
   }
 }
