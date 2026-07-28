@@ -2,23 +2,23 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 2
+      "count": 3
     },
     {
       "label": "mid",
-      "count": 18
+      "count": 27
     },
     {
       "label": "mid_senior",
-      "count": 1
+      "count": 5
     },
     {
       "label": "senior",
-      "count": 18
+      "count": 29
     },
     {
       "label": "lead",
-      "count": 2
+      "count": 3
     },
     {
       "label": "staff",
@@ -26,7 +26,7 @@
     },
     {
       "label": "group",
-      "count": 4
+      "count": 5
     },
     {
       "label": "principal",
@@ -34,21 +34,21 @@
     },
     {
       "label": "unknown",
-      "count": 2
+      "count": 6
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 32
-    },
-    {
-      "label": "hybrid",
-      "count": 10
+      "count": 44
     },
     {
       "label": "remote",
-      "count": 8
+      "count": 18
+    },
+    {
+      "label": "hybrid",
+      "count": 16
     },
     {
       "label": "hybrid_3d",
@@ -56,49 +56,49 @@
     },
     {
       "label": "onsite",
-      "count": 1
+      "count": 4
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 31
+      "count": 52
+    },
+    {
+      "label": "de",
+      "count": 20
     },
     {
       "label": "unknown",
       "count": 14
-    },
-    {
-      "label": "de",
-      "count": 10
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 55
+      "count": 86
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 3
+      "count": 4
     },
     {
       "label": "customer_facing",
-      "count": 2
+      "count": 4
     },
     {
       "label": "platform",
-      "count": 2
+      "count": 4
     },
     {
       "label": "data_ai",
-      "count": 1
+      "count": 2
     },
     {
       "label": "growth",
-      "count": 12
+      "count": 17
     }
   ],
   "industry": [],
@@ -106,19 +106,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 55
+      "count": 86
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 55
+      "count": 86
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 55
+      "count": 86
     }
   ],
   "domain_req_breakdown": [],
@@ -126,7 +126,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 20,
+    "n_enriched": 31,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -134,16 +134,16 @@
   },
   "source": [
     {
-      "label": "ats",
-      "count": 27
+      "label": "jsearch",
+      "count": 48
     },
     {
-      "label": "jsearch",
-      "count": 22
+      "label": "ats",
+      "count": 29
     },
     {
       "label": "arbeitnow",
-      "count": 6
+      "count": 9
     }
   ],
   "companies": {
@@ -153,8 +153,16 @@
         "count": 10
       },
       {
+        "label": "remote click jobs",
+        "count": 5
+      },
+      {
         "label": "Scalable Capital",
         "count": 5
+      },
+      {
+        "label": "Stryker Corporation",
+        "count": 4
       },
       {
         "label": "GetYourGuide",
@@ -165,11 +173,19 @@
         "count": 3
       },
       {
+        "label": "N26",
+        "count": 3
+      },
+      {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "SumUp",
+        "label": "remote zest jobs",
+        "count": 3
+      },
+      {
+        "label": "Energy Market Solutions GmbH - Standort Berlin",
         "count": 2
       },
       {
@@ -177,19 +193,31 @@
         "count": 2
       },
       {
-        "label": "celebrate company GmbH",
-        "count": 1
+        "label": "WTG Holding GmbH",
+        "count": 2
       },
       {
-        "label": "blacklane",
-        "count": 1
+        "label": "Das kann Bank",
+        "count": 2
       },
       {
         "label": "Moss",
-        "count": 1
+        "count": 2
       },
       {
-        "label": "WTG Holding GmbH",
+        "label": "meinestadt.de",
+        "count": 2
+      },
+      {
+        "label": "Snowflake",
+        "count": 2
+      },
+      {
+        "label": "SumUp",
+        "count": 2
+      },
+      {
+        "label": "Redcare Pharmacy",
         "count": 1
       },
       {
@@ -197,41 +225,13 @@
         "count": 1
       },
       {
-        "label": "Das kann Bank",
-        "count": 1
-      },
-      {
-        "label": "CYCLE",
-        "count": 1
-      },
-      {
-        "label": "PPRO",
-        "count": 1
-      },
-      {
-        "label": "meinestadt.de",
-        "count": 1
-      },
-      {
-        "label": "Redcare Pharmacy",
-        "count": 1
-      },
-      {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
-        "count": 1
-      },
-      {
-        "label": "Aroundhome",
-        "count": 1
-      },
-      {
-        "label": "FORMEL SKIN",
+        "label": "blacklane",
         "count": 1
       }
     ],
-    "n_companies": 33,
-    "top10_share": 32,
-    "top10_pct": 58,
-    "multi_hiring": 7
+    "n_companies": 47,
+    "top10_share": 42,
+    "top10_pct": 49,
+    "multi_hiring": 17
   }
 }
