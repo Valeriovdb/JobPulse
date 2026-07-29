@@ -2,19 +2,19 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 3
+      "count": 1
     },
     {
       "label": "mid",
-      "count": 27
+      "count": 24
     },
     {
       "label": "mid_senior",
-      "count": 5
+      "count": 6
     },
     {
       "label": "senior",
-      "count": 29
+      "count": 31
     },
     {
       "label": "lead",
@@ -26,15 +26,15 @@
     },
     {
       "label": "group",
-      "count": 5
+      "count": 6
     },
     {
       "label": "principal",
-      "count": 3
+      "count": 4
     },
     {
       "label": "unknown",
-      "count": 6
+      "count": 7
     }
   ],
   "work_mode": [
@@ -44,29 +44,33 @@
     },
     {
       "label": "remote",
-      "count": 18
+      "count": 20
     },
     {
       "label": "hybrid",
-      "count": 16
-    },
-    {
-      "label": "hybrid_3d",
-      "count": 4
+      "count": 13
     },
     {
       "label": "onsite",
-      "count": 4
+      "count": 5
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 3
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 52
+      "count": 56
     },
     {
       "label": "de",
-      "count": 20
+      "count": 17
     },
     {
       "label": "unknown",
@@ -76,29 +80,29 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 86
+      "count": 87
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 4
+      "count": 9
     },
     {
       "label": "customer_facing",
-      "count": 4
+      "count": 3
     },
     {
       "label": "platform",
-      "count": 4
+      "count": 7
     },
     {
       "label": "data_ai",
-      "count": 2
+      "count": 3
     },
     {
       "label": "growth",
-      "count": 17
+      "count": 14
     }
   ],
   "industry": [],
@@ -106,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 86
+      "count": 87
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 86
+      "count": 87
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 86
+      "count": 87
     }
   ],
   "domain_req_breakdown": [],
@@ -126,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 31,
+    "n_enriched": 36,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -135,7 +139,7 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 48
+      "count": 52
     },
     {
       "label": "ats",
@@ -143,34 +147,30 @@
     },
     {
       "label": "arbeitnow",
-      "count": 9
+      "count": 6
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 10
+        "count": 11
       },
       {
         "label": "remote click jobs",
-        "count": 5
+        "count": 6
       },
       {
-        "label": "Scalable Capital",
+        "label": "Jobtailor",
         "count": 5
-      },
-      {
-        "label": "Stryker Corporation",
-        "count": 4
       },
       {
         "label": "GetYourGuide",
         "count": 4
       },
       {
-        "label": "Raisin",
-        "count": 3
+        "label": "Scalable Capital",
+        "count": 4
       },
       {
         "label": "N26",
@@ -185,31 +185,15 @@
         "count": 3
       },
       {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
-        "count": 2
+        "label": "Raisin",
+        "count": 3
+      },
+      {
+        "label": "Stryker Corporation",
+        "count": 3
       },
       {
         "label": "Nebius",
-        "count": 2
-      },
-      {
-        "label": "WTG Holding GmbH",
-        "count": 2
-      },
-      {
-        "label": "Das kann Bank",
-        "count": 2
-      },
-      {
-        "label": "Moss",
-        "count": 2
-      },
-      {
-        "label": "meinestadt.de",
-        "count": 2
-      },
-      {
-        "label": "Snowflake",
         "count": 2
       },
       {
@@ -217,21 +201,41 @@
         "count": 2
       },
       {
-        "label": "Redcare Pharmacy",
-        "count": 1
+        "label": "Remotely",
+        "count": 2
       },
       {
-        "label": "7Learnings",
-        "count": 1
+        "label": "N26 GmbH",
+        "count": 2
       },
       {
-        "label": "blacklane",
+        "label": "DNS:NET",
+        "count": 2
+      },
+      {
+        "label": "DKB Grund GmbH",
+        "count": 2
+      },
+      {
+        "label": "idealo internet GmbH",
+        "count": 2
+      },
+      {
+        "label": "Moss",
+        "count": 2
+      },
+      {
+        "label": "Snowflake",
+        "count": 2
+      },
+      {
+        "label": "S-Communication Services GmbH",
         "count": 1
       }
     ],
-    "n_companies": 47,
-    "top10_share": 42,
-    "top10_pct": 49,
-    "multi_hiring": 17
+    "n_companies": 43,
+    "top10_share": 45,
+    "top10_pct": 52,
+    "multi_hiring": 19
   }
 }
