@@ -2,23 +2,23 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 1
+      "count": 2
     },
     {
       "label": "mid",
-      "count": 24
+      "count": 20
     },
     {
       "label": "mid_senior",
-      "count": 6
+      "count": 5
     },
     {
       "label": "senior",
-      "count": 31
+      "count": 33
     },
     {
       "label": "lead",
-      "count": 3
+      "count": 4
     },
     {
       "label": "staff",
@@ -26,29 +26,33 @@
     },
     {
       "label": "group",
-      "count": 6
+      "count": 8
     },
     {
       "label": "principal",
-      "count": 4
+      "count": 8
     },
     {
       "label": "unknown",
-      "count": 7
+      "count": 8
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 44
+      "count": 47
     },
     {
       "label": "remote",
-      "count": 20
+      "count": 19
     },
     {
       "label": "hybrid",
-      "count": 13
+      "count": 14
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 5
     },
     {
       "label": "onsite",
@@ -57,20 +61,16 @@
     {
       "label": "hybrid_3d",
       "count": 3
-    },
-    {
-      "label": "hybrid_2d",
-      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 56
+      "count": 63
     },
     {
       "label": "de",
-      "count": 17
+      "count": 16
     },
     {
       "label": "unknown",
@@ -80,29 +80,29 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 87
+      "count": 93
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 9
+      "count": 10
     },
     {
       "label": "customer_facing",
-      "count": 3
+      "count": 1
     },
     {
       "label": "platform",
-      "count": 7
+      "count": 9
     },
     {
       "label": "data_ai",
-      "count": 3
+      "count": 5
     },
     {
       "label": "growth",
-      "count": 14
+      "count": 15
     }
   ],
   "industry": [],
@@ -110,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 87
+      "count": 93
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 87
+      "count": 93
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 87
+      "count": 93
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 36,
+    "n_enriched": 40,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -139,15 +139,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 52
+      "count": 58
     },
     {
       "label": "ats",
-      "count": 29
+      "count": 31
     },
     {
       "label": "arbeitnow",
-      "count": 6
+      "count": 4
     }
   ],
   "companies": {
@@ -157,19 +157,23 @@
         "count": 11
       },
       {
-        "label": "remote click jobs",
-        "count": 6
-      },
-      {
         "label": "Jobtailor",
-        "count": 5
-      },
-      {
-        "label": "GetYourGuide",
-        "count": 4
+        "count": 11
       },
       {
         "label": "Scalable Capital",
+        "count": 6
+      },
+      {
+        "label": "GetYourGuide",
+        "count": 5
+      },
+      {
+        "label": "Raisin",
+        "count": 4
+      },
+      {
+        "label": "Remotely",
         "count": 4
       },
       {
@@ -181,39 +185,27 @@
         "count": 3
       },
       {
-        "label": "remote zest jobs",
-        "count": 3
-      },
-      {
-        "label": "Raisin",
-        "count": 3
-      },
-      {
-        "label": "Stryker Corporation",
-        "count": 3
-      },
-      {
-        "label": "Nebius",
+        "label": "KIDDINX Media GmbH",
         "count": 2
       },
       {
-        "label": "SumUp",
+        "label": "Deutsche Telekom AG",
         "count": 2
       },
       {
-        "label": "Remotely",
+        "label": "Zalando",
         "count": 2
       },
       {
-        "label": "N26 GmbH",
+        "label": "RioRise",
         "count": 2
       },
       {
-        "label": "DNS:NET",
+        "label": "zollsoft GmbH",
         "count": 2
       },
       {
-        "label": "DKB Grund GmbH",
+        "label": "remote click jobs",
         "count": 2
       },
       {
@@ -221,21 +213,29 @@
         "count": 2
       },
       {
-        "label": "Moss",
-        "count": 2
-      },
-      {
         "label": "Snowflake",
         "count": 2
       },
       {
-        "label": "S-Communication Services GmbH",
+        "label": "SumUp",
+        "count": 2
+      },
+      {
+        "label": "ShopMy",
+        "count": 2
+      },
+      {
+        "label": "N26 GmbH",
+        "count": 2
+      },
+      {
+        "label": "DKB Grund GmbH",
         "count": 1
       }
     ],
     "n_companies": 43,
-    "top10_share": 45,
-    "top10_pct": 52,
+    "top10_share": 51,
+    "top10_pct": 55,
     "multi_hiring": 19
   }
 }
