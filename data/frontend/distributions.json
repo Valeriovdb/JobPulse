@@ -6,15 +6,15 @@
     },
     {
       "label": "mid",
-      "count": 20
+      "count": 23
     },
     {
       "label": "mid_senior",
-      "count": 5
+      "count": 3
     },
     {
       "label": "senior",
-      "count": 33
+      "count": 38
     },
     {
       "label": "lead",
@@ -26,37 +26,37 @@
     },
     {
       "label": "group",
-      "count": 8
+      "count": 7
     },
     {
       "label": "principal",
-      "count": 8
+      "count": 6
     },
     {
       "label": "unknown",
-      "count": 8
+      "count": 12
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 47
+      "count": 46
     },
     {
       "label": "remote",
-      "count": 19
+      "count": 24
     },
     {
       "label": "hybrid",
-      "count": 14
-    },
-    {
-      "label": "hybrid_2d",
-      "count": 5
+      "count": 18
     },
     {
       "label": "onsite",
       "count": 5
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 4
     },
     {
       "label": "hybrid_3d",
@@ -66,21 +66,21 @@
   "language": [
     {
       "label": "en",
-      "count": 63
+      "count": 69
     },
     {
       "label": "de",
-      "count": 16
+      "count": 19
     },
     {
       "label": "unknown",
-      "count": 14
+      "count": 12
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 93
+      "count": 100
     }
   ],
   "pm_type": [
@@ -90,19 +90,23 @@
     },
     {
       "label": "customer_facing",
-      "count": 1
+      "count": 2
     },
     {
       "label": "platform",
-      "count": 9
+      "count": 10
     },
     {
       "label": "data_ai",
-      "count": 5
+      "count": 7
     },
     {
       "label": "growth",
-      "count": 15
+      "count": 18
+    },
+    {
+      "label": "internal_ops",
+      "count": 1
     }
   ],
   "industry": [],
@@ -110,19 +114,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 93
+      "count": 100
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 93
+      "count": 100
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 93
+      "count": 100
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +134,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 40,
+    "n_enriched": 48,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -139,15 +143,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 58
+      "count": 65
     },
     {
       "label": "ats",
-      "count": 31
+      "count": 29
     },
     {
       "label": "arbeitnow",
-      "count": 4
+      "count": 6
     }
   ],
   "companies": {
@@ -158,23 +162,31 @@
       },
       {
         "label": "Jobtailor",
-        "count": 11
+        "count": 7
       },
       {
-        "label": "Scalable Capital",
-        "count": 6
+        "label": "Raisin",
+        "count": 5
       },
       {
         "label": "GetYourGuide",
         "count": 5
       },
       {
-        "label": "Raisin",
+        "label": "remote zest jobs",
+        "count": 5
+      },
+      {
+        "label": "Scalable Capital",
         "count": 4
       },
       {
         "label": "Remotely",
-        "count": 4
+        "count": 3
+      },
+      {
+        "label": "remote click jobs",
+        "count": 3
       },
       {
         "label": "N26",
@@ -189,31 +201,19 @@
         "count": 2
       },
       {
-        "label": "Deutsche Telekom AG",
+        "label": "S Rating und Risikosysteme GmbH",
         "count": 2
       },
       {
-        "label": "Zalando",
+        "label": "procilon GROUP",
         "count": 2
       },
       {
-        "label": "RioRise",
+        "label": "Decilegroup",
         "count": 2
       },
       {
-        "label": "zollsoft GmbH",
-        "count": 2
-      },
-      {
-        "label": "remote click jobs",
-        "count": 2
-      },
-      {
-        "label": "idealo internet GmbH",
-        "count": 2
-      },
-      {
-        "label": "Snowflake",
+        "label": "Jobgether",
         "count": 2
       },
       {
@@ -221,21 +221,25 @@
         "count": 2
       },
       {
-        "label": "ShopMy",
+        "label": "Deutsche Telekom AG",
         "count": 2
       },
       {
-        "label": "N26 GmbH",
+        "label": "ABiTEP GmbH",
         "count": 2
       },
       {
-        "label": "DKB Grund GmbH",
-        "count": 1
+        "label": "Remote Technology",
+        "count": 2
+      },
+      {
+        "label": "Climatiq",
+        "count": 2
       }
     ],
-    "n_companies": 43,
-    "top10_share": 51,
-    "top10_pct": 55,
-    "multi_hiring": 19
+    "n_companies": 50,
+    "top10_share": 49,
+    "top10_pct": 49,
+    "multi_hiring": 21
   }
 }
