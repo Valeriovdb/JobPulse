@@ -2,11 +2,11 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 2
+      "count": 4
     },
     {
       "label": "mid",
-      "count": 23
+      "count": 18
     },
     {
       "label": "mid_senior",
@@ -14,11 +14,11 @@
     },
     {
       "label": "senior",
-      "count": 38
+      "count": 16
     },
     {
       "label": "lead",
-      "count": 4
+      "count": 3
     },
     {
       "label": "staff",
@@ -26,36 +26,28 @@
     },
     {
       "label": "group",
-      "count": 7
+      "count": 3
     },
     {
       "label": "principal",
-      "count": 6
-    },
-    {
-      "label": "unknown",
-      "count": 12
+      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 46
-    },
-    {
-      "label": "remote",
-      "count": 24
+      "count": 26
     },
     {
       "label": "hybrid",
-      "count": 18
+      "count": 13
+    },
+    {
+      "label": "remote",
+      "count": 8
     },
     {
       "label": "onsite",
-      "count": 5
-    },
-    {
-      "label": "hybrid_2d",
       "count": 4
     },
     {
@@ -66,47 +58,43 @@
   "language": [
     {
       "label": "en",
-      "count": 69
-    },
-    {
-      "label": "de",
-      "count": 19
+      "count": 37
     },
     {
       "label": "unknown",
       "count": 12
+    },
+    {
+      "label": "de",
+      "count": 5
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 100
+      "count": 54
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 10
+      "count": 5
     },
     {
       "label": "customer_facing",
-      "count": 2
+      "count": 1
     },
     {
       "label": "platform",
-      "count": 10
+      "count": 5
     },
     {
       "label": "data_ai",
-      "count": 7
+      "count": 1
     },
     {
       "label": "growth",
-      "count": 18
-    },
-    {
-      "label": "internal_ops",
-      "count": 1
+      "count": 11
     }
   ],
   "industry": [],
@@ -114,19 +102,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 54
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 54
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 54
     }
   ],
   "domain_req_breakdown": [],
@@ -134,7 +122,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 48,
+    "n_enriched": 23,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -142,12 +130,12 @@
   },
   "source": [
     {
-      "label": "jsearch",
-      "count": 65
-    },
-    {
       "label": "ats",
       "count": 29
+    },
+    {
+      "label": "jsearch",
+      "count": 19
     },
     {
       "label": "arbeitnow",
@@ -158,38 +146,22 @@
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 11
-      },
-      {
-        "label": "Jobtailor",
-        "count": 7
-      },
-      {
-        "label": "Raisin",
-        "count": 5
+        "count": 9
       },
       {
         "label": "GetYourGuide",
         "count": 5
       },
       {
-        "label": "remote zest jobs",
-        "count": 5
-      },
-      {
-        "label": "Scalable Capital",
+        "label": "Raisin",
         "count": 4
       },
       {
-        "label": "Remotely",
-        "count": 3
-      },
-      {
-        "label": "remote click jobs",
-        "count": 3
-      },
-      {
         "label": "N26",
+        "count": 3
+      },
+      {
+        "label": "Scalable Capital",
         "count": 3
       },
       {
@@ -197,49 +169,65 @@
         "count": 3
       },
       {
-        "label": "KIDDINX Media GmbH",
-        "count": 2
-      },
-      {
-        "label": "S Rating und Risikosysteme GmbH",
-        "count": 2
-      },
-      {
-        "label": "procilon GROUP",
-        "count": 2
-      },
-      {
-        "label": "Decilegroup",
-        "count": 2
-      },
-      {
-        "label": "Jobgether",
-        "count": 2
-      },
-      {
         "label": "SumUp",
         "count": 2
       },
       {
-        "label": "Deutsche Telekom AG",
+        "label": "Rootglobal",
         "count": 2
       },
       {
-        "label": "ABiTEP GmbH",
+        "label": "Liqid Lig",
         "count": 2
       },
       {
-        "label": "Remote Technology",
+        "label": "TE Connectivity",
         "count": 2
       },
       {
-        "label": "Climatiq",
-        "count": 2
+        "label": "Enpal",
+        "count": 1
+      },
+      {
+        "label": "dasauge",
+        "count": 1
+      },
+      {
+        "label": "Voize",
+        "count": 1
+      },
+      {
+        "label": "Arsipa GmbH",
+        "count": 1
+      },
+      {
+        "label": "TechBiz Global",
+        "count": 1
+      },
+      {
+        "label": "TF Bank",
+        "count": 1
+      },
+      {
+        "label": "Dasauge",
+        "count": 1
+      },
+      {
+        "label": "Amazon Development Center Germany GmbH",
+        "count": 1
+      },
+      {
+        "label": "andercore",
+        "count": 1
+      },
+      {
+        "label": "bettercoach.de GmbH",
+        "count": 1
       }
     ],
-    "n_companies": 50,
-    "top10_share": 49,
-    "top10_pct": 49,
-    "multi_hiring": 21
+    "n_companies": 29,
+    "top10_share": 35,
+    "top10_pct": 65,
+    "multi_hiring": 10
   }
 }
