@@ -2,23 +2,23 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 4
+      "count": 5
     },
     {
       "label": "mid",
-      "count": 18
+      "count": 26
     },
     {
       "label": "mid_senior",
-      "count": 3
+      "count": 4
     },
     {
       "label": "senior",
-      "count": 16
+      "count": 29
     },
     {
       "label": "lead",
-      "count": 3
+      "count": 5
     },
     {
       "label": "staff",
@@ -30,71 +30,79 @@
     },
     {
       "label": "principal",
-      "count": 2
+      "count": 3
+    },
+    {
+      "label": "unknown",
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 26
-    },
-    {
-      "label": "hybrid",
-      "count": 13
+      "count": 35
     },
     {
       "label": "remote",
-      "count": 8
+      "count": 21
+    },
+    {
+      "label": "hybrid",
+      "count": 15
     },
     {
       "label": "onsite",
-      "count": 4
+      "count": 6
     },
     {
       "label": "hybrid_3d",
       "count": 3
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 37
+      "count": 56
     },
     {
       "label": "unknown",
-      "count": 12
+      "count": 13
     },
     {
       "label": "de",
-      "count": 5
+      "count": 12
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 54
+      "count": 81
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 5
+      "count": 6
     },
     {
       "label": "customer_facing",
-      "count": 1
+      "count": 2
     },
     {
       "label": "platform",
-      "count": 5
+      "count": 8
     },
     {
       "label": "data_ai",
-      "count": 1
+      "count": 3
     },
     {
       "label": "growth",
-      "count": 11
+      "count": 15
     }
   ],
   "industry": [],
@@ -102,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 81
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 81
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 54
+      "count": 81
     }
   ],
   "domain_req_breakdown": [],
@@ -122,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 23,
+    "n_enriched": 34,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -130,23 +138,27 @@
   },
   "source": [
     {
-      "label": "ats",
-      "count": 29
+      "label": "jsearch",
+      "count": 39
     },
     {
-      "label": "jsearch",
-      "count": 19
+      "label": "ats",
+      "count": 30
     },
     {
       "label": "arbeitnow",
-      "count": 6
+      "count": 12
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 9
+        "count": 10
+      },
+      {
+        "label": "remote zest jobs",
+        "count": 8
       },
       {
         "label": "GetYourGuide",
@@ -157,7 +169,7 @@
         "count": 4
       },
       {
-        "label": "N26",
+        "label": "commercetools",
         "count": 3
       },
       {
@@ -165,8 +177,24 @@
         "count": 3
       },
       {
-        "label": "commercetools",
+        "label": "N26",
         "count": 3
+      },
+      {
+        "label": "Arsipa GmbH",
+        "count": 2
+      },
+      {
+        "label": "Amazon Development Center Germany GmbH",
+        "count": 2
+      },
+      {
+        "label": "CHAPTR",
+        "count": 2
+      },
+      {
+        "label": "Dasauge",
+        "count": 2
       },
       {
         "label": "SumUp",
@@ -177,57 +205,37 @@
         "count": 2
       },
       {
-        "label": "Liqid Lig",
-        "count": 2
-      },
-      {
         "label": "TE Connectivity",
         "count": 2
       },
       {
-        "label": "Enpal",
-        "count": 1
-      },
-      {
-        "label": "dasauge",
-        "count": 1
-      },
-      {
-        "label": "Voize",
-        "count": 1
-      },
-      {
-        "label": "Arsipa GmbH",
-        "count": 1
-      },
-      {
-        "label": "TechBiz Global",
-        "count": 1
-      },
-      {
-        "label": "TF Bank",
-        "count": 1
-      },
-      {
-        "label": "Dasauge",
-        "count": 1
-      },
-      {
-        "label": "Amazon Development Center Germany GmbH",
-        "count": 1
+        "label": "Liqid Lig",
+        "count": 2
       },
       {
         "label": "andercore",
+        "count": 2
+      },
+      {
+        "label": "Vrey",
         "count": 1
       },
       {
-        "label": "bettercoach.de GmbH",
+        "label": "Peec AI",
+        "count": 1
+      },
+      {
+        "label": "0G",
+        "count": 1
+      },
+      {
+        "label": "InStaff & Jobs GmbH",
         "count": 1
       }
     ],
-    "n_companies": 29,
-    "top10_share": 35,
-    "top10_pct": 65,
-    "multi_hiring": 10
+    "n_companies": 43,
+    "top10_share": 42,
+    "top10_pct": 52,
+    "multi_hiring": 16
   }
 }
