@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-08-04",
-  "n_active": 81,
-  "n_new_week": 56,
-  "senior_pct": 60,
+  "last_updated": "2026-08-05",
+  "n_active": 87,
+  "n_new_week": 62,
+  "senior_pct": 64,
   "median_age_days": 1,
   "accessible_pct": 0,
-  "entry_pct": 38,
+  "entry_pct": 26,
   "language": {
     "en_none": 0,
     "en_plus": 0,
     "en_must": 0,
-    "de": 12
+    "de": 15
   },
   "location": {
-    "berlin": 62,
-    "remote_germany": 19,
+    "berlin": 60,
+    "remote_germany": 27,
     "unclear": 0
   }
 }
