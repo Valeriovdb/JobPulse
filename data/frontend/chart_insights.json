@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-08-05T09:42:47.921422+00:00",
-  "data_version": "sha256:0f6ad1f8ae56b661",
+  "generated_at": "2026-08-06T09:46:02.365342+00:00",
+  "data_version": "sha256:11d5680617474209",
   "charts": {
     "german_requirement": {
       "title": "German requirements vary across roles",
       "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:37.158984+00:00",
+      "generated_at": "2026-08-06T09:45:51.715625+00:00",
       "model": null
     },
     "pm_type": {
       "title": "PM demand is spread across role types",
       "subtitle": "Openings are distributed across several PM types, with no single category strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:38.895222+00:00",
+      "generated_at": "2026-08-06T09:45:53.279249+00:00",
       "model": null
     },
     "seniority": {
       "title": "Hiring skews toward experienced roles",
       "subtitle": "Most active roles target senior profiles, with limited entry-level demand.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:40.379414+00:00",
+      "generated_at": "2026-08-06T09:45:54.839606+00:00",
       "model": null
     },
     "work_mode": {
       "title": "Remote work is widely available",
-      "subtitle": "Around 33% of roles offer full remote flexibility \u2014 high for a Berlin-focused search.",
+      "subtitle": "Around 38% of roles offer full remote flexibility \u2014 high for a Berlin-focused search.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:41.827621+00:00",
+      "generated_at": "2026-08-06T09:45:56.465862+00:00",
       "model": null
     },
     "location": {
       "title": "Remote roles are a meaningful share",
-      "subtitle": "31% of openings are available outside Berlin, broadening access for remote candidates.",
+      "subtitle": "36% of openings are available outside Berlin, broadening access for remote candidates.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:43.427367+00:00",
+      "generated_at": "2026-08-06T09:45:57.793496+00:00",
       "model": null
     },
     "ai": {
       "title": "AI focus remains a niche requirement",
       "subtitle": "AI-specific roles are present but represent a small share of the market at 0%.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:44.950580+00:00",
+      "generated_at": "2026-08-06T09:45:59.224876+00:00",
       "model": null
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-08-05T09:42:46.458048+00:00",
+      "generated_at": "2026-08-06T09:46:00.811040+00:00",
       "model": null
     }
   }
