@@ -2,11 +2,11 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 1
+      "count": 2
     },
     {
       "label": "mid",
-      "count": 26
+      "count": 32
     },
     {
       "label": "mid_senior",
@@ -14,19 +14,19 @@
     },
     {
       "label": "senior",
-      "count": 34
+      "count": 40
     },
     {
       "label": "lead",
-      "count": 7
+      "count": 8
     },
     {
       "label": "staff",
-      "count": 2
+      "count": 1
     },
     {
       "label": "group",
-      "count": 2
+      "count": 3
     },
     {
       "label": "principal",
@@ -34,35 +34,35 @@
     },
     {
       "label": "unknown",
-      "count": 12
+      "count": 8
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 39
+      "count": 45
     },
     {
       "label": "remote",
-      "count": 38
+      "count": 41
     },
     {
       "label": "hybrid",
-      "count": 12
-    },
-    {
-      "label": "hybrid_3d",
-      "count": 6
+      "count": 17
     },
     {
       "label": "onsite",
       "count": 5
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 4
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 70
+      "count": 82
     },
     {
       "label": "de",
@@ -76,29 +76,29 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 100
+      "count": 112
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 5
+      "count": 6
     },
     {
       "label": "customer_facing",
-      "count": 1
+      "count": 4
     },
     {
       "label": "platform",
-      "count": 14
+      "count": 11
     },
     {
       "label": "data_ai",
-      "count": 7
+      "count": 8
     },
     {
       "label": "growth",
-      "count": 10
+      "count": 15
     },
     {
       "label": "internal_ops",
@@ -110,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 112
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 112
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 100
+      "count": 112
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 39,
+    "n_enriched": 46,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -139,7 +139,7 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 57
+      "count": 70
     },
     {
       "label": "ats",
@@ -147,77 +147,65 @@
     },
     {
       "label": "arbeitnow",
-      "count": 13
+      "count": 12
     }
   ],
   "companies": {
     "top20": [
       {
+        "label": "remote zest jobs",
+        "count": 12
+      },
+      {
         "label": "Delivery Hero",
         "count": 10
       },
       {
-        "label": "remote zest jobs",
-        "count": 7
+        "label": "remote click jobs",
+        "count": 9
       },
       {
-        "label": "remote click jobs",
-        "count": 7
+        "label": "N26",
+        "count": 6
       },
       {
         "label": "GetYourGuide",
         "count": 5
       },
       {
-        "label": "commercetools",
-        "count": 4
-      },
-      {
-        "label": "N26",
-        "count": 4
-      },
-      {
         "label": "Raisin",
         "count": 4
       },
       {
-        "label": "FlexBoard",
+        "label": "commercetools",
         "count": 4
       },
       {
-        "label": "Scalable Capital",
-        "count": 3
+        "label": "Stryker Corporation",
+        "count": 4
       },
       {
         "label": "vacancy global pro",
         "count": 3
       },
       {
-        "label": "Boerse Stuttgart Digital",
+        "label": "Scalable Capital",
+        "count": 3
+      },
+      {
+        "label": "Thales",
+        "count": 3
+      },
+      {
+        "label": "Finom",
+        "count": 3
+      },
+      {
+        "label": "Healthcaremarketing",
         "count": 2
       },
       {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
-        "count": 2
-      },
-      {
-        "label": "Lovehoney Group",
-        "count": 2
-      },
-      {
-        "label": "meinestadt.de",
-        "count": 2
-      },
-      {
-        "label": "finmid",
-        "count": 2
-      },
-      {
-        "label": "Leef Blattwerk GmbH",
-        "count": 2
-      },
-      {
-        "label": "ScholarshipOwl",
+        "label": "Emma \u2013 The Sleep Company",
         "count": 2
       },
       {
@@ -225,17 +213,29 @@
         "count": 2
       },
       {
-        "label": "Classic Trader GmbH",
+        "label": "SumUp",
         "count": 2
       },
       {
-        "label": "Finom",
+        "label": "Energy Market Solutions GmbH - Standort Berlin",
         "count": 2
+      },
+      {
+        "label": "Boerse Stuttgart Digital",
+        "count": 2
+      },
+      {
+        "label": "ScholarshipOwl",
+        "count": 2
+      },
+      {
+        "label": "BWI GmbH",
+        "count": 1
       }
     ],
-    "n_companies": 47,
-    "top10_share": 51,
-    "top10_pct": 51,
-    "multi_hiring": 22
+    "n_companies": 51,
+    "top10_share": 60,
+    "top10_pct": 54,
+    "multi_hiring": 19
   }
 }
