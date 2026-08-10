@@ -2,23 +2,23 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 2
+      "count": 1
     },
     {
       "label": "mid",
-      "count": 32
+      "count": 8
     },
     {
       "label": "mid_senior",
-      "count": 6
+      "count": 2
     },
     {
       "label": "senior",
-      "count": 40
+      "count": 23
     },
     {
       "label": "lead",
-      "count": 8
+      "count": 3
     },
     {
       "label": "staff",
@@ -26,7 +26,7 @@
     },
     {
       "label": "group",
-      "count": 3
+      "count": 1
     },
     {
       "label": "principal",
@@ -34,75 +34,75 @@
     },
     {
       "label": "unknown",
-      "count": 8
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 45
+      "count": 25
     },
     {
       "label": "remote",
-      "count": 41
+      "count": 9
     },
     {
       "label": "hybrid",
-      "count": 17
+      "count": 7
     },
     {
       "label": "onsite",
-      "count": 5
+      "count": 3
     },
     {
       "label": "hybrid_3d",
-      "count": 4
+      "count": 3
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 82
-    },
-    {
-      "label": "de",
-      "count": 17
+      "count": 31
     },
     {
       "label": "unknown",
-      "count": 13
+      "count": 12
+    },
+    {
+      "label": "de",
+      "count": 4
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 112
+      "count": 47
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 6
-    },
-    {
-      "label": "customer_facing",
       "count": 4
     },
     {
+      "label": "customer_facing",
+      "count": 1
+    },
+    {
       "label": "platform",
-      "count": 11
+      "count": 2
     },
     {
       "label": "data_ai",
-      "count": 8
+      "count": 1
     },
     {
       "label": "growth",
-      "count": 15
+      "count": 7
     },
     {
       "label": "internal_ops",
-      "count": 2
+      "count": 1
     }
   ],
   "industry": [],
@@ -110,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 112
+      "count": 47
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 112
+      "count": 47
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 112
+      "count": 47
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 46,
+    "n_enriched": 16,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -138,35 +138,23 @@
   },
   "source": [
     {
-      "label": "jsearch",
-      "count": 70
-    },
-    {
       "label": "ats",
       "count": 30
     },
     {
+      "label": "jsearch",
+      "count": 15
+    },
+    {
       "label": "arbeitnow",
-      "count": 12
+      "count": 2
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "remote zest jobs",
-        "count": 12
-      },
-      {
         "label": "Delivery Hero",
-        "count": 10
-      },
-      {
-        "label": "remote click jobs",
         "count": 9
-      },
-      {
-        "label": "N26",
-        "count": 6
       },
       {
         "label": "GetYourGuide",
@@ -177,15 +165,7 @@
         "count": 4
       },
       {
-        "label": "commercetools",
-        "count": 4
-      },
-      {
-        "label": "Stryker Corporation",
-        "count": 4
-      },
-      {
-        "label": "vacancy global pro",
+        "label": "N26",
         "count": 3
       },
       {
@@ -193,23 +173,19 @@
         "count": 3
       },
       {
-        "label": "Thales",
+        "label": "remote zest jobs",
         "count": 3
       },
       {
-        "label": "Finom",
+        "label": "commercetools",
         "count": 3
       },
       {
-        "label": "Healthcaremarketing",
+        "label": "HelloFresh",
         "count": 2
       },
       {
-        "label": "Emma \u2013 The Sleep Company",
-        "count": 2
-      },
-      {
-        "label": "United States Digital Space LLC",
+        "label": "remote click jobs",
         "count": 2
       },
       {
@@ -217,25 +193,49 @@
         "count": 2
       },
       {
+        "label": "jobs - Personio",
+        "count": 1
+      },
+      {
+        "label": "InStaff & Jobs GmbH",
+        "count": 1
+      },
+      {
+        "label": "Flinn",
+        "count": 1
+      },
+      {
+        "label": "EDEKA IT Stiftung & Co. OHG",
+        "count": 1
+      },
+      {
+        "label": "Snowflake",
+        "count": 1
+      },
+      {
         "label": "Energy Market Solutions GmbH - Standort Berlin",
-        "count": 2
+        "count": 1
       },
       {
-        "label": "Boerse Stuttgart Digital",
-        "count": 2
+        "label": "Octopus Energy",
+        "count": 1
       },
       {
-        "label": "ScholarshipOwl",
-        "count": 2
+        "label": "home24 SE",
+        "count": 1
       },
       {
-        "label": "BWI GmbH",
+        "label": "Amazon Development Center Germany GmbH",
+        "count": 1
+      },
+      {
+        "label": "vacancy global pro",
         "count": 1
       }
     ],
-    "n_companies": 51,
-    "top10_share": 60,
-    "top10_pct": 54,
-    "multi_hiring": 19
+    "n_companies": 21,
+    "top10_share": 36,
+    "top10_pct": 77,
+    "multi_hiring": 10
   }
 }

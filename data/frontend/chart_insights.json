@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-08-07T08:21:20.105637+00:00",
-  "data_version": "sha256:e49c82cb13bf84ee",
+  "generated_at": "2026-08-10T08:44:26.490622+00:00",
+  "data_version": "sha256:7f492639c514fb42",
   "charts": {
     "german_requirement": {
       "title": "German requirements vary across roles",
       "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:06.223154+00:00",
+      "generated_at": "2026-08-10T08:44:16.321447+00:00",
       "model": null
     },
     "pm_type": {
-      "title": "PM demand is spread across role types",
-      "subtitle": "Openings are distributed across several PM types, with no single category strongly dominant.",
+      "title": "Growth PM roles lead the market",
+      "subtitle": "Growth PM profiles are the most in-demand PM type right now.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:08.602307+00:00",
+      "generated_at": "2026-08-10T08:44:17.873297+00:00",
       "model": null
     },
     "seniority": {
       "title": "Hiring skews toward experienced roles",
       "subtitle": "Most active roles target senior profiles, with limited entry-level demand.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:10.442203+00:00",
+      "generated_at": "2026-08-10T08:44:19.295770+00:00",
       "model": null
     },
     "work_mode": {
-      "title": "Remote work is widely available",
-      "subtitle": "Around 37% of roles offer full remote flexibility \u2014 high for a Berlin-focused search.",
+      "title": "Work style is evenly split",
+      "subtitle": "Remote, hybrid, and on-site roles are all represented in the current market.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:12.443716+00:00",
+      "generated_at": "2026-08-10T08:44:20.744820+00:00",
       "model": null
     },
     "location": {
-      "title": "Remote roles are a meaningful share",
-      "subtitle": "35% of openings are available outside Berlin, broadening access for remote candidates.",
+      "title": "Roles are heavily concentrated in Berlin",
+      "subtitle": "81% of positions are Berlin-based, with limited availability elsewhere.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:14.398868+00:00",
+      "generated_at": "2026-08-10T08:44:22.201276+00:00",
       "model": null
     },
     "ai": {
       "title": "AI focus remains a niche requirement",
       "subtitle": "AI-specific roles are present but represent a small share of the market at 0%.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:16.445110+00:00",
+      "generated_at": "2026-08-10T08:44:23.617863+00:00",
       "model": null
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-08-07T08:21:18.258638+00:00",
+      "generated_at": "2026-08-10T08:44:25.071963+00:00",
       "model": null
     }
   }
