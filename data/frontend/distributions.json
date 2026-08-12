@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 24
+      "count": 35
     },
     {
       "label": "mid_senior",
@@ -14,15 +14,15 @@
     },
     {
       "label": "senior",
-      "count": 31
+      "count": 35
     },
     {
       "label": "lead",
-      "count": 3
+      "count": 4
     },
     {
       "label": "staff",
-      "count": 3
+      "count": 4
     },
     {
       "label": "group",
@@ -30,25 +30,25 @@
     },
     {
       "label": "principal",
-      "count": 4
+      "count": 3
     },
     {
       "label": "unknown",
-      "count": 2
+      "count": 3
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 39
+      "count": 43
     },
     {
       "label": "remote",
-      "count": 21
+      "count": 27
     },
     {
       "label": "hybrid",
-      "count": 12
+      "count": 17
     },
     {
       "label": "hybrid_3d",
@@ -57,12 +57,16 @@
     {
       "label": "onsite",
       "count": 3
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 57
+      "count": 71
     },
     {
       "label": "unknown",
@@ -70,13 +74,13 @@
     },
     {
       "label": "de",
-      "count": 7
+      "count": 10
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 78
+      "count": 95
     }
   ],
   "pm_type": [
@@ -85,24 +89,16 @@
       "count": 5
     },
     {
-      "label": "customer_facing",
-      "count": 1
-    },
-    {
       "label": "platform",
-      "count": 6
+      "count": 9
     },
     {
       "label": "data_ai",
-      "count": 4
+      "count": 7
     },
     {
       "label": "growth",
-      "count": 12
-    },
-    {
-      "label": "internal_ops",
-      "count": 1
+      "count": 17
     }
   ],
   "industry": [],
@@ -110,19 +106,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 78
+      "count": 95
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 78
+      "count": 95
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 78
+      "count": 95
     }
   ],
   "domain_req_breakdown": [],
@@ -130,7 +126,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 29,
+    "n_enriched": 38,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -138,20 +134,24 @@
   },
   "source": [
     {
+      "label": "jsearch",
+      "count": 48
+    },
+    {
       "label": "ats",
       "count": 36
     },
     {
-      "label": "jsearch",
-      "count": 36
-    },
-    {
       "label": "arbeitnow",
-      "count": 6
+      "count": 11
     }
   ],
   "companies": {
     "top20": [
+      {
+        "label": "FlexBoard",
+        "count": 14
+      },
       {
         "label": "Delivery Hero",
         "count": 11
@@ -161,15 +161,11 @@
         "count": 6
       },
       {
-        "label": "FlexBoard",
-        "count": 6
-      },
-      {
-        "label": "GetYourGuide",
+        "label": "HelloFresh",
         "count": 5
       },
       {
-        "label": "HelloFresh",
+        "label": "GetYourGuide",
         "count": 5
       },
       {
@@ -177,19 +173,15 @@
         "count": 4
       },
       {
-        "label": "Scalable Capital",
-        "count": 3
-      },
-      {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "remote zest jobs",
+        "label": "Scalable Capital",
         "count": 3
       },
       {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
+        "label": "Sonova Group",
         "count": 2
       },
       {
@@ -197,45 +189,49 @@
         "count": 2
       },
       {
+        "label": "CHAPTR",
+        "count": 2
+      },
+      {
+        "label": "Little Bird Group",
+        "count": 2
+      },
+      {
         "label": "wolt",
         "count": 2
       },
       {
-        "label": "vacancy global pro",
+        "label": "Helsing",
         "count": 2
       },
       {
-        "label": "remote click jobs",
+        "label": "remote zest jobs",
         "count": 2
       },
       {
-        "label": "CHAPTR",
+        "label": "doctari",
         "count": 1
       },
       {
-        "label": "Octopus Energy",
+        "label": "Energy Market Solutions GmbH - Standort Berlin",
         "count": 1
       },
       {
-        "label": "Flinn",
+        "label": "Xsolla",
         "count": 1
       },
       {
-        "label": "Sonova Group",
+        "label": "Focusrite",
         "count": 1
       },
       {
-        "label": "Snowflake",
-        "count": 1
-      },
-      {
-        "label": "jobs - Personio",
+        "label": "Andercore",
         "count": 1
       }
     ],
-    "n_companies": 36,
-    "top10_share": 48,
-    "top10_pct": 62,
-    "multi_hiring": 14
+    "n_companies": 45,
+    "top10_share": 55,
+    "top10_pct": 58,
+    "multi_hiring": 15
   }
 }

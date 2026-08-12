@@ -3824,7 +3824,7 @@
     },
     {
       "date": "2026-06-03",
-      "count": 14
+      "count": 12
     },
     {
       "date": "2026-06-04",
@@ -3832,7 +3832,7 @@
     },
     {
       "date": "2026-06-05",
-      "count": 9
+      "count": 8
     },
     {
       "date": "2026-06-08",
@@ -3936,7 +3936,7 @@
     },
     {
       "date": "2026-07-27",
-      "count": 24
+      "count": 23
     },
     {
       "date": "2026-07-28",
@@ -3964,11 +3964,15 @@
     },
     {
       "date": "2026-08-10",
-      "count": 7
+      "count": 1
     },
     {
       "date": "2026-08-11",
-      "count": 5
+      "count": 8
+    },
+    {
+      "date": "2026-08-12",
+      "count": 7
     }
   ],
   "active_per_day": [
@@ -4059,9 +4063,9 @@
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 6.5,
+    "mean_days": 6.6,
     "pct_gone_week": 83,
-    "n_inactive": 970
+    "n_inactive": 966
   },
   "seniority_mix": {
     "dates": [
