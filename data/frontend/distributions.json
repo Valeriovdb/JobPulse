@@ -2,19 +2,19 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 3
+      "count": 1
     },
     {
       "label": "mid",
-      "count": 35
+      "count": 38
     },
     {
       "label": "mid_senior",
-      "count": 2
+      "count": 4
     },
     {
       "label": "senior",
-      "count": 35
+      "count": 47
     },
     {
       "label": "lead",
@@ -22,11 +22,11 @@
     },
     {
       "label": "staff",
-      "count": 4
+      "count": 3
     },
     {
       "label": "group",
-      "count": 1
+      "count": 2
     },
     {
       "label": "principal",
@@ -34,21 +34,25 @@
     },
     {
       "label": "unknown",
-      "count": 3
+      "count": 7
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 43
+      "count": 48
     },
     {
       "label": "remote",
-      "count": 27
+      "count": 32
     },
     {
       "label": "hybrid",
-      "count": 17
+      "count": 24
+    },
+    {
+      "label": "hybrid_2d",
+      "count": 4
     },
     {
       "label": "hybrid_3d",
@@ -57,48 +61,48 @@
     {
       "label": "onsite",
       "count": 3
-    },
-    {
-      "label": "hybrid_2d",
-      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 71
+      "count": 78
+    },
+    {
+      "label": "de",
+      "count": 22
     },
     {
       "label": "unknown",
       "count": 14
-    },
-    {
-      "label": "de",
-      "count": 10
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 95
+      "count": 114
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 5
-    },
-    {
-      "label": "platform",
-      "count": 9
-    },
-    {
-      "label": "data_ai",
       "count": 7
     },
     {
+      "label": "customer_facing",
+      "count": 2
+    },
+    {
+      "label": "platform",
+      "count": 15
+    },
+    {
+      "label": "data_ai",
+      "count": 5
+    },
+    {
       "label": "growth",
-      "count": 17
+      "count": 21
     }
   ],
   "industry": [],
@@ -106,19 +110,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 95
+      "count": 114
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 95
+      "count": 114
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 95
+      "count": 114
     }
   ],
   "domain_req_breakdown": [],
@@ -126,7 +130,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 38,
+    "n_enriched": 50,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -135,7 +139,7 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 48
+      "count": 62
     },
     {
       "label": "ats",
@@ -143,25 +147,25 @@
     },
     {
       "label": "arbeitnow",
-      "count": 11
+      "count": 16
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "FlexBoard",
-        "count": 14
+        "label": "Delivery Hero",
+        "count": 12
       },
       {
-        "label": "Delivery Hero",
-        "count": 11
+        "label": "FlexBoard",
+        "count": 12
       },
       {
         "label": "N26",
         "count": 6
       },
       {
-        "label": "HelloFresh",
+        "label": "remote zest jobs",
         "count": 5
       },
       {
@@ -169,23 +173,31 @@
         "count": 5
       },
       {
-        "label": "Raisin",
+        "label": "HelloFresh",
         "count": 4
       },
       {
-        "label": "commercetools",
-        "count": 3
+        "label": "Raisin",
+        "count": 4
       },
       {
         "label": "Scalable Capital",
         "count": 3
       },
       {
-        "label": "Sonova Group",
+        "label": "commercetools",
+        "count": 3
+      },
+      {
+        "label": "Remotely",
         "count": 2
       },
       {
-        "label": "SumUp",
+        "label": "Capgemini Invent",
+        "count": 2
+      },
+      {
+        "label": "Axel Springer News Media National",
         "count": 2
       },
       {
@@ -193,45 +205,37 @@
         "count": 2
       },
       {
-        "label": "Little Bird Group",
+        "label": "Cochlear",
         "count": 2
       },
       {
-        "label": "wolt",
+        "label": "YPOG",
         "count": 2
       },
       {
-        "label": "Helsing",
+        "label": "Redcare Pharmacy",
         "count": 2
       },
       {
-        "label": "remote zest jobs",
+        "label": "n8n",
         "count": 2
       },
       {
-        "label": "doctari",
-        "count": 1
+        "label": "ARISE GmbH",
+        "count": 2
       },
       {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
-        "count": 1
+        "label": "DEPT OF DESIGN & CONSTRUCTION",
+        "count": 2
       },
       {
-        "label": "Xsolla",
-        "count": 1
-      },
-      {
-        "label": "Focusrite",
-        "count": 1
-      },
-      {
-        "label": "Andercore",
-        "count": 1
+        "label": "SumUp",
+        "count": 2
       }
     ],
-    "n_companies": 45,
-    "top10_share": 55,
-    "top10_pct": 58,
-    "multi_hiring": 15
+    "n_companies": 57,
+    "top10_share": 56,
+    "top10_pct": 49,
+    "multi_hiring": 21
   }
 }
