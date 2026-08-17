@@ -2,111 +2,99 @@
   "seniority": [
     {
       "label": "junior",
-      "count": 3
+      "count": 1
     },
     {
       "label": "mid",
-      "count": 35
+      "count": 19
     },
     {
       "label": "mid_senior",
-      "count": 5
+      "count": 1
     },
     {
       "label": "senior",
-      "count": 49
+      "count": 20
     },
     {
       "label": "lead",
-      "count": 5
+      "count": 4
     },
     {
       "label": "staff",
-      "count": 2
+      "count": 1
     },
     {
       "label": "group",
-      "count": 3
+      "count": 2
     },
     {
       "label": "principal",
-      "count": 3
+      "count": 2
     },
     {
       "label": "unknown",
-      "count": 10
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 50
-    },
-    {
-      "label": "remote",
-      "count": 34
+      "count": 28
     },
     {
       "label": "hybrid",
-      "count": 26
+      "count": 15
     },
     {
-      "label": "onsite",
-      "count": 4
-    },
-    {
-      "label": "hybrid_2d",
-      "count": 3
+      "label": "remote",
+      "count": 11
     },
     {
       "label": "hybrid_3d",
       "count": 3
+    },
+    {
+      "label": "onsite",
+      "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 75
-    },
-    {
-      "label": "de",
-      "count": 31
+      "count": 37
     },
     {
       "label": "unknown",
-      "count": 14
+      "count": 13
+    },
+    {
+      "label": "de",
+      "count": 8
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 120
+      "count": 58
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 11
+      "count": 4
     },
     {
       "label": "customer_facing",
-      "count": 3
+      "count": 1
     },
     {
       "label": "platform",
-      "count": 15
-    },
-    {
-      "label": "data_ai",
-      "count": 2
+      "count": 10
     },
     {
       "label": "growth",
-      "count": 15
-    },
-    {
-      "label": "internal_ops",
-      "count": 1
+      "count": 6
     }
   ],
   "industry": [],
@@ -114,19 +102,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 120
+      "count": 58
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 120
+      "count": 58
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 120
+      "count": 58
     }
   ],
   "domain_req_breakdown": [],
@@ -134,7 +122,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 47,
+    "n_enriched": 21,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -142,55 +130,27 @@
   },
   "source": [
     {
-      "label": "jsearch",
-      "count": 71
+      "label": "ats",
+      "count": 29
     },
     {
-      "label": "ats",
-      "count": 34
+      "label": "jsearch",
+      "count": 25
     },
     {
       "label": "arbeitnow",
-      "count": 15
+      "count": 4
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 12
-      },
-      {
-        "label": "FlexBoard",
-        "count": 8
-      },
-      {
-        "label": "remote zest jobs",
-        "count": 6
+        "count": 10
       },
       {
         "label": "GetYourGuide",
         "count": 5
-      },
-      {
-        "label": "Raisin",
-        "count": 4
-      },
-      {
-        "label": "N26",
-        "count": 4
-      },
-      {
-        "label": "HelloFresh",
-        "count": 3
-      },
-      {
-        "label": "n8n",
-        "count": 3
-      },
-      {
-        "label": "Distribusion Technologies",
-        "count": 3
       },
       {
         "label": "Scalable Capital",
@@ -201,45 +161,73 @@
         "count": 3
       },
       {
-        "label": "Energy Market Solutions GmbH - Standort Berlin",
+        "label": "N26",
         "count": 2
       },
       {
-        "label": "Unzer",
+        "label": "Raisin",
         "count": 2
       },
       {
-        "label": "Redcare Pharmacy",
+        "label": "HelloFresh",
         "count": 2
       },
       {
-        "label": "LIQID Investments",
+        "label": "SumUp",
         "count": 2
       },
       {
-        "label": "remote click jobs",
+        "label": "YPOG",
         "count": 2
       },
       {
-        "label": "Cochlear",
-        "count": 2
+        "label": "JustPlay GmbH",
+        "count": 1
       },
       {
-        "label": "Axel Springer News Media National",
-        "count": 2
+        "label": "Superhuman%20Platform%20Inc",
+        "count": 1
       },
       {
-        "label": "Campusj\u00e4ger by Workwise",
-        "count": 2
+        "label": "bunch",
+        "count": 1
       },
       {
-        "label": "Qonto",
-        "count": 2
+        "label": "plancraft",
+        "count": 1
+      },
+      {
+        "label": "AIOS",
+        "count": 1
+      },
+      {
+        "label": "Enapi",
+        "count": 1
+      },
+      {
+        "label": "eBay",
+        "count": 1
+      },
+      {
+        "label": "Snowflake",
+        "count": 1
+      },
+      {
+        "label": "Headmatch  & Co. KG",
+        "count": 1
+      },
+      {
+        "label": "genua GmbH",
+        "count": 1
+      },
+      {
+        "label": "MOIA",
+        "count": 1
       }
     ],
-    "n_companies": 63,
-    "top10_share": 51,
-    "top10_pct": 42,
-    "multi_hiring": 25
+    "n_companies": 36,
+    "top10_share": 32,
+    "top10_pct": 55,
+    "multi_hiring": 9
   }
 }
