@@ -6,15 +6,15 @@
     },
     {
       "label": "mid",
-      "count": 19
+      "count": 34
     },
     {
       "label": "mid_senior",
-      "count": 1
+      "count": 2
     },
     {
       "label": "senior",
-      "count": 20
+      "count": 35
     },
     {
       "label": "lead",
@@ -26,7 +26,7 @@
     },
     {
       "label": "group",
-      "count": 2
+      "count": 3
     },
     {
       "label": "principal",
@@ -34,21 +34,21 @@
     },
     {
       "label": "unknown",
-      "count": 1
+      "count": 4
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 28
-    },
-    {
-      "label": "hybrid",
-      "count": 15
+      "count": 40
     },
     {
       "label": "remote",
-      "count": 11
+      "count": 27
+    },
+    {
+      "label": "hybrid",
+      "count": 21
     },
     {
       "label": "hybrid_3d",
@@ -56,45 +56,45 @@
     },
     {
       "label": "onsite",
-      "count": 1
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 37
+      "count": 63
+    },
+    {
+      "label": "de",
+      "count": 17
     },
     {
       "label": "unknown",
       "count": 13
-    },
-    {
-      "label": "de",
-      "count": 8
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 58
+      "count": 93
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 4
+      "count": 5
     },
     {
       "label": "customer_facing",
-      "count": 1
+      "count": 3
     },
     {
       "label": "platform",
-      "count": 10
+      "count": 17
     },
     {
       "label": "growth",
-      "count": 6
+      "count": 7
     }
   ],
   "industry": [],
@@ -102,19 +102,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 58
+      "count": 93
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 58
+      "count": 93
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 58
+      "count": 93
     }
   ],
   "domain_req_breakdown": [],
@@ -122,7 +122,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 21,
+    "n_enriched": 32,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -130,16 +130,16 @@
   },
   "source": [
     {
+      "label": "jsearch",
+      "count": 55
+    },
+    {
       "label": "ats",
       "count": 29
     },
     {
-      "label": "jsearch",
-      "count": 25
-    },
-    {
       "label": "arbeitnow",
-      "count": 4
+      "count": 9
     }
   ],
   "companies": {
@@ -149,23 +149,31 @@
         "count": 10
       },
       {
+        "label": "FlexBoard",
+        "count": 10
+      },
+      {
         "label": "GetYourGuide",
         "count": 5
       },
       {
-        "label": "Scalable Capital",
-        "count": 3
+        "label": "YPOG",
+        "count": 4
       },
       {
         "label": "commercetools",
         "count": 3
       },
       {
-        "label": "N26",
-        "count": 2
+        "label": "Scalable Capital",
+        "count": 3
       },
       {
         "label": "Raisin",
+        "count": 2
+      },
+      {
+        "label": "N26",
         "count": 2
       },
       {
@@ -173,61 +181,53 @@
         "count": 2
       },
       {
+        "label": "Snowflake",
+        "count": 2
+      },
+      {
+        "label": "Meyandy LLC",
+        "count": 2
+      },
+      {
+        "label": "United States Digital Space LLC",
+        "count": 2
+      },
+      {
+        "label": "MOIA",
+        "count": 2
+      },
+      {
+        "label": "Enapi",
+        "count": 2
+      },
+      {
+        "label": "eBay",
+        "count": 2
+      },
+      {
         "label": "SumUp",
         "count": 2
       },
       {
-        "label": "YPOG",
+        "label": "Jobgether",
         "count": 2
       },
       {
-        "label": "JustPlay GmbH",
-        "count": 1
+        "label": "Experimentation Jobs",
+        "count": 2
       },
       {
-        "label": "Superhuman%20Platform%20Inc",
-        "count": 1
+        "label": "Alteos",
+        "count": 2
       },
       {
-        "label": "bunch",
-        "count": 1
-      },
-      {
-        "label": "plancraft",
-        "count": 1
-      },
-      {
-        "label": "AIOS",
-        "count": 1
-      },
-      {
-        "label": "Enapi",
-        "count": 1
-      },
-      {
-        "label": "eBay",
-        "count": 1
-      },
-      {
-        "label": "Snowflake",
-        "count": 1
-      },
-      {
-        "label": "Headmatch  & Co. KG",
-        "count": 1
-      },
-      {
-        "label": "genua GmbH",
-        "count": 1
-      },
-      {
-        "label": "MOIA",
-        "count": 1
+        "label": "IONOS",
+        "count": 2
       }
     ],
-    "n_companies": 36,
-    "top10_share": 32,
-    "top10_pct": 55,
-    "multi_hiring": 9
+    "n_companies": 49,
+    "top10_share": 43,
+    "top10_pct": 46,
+    "multi_hiring": 21
   }
 }
