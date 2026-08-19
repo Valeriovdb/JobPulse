@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-08-18T07:44:38.244371+00:00",
-  "data_version": "sha256:b88815f30833c6ee",
+  "generated_at": "2026-08-19T07:46:32.194617+00:00",
+  "data_version": "sha256:e1efde70f2811aa0",
   "charts": {
     "german_requirement": {
-      "title": "German requirements vary across roles",
-      "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:27.085247+00:00",
-      "model": null
+      "title": "German Language Skills Are Not Dominant in Roles",
+      "subtitle": "A significant portion of positions remain unclassified, highlighting accessibility issues.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:22.774600+00:00",
+      "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Platform PM roles lead the market",
-      "subtitle": "Platform PM profiles are the most in-demand PM type right now.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:28.878796+00:00",
-      "model": null
+      "title": "Core PMs Dominate Despite Fragmented Landscape",
+      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting an imbalance in the market.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:23.702968+00:00",
+      "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Hiring skews toward experienced roles",
-      "subtitle": "Most active roles target senior profiles, with limited entry-level demand.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:30.445456+00:00",
-      "model": null
+      "title": "Senior Roles Dominate Workforce Composition",
+      "subtitle": "Senior positions account for 50% of the workforce, significantly outpacing mid and junior roles.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:24.554848+00:00",
+      "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Work style is evenly split",
-      "subtitle": "Remote, hybrid, and on-site roles are all represented in the current market.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:32.088625+00:00",
-      "model": null
+      "title": "Remote Work Dominates with Limited On-Site Expectations",
+      "subtitle": "A significant portion of roles are remote-friendly, indicating a shift towards flexible work arrangements.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:25.395987+00:00",
+      "model": "gpt-4o-mini"
     },
     "location": {
-      "title": "Roles are heavily concentrated in Berlin",
-      "subtitle": "72% of positions are Berlin-based, with limited availability elsewhere.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:33.675785+00:00",
-      "model": null
+      "title": "Berlin Dominates Remote Job Accessibility",
+      "subtitle": "A significant majority of remote opportunities are concentrated in Berlin, enhancing market reach for job seekers.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:26.439119+00:00",
+      "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI focus remains a niche requirement",
-      "subtitle": "AI-specific roles are present but represent a small share of the market at 0%.",
-      "source": "fallback",
-      "generated_at": "2026-08-18T07:44:35.317572+00:00",
-      "model": null
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "35% of roles prioritize AI responsibilities, with 29% requiring AI skills.",
+      "source": "llm",
+      "generated_at": "2026-08-19T07:46:27.241667+00:00",
+      "model": "gpt-4o-mini"
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-08-18T07:44:36.847388+00:00",
+      "generated_at": "2026-08-19T07:46:31.505257+00:00",
       "model": null
     }
   }
