@@ -1819,23 +1819,6 @@
     "years_experience_min": null
   },
   {
-    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
-    "title": "Group Product Manager - Global Product Strategy",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "group",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-09",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "30ecc795-0b3c-4054-bdd4-54b30d4ed7e8",
     "title": "Senior Product Manager - Acquiring",
     "company": "SumUp",
@@ -1850,6 +1833,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-03-31",
     "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
+    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
+    "title": "Group Product Manager - Global Product Strategy",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "group",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -5474,23 +5474,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
-    "title": "Senior Product Manager, Insights - Vendor",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-08",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "a28f2422-df52-43a3-91a8-01bbd816b5c8",
     "title": "Freelance Product Owner remote (m/w/d) - deutschsprachig",
     "company": "B-works",
@@ -5504,6 +5487,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-04-20",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
+    "title": "Senior Product Manager, Insights - Vendor",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-08",
     "industry": null,
     "years_experience_min": null
   },
@@ -7599,23 +7599,6 @@
     "years_experience_min": null
   },
   {
-    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
-    "title": "Product Manager - Customer Data Platform, Tech Foundations",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-23",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "f2591511-f0c7-455f-819e-369737162c76",
     "title": "Product Manager - Product Factory",
     "company": "N26",
@@ -7629,6 +7612,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-04-30",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
+    "title": "Product Manager - Customer Data Platform, Tech Foundations",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-23",
     "industry": null,
     "years_experience_min": null
   },
@@ -15827,23 +15827,6 @@
     "years_experience_min": null
   },
   {
-    "id": "b7eefbcf-06ab-42b3-bc93-61f03725e3f9",
-    "title": "Head of Product \u2013 Agentic Offerings",
-    "company": "commercetools",
-    "url": "https://job-boards.greenhouse.io/commercetools/jobs/7774522003",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "head",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "data_ai",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-06-16",
-    "industry": "saas_b2b_software",
-    "years_experience_min": null
-  },
-  {
     "id": "afffba71-f26d-45f2-9180-c78f915f8d3c",
     "title": "Product Manager - Data Consumption, Tech Foundations",
     "company": "Delivery Hero",
@@ -16997,6 +16980,23 @@
     "ai_skills": true,
     "first_seen_date": "2026-06-03",
     "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
+    "id": "a0651905-c923-479e-a803-13dbb547963f",
+    "title": "Product Manager - Mobile App - Full Remote or Hybrid /m/f/d/",
+    "company": "remote click jobs",
+    "url": "https://remoteclickjobs-production.up.railway.app/job/product-manager-mobile-app-full-remote-or-hybrid-mfd-3",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "unclassified",
+    "pm_type": "customer_facing",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-27",
+    "industry": null,
     "years_experience_min": null
   }
 ]
