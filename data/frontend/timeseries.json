@@ -157,7 +157,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 7,
-      "jobs_added": 7,
+      "jobs_added": 6,
       "jobs_removed": 0
     },
     {
@@ -1977,7 +1977,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 1,
-      "jobs_added": 1,
+      "jobs_added": 0,
       "jobs_removed": 2
     },
     {
@@ -3696,7 +3696,7 @@
     },
     {
       "date": "2026-04-17",
-      "count": 22
+      "count": 21
     },
     {
       "date": "2026-04-20",
@@ -3792,7 +3792,7 @@
     },
     {
       "date": "2026-05-21",
-      "count": 18
+      "count": 19
     },
     {
       "date": "2026-05-22",
@@ -3824,7 +3824,7 @@
     },
     {
       "date": "2026-06-03",
-      "count": 12
+      "count": 10
     },
     {
       "date": "2026-06-04",
@@ -3832,11 +3832,11 @@
     },
     {
       "date": "2026-06-05",
-      "count": 7
+      "count": 4
     },
     {
       "date": "2026-06-08",
-      "count": 11
+      "count": 10
     },
     {
       "date": "2026-06-09",
@@ -3860,7 +3860,7 @@
     },
     {
       "date": "2026-06-16",
-      "count": 7
+      "count": 8
     },
     {
       "date": "2026-06-17",
@@ -3896,11 +3896,11 @@
     },
     {
       "date": "2026-06-30",
-      "count": 8
+      "count": 7
     },
     {
       "date": "2026-07-01",
-      "count": 3
+      "count": 2
     },
     {
       "date": "2026-07-02",
@@ -3936,7 +3936,7 @@
     },
     {
       "date": "2026-07-27",
-      "count": 21
+      "count": 18
     },
     {
       "date": "2026-07-28",
@@ -3956,7 +3956,7 @@
     },
     {
       "date": "2026-08-05",
-      "count": 16
+      "count": 15
     },
     {
       "date": "2026-08-06",
@@ -3968,7 +3968,7 @@
     },
     {
       "date": "2026-08-11",
-      "count": 22
+      "count": 23
     },
     {
       "date": "2026-08-12",
@@ -3981,6 +3981,14 @@
     {
       "date": "2026-08-14",
       "count": 1
+    },
+    {
+      "date": "2026-08-19",
+      "count": 5
+    },
+    {
+      "date": "2026-08-21",
+      "count": 6
     }
   ],
   "active_per_day": [
@@ -4071,9 +4079,9 @@
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 6.6,
+    "mean_days": 6.5,
     "pct_gone_week": 83,
-    "n_inactive": 992
+    "n_inactive": 983
   },
   "seniority_mix": {
     "dates": [

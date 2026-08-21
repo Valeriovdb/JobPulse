@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-08-20T07:48:55.466231+00:00",
-  "data_version": "sha256:80bb60a9af58163c",
+  "generated_at": "2026-08-21T07:52:00.047445+00:00",
+  "data_version": "sha256:7a7f4e9b96a57255",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Not a Barrier",
-      "subtitle": "A significant majority of roles do not require German proficiency, highlighting accessibility in the job market.",
+      "title": "Majority of Roles Do Not Require German Skills",
+      "subtitle": "A significant share of positions remain accessible without German proficiency, highlighting a notable skill gap.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:49.820390+00:00",
+      "generated_at": "2026-08-21T07:51:55.353770+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate with Notable Imbalance",
-      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting a concentration in generalist positions.",
+      "title": "Core PMs Lead, But Technical Roles Close Behind",
+      "subtitle": "A slight gap indicates a competitive landscape for PM roles.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:50.661366+00:00",
+      "generated_at": "2026-08-21T07:51:56.054802+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Senior Roles Dominate Workforce Composition",
-      "subtitle": "More than half of the workforce is in senior positions, indicating a senior-heavy environment.",
+      "title": "Senior Roles Dominate the Workforce",
+      "subtitle": "With 57% of positions held by senior professionals, the market is clearly senior-heavy.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:51.449570+00:00",
+      "generated_at": "2026-08-21T07:51:56.757248+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Remote Work Dominates, Yet Balance is Key",
-      "subtitle": "A significant portion of employees prefer remote work, highlighting the need for flexible arrangements.",
+      "title": "Work Modes Reflect Diverse Preferences Among Employees",
+      "subtitle": "A significant portion of the workforce remains unclassified, indicating varied expectations for flexibility and on-site presence.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:52.330010+00:00",
+      "generated_at": "2026-08-21T07:51:57.450859+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
-      "title": "Berlin Dominates Remote Job Accessibility",
-      "subtitle": "A significant majority of remote opportunities are concentrated in Berlin, enhancing market reach.",
+      "title": "Berlin Dominates Job Market Concentration",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:53.199051+00:00",
+      "generated_at": "2026-08-21T07:51:57.976954+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
       "title": "AI Expertise is Becoming Mainstream in Job Market",
-      "subtitle": "Nearly half of roles now prioritize AI responsibilities, with significant demand for related skills.",
+      "subtitle": "Over half of roles now prioritize AI responsibilities, with significant demand for related skills.",
       "source": "llm",
-      "generated_at": "2026-08-20T07:48:53.953540+00:00",
+      "generated_at": "2026-08-21T07:51:58.575052+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Notable Diversity and Balance",
-      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
-      "source": "llm",
-      "generated_at": "2026-08-20T07:48:54.673367+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-08-21T07:51:59.382781+00:00",
+      "model": null
     }
   }
 }
