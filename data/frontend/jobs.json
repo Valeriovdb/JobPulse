@@ -374,23 +374,6 @@
     "years_experience_min": null
   },
   {
-    "id": "fd825bf3-3ff1-49d3-ab5b-404d1c110779",
-    "title": "Senior Product Manager, Intelligent Platforms (m/f/x)",
-    "company": "HelloFresh",
-    "url": "https://careers.hellofresh.com/global/en/job/8095950?gh_jid=8095950",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "technical",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-08-11",
-    "industry": "other",
-    "years_experience_min": null
-  },
-  {
     "id": "4ac560ab-c1a4-4398-9678-e1fd128b7121",
     "title": "Principal Product Manager (f/m/d)",
     "company": "Contentful",
@@ -986,23 +969,6 @@
     "years_experience_min": null
   },
   {
-    "id": "08fe0a1e-a4d2-4c4a-90ad-edf2344f59e4",
-    "title": "Senior Technical Product Manager",
-    "company": "SumUp",
-    "url": "https://sumup.com/careers/positions/8529498002?gh_jid=8529498002",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "senior",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "technical",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-05-21",
-    "industry": "fintech_payments",
-    "years_experience_min": null
-  },
-  {
     "id": "7679062a-4e2a-4e2b-961f-a9adaf0174fe",
     "title": "Produktorientierter Projektmanager / Product Owner KI-Anwendungen (LLM/RAG) (m/w/d)",
     "company": "AVS Services GmbH",
@@ -1341,23 +1307,6 @@
     "first_seen_date": "2026-03-31",
     "industry": "fintech_payments",
     "years_experience_min": 3
-  },
-  {
-    "id": "b7eefbcf-06ab-42b3-bc93-61f03725e3f9",
-    "title": "Head of Product \u2013 Agentic Offerings",
-    "company": "commercetools",
-    "url": "https://job-boards.greenhouse.io/commercetools/jobs/7774522003",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "head",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "data_ai",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-06-16",
-    "industry": "saas_b2b_software",
-    "years_experience_min": null
   },
   {
     "id": "ede44983-1b9c-4ca9-833b-b9279613badb",
@@ -1802,23 +1751,6 @@
     "years_experience_min": 5
   },
   {
-    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
-    "title": "Group Product Manager - Global Product Strategy",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "group",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-09",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "c9c1fdd6-ba23-45f5-841b-a2b2f84da1b2",
     "title": "Senior Product Manager \u2014 Intelligent Service Management",
     "company": "Matrix42",
@@ -1833,6 +1765,23 @@
     "ai_skills": true,
     "first_seen_date": "2026-05-01",
     "industry": "saas_b2b_software",
+    "years_experience_min": null
+  },
+  {
+    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
+    "title": "Group Product Manager - Global Product Strategy",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "group",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -2071,23 +2020,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-04-17",
     "industry": "other",
-    "years_experience_min": null
-  },
-  {
-    "id": "99ca9272-c9fb-4db4-b694-e8260f590417",
-    "title": "Produktmanager im Bereich Prozessanalytik (w/m/d)",
-    "company": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
-    "url": "https://www.arbeitnow.com/jobs/companies/knick-elektronische-messgerate-gmbh-co-kg/produktmanager-im-bereich-prozessanalytik-knick-berlin-441648",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "unknown",
-    "language": "de",
-    "german_req": "not_mentioned",
-    "pm_type": "core_pm",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-21",
-    "industry": "healthtech_biotech",
     "years_experience_min": null
   },
   {
@@ -2344,23 +2276,6 @@
     "first_seen_date": "2026-04-17",
     "industry": "other",
     "years_experience_min": null
-  },
-  {
-    "id": "71b2b63d-d1b7-4a99-89af-0f69b25bdf8a",
-    "title": "Technical Product Owner | Integrations (m/f/d)",
-    "company": "Superchat",
-    "url": "https://www.arbeitnow.com/jobs/companies/superchat/technical-product-owner-integrations-berlin-berlin-176910",
-    "location": "berlin",
-    "work_mode": "hybrid_3d",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "technical",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-08-21",
-    "industry": "saas_b2b_software",
-    "years_experience_min": 3
   },
   {
     "id": "95d4398f-2ae2-40ab-b0c8-2796a1decf22",
@@ -3451,23 +3366,6 @@
     "years_experience_min": 5
   },
   {
-    "id": "568407a0-f408-4c63-9521-7842eeedad10",
-    "title": "Technical Product Owner | Core (m/f/d)",
-    "company": "Superchat",
-    "url": "https://www.arbeitnow.com/jobs/companies/superchat/technical-product-owner-core-berlin-berlin-248619",
-    "location": "berlin",
-    "work_mode": "hybrid_3d",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "core_pm",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-08-21",
-    "industry": "saas_b2b_software",
-    "years_experience_min": null
-  },
-  {
     "id": "518dd16e-f0b1-4f07-a951-cd59e182a20c",
     "title": "Product Manager - AI Task & Prompt Design",
     "company": "YO IT CONSULTING",
@@ -3517,23 +3415,6 @@
     "first_seen_date": "2026-05-05",
     "industry": "saas_b2b_software",
     "years_experience_min": null
-  },
-  {
-    "id": "2d7dfa7c-10b0-4e0d-8938-cdb3a9a885cf",
-    "title": "Senior Product Manager \u2013 German Speaking - Managed Detection and Incident Response (m/f/x)",
-    "company": "Eye Security",
-    "url": "https://www.arbeitnow.com/jobs/companies/eye-security/senior-product-manager-german-speaking-managed-detection-and-incident-response-berlin-122217",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "senior",
-    "language": "en",
-    "german_req": "must",
-    "pm_type": "technical",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-21",
-    "industry": "cybersecurity",
-    "years_experience_min": 5
   },
   {
     "id": "50af0fc7-59d7-453f-bf1c-f5fb37b378cb",
@@ -4281,6 +4162,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-04-27",
     "industry": "healthtech_biotech",
+    "years_experience_min": 5
+  },
+  {
+    "id": "5f9f9283-5dfb-48fb-bc53-c83378ef6d03",
+    "title": "Product Lead - Portfolio Midcore Games",
+    "company": "Voodoo",
+    "url": "https://de.linkedin.com/jobs/view/product-lead-portfolio-midcore-games-at-voodoo-4430906660",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "lead",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "customer_facing",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-24",
+    "industry": "consumer_apps",
     "years_experience_min": 5
   },
   {
@@ -5287,6 +5185,23 @@
     "years_experience_min": null
   },
   {
+    "id": "fd825bf3-3ff1-49d3-ab5b-404d1c110779",
+    "title": "Senior Product Manager, Intelligent Platforms (m/f/x)",
+    "company": "HelloFresh",
+    "url": "https://careers.hellofresh.com/global/en/job/8095950?gh_jid=8095950",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "technical",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-08-11",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
     "id": "d9571d36-23f6-4eb1-9934-978cc83c90ef",
     "title": "Product Manager Alevate Payments",
     "company": "Serrala",
@@ -5559,23 +5474,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
-    "title": "Senior Product Manager, Insights - Vendor",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-08",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "e030364b-124c-455d-935e-187999139334",
     "title": "Senior Product- & Alliance Manager m/w/d (Virtualization & Application Infrastructure). Job in Berlin Move Collective Jobs",
     "company": "Advanced UniByte GmbH",
@@ -5623,6 +5521,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-07-23",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
+    "title": "Senior Product Manager, Insights - Vendor",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-08",
     "industry": null,
     "years_experience_min": null
   },
@@ -7684,23 +7599,6 @@
     "years_experience_min": 5
   },
   {
-    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
-    "title": "Product Manager - Customer Data Platform, Tech Foundations",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-23",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "59abca96-113d-4e79-bb9a-e5daceffa151",
     "title": "Product Manager Agentic AI Education (m/w/d)",
     "company": "AI Transformation Institute",
@@ -7749,6 +7647,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-04-27",
     "industry": "healthtech_biotech",
+    "years_experience_min": null
+  },
+  {
+    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
+    "title": "Product Manager - Customer Data Platform, Tech Foundations",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-23",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -8908,6 +8823,23 @@
     "years_experience_min": null
   },
   {
+    "id": "480f4541-bc71-4a07-b61f-7dbd5fea9ec6",
+    "title": "Senior Product Manager, Connectivity ",
+    "company": "GetYourGuide",
+    "url": "https://job-boards.greenhouse.io/getyourguide/jobs/7552392",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "platform",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-05-21",
+    "industry": "ecommerce_marketplace",
+    "years_experience_min": 5
+  },
+  {
     "id": "0cade591-062f-4070-b375-b8621481093b",
     "title": "Produktmanager Interface-Technik / Bahn (w/m/d)",
     "company": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
@@ -9229,23 +9161,6 @@
     "first_seen_date": "2026-05-27",
     "industry": "ecommerce_marketplace",
     "years_experience_min": 4
-  },
-  {
-    "id": "6fb65f0b-2872-4c3b-af82-654f5a4a3caa",
-    "title": "Senior Product Manager (m/f/x) - German Speaking",
-    "company": "DemoUp Cliplister",
-    "url": "https://www.arbeitnow.com/jobs/companies/demoup-cliplister/remote-senior-product-manager-german-speaking-berlin-311211",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "senior",
-    "language": "en",
-    "german_req": "must",
-    "pm_type": "core_pm",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-08-21",
-    "industry": "saas_b2b_software",
-    "years_experience_min": 5
   },
   {
     "id": "4431a058-c161-4c84-9c9d-d6e9f26a57a8",
@@ -10622,6 +10537,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-01",
     "industry": "mobility_automotive",
+    "years_experience_min": null
+  },
+  {
+    "id": "ff53cd0b-dbd6-418e-96e3-a4a04c69b4a3",
+    "title": "Produktmanager (m/w/d) aus dem Homeoffice gesucht!",
+    "company": "AGRIAL Deutschland GmbH & Co. KG",
+    "url": "https://de.jooble.org/rjdp/8725234644220165398/Produktmanager-(m%2Fw%2Fd)-aus-dem-Homeoffice-gesucht!-Dortmund",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "unknown",
+    "language": "de",
+    "german_req": "must",
+    "pm_type": "core_pm",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-24",
+    "industry": "consumer_apps",
     "years_experience_min": null
   },
   {
@@ -15062,23 +14994,6 @@
     "years_experience_min": 8
   },
   {
-    "id": "34ac04f6-6dd0-4fa6-b17e-47e4744668e9",
-    "title": "Senior Product Manager - (Core Data, Tech Foundations)",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000141866625",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-06",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "a6060123-cad0-4f6d-9fc9-7a638126a9a1",
     "title": "Produkt Manager:in",
     "company": "Haufe Group SE",
@@ -15093,6 +15008,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-01",
     "industry": "saas_b2b_software",
+    "years_experience_min": null
+  },
+  {
+    "id": "34ac04f6-6dd0-4fa6-b17e-47e4744668e9",
+    "title": "Senior Product Manager - (Core Data, Tech Foundations)",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000141866625",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-06",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -15912,23 +15844,6 @@
     "years_experience_min": null
   },
   {
-    "id": "afffba71-f26d-45f2-9180-c78f915f8d3c",
-    "title": "Product Manager - Data Consumption, Tech Foundations",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000142597484",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-11",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "41007db4-8d2c-41ea-831e-b16f87d37962",
     "title": "Technical Product Specialist",
     "company": "IBC SOLAR AG",
@@ -15942,6 +15857,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-07-24",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "afffba71-f26d-45f2-9180-c78f915f8d3c",
+    "title": "Product Manager - Data Consumption, Tech Foundations",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000142597484",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-11",
     "industry": null,
     "years_experience_min": null
   },
@@ -16320,6 +16252,23 @@
     "years_experience_min": 5
   },
   {
+    "id": "6f1d9ac3-1829-4a35-88dd-cd7de305088a",
+    "title": "Product Owner (remote)",
+    "company": "RioRise",
+    "url": "https://de.jooble.org/jdp/2725924050160740265/Product-Owner-(remote)-Homeoffice",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "core_pm",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-20",
+    "industry": "media_entertainment",
+    "years_experience_min": null
+  },
+  {
     "id": "0b77d3c5-1672-49f2-a1ca-13036386de98",
     "title": "Senior Technical Product Manager, Agentic AI IDEs (Developer Tools)-Tech Foundations",
     "company": "Delivery Hero",
@@ -16420,23 +16369,6 @@
     "first_seen_date": "2026-06-09",
     "industry": "consumer_apps",
     "years_experience_min": 5
-  },
-  {
-    "id": "0ef1a0e4-10ff-497f-80e1-3c0cc0808594",
-    "title": "Senior Product Manager Claims (w/m/d/x)",
-    "company": "EMIL Group GmbH",
-    "url": "https://www.arbeitnow.com/jobs/companies/emil-group-gmbh/senior-product-manager-claims-x-berlin-499709",
-    "location": "berlin",
-    "work_mode": "hybrid",
-    "seniority": "senior",
-    "language": "de",
-    "german_req": "must",
-    "pm_type": "customer_facing",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-08-21",
-    "industry": "fintech_payments",
-    "years_experience_min": 7
   },
   {
     "id": "64befa4e-9a4e-4f04-8e9b-09718f9ac428",
@@ -16997,6 +16929,74 @@
     "ai_skills": false,
     "first_seen_date": "2026-07-27",
     "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "dbb5059c-00c1-46bd-913f-5d4bda3dd9ec",
+    "title": "Senior Product Manager Accounting expertise - German speaking",
+    "company": "Qonto",
+    "url": "https://www.learn4good.com/jobs/berlin/deutschland/wirtschaft/5311743086/g/",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-27",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "e247adfa-6f05-48a0-9e9f-e9c6ec2b9cb0",
+    "title": "&lpar;Junior&rpar; Produktmanager &lpar;m&sol;w&sol;d&rpar; \u2013 Technical Product Manager Reise",
+    "company": "CHECK24 Services Personal GmbH",
+    "url": "https://portal.oproma.de/jobs/junior-produktmanager-m-w-d-technical-product-manager-reise-ID-11343204",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "junior",
+    "language": "de",
+    "german_req": "must",
+    "pm_type": "technical",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-06-05",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
+    "id": "03766260-c2fc-4b67-b693-d6513c432a83",
+    "title": "Senior) International Standards Manager (all genders) (Product Compliance",
+    "company": "United States Digital Space LLC",
+    "url": "https://www.learn4good.com/jobs/online/management/5329663312/g/",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-05",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "372be66d-28ef-4740-ab11-e58a4a2cda57",
+    "title": "Product Support Manager (m/w)",
+    "company": "Delivery Hero SE",
+    "url": "https://de.jooble.org/rjdp/8849742674977252500/Product-Support-Manager-(m%2Fw)-Berlin",
+    "location": "berlin",
+    "work_mode": "hybrid_2d",
+    "seniority": "unknown",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "customer_facing",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-08",
+    "industry": "ecommerce_marketplace",
     "years_experience_min": null
   }
 ]
