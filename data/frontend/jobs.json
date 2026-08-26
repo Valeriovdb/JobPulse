@@ -986,23 +986,6 @@
     "years_experience_min": null
   },
   {
-    "id": "cc5a5eec-7a5e-4df5-a55b-03f32734e34e",
-    "title": "Principal Product Manager , Vendor Promotions - Vendor",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000134794614",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "principal",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-30",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "e31b58dc-3336-48d7-acc9-3cc6fb0fc740",
     "title": "Product Manager, Physical Product (12 Month Contract)",
     "company": "HelloFresh",
@@ -1018,6 +1001,23 @@
     "first_seen_date": "2026-03-31",
     "industry": "ecommerce_marketplace",
     "years_experience_min": 5
+  },
+  {
+    "id": "cc5a5eec-7a5e-4df5-a55b-03f32734e34e",
+    "title": "Principal Product Manager , Vendor Promotions - Vendor",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000134794614",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "principal",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-30",
+    "industry": null,
+    "years_experience_min": null
   },
   {
     "id": "13f91e93-5bf8-4d52-a8c3-8ee88f0fe550",
@@ -1309,23 +1309,6 @@
     "years_experience_min": 3
   },
   {
-    "id": "ede44983-1b9c-4ca9-833b-b9279613badb",
-    "title": "Principal Product Manager, Affordability - Quick Commerce",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000132868997",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "principal",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-19",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "f4dc5bbc-f4fe-4963-afc9-60f38a04ef62",
     "title": "Product Owner / Technical Consultant (m/w/d) Berlin mit remote Anteil",
     "company": "JOBKNIGHT",
@@ -1341,6 +1324,23 @@
     "first_seen_date": "2026-03-31",
     "industry": "other",
     "years_experience_min": 1
+  },
+  {
+    "id": "ede44983-1b9c-4ca9-833b-b9279613badb",
+    "title": "Principal Product Manager, Affordability - Quick Commerce",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000132868997",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "principal",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-19",
+    "industry": null,
+    "years_experience_min": null
   },
   {
     "id": "bf7b3464-b885-426f-9a1c-167517d65191",
@@ -1768,23 +1768,6 @@
     "years_experience_min": null
   },
   {
-    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
-    "title": "Group Product Manager - Global Product Strategy",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "group",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-09",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "f28e7a5f-372c-4fe0-b800-6d54b061a93a",
     "title": "(Senior) Product Manager- Market Making (m/f/x)",
     "company": "Scalable Capital",
@@ -1833,6 +1816,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-05-14",
     "industry": "saas_b2b_software",
+    "years_experience_min": null
+  },
+  {
+    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
+    "title": "Group Product Manager - Global Product Strategy",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "group",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -4162,23 +4162,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-04-27",
     "industry": "healthtech_biotech",
-    "years_experience_min": 5
-  },
-  {
-    "id": "5f9f9283-5dfb-48fb-bc53-c83378ef6d03",
-    "title": "Product Lead - Portfolio Midcore Games",
-    "company": "Voodoo",
-    "url": "https://de.linkedin.com/jobs/view/product-lead-portfolio-midcore-games-at-voodoo-4430906660",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "lead",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-24",
-    "industry": "consumer_apps",
     "years_experience_min": 5
   },
   {
@@ -10503,23 +10486,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-01",
     "industry": "mobility_automotive",
-    "years_experience_min": null
-  },
-  {
-    "id": "ff53cd0b-dbd6-418e-96e3-a4a04c69b4a3",
-    "title": "Produktmanager (m/w/d) aus dem Homeoffice gesucht!",
-    "company": "AGRIAL Deutschland GmbH & Co. KG",
-    "url": "https://de.jooble.org/rjdp/8725234644220165398/Produktmanager-(m%2Fw%2Fd)-aus-dem-Homeoffice-gesucht!-Dortmund",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "unknown",
-    "language": "de",
-    "german_req": "must",
-    "pm_type": "core_pm",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-24",
-    "industry": "consumer_apps",
     "years_experience_min": null
   },
   {
@@ -16997,6 +16963,40 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-05",
     "industry": "other",
+    "years_experience_min": null
+  },
+  {
+    "id": "82a525bb-7b58-452f-a079-03c7a2d62162",
+    "title": "(Senior) Product Development Manager (gn) - VMS More",
+    "company": "thequalitygroupgmbh1",
+    "url": "https://www.arbeitnow.com/jobs/companies/thequalitygroupgmbh1/remote-senior-product-development-manager-gn-vms-more-359754",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "mid_senior",
+    "language": "de",
+    "german_req": "not_mentioned",
+    "pm_type": "unclassified",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-03-31",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
+    "id": "95551bd3-ca5c-43a8-9055-4d910fadcfd9",
+    "title": "Founding Product Manager \u2013 AI Agents Platform",
+    "company": "Lucid Labs",
+    "url": "https://www.remoterocketship.com/company/lucid-labs-de/jobs/founding-product-manager-ai-agents-platform-berlin-hybrid/",
+    "location": "berlin",
+    "work_mode": "hybrid",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-27",
+    "industry": null,
     "years_experience_min": null
   }
 ]
