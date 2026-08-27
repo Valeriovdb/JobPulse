@@ -14688,6 +14688,23 @@
     "years_experience_min": null
   },
   {
+    "id": "2ba1414b-d153-4ebd-a692-a1f1341b4c9d",
+    "title": "Product Owner - DKB Website (x/f/m)",
+    "company": "dkbcodefactory",
+    "url": "https://www.arbeitnow.com/jobs/companies/dkbcodefactory/product-owner-dkb-website-berlin-32007",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "core_pm",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-27",
+    "industry": "fintech_payments",
+    "years_experience_min": 3
+  },
+  {
     "id": "52b643ef-786b-4f67-895f-7e23a1a495c2",
     "title": "Product Manager FinTech Plattform in Berlin (w/m/d)",
     "company": "Finmas GmbH",
@@ -15793,23 +15810,6 @@
     "years_experience_min": null
   },
   {
-    "id": "afffba71-f26d-45f2-9180-c78f915f8d3c",
-    "title": "Product Manager - Data Consumption, Tech Foundations",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000142597484",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-11",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "74d62cf1-be53-4d44-8eee-636095c571fc",
     "title": "Senior Product Manager - Payment",
     "company": "Agicap",
@@ -15824,6 +15824,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-23",
     "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
+    "id": "afffba71-f26d-45f2-9180-c78f915f8d3c",
+    "title": "Product Manager - Data Consumption, Tech Foundations",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000142597484",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-11",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -16980,23 +16997,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-03-31",
     "industry": "other",
-    "years_experience_min": null
-  },
-  {
-    "id": "95551bd3-ca5c-43a8-9055-4d910fadcfd9",
-    "title": "Founding Product Manager \u2013 AI Agents Platform",
-    "company": "Lucid Labs",
-    "url": "https://www.remoterocketship.com/company/lucid-labs-de/jobs/founding-product-manager-ai-agents-platform-berlin-hybrid/",
-    "location": "berlin",
-    "work_mode": "hybrid",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-27",
-    "industry": null,
     "years_experience_min": null
   }
 ]
