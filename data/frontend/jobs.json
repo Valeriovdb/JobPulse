@@ -1,5 +1,22 @@
 [
   {
+    "id": "23bcdaba-1bea-4f9b-abd9-faf7c2bef599",
+    "title": "Technical Product Manager (All gender)",
+    "company": "Stark",
+    "url": "https://www.arbeitnow.com/jobs/companies/stark/technical-product-manager-all-gender-berlin-16833",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "technical",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-26",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
     "id": "cee411ff-3fa2-41ad-85cf-1d1825946ab4",
     "title": "Senior Product Manager - (Core Data, Tech Foundations)",
     "company": "Delivery Hero",
@@ -5508,23 +5525,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
-    "title": "Senior Product Manager, Insights - Vendor",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-08",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "a28f2422-df52-43a3-91a8-01bbd816b5c8",
     "title": "Freelance Product Owner remote (m/w/d) - deutschsprachig",
     "company": "B-works",
@@ -5538,6 +5538,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-04-20",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
+    "title": "Senior Product Manager, Insights - Vendor",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-08",
     "industry": null,
     "years_experience_min": null
   },
@@ -7633,23 +7650,6 @@
     "years_experience_min": null
   },
   {
-    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
-    "title": "Product Manager - Customer Data Platform, Tech Foundations",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-23",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "f2591511-f0c7-455f-819e-369737162c76",
     "title": "Product Manager - Product Factory",
     "company": "N26",
@@ -7663,6 +7663,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-04-30",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "8441d9ba-c917-4aac-a64e-8cf5bb042e42",
+    "title": "Product Manager - Customer Data Platform, Tech Foundations",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000138833829",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-23",
     "industry": null,
     "years_experience_min": null
   },
@@ -16979,23 +16996,6 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-06-05",
-    "industry": "other",
-    "years_experience_min": null
-  },
-  {
-    "id": "82a525bb-7b58-452f-a079-03c7a2d62162",
-    "title": "(Senior) Product Development Manager (gn) - VMS More",
-    "company": "thequalitygroupgmbh1",
-    "url": "https://www.arbeitnow.com/jobs/companies/thequalitygroupgmbh1/remote-senior-product-development-manager-gn-vms-more-359754",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "mid_senior",
-    "language": "de",
-    "german_req": "not_mentioned",
-    "pm_type": "unclassified",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-03-31",
     "industry": "other",
     "years_experience_min": null
   }
