@@ -1343,23 +1343,6 @@
     "years_experience_min": 1
   },
   {
-    "id": "ede44983-1b9c-4ca9-833b-b9279613badb",
-    "title": "Principal Product Manager, Affordability - Quick Commerce",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000132868997",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "principal",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-19",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "bf7b3464-b885-426f-9a1c-167517d65191",
     "title": "Sr Product Manager",
     "company": "Delivery Hero",
@@ -1373,6 +1356,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-03-31",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "ede44983-1b9c-4ca9-833b-b9279613badb",
+    "title": "Principal Product Manager, Affordability - Quick Commerce",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000132868997",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "principal",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-19",
     "industry": null,
     "years_experience_min": null
   },
@@ -1836,23 +1836,6 @@
     "years_experience_min": null
   },
   {
-    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
-    "title": "Group Product Manager - Global Product Strategy",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "group",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-06-09",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "30ecc795-0b3c-4054-bdd4-54b30d4ed7e8",
     "title": "Senior Product Manager - Acquiring",
     "company": "SumUp",
@@ -1884,6 +1867,23 @@
     "ai_skills": true,
     "first_seen_date": "2026-04-01",
     "industry": "cybersecurity",
+    "years_experience_min": null
+  },
+  {
+    "id": "dc49d45c-4ba2-4fcd-aeac-419f9a5dbb8b",
+    "title": "Group Product Manager - Global Product Strategy",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000131061324",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "group",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -5542,23 +5542,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
-    "title": "Senior Product Manager, Insights - Vendor",
-    "company": "Delivery Hero",
-    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "senior",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-08",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "97c70ead-14e4-417b-9787-7a18f4e65ec0",
     "title": "Senior Product Manager (m|w|d) - Advertising Products",
     "company": "idealo internet GmbH",
@@ -5606,6 +5589,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-07-10",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "e99d14e0-ce19-4c61-8faa-5c6f0afdb140",
+    "title": "Senior Product Manager, Insights - Vendor",
+    "company": "Delivery Hero",
+    "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings/744000136398419",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "senior",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-08",
     "industry": null,
     "years_experience_min": null
   },
@@ -14705,23 +14705,6 @@
     "years_experience_min": null
   },
   {
-    "id": "2ba1414b-d153-4ebd-a692-a1f1341b4c9d",
-    "title": "Product Owner - DKB Website (x/f/m)",
-    "company": "dkbcodefactory",
-    "url": "https://www.arbeitnow.com/jobs/companies/dkbcodefactory/product-owner-dkb-website-berlin-32007",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "core_pm",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-08-27",
-    "industry": "fintech_payments",
-    "years_experience_min": 3
-  },
-  {
     "id": "52b643ef-786b-4f67-895f-7e23a1a495c2",
     "title": "Product Manager FinTech Plattform in Berlin (w/m/d)",
     "company": "Finmas GmbH",
@@ -16996,6 +16979,23 @@
     "ai_focus": false,
     "ai_skills": false,
     "first_seen_date": "2026-06-05",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
+    "id": "82a525bb-7b58-452f-a079-03c7a2d62162",
+    "title": "(Senior) Product Development Manager (gn) - VMS More",
+    "company": "thequalitygroupgmbh1",
+    "url": "https://www.arbeitnow.com/jobs/companies/thequalitygroupgmbh1/remote-senior-product-development-manager-gn-vms-more-359754",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "mid_senior",
+    "language": "de",
+    "german_req": "not_mentioned",
+    "pm_type": "unclassified",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-03-31",
     "industry": "other",
     "years_experience_min": null
   }
