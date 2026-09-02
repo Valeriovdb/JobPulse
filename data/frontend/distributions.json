@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 11
+      "count": 13
     },
     {
       "label": "lead",
@@ -36,25 +36,33 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 22
+      "count": 20
     },
     {
       "label": "onsite",
-      "count": 10
+      "count": 12
     },
     {
       "label": "remote",
-      "count": 3
+      "count": 2
+    },
+    {
+      "label": "hybrid",
+      "count": 2
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 17
+      "count": 21
     },
     {
       "label": "unknown",
-      "count": 16
+      "count": 14
     },
     {
       "label": "de",
@@ -64,29 +72,33 @@
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 16
+      "count": 17
     },
     {
       "label": "unclassified",
-      "count": 16
+      "count": 14
     },
     {
       "label": "must",
-      "count": 3
+      "count": 4
+    },
+    {
+      "label": "plus",
+      "count": 2
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 6
+      "count": 7
     },
     {
       "label": "technical",
-      "count": 6
+      "count": 5
     },
     {
       "label": "customer_facing",
-      "count": 5
+      "count": 6
     },
     {
       "label": "platform",
@@ -94,10 +106,14 @@
     },
     {
       "label": "data_ai",
-      "count": 3
+      "count": 5
     },
     {
       "label": "growth",
+      "count": 1
+    },
+    {
+      "label": "internal_ops",
       "count": 1
     }
   ],
@@ -105,18 +121,22 @@
   "industry_normalized": [
     {
       "label": "fintech_payments",
-      "count": 8
-    },
-    {
-      "label": "other",
-      "count": 4
+      "count": 9
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 4
+      "count": 5
     },
     {
       "label": "saas_b2b_software",
+      "count": 4
+    },
+    {
+      "label": "media_entertainment",
+      "count": 1
+    },
+    {
+      "label": "other",
       "count": 1
     },
     {
@@ -124,46 +144,56 @@
       "count": 1
     },
     {
-      "label": "media_entertainment",
+      "label": "logistics_supply_chain",
+      "count": 1
+    },
+    {
+      "label": "consumer_apps",
       "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 35
+      "count": 37
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 35
+      "count": 37
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 16
+      "count": 14
     },
     {
       "label": "hard",
-      "count": 11
+      "count": 13
     },
     {
       "label": "none",
-      "count": 7
+      "count": 8
     },
     {
       "label": "soft",
-      "count": 1
+      "count": 2
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
       "hard": 6,
-      "soft": 1,
-      "total": 7
+      "soft": 0,
+      "total": 6
+    },
+    {
+      "domain": "banking_financial_services",
+      "hard": 0,
+      "soft": 2,
+      "total": 2
     },
     {
       "domain": "ai_ml_data_products",
@@ -179,6 +209,18 @@
     },
     {
       "domain": "healthtech",
+      "hard": 1,
+      "soft": 0,
+      "total": 1
+    },
+    {
+      "domain": "logistics_supply_chain",
+      "hard": 1,
+      "soft": 0,
+      "total": 1
+    },
+    {
+      "domain": "saas_b2b_software",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -202,8 +244,8 @@
     },
     {
       "seniority": "mid",
-      "years_min": 3.0,
-      "count": 1
+      "years_min": 2.0,
+      "count": 2
     },
     {
       "seniority": "senior",
@@ -213,24 +255,24 @@
     {
       "seniority": "senior",
       "years_min": 5.0,
-      "count": 1
+      "count": 3
     }
   ],
   "industry_experience_bubble": [
     {
-      "industry": "ecommerce_marketplace",
-      "years_min": 3.0,
+      "industry": "consumer_apps",
+      "years_min": 7.0,
       "count": 1
     },
     {
       "industry": "ecommerce_marketplace",
       "years_min": 5.0,
-      "count": 1
+      "count": 2
     },
     {
       "industry": "fintech_payments",
       "years_min": 2.0,
-      "count": 1
+      "count": 3
     },
     {
       "industry": "fintech_payments",
@@ -238,13 +280,13 @@
       "count": 1
     },
     {
-      "industry": "other",
-      "years_min": 1.0,
+      "industry": "logistics_supply_chain",
+      "years_min": 5.0,
       "count": 1
     },
     {
-      "industry": "other",
-      "years_min": 7.0,
+      "industry": "saas_b2b_software",
+      "years_min": 1.0,
       "count": 1
     }
   ],
@@ -253,11 +295,11 @@
     "buckets": [
       {
         "label": "0-2",
-        "count": 2
+        "count": 4
       },
       {
         "label": "3-5",
-        "count": 3
+        "count": 4
       },
       {
         "label": "6-8",
@@ -268,14 +310,14 @@
         "count": 0
       }
     ],
-    "n_extractable": 6
+    "n_extractable": 9
   },
   "ai": {
-    "n_enriched": 22,
-    "n_ai_focus": 4,
-    "n_ai_skills": 4,
-    "ai_focus_pct": 18,
-    "ai_skills_pct": 18
+    "n_enriched": 26,
+    "n_ai_focus": 9,
+    "n_ai_skills": 9,
+    "ai_focus_pct": 35,
+    "ai_skills_pct": 35
   },
   "source": [
     {
@@ -284,17 +326,21 @@
     },
     {
       "label": "arbeitnow",
-      "count": 7
+      "count": 9
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 11
+        "count": 9
       },
       {
         "label": "Scalable Capital",
+        "count": 4
+      },
+      {
+        "label": "N26",
         "count": 4
       },
       {
@@ -310,19 +356,7 @@
         "count": 2
       },
       {
-        "label": "N26",
-        "count": 2
-      },
-      {
         "label": "Eleve Talent",
-        "count": 1
-      },
-      {
-        "label": "Gismart",
-        "count": 1
-      },
-      {
-        "label": "Andris Consulting GmbH",
         "count": 1
       },
       {
@@ -330,29 +364,45 @@
         "count": 1
       },
       {
+        "label": "Andris Consulting GmbH",
+        "count": 1
+      },
+      {
+        "label": "Matera GmbH",
+        "count": 1
+      },
+      {
+        "label": "Gismart",
+        "count": 1
+      },
+      {
+        "label": "Distribusion Technologies",
+        "count": 1
+      },
+      {
+        "label": "N8N",
+        "count": 1
+      },
+      {
+        "label": "KoRo Handels GmbH",
+        "count": 1
+      },
+      {
+        "label": "Pergolux",
+        "count": 1
+      },
+      {
+        "label": "Staffbase",
+        "count": 1
+      },
+      {
         "label": "sennder",
-        "count": 1
-      },
-      {
-        "label": "Stark",
-        "count": 1
-      },
-      {
-        "label": "nearshorefriends GmbH",
-        "count": 1
-      },
-      {
-        "label": "Future Demand",
-        "count": 1
-      },
-      {
-        "label": "sumup",
         "count": 1
       }
     ],
-    "n_companies": 15,
+    "n_companies": 17,
     "top10_share": 30,
-    "top10_pct": 86,
+    "top10_pct": 81,
     "multi_hiring": 6
   }
 }
