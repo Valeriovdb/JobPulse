@@ -6,19 +6,15 @@
     },
     {
       "label": "mid",
-      "count": 11
-    },
-    {
-      "label": "mid_senior",
-      "count": 1
+      "count": 10
     },
     {
       "label": "senior",
-      "count": 13
+      "count": 11
     },
     {
       "label": "lead",
-      "count": 4
+      "count": 3
     },
     {
       "label": "staff",
@@ -31,20 +27,20 @@
     {
       "label": "principal",
       "count": 2
+    },
+    {
+      "label": "unknown",
+      "count": 1
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 20
+      "count": 19
     },
     {
       "label": "onsite",
-      "count": 12
-    },
-    {
-      "label": "remote",
-      "count": 2
+      "count": 11
     },
     {
       "label": "hybrid",
@@ -58,11 +54,11 @@
   "language": [
     {
       "label": "en",
-      "count": 21
+      "count": 18
     },
     {
       "label": "unknown",
-      "count": 14
+      "count": 13
     },
     {
       "label": "de",
@@ -72,11 +68,11 @@
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 17
+      "count": 14
     },
     {
       "label": "unclassified",
-      "count": 14
+      "count": 13
     },
     {
       "label": "must",
@@ -98,15 +94,11 @@
     },
     {
       "label": "customer_facing",
-      "count": 6
-    },
-    {
-      "label": "platform",
-      "count": 1
+      "count": 5
     },
     {
       "label": "data_ai",
-      "count": 5
+      "count": 4
     },
     {
       "label": "growth",
@@ -125,68 +117,60 @@
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 5
-    },
-    {
-      "label": "saas_b2b_software",
       "count": 4
     },
     {
-      "label": "media_entertainment",
-      "count": 1
+      "label": "saas_b2b_software",
+      "count": 3
     },
     {
       "label": "other",
-      "count": 1
-    },
-    {
-      "label": "healthtech_biotech",
-      "count": 1
+      "count": 2
     },
     {
       "label": "logistics_supply_chain",
       "count": 1
     },
     {
-      "label": "consumer_apps",
+      "label": "healthtech_biotech",
       "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 37
+      "count": 33
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 37
+      "count": 33
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 14
-    },
-    {
-      "label": "hard",
       "count": 13
     },
     {
+      "label": "hard",
+      "count": 9
+    },
+    {
       "label": "none",
-      "count": 8
+      "count": 6
     },
     {
       "label": "soft",
-      "count": 2
+      "count": 5
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 6,
-      "soft": 0,
+      "hard": 5,
+      "soft": 1,
       "total": 6
     },
     {
@@ -209,18 +193,12 @@
     },
     {
       "domain": "healthtech",
-      "hard": 1,
-      "soft": 0,
+      "hard": 0,
+      "soft": 1,
       "total": 1
     },
     {
       "domain": "logistics_supply_chain",
-      "hard": 1,
-      "soft": 0,
-      "total": 1
-    },
-    {
-      "domain": "saas_b2b_software",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -245,7 +223,7 @@
     {
       "seniority": "mid",
       "years_min": 2.0,
-      "count": 2
+      "count": 3
     },
     {
       "seniority": "senior",
@@ -255,24 +233,19 @@
     {
       "seniority": "senior",
       "years_min": 5.0,
-      "count": 3
+      "count": 2
     }
   ],
   "industry_experience_bubble": [
     {
-      "industry": "consumer_apps",
-      "years_min": 7.0,
-      "count": 1
-    },
-    {
       "industry": "ecommerce_marketplace",
       "years_min": 5.0,
-      "count": 2
+      "count": 1
     },
     {
       "industry": "fintech_payments",
       "years_min": 2.0,
-      "count": 3
+      "count": 4
     },
     {
       "industry": "fintech_payments",
@@ -285,21 +258,26 @@
       "count": 1
     },
     {
+      "industry": "other",
+      "years_min": 7.0,
+      "count": 1
+    },
+    {
       "industry": "saas_b2b_software",
       "years_min": 1.0,
       "count": 1
     }
   ],
   "years_experience": {
-    "median": 3.0,
+    "median": 2.0,
     "buckets": [
       {
         "label": "0-2",
-        "count": 4
+        "count": 5
       },
       {
         "label": "3-5",
-        "count": 4
+        "count": 3
       },
       {
         "label": "6-8",
@@ -313,42 +291,38 @@
     "n_extractable": 9
   },
   "ai": {
-    "n_enriched": 26,
-    "n_ai_focus": 9,
-    "n_ai_skills": 9,
+    "n_enriched": 23,
+    "n_ai_focus": 8,
+    "n_ai_skills": 8,
     "ai_focus_pct": 35,
     "ai_skills_pct": 35
   },
   "source": [
     {
       "label": "ats",
-      "count": 28
+      "count": 26
     },
     {
       "label": "arbeitnow",
-      "count": 9
+      "count": 7
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 9
+        "count": 8
+      },
+      {
+        "label": "N26",
+        "count": 5
       },
       {
         "label": "Scalable Capital",
         "count": 4
       },
       {
-        "label": "N26",
-        "count": 4
-      },
-      {
         "label": "GetYourGuide",
-        "count": 4
-      },
-      {
-        "label": "SumUp",
         "count": 3
       },
       {
@@ -356,31 +330,15 @@
         "count": 2
       },
       {
-        "label": "Eleve Talent",
-        "count": 1
-      },
-      {
-        "label": "HelloFresh",
-        "count": 1
-      },
-      {
-        "label": "Andris Consulting GmbH",
-        "count": 1
-      },
-      {
-        "label": "Matera GmbH",
-        "count": 1
-      },
-      {
-        "label": "Gismart",
-        "count": 1
+        "label": "SumUp",
+        "count": 2
       },
       {
         "label": "Distribusion Technologies",
         "count": 1
       },
       {
-        "label": "N8N",
+        "label": "Staffbase",
         "count": 1
       },
       {
@@ -392,7 +350,19 @@
         "count": 1
       },
       {
-        "label": "Staffbase",
+        "label": "N8N",
+        "count": 1
+      },
+      {
+        "label": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
+        "count": 1
+      },
+      {
+        "label": "HelloFresh",
+        "count": 1
+      },
+      {
+        "label": "Matera GmbH",
         "count": 1
       },
       {
@@ -400,9 +370,9 @@
         "count": 1
       }
     ],
-    "n_companies": 17,
-    "top10_share": 30,
-    "top10_pct": 81,
+    "n_companies": 15,
+    "top10_share": 28,
+    "top10_pct": 85,
     "multi_hiring": 6
   }
 }
