@@ -6,27 +6,19 @@
     },
     {
       "label": "mid",
-      "count": 10
+      "count": 12
     },
     {
       "label": "senior",
-      "count": 11
+      "count": 9
     },
     {
       "label": "lead",
       "count": 3
     },
     {
-      "label": "staff",
-      "count": 1
-    },
-    {
-      "label": "group",
-      "count": 1
-    },
-    {
       "label": "principal",
-      "count": 2
+      "count": 1
     },
     {
       "label": "unknown",
@@ -36,29 +28,33 @@
   "work_mode": [
     {
       "label": "unknown",
-      "count": 19
+      "count": 17
     },
     {
       "label": "onsite",
-      "count": 11
-    },
-    {
-      "label": "hybrid",
-      "count": 2
+      "count": 10
     },
     {
       "label": "hybrid_3d",
+      "count": 1
+    },
+    {
+      "label": "remote",
+      "count": 1
+    },
+    {
+      "label": "hybrid",
       "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 18
+      "count": 17
     },
     {
       "label": "unknown",
-      "count": 13
+      "count": 11
     },
     {
       "label": "de",
@@ -72,7 +68,7 @@
     },
     {
       "label": "unclassified",
-      "count": 13
+      "count": 11
     },
     {
       "label": "must",
@@ -80,21 +76,21 @@
     },
     {
       "label": "plus",
-      "count": 2
+      "count": 1
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 7
+      "count": 9
     },
     {
       "label": "technical",
-      "count": 5
+      "count": 4
     },
     {
       "label": "customer_facing",
-      "count": 5
+      "count": 3
     },
     {
       "label": "data_ai",
@@ -103,24 +99,16 @@
     {
       "label": "growth",
       "count": 1
-    },
-    {
-      "label": "internal_ops",
-      "count": 1
     }
   ],
   "industry": [],
   "industry_normalized": [
     {
       "label": "fintech_payments",
-      "count": 9
+      "count": 10
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 4
-    },
-    {
-      "label": "saas_b2b_software",
       "count": 3
     },
     {
@@ -128,50 +116,60 @@
       "count": 2
     },
     {
-      "label": "logistics_supply_chain",
-      "count": 1
+      "label": "saas_b2b_software",
+      "count": 2
     },
     {
       "label": "healthtech_biotech",
+      "count": 1
+    },
+    {
+      "label": "consumer_apps",
       "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 33
+      "count": 30
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 33
+      "count": 30
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 13
+      "count": 11
     },
     {
       "label": "hard",
       "count": 9
     },
     {
-      "label": "none",
+      "label": "soft",
       "count": 6
     },
     {
-      "label": "soft",
-      "count": 5
+      "label": "none",
+      "count": 4
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 5,
-      "soft": 1,
+      "hard": 4,
+      "soft": 2,
       "total": 6
+    },
+    {
+      "domain": "ai_ml_data_products",
+      "hard": 2,
+      "soft": 0,
+      "total": 2
     },
     {
       "domain": "banking_financial_services",
@@ -180,25 +178,13 @@
       "total": 2
     },
     {
-      "domain": "ai_ml_data_products",
-      "hard": 1,
-      "soft": 0,
-      "total": 1
-    },
-    {
-      "domain": "ecommerce_marketplace",
-      "hard": 1,
-      "soft": 0,
-      "total": 1
-    },
-    {
       "domain": "healthtech",
       "hard": 0,
       "soft": 1,
       "total": 1
     },
     {
-      "domain": "logistics_supply_chain",
+      "domain": "payments",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -226,22 +212,22 @@
       "count": 3
     },
     {
-      "seniority": "senior",
+      "seniority": "mid",
       "years_min": 3.0,
       "count": 1
     },
     {
       "seniority": "senior",
-      "years_min": 5.0,
+      "years_min": 3.0,
       "count": 2
+    },
+    {
+      "seniority": "senior",
+      "years_min": 7.0,
+      "count": 1
     }
   ],
   "industry_experience_bubble": [
-    {
-      "industry": "ecommerce_marketplace",
-      "years_min": 5.0,
-      "count": 1
-    },
     {
       "industry": "fintech_payments",
       "years_min": 2.0,
@@ -250,12 +236,7 @@
     {
       "industry": "fintech_payments",
       "years_min": 3.0,
-      "count": 1
-    },
-    {
-      "industry": "logistics_supply_chain",
-      "years_min": 5.0,
-      "count": 1
+      "count": 3
     },
     {
       "industry": "other",
@@ -266,10 +247,15 @@
       "industry": "saas_b2b_software",
       "years_min": 1.0,
       "count": 1
+    },
+    {
+      "industry": "saas_b2b_software",
+      "years_min": 7.0,
+      "count": 1
     }
   ],
   "years_experience": {
-    "median": 2.0,
+    "median": 2.5,
     "buckets": [
       {
         "label": "0-2",
@@ -281,26 +267,26 @@
       },
       {
         "label": "6-8",
-        "count": 1
+        "count": 2
       },
       {
         "label": "9+",
         "count": 0
       }
     ],
-    "n_extractable": 9
+    "n_extractable": 10
   },
   "ai": {
-    "n_enriched": 23,
-    "n_ai_focus": 8,
-    "n_ai_skills": 8,
-    "ai_focus_pct": 35,
-    "ai_skills_pct": 35
+    "n_enriched": 21,
+    "n_ai_focus": 7,
+    "n_ai_skills": 7,
+    "ai_focus_pct": 33,
+    "ai_skills_pct": 33
   },
   "source": [
     {
       "label": "ats",
-      "count": 26
+      "count": 23
     },
     {
       "label": "arbeitnow",
@@ -311,15 +297,15 @@
     "top20": [
       {
         "label": "Delivery Hero",
-        "count": 8
-      },
-      {
-        "label": "N26",
         "count": 5
       },
       {
         "label": "Scalable Capital",
-        "count": 4
+        "count": 5
+      },
+      {
+        "label": "N26",
+        "count": 5
       },
       {
         "label": "GetYourGuide",
@@ -330,31 +316,15 @@
         "count": 2
       },
       {
-        "label": "SumUp",
-        "count": 2
-      },
-      {
-        "label": "Distribusion Technologies",
-        "count": 1
-      },
-      {
-        "label": "Staffbase",
-        "count": 1
-      },
-      {
-        "label": "KoRo Handels GmbH",
-        "count": 1
-      },
-      {
-        "label": "Pergolux",
-        "count": 1
-      },
-      {
-        "label": "N8N",
-        "count": 1
-      },
-      {
         "label": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
+        "count": 1
+      },
+      {
+        "label": "Matera GmbH",
+        "count": 1
+      },
+      {
+        "label": "SumUp",
         "count": 1
       },
       {
@@ -362,7 +332,23 @@
         "count": 1
       },
       {
-        "label": "Matera GmbH",
+        "label": "raisin",
+        "count": 1
+      },
+      {
+        "label": "ThriveCart",
+        "count": 1
+      },
+      {
+        "label": "Statista",
+        "count": 1
+      },
+      {
+        "label": "Atolls",
+        "count": 1
+      },
+      {
+        "label": "Tandem",
         "count": 1
       },
       {
@@ -371,8 +357,8 @@
       }
     ],
     "n_companies": 15,
-    "top10_share": 28,
-    "top10_pct": 85,
-    "multi_hiring": 6
+    "top10_share": 25,
+    "top10_pct": 83,
+    "multi_hiring": 5
   }
 }
