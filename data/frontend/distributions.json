@@ -10,51 +10,31 @@
     },
     {
       "label": "senior",
-      "count": 9
+      "count": 6
     },
     {
       "label": "lead",
       "count": 3
-    },
-    {
-      "label": "principal",
-      "count": 1
-    },
-    {
-      "label": "unknown",
-      "count": 1
     }
   ],
   "work_mode": [
     {
-      "label": "unknown",
-      "count": 17
-    },
-    {
       "label": "onsite",
-      "count": 10
+      "count": 14
     },
     {
-      "label": "hybrid_3d",
-      "count": 1
-    },
-    {
-      "label": "remote",
-      "count": 1
-    },
-    {
-      "label": "hybrid",
-      "count": 1
+      "label": "unknown",
+      "count": 11
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 17
+      "count": 15
     },
     {
       "label": "unknown",
-      "count": 11
+      "count": 8
     },
     {
       "label": "de",
@@ -68,21 +48,17 @@
     },
     {
       "label": "unclassified",
-      "count": 11
+      "count": 8
     },
     {
       "label": "must",
-      "count": 4
-    },
-    {
-      "label": "plus",
-      "count": 1
+      "count": 3
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 9
+      "count": 7
     },
     {
       "label": "technical",
@@ -90,11 +66,11 @@
     },
     {
       "label": "customer_facing",
-      "count": 3
+      "count": 5
     },
     {
       "label": "data_ai",
-      "count": 4
+      "count": 2
     },
     {
       "label": "growth",
@@ -105,86 +81,64 @@
   "industry_normalized": [
     {
       "label": "fintech_payments",
-      "count": 10
+      "count": 9
+    },
+    {
+      "label": "other",
+      "count": 3
     },
     {
       "label": "ecommerce_marketplace",
       "count": 3
     },
     {
-      "label": "other",
-      "count": 2
-    },
-    {
-      "label": "saas_b2b_software",
-      "count": 2
-    },
-    {
-      "label": "healthtech_biotech",
+      "label": "consumer_apps",
       "count": 1
     },
     {
-      "label": "consumer_apps",
+      "label": "saas_b2b_software",
       "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 30
+      "count": 25
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 30
+      "count": 25
     }
   ],
   "domain_req_strength": [
     {
-      "label": "unclear",
-      "count": 11
-    },
-    {
       "label": "hard",
-      "count": 9
+      "count": 10
     },
     {
-      "label": "soft",
-      "count": 6
+      "label": "unclear",
+      "count": 8
     },
     {
       "label": "none",
-      "count": 4
+      "count": 5
+    },
+    {
+      "label": "soft",
+      "count": 2
     }
   ],
   "domain_req_breakdown": [
     {
       "domain": "fintech",
-      "hard": 4,
+      "hard": 6,
       "soft": 2,
-      "total": 6
+      "total": 8
     },
     {
       "domain": "ai_ml_data_products",
-      "hard": 2,
-      "soft": 0,
-      "total": 2
-    },
-    {
-      "domain": "banking_financial_services",
-      "hard": 0,
-      "soft": 2,
-      "total": 2
-    },
-    {
-      "domain": "healthtech",
-      "hard": 0,
-      "soft": 1,
-      "total": 1
-    },
-    {
-      "domain": "payments",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -203,124 +157,114 @@
     },
     {
       "seniority": "mid",
-      "years_min": 1.0,
+      "years_min": 2.0,
       "count": 1
     },
     {
       "seniority": "mid",
-      "years_min": 2.0,
+      "years_min": 3.0,
       "count": 3
     },
     {
-      "seniority": "mid",
+      "seniority": "senior",
       "years_min": 3.0,
       "count": 1
     },
     {
       "seniority": "senior",
-      "years_min": 3.0,
-      "count": 2
-    },
-    {
-      "seniority": "senior",
-      "years_min": 7.0,
+      "years_min": 5.0,
       "count": 1
     }
   ],
   "industry_experience_bubble": [
     {
+      "industry": "consumer_apps",
+      "years_min": 5.0,
+      "count": 1
+    },
+    {
       "industry": "fintech_payments",
       "years_min": 2.0,
-      "count": 4
+      "count": 2
     },
     {
       "industry": "fintech_payments",
       "years_min": 3.0,
-      "count": 3
+      "count": 4
     },
     {
       "industry": "other",
       "years_min": 7.0,
       "count": 1
-    },
-    {
-      "industry": "saas_b2b_software",
-      "years_min": 1.0,
-      "count": 1
-    },
-    {
-      "industry": "saas_b2b_software",
-      "years_min": 7.0,
-      "count": 1
     }
   ],
   "years_experience": {
-    "median": 2.5,
+    "median": 3.0,
     "buckets": [
       {
         "label": "0-2",
-        "count": 5
+        "count": 2
       },
       {
         "label": "3-5",
-        "count": 3
+        "count": 5
       },
       {
         "label": "6-8",
-        "count": 2
+        "count": 1
       },
       {
         "label": "9+",
         "count": 0
       }
     ],
-    "n_extractable": 10
+    "n_extractable": 8
   },
   "ai": {
-    "n_enriched": 21,
-    "n_ai_focus": 7,
-    "n_ai_skills": 7,
-    "ai_focus_pct": 33,
-    "ai_skills_pct": 33
+    "n_enriched": 19,
+    "n_ai_focus": 9,
+    "n_ai_skills": 9,
+    "ai_focus_pct": 47,
+    "ai_skills_pct": 47
   },
   "source": [
     {
       "label": "ats",
-      "count": 23
+      "count": 21
     },
     {
       "label": "arbeitnow",
-      "count": 7
+      "count": 4
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "Delivery Hero",
+        "label": "N26",
         "count": 5
       },
       {
         "label": "Scalable Capital",
-        "count": 5
+        "count": 4
       },
       {
-        "label": "N26",
-        "count": 5
+        "label": "Delivery Hero",
+        "count": 3
       },
       {
         "label": "GetYourGuide",
         "count": 3
       },
       {
+        "label": "HelloFresh",
+        "count": 2
+      },
+      {
         "label": "Raisin",
         "count": 2
       },
       {
-        "label": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
-        "count": 1
-      },
-      {
-        "label": "Matera GmbH",
+        "label": "ucm.agency",
         "count": 1
       },
       {
@@ -328,27 +272,15 @@
         "count": 1
       },
       {
-        "label": "HelloFresh",
+        "label": "Insider One",
         "count": 1
       },
       {
-        "label": "raisin",
+        "label": "tink GmbH",
         "count": 1
       },
       {
-        "label": "ThriveCart",
-        "count": 1
-      },
-      {
-        "label": "Statista",
-        "count": 1
-      },
-      {
-        "label": "Atolls",
-        "count": 1
-      },
-      {
-        "label": "Tandem",
+        "label": "Prior Labs",
         "count": 1
       },
       {
@@ -356,9 +288,9 @@
         "count": 1
       }
     ],
-    "n_companies": 15,
-    "top10_share": 25,
-    "top10_pct": 83,
-    "multi_hiring": 5
+    "n_companies": 12,
+    "top10_share": 23,
+    "top10_pct": 92,
+    "multi_hiring": 6
   }
 }

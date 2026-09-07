@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-09-04T12:04:31.708973+00:00",
-  "data_version": "sha256:24a0d599ca7b2e2d",
+  "generated_at": "2026-09-07T13:25:36.379131+00:00",
+  "data_version": "sha256:446ec09286bc7911",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Not Dominant",
-      "subtitle": "A significant share of roles do not require German, highlighting accessibility issues.",
+      "title": "German Language Requirement is Not a Barrier",
+      "subtitle": "Most roles do not require German, highlighting significant accessibility despite some unclassified positions.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:25.875628+00:00",
+      "generated_at": "2026-09-07T13:25:30.992454+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Dominate, Leaving Technical Roles Marginalized",
-      "subtitle": "A significant gap exists between Core and Technical PM roles, highlighting a concentration in generalist positions.",
+      "title": "Core PMs Dominate Role Landscape",
+      "subtitle": "A significant gap exists between Core and Customer-facing PM roles, highlighting concentration in product management.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:26.586817+00:00",
+      "generated_at": "2026-09-07T13:25:31.899822+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Mid-level Roles Are Predominant in Workforce",
-      "subtitle": "Nearly half of the workforce consists of mid-level positions, with senior roles also significant.",
+      "title": "Mid-level Roles Lead the Seniority Landscape",
+      "subtitle": "Mid-level positions account for 55% of the workforce, significantly outpacing junior and senior roles.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:27.394980+00:00",
+      "generated_at": "2026-09-07T13:25:32.664036+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates with Limited Remote Options",
-      "subtitle": "A significant majority of roles remain unclassified, indicating a preference for traditional work environments over flexible arrangements.",
+      "title": "On-site Work Dominates with No Remote Options",
+      "subtitle": "A significant majority of roles require on-site presence, limiting flexibility and remote work opportunities.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:28.075864+00:00",
+      "generated_at": "2026-09-07T13:25:33.402190+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A staggering majority of opportunities are concentrated in Berlin, limiting remote access.",
+      "subtitle": "All job opportunities are concentrated in Berlin, with no remote or unclear options available.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:29.233811+00:00",
+      "generated_at": "2026-09-07T13:25:34.209950+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Becoming Mainstream",
-      "subtitle": "One-third of roles demand AI as a core responsibility or skill.",
+      "title": "AI Expertise is Now Mainstream in Job Market",
+      "subtitle": "Nearly half of roles demand AI skills or focus, indicating high industry reliance.",
       "source": "llm",
-      "generated_at": "2026-09-04T12:04:30.398351+00:00",
+      "generated_at": "2026-09-07T13:25:34.817289+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Are Equally Distributed Across Categories",
-      "subtitle": "No single category dominates, but unclassified roles limit overall accessibility.",
-      "source": "llm",
-      "generated_at": "2026-09-04T12:04:31.132132+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-09-07T13:25:35.565152+00:00",
+      "model": null
     }
   }
 }

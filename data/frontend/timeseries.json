@@ -4083,9 +4083,9 @@
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 6.8,
+    "mean_days": 6.9,
     "pct_gone_week": 83,
-    "n_inactive": 997
+    "n_inactive": 999
   },
   "seniority_mix": {
     "dates": [
