@@ -1,20 +1,20 @@
 {
-  "last_updated": "2026-09-08",
-  "n_active": 38,
-  "n_new_week": 21,
-  "senior_pct": 47,
-  "median_age_days": 2,
-  "accessible_pct": 50,
-  "entry_pct": 50,
+  "last_updated": "2026-09-15",
+  "n_active": 47,
+  "n_new_week": 29,
+  "senior_pct": 51,
+  "median_age_days": 1,
+  "accessible_pct": 49,
+  "entry_pct": 47,
   "language": {
-    "en_none": 19,
-    "en_plus": 0,
-    "en_must": 4,
-    "de": 6
+    "en_none": 23,
+    "en_plus": 2,
+    "en_must": 8,
+    "de": 5
   },
   "location": {
-    "berlin": 37,
-    "remote_germany": 1,
+    "berlin": 39,
+    "remote_germany": 8,
     "unclear": 0
   }
 }
