@@ -2346,23 +2346,6 @@
     "years_experience_min": null
   },
   {
-    "id": "f9bbf9e7-2ab1-42c7-b483-4043cf7d9edd",
-    "title": "Marketing Product Manager- Remote",
-    "company": "PAJ UG (haftungsbeschr\u00e4nkt)",
-    "url": "https://de.talent.com/view?id=637445580604900202",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-09-18",
-    "industry": "other",
-    "years_experience_min": null
-  },
-  {
     "id": "49c8965c-4451-4610-a390-a565eaf17f36",
     "title": "Hybrid Account Manager Jobs in Berlin",
     "company": "CosmoQuick",
@@ -4214,23 +4197,6 @@
     "first_seen_date": "2026-04-27",
     "industry": "healthtech_biotech",
     "years_experience_min": 5
-  },
-  {
-    "id": "1a5a83a4-10b9-4459-ae64-a08f3900a40f",
-    "title": "Product Manager (remote)",
-    "company": "Severex",
-    "url": "https://de.jooble.org/jdp/-8489707743418581192/Product-Manager-(remote)-Homeoffice",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-09-18",
-    "industry": "consumer_apps",
-    "years_experience_min": 3
   },
   {
     "id": "be5b05b3-c64f-4f94-9b7a-eb170010f15b",
@@ -8874,6 +8840,23 @@
     "years_experience_min": null
   },
   {
+    "id": "ff903760-372a-4739-940a-87623b764317",
+    "title": "Product Manager (Hands-on & Execution) (m/f/d)",
+    "company": "NEWWORK Software GmbH",
+    "url": "https://hokify.de/job/28917420",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "core_pm",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-09-17",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
     "id": "0cade591-062f-4070-b375-b8621481093b",
     "title": "Produktmanager Interface-Technik / Bahn (w/m/d)",
     "company": "Knick Elektronische Messger\u00e4te GmbH & Co. KG",
@@ -10572,6 +10555,23 @@
     "first_seen_date": "2026-06-01",
     "industry": "mobility_automotive",
     "years_experience_min": null
+  },
+  {
+    "id": "e8b3af15-e9bf-4214-ae42-d5adf007ac87",
+    "title": "Senior Product Manager II, Consumer (all genders) ",
+    "company": "HelloFresh",
+    "url": "https://careers.hellofresh.com/global/en/job/8167337?gh_jid=8167337",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "customer_facing",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-09-07",
+    "industry": "consumer_apps",
+    "years_experience_min": 5
   },
   {
     "id": "ddca4ccb-73ca-4e32-8bfb-c7a0a5b898a4",
@@ -14433,23 +14433,6 @@
     "years_experience_min": 5
   },
   {
-    "id": "2d9ee294-e6de-4e5b-99d6-f79dff38d2f3",
-    "title": "(Associate) Product Manager - Tax Enablement (m/f/x)",
-    "company": "Scalable Capital",
-    "url": "https://api.smartrecruiters.com/v1/companies/ScalableGmbH/postings/744000140413449",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-29",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "6c7fddb4-f52d-4394-a6cc-5b9a599ddfc1",
     "title": "Product Manager - Customer Data Platform, Tech Foundations",
     "company": "Delivery Hero",
@@ -16997,6 +16980,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-08-05",
     "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "372be66d-28ef-4740-ab11-e58a4a2cda57",
+    "title": "Product Support Manager (m/w)",
+    "company": "Delivery Hero SE",
+    "url": "https://de.jooble.org/rjdp/8849742674977252500/Product-Support-Manager-(m%2Fw)-Berlin",
+    "location": "berlin",
+    "work_mode": "hybrid_2d",
+    "seniority": "unknown",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "customer_facing",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-08",
+    "industry": "ecommerce_marketplace",
     "years_experience_min": null
   }
 ]

@@ -3836,7 +3836,7 @@
     },
     {
       "date": "2026-06-08",
-      "count": 10
+      "count": 11
     },
     {
       "date": "2026-06-09",
@@ -3944,7 +3944,7 @@
     },
     {
       "date": "2026-07-29",
-      "count": 9
+      "count": 8
     },
     {
       "date": "2026-08-03",
@@ -3995,12 +3995,16 @@
       "count": 1
     },
     {
+      "date": "2026-09-07",
+      "count": 1
+    },
+    {
       "date": "2026-09-16",
       "count": 2
     },
     {
-      "date": "2026-09-18",
-      "count": 2
+      "date": "2026-09-17",
+      "count": 1
     }
   ],
   "active_per_day": [
@@ -4093,7 +4097,7 @@
     "median_days": 1,
     "mean_days": 6.8,
     "pct_gone_week": 83,
-    "n_inactive": 997
+    "n_inactive": 999
   },
   "seniority_mix": {
     "dates": [
