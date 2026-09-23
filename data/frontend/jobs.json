@@ -391,23 +391,6 @@
     "years_experience_min": null
   },
   {
-    "id": "9f03c6dc-cfd1-4616-ad15-569cc412ce68",
-    "title": "Technical Product Manager - Applied Machine Learning",
-    "company": "N26",
-    "url": "https://n26.com/en-eu/careers/positions/8196295?gh_jid=8196295",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "technical",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-09-14",
-    "industry": "fintech_payments",
-    "years_experience_min": 4
-  },
-  {
     "id": "4ac560ab-c1a4-4398-9678-e1fd128b7121",
     "title": "Principal Product Manager (f/m/d)",
     "company": "Contentful",
@@ -10676,23 +10659,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e8b3af15-e9bf-4214-ae42-d5adf007ac87",
-    "title": "Senior Product Manager II, Consumer (all genders) ",
-    "company": "HelloFresh",
-    "url": "https://careers.hellofresh.com/global/en/job/8167337?gh_jid=8167337",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "senior",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-09-07",
-    "industry": "consumer_apps",
-    "years_experience_min": 5
-  },
-  {
     "id": "ddca4ccb-73ca-4e32-8bfb-c7a0a5b898a4",
     "title": "Product Manager: Agentic Workflows",
     "company": "Proxify",
@@ -16998,5 +16964,39 @@
     "first_seen_date": "2026-06-05",
     "industry": "media_entertainment",
     "years_experience_min": 5
+  },
+  {
+    "id": "509a1bd2-e234-433f-9001-8db38bd38cb8",
+    "title": "Senior Product Manager \u2013 House Owner & Service Request Acquisition (all genders) in Berlin von Aroundhome gesucht",
+    "company": "Aroundhome",
+    "url": "https://pr-jobs.net/job/senior-product-manager-house-owner-service-request-acquisition-all-genders-in-berlin-von-aroundhome-gesucht/",
+    "location": "berlin",
+    "work_mode": "hybrid",
+    "seniority": "senior",
+    "language": "de",
+    "german_req": "unclassified",
+    "pm_type": "growth",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-27",
+    "industry": null,
+    "years_experience_min": null
+  },
+  {
+    "id": "3c809754-ce4f-4b06-bb96-d38d7d7a76f7",
+    "title": "IT-Product-Manager (w/m/d)",
+    "company": "Energy Market Solutions GmbH - Standort Berlin",
+    "url": "https://www.entega.ag/karriere/jobs/stellenanzeige/16603-it-product-manager-wmd/",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "unknown",
+    "language": "de",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-27",
+    "industry": null,
+    "years_experience_min": null
   }
 ]
