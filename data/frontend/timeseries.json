@@ -3900,7 +3900,7 @@
     },
     {
       "date": "2026-07-01",
-      "count": 3
+      "count": 2
     },
     {
       "date": "2026-07-02",
@@ -4001,6 +4001,10 @@
     {
       "date": "2026-09-17",
       "count": 1
+    },
+    {
+      "date": "2026-09-28",
+      "count": 1
     }
   ],
   "active_per_day": [
@@ -4093,7 +4097,7 @@
     "median_days": 1,
     "mean_days": 6.8,
     "pct_gone_week": 83,
-    "n_inactive": 1000
+    "n_inactive": 999
   },
   "seniority_mix": {
     "dates": [

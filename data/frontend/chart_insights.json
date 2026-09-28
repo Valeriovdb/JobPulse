@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-09-25T12:42:59.174337+00:00",
-  "data_version": "sha256:e216a3139f7d4c30",
+  "generated_at": "2026-09-28T15:14:23.611435+00:00",
+  "data_version": "sha256:f4a1cbf3e43927e9",
   "charts": {
     "german_requirement": {
-      "title": "Majority of Roles Do Not Require German Skills",
-      "subtitle": "A significant gap exists, with over half of positions accessible without German proficiency.",
+      "title": "German Language Requirement is Not Dominant",
+      "subtitle": "Nearly half of roles do not require German, highlighting accessibility issues.",
       "source": "llm",
-      "generated_at": "2026-09-25T12:42:53.095280+00:00",
+      "generated_at": "2026-09-28T15:14:15.782597+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Core PMs Lead with Slight Edge Over Technical PMs",
-      "subtitle": "A narrow gap highlights a competitive landscape for product management roles.",
+      "title": "Core PMs Lead, But Technical Roles Trail Behind",
+      "subtitle": "A significant gap exists between Core and Technical PM roles, indicating potential constraints in talent accessibility.",
       "source": "llm",
-      "generated_at": "2026-09-25T12:42:54.287044+00:00",
+      "generated_at": "2026-09-28T15:14:17.063892+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Hiring is spread across multiple levels",
-      "subtitle": "No single seniority group clearly dominates the current market.",
-      "source": "fallback",
-      "generated_at": "2026-09-25T12:42:55.064254+00:00",
-      "model": null
+      "title": "Mid-level Roles Are Most Prevalent",
+      "subtitle": "Mid-level positions comprise 35% of the workforce, while senior roles account for 48%.",
+      "source": "llm",
+      "generated_at": "2026-09-28T15:14:17.977168+00:00",
+      "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates Despite Remote Options",
-      "subtitle": "A significant portion of employees still prefer on-site work over hybrid and remote arrangements.",
+      "title": "Fragmented Work Modes Indicate Uncertain Flexibility",
+      "subtitle": "A significant portion of roles remain unclassified, highlighting mixed expectations for remote and on-site work.",
       "source": "llm",
-      "generated_at": "2026-09-25T12:42:55.802598+00:00",
+      "generated_at": "2026-09-28T15:14:18.980383+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, limiting remote access.",
       "source": "llm",
-      "generated_at": "2026-09-25T12:42:56.907788+00:00",
+      "generated_at": "2026-09-28T15:14:21.256080+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Now Mainstream in Job Market",
-      "subtitle": "Over half of roles demand core AI responsibilities, indicating widespread integration of AI skills.",
+      "title": "AI Expertise is Becoming Mainstream",
+      "subtitle": "35% of roles require AI as a core responsibility, indicating high demand for AI skills.",
       "source": "llm",
-      "generated_at": "2026-09-25T12:42:57.614199+00:00",
+      "generated_at": "2026-09-28T15:14:22.044033+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Are Equally Distributed Across Categories",
-      "subtitle": "No single category dominates, but unclassified roles limit overall accessibility.",
-      "source": "llm",
-      "generated_at": "2026-09-25T12:42:58.391380+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-09-28T15:14:22.851762+00:00",
+      "model": null
     }
   }
 }
