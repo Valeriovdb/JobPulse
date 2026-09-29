@@ -867,23 +867,6 @@
     "years_experience_min": null
   },
   {
-    "id": "370d5d97-83ff-48c9-83dd-4c30fd638c71",
-    "title": "Founding Product Manager",
-    "company": "TechBiz Global GmbH",
-    "url": "https://www.arbeitnow.com/jobs/companies/techbiz-global-gmbh/founding-product-manager-berlin-136943",
-    "location": "berlin",
-    "work_mode": "hybrid",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "must",
-    "pm_type": "technical",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-04-01",
-    "industry": "cybersecurity",
-    "years_experience_min": null
-  },
-  {
     "id": "073361ca-2904-400b-9d1e-1755c654d941",
     "title": "Senior Product Manager KI & Cloud",
     "company": "DIS Deutscher Industrie Service AG",
@@ -1171,23 +1154,6 @@
     "first_seen_date": "2026-04-15",
     "industry": "saas_b2b_software",
     "years_experience_min": null
-  },
-  {
-    "id": "34fc10c2-2115-4734-9524-833625faf706",
-    "title": "Founding Product Manager",
-    "company": "Cygrid GmbH",
-    "url": "https://www.arbeitnow.com/jobs/companies/cygrid-gmbh/founding-product-manager-berlin-356205",
-    "location": "berlin",
-    "work_mode": "hybrid",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "plus",
-    "pm_type": "technical",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-04-01",
-    "industry": "cybersecurity",
-    "years_experience_min": 10
   },
   {
     "id": "4c6407e7-fef1-42c9-a7bd-9278af36d06e",
@@ -16660,23 +16626,6 @@
     "years_experience_min": null
   },
   {
-    "id": "295dafed-a983-4168-99fe-878d020f64bc",
-    "title": "Product Manager - Anti Financial Crime (m/f/x)",
-    "company": "Scalable Capital",
-    "url": "https://api.smartrecruiters.com/v1/companies/ScalableGmbH/postings/744000140457923",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-30",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "4179caf5-476b-4994-88ca-baac2f8995ac",
     "title": "Staff Product Manager",
     "company": "SumUp",
@@ -16691,6 +16640,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-07-01",
     "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
+    "id": "295dafed-a983-4168-99fe-878d020f64bc",
+    "title": "Product Manager - Anti Financial Crime (m/f/x)",
+    "company": "Scalable Capital",
+    "url": "https://api.smartrecruiters.com/v1/companies/ScalableGmbH/postings/744000140457923",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-30",
+    "industry": null,
     "years_experience_min": null
   },
   {
@@ -16997,6 +16963,40 @@
     "ai_skills": true,
     "first_seen_date": "2026-06-10",
     "industry": "saas_b2b_software",
+    "years_experience_min": null
+  },
+  {
+    "id": "8004a829-4b81-4fb7-8b83-2216888dfb05",
+    "title": "Product Manager (all genders) (Consumer Lending / BNPL / Installment Loans)",
+    "company": "Vexcash AG",
+    "url": "https://www.arbeitnow.com/jobs/companies/vexcash-ag/product-manager-all-genders-consumer-lending-bnpl-installment-loans-berlin-339953",
+    "location": "berlin",
+    "work_mode": "hybrid",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "plus",
+    "pm_type": "core_pm",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": "fintech_payments",
+    "years_experience_min": 4
+  },
+  {
+    "id": "8b9566b4-d67a-473b-96a9-84af4adcd1b8",
+    "title": "Product Manager, Partnerships",
+    "company": "SumUp",
+    "url": "https://www.arbeitnow.com/jobs/companies/sumup/product-manager-partnerships-berlin-257453",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "mid",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "internal_ops",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-09",
+    "industry": "fintech_payments",
     "years_experience_min": null
   }
 ]
