@@ -2346,23 +2346,6 @@
     "years_experience_min": null
   },
   {
-    "id": "e6cf0e6f-df62-42c1-bcf6-d661b646e5e0",
-    "title": "Product Manager/Product Owner",
-    "company": "RemoteJobsOne",
-    "url": "https://bebee.com/de/jobs/product-manager-product-owner-remotejobsone-berlin--talent-639047627607712576",
-    "location": "berlin",
-    "work_mode": "remote",
-    "seniority": "mid",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "data_ai",
-    "ai_focus": true,
-    "ai_skills": false,
-    "first_seen_date": "2026-09-28",
-    "industry": "other",
-    "years_experience_min": null
-  },
-  {
     "id": "50af0fc7-59d7-453f-bf1c-f5fb37b378cb",
     "title": "[Remote] Product Manager (Contract - 6 Month Remote Role)",
     "company": "vacancy global pro",
@@ -16643,23 +16626,6 @@
     "years_experience_min": null
   },
   {
-    "id": "295dafed-a983-4168-99fe-878d020f64bc",
-    "title": "Product Manager - Anti Financial Crime (m/f/x)",
-    "company": "Scalable Capital",
-    "url": "https://api.smartrecruiters.com/v1/companies/ScalableGmbH/postings/744000140457923",
-    "location": "berlin",
-    "work_mode": "unknown",
-    "seniority": "mid",
-    "language": "unknown",
-    "german_req": "unclassified",
-    "pm_type": null,
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-07-30",
-    "industry": null,
-    "years_experience_min": null
-  },
-  {
     "id": "ff107d76-babe-4dd0-a753-3377c9a43bd0",
     "title": "Head of Product Design (m/f/d)",
     "company": "1KOMMA5\u02da",
@@ -16675,6 +16641,23 @@
     "first_seen_date": "2026-06-12",
     "industry": "other",
     "years_experience_min": 9
+  },
+  {
+    "id": "295dafed-a983-4168-99fe-878d020f64bc",
+    "title": "Product Manager - Anti Financial Crime (m/f/x)",
+    "company": "Scalable Capital",
+    "url": "https://api.smartrecruiters.com/v1/companies/ScalableGmbH/postings/744000140457923",
+    "location": "berlin",
+    "work_mode": "unknown",
+    "seniority": "mid",
+    "language": "unknown",
+    "german_req": "unclassified",
+    "pm_type": null,
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-07-30",
+    "industry": null,
+    "years_experience_min": null
   },
   {
     "id": "9e6e3949-b95f-4255-8e4e-99a9551bbda4",
@@ -16997,6 +16980,23 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-09",
     "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
+    "id": "330c49f8-9d29-409e-a33e-39f1075ee859",
+    "title": "Senior Product Manager - PPA & Energy Trading Platform (m/w/d)",
+    "company": "Otark GmbH",
+    "url": "https://www.arbeitnow.com/jobs/companies/otark-gmbh/senior-product-manager-ppa-energy-trading-platform-frankfurt-am-main-196211",
+    "location": "remote_germany",
+    "work_mode": "remote",
+    "seniority": "senior",
+    "language": "de",
+    "german_req": "must",
+    "pm_type": "core_pm",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-06-09",
+    "industry": "other",
     "years_experience_min": null
   }
 ]
