@@ -3060,6 +3060,23 @@
     "years_experience_min": 5
   },
   {
+    "id": "cee91f26-36a6-4265-8617-bbab4bfed09f",
+    "title": "Head of Product, Core Banking Systems",
+    "company": "N26",
+    "url": "https://n26.com/en-eu/careers/positions/8111591?gh_jid=8111591",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "head",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "core_pm",
+    "ai_focus": false,
+    "ai_skills": false,
+    "first_seen_date": "2026-08-11",
+    "industry": "fintech_payments",
+    "years_experience_min": null
+  },
+  {
     "id": "be5b05b3-c64f-4f94-9b7a-eb170010f15b",
     "title": "Product Manager, Search Ranking",
     "company": "eBay",
@@ -16980,23 +16997,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-09",
     "industry": "fintech_payments",
-    "years_experience_min": null
-  },
-  {
-    "id": "330c49f8-9d29-409e-a33e-39f1075ee859",
-    "title": "Senior Product Manager - PPA & Energy Trading Platform (m/w/d)",
-    "company": "Otark GmbH",
-    "url": "https://www.arbeitnow.com/jobs/companies/otark-gmbh/senior-product-manager-ppa-energy-trading-platform-frankfurt-am-main-196211",
-    "location": "remote_germany",
-    "work_mode": "remote",
-    "seniority": "senior",
-    "language": "de",
-    "german_req": "must",
-    "pm_type": "core_pm",
-    "ai_focus": true,
-    "ai_skills": true,
-    "first_seen_date": "2026-06-09",
-    "industry": "other",
     "years_experience_min": null
   }
 ]
