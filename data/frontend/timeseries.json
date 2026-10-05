@@ -37,7 +37,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 2,
-      "jobs_added": 1,
+      "jobs_added": 0,
       "jobs_removed": 0
     },
     {
@@ -3836,7 +3836,7 @@
     },
     {
       "date": "2026-06-08",
-      "count": 10
+      "count": 11
     },
     {
       "date": "2026-06-09",
@@ -3900,7 +3900,7 @@
     },
     {
       "date": "2026-07-01",
-      "count": 2
+      "count": 3
     },
     {
       "date": "2026-07-02",
@@ -3968,7 +3968,7 @@
     },
     {
       "date": "2026-08-11",
-      "count": 23
+      "count": 22
     },
     {
       "date": "2026-08-12",
@@ -4093,7 +4093,7 @@
     "median_days": 1,
     "mean_days": 6.8,
     "pct_gone_week": 83,
-    "n_inactive": 998
+    "n_inactive": 1000
   },
   "seniority_mix": {
     "dates": [
