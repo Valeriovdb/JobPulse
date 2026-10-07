@@ -4590,23 +4590,6 @@
     "years_experience_min": null
   },
   {
-    "id": "23f13e8e-790d-40ad-9a57-2fc98abf535a",
-    "title": "Head of Product - Engagement",
-    "company": "N26",
-    "url": "https://n26.com/en-eu/careers/positions/7792041?gh_jid=7792041",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "head",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-04-09",
-    "industry": "consumer_apps",
-    "years_experience_min": 8
-  },
-  {
     "id": "06a7193a-133d-41f2-9d62-c334f20ab3e1",
     "title": "Product Manager*in, AI-Native",
     "company": "Faircado",
@@ -5097,23 +5080,6 @@
     "ai_skills": false,
     "first_seen_date": "2026-06-22",
     "industry": "logistics_supply_chain",
-    "years_experience_min": 8
-  },
-  {
-    "id": "c425b011-50f9-46ba-b3e0-b0c573ce1d37",
-    "title": "Head of Product - Engagement",
-    "company": "N26",
-    "url": "https://n26.com/en-eu/careers/positions/7792558?gh_jid=7792558",
-    "location": "berlin",
-    "work_mode": "onsite",
-    "seniority": "head",
-    "language": "en",
-    "german_req": "not_mentioned",
-    "pm_type": "customer_facing",
-    "ai_focus": false,
-    "ai_skills": false,
-    "first_seen_date": "2026-04-09",
-    "industry": "consumer_apps",
     "years_experience_min": 8
   },
   {
@@ -16998,5 +16964,39 @@
     "first_seen_date": "2026-06-19",
     "industry": null,
     "years_experience_min": null
+  },
+  {
+    "id": "d0da08e6-7331-4780-963f-b211f2c648a2",
+    "title": "Produktmanager:in (m/w/d)",
+    "company": "Disrupted Cloud",
+    "url": "https://de.talent.com/view?id=625455387194566979",
+    "location": "berlin",
+    "work_mode": "hybrid",
+    "seniority": "unknown",
+    "language": "de",
+    "german_req": "must",
+    "pm_type": "core_pm",
+    "ai_focus": true,
+    "ai_skills": false,
+    "first_seen_date": "2026-06-26",
+    "industry": "other",
+    "years_experience_min": null
+  },
+  {
+    "id": "2f08b9f7-7846-42b3-8182-4af5d16b588e",
+    "title": "Senior\u200b/Product Manager; Internal AI",
+    "company": "Personio",
+    "url": "https://www.learn4good.com/jobs/berlin/deutschland/software_entwicklung/5187182665/g/",
+    "location": "berlin",
+    "work_mode": "onsite",
+    "seniority": "senior",
+    "language": "en",
+    "german_req": "not_mentioned",
+    "pm_type": "technical",
+    "ai_focus": true,
+    "ai_skills": true,
+    "first_seen_date": "2026-06-19",
+    "industry": "saas_b2b_software",
+    "years_experience_min": 5
   }
 ]
