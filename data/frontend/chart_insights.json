@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-10-09T14:19:13.414153+00:00",
-  "data_version": "sha256:16fafe9b9e1c8a7d",
+  "generated_at": "2026-10-12T16:39:38.307158+00:00",
+  "data_version": "sha256:fb144fdf35b08b7d",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement Creates Accessibility Imbalance",
-      "subtitle": "A significant portion of roles demand German, limiting opportunities for non-German speakers.",
+      "title": "German Language Requirement is Not Dominant",
+      "subtitle": "A significant portion of roles do not require German, highlighting accessibility concerns.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:05.972309+00:00",
+      "generated_at": "2026-10-12T16:39:33.262183+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
       "title": "Core PMs Dominate Role Landscape",
-      "subtitle": "A significant gap exists between Core PMs and Customer-facing PMs, indicating a concentration in product management roles.",
+      "subtitle": "A significant gap exists between Core and Technical PM positions, indicating a concentration in generalist roles.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:07.084924+00:00",
+      "generated_at": "2026-10-12T16:39:33.936510+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Senior Roles Dominate the Market",
-      "subtitle": "Over half of the positions are filled by senior professionals, indicating a strong senior-heavy trend.",
+      "title": "Mid-level Roles Are Predominant in Workforce",
+      "subtitle": "Mid-level positions comprise 46% of the workforce, surpassing other seniority levels.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:07.925940+00:00",
+      "generated_at": "2026-10-12T16:39:34.565884+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates Flexible Arrangements",
-      "subtitle": "A significant majority of employees are expected to work on-site, with limited remote and hybrid options available.",
+      "title": "Hybrid Work Model Dominates Employee Preferences",
+      "subtitle": "A significant portion of the workforce favors a flexible hybrid approach over fully remote or onsite arrangements.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:08.838644+00:00",
+      "generated_at": "2026-10-12T16:39:35.308142+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:11.050707+00:00",
+      "generated_at": "2026-10-12T16:39:36.112763+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
       "title": "AI Expertise is Becoming Mainstream in Job Market",
-      "subtitle": "Over half of roles now require AI as a core responsibility or essential skills.",
+      "subtitle": "Over half of roles now prioritize AI responsibilities, indicating a significant shift towards AI-focused skill sets.",
       "source": "llm",
-      "generated_at": "2026-10-09T14:19:11.759295+00:00",
+      "generated_at": "2026-10-12T16:39:36.985864+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "Industry Roles Exhibit Notable Diversity and Balance",
-      "subtitle": "A significant portion of roles remains unclassified, indicating potential accessibility constraints.",
-      "source": "llm",
-      "generated_at": "2026-10-09T14:19:12.617549+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand spans multiple industries",
+      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-10-12T16:39:37.647378+00:00",
+      "model": null
     }
   }
 }
