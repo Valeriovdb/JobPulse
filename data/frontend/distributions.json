@@ -6,11 +6,11 @@
     },
     {
       "label": "mid",
-      "count": 6
+      "count": 8
     },
     {
       "label": "senior",
-      "count": 5
+      "count": 8
     },
     {
       "label": "lead",
@@ -18,21 +18,21 @@
     },
     {
       "label": "unknown",
-      "count": 2
+      "count": 5
     }
   ],
   "work_mode": [
     {
       "label": "onsite",
-      "count": 11
+      "count": 16
     },
     {
       "label": "unknown",
-      "count": 3
+      "count": 5
     },
     {
       "label": "hybrid",
-      "count": 3
+      "count": 4
     },
     {
       "label": "remote",
@@ -46,11 +46,11 @@
   "language": [
     {
       "label": "en",
-      "count": 12
+      "count": 17
     },
     {
       "label": "de",
-      "count": 6
+      "count": 9
     },
     {
       "label": "unknown",
@@ -60,33 +60,33 @@
   "german_requirement": [
     {
       "label": "not_mentioned",
-      "count": 9
+      "count": 11
     },
     {
       "label": "must",
-      "count": 8
+      "count": 11
+    },
+    {
+      "label": "plus",
+      "count": 4
     },
     {
       "label": "unclassified",
       "count": 2
-    },
-    {
-      "label": "plus",
-      "count": 1
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 8
+      "count": 11
     },
     {
       "label": "technical",
-      "count": 3
+      "count": 5
     },
     {
       "label": "customer_facing",
-      "count": 4
+      "count": 6
     },
     {
       "label": "data_ai",
@@ -95,25 +95,33 @@
     {
       "label": "growth",
       "count": 1
+    },
+    {
+      "label": "internal_ops",
+      "count": 1
     }
   ],
   "industry": [],
   "industry_normalized": [
     {
       "label": "fintech_payments",
-      "count": 7
+      "count": 9
     },
     {
       "label": "other",
-      "count": 5
-    },
-    {
-      "label": "ecommerce_marketplace",
-      "count": 2
+      "count": 7
     },
     {
       "label": "saas_b2b_software",
-      "count": 2
+      "count": 4
+    },
+    {
+      "label": "ecommerce_marketplace",
+      "count": 3
+    },
+    {
+      "label": "logistics_supply_chain",
+      "count": 1
     },
     {
       "label": "cybersecurity",
@@ -127,27 +135,35 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 20
+      "count": 27
+    },
+    {
+      "label": "no",
+      "count": 1
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 18
+      "count": 25
     },
     {
       "label": "yes",
       "count": 2
+    },
+    {
+      "label": "no",
+      "count": 1
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 9
+      "count": 14
     },
     {
       "label": "none",
-      "count": 7
+      "count": 10
     },
     {
       "label": "unclear",
@@ -166,13 +182,19 @@
       "total": 6
     },
     {
-      "domain": "ai_ml_data_products",
+      "domain": "payments",
+      "hard": 3,
+      "soft": 0,
+      "total": 3
+    },
+    {
+      "domain": "consumer_digital_products",
       "hard": 1,
       "soft": 0,
       "total": 1
     },
     {
-      "domain": "consumer_digital_products",
+      "domain": "ai_ml_data_products",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -184,7 +206,7 @@
       "total": 1
     },
     {
-      "domain": "payments",
+      "domain": "saas_b2b_software",
       "hard": 1,
       "soft": 0,
       "total": 1
@@ -194,6 +216,11 @@
     {
       "seniority": "lead",
       "years_min": 7.0,
+      "count": 1
+    },
+    {
+      "seniority": "mid",
+      "years_min": 1.0,
       "count": 1
     },
     {
@@ -219,7 +246,12 @@
     {
       "seniority": "senior",
       "years_min": 7.0,
-      "count": 1
+      "count": 2
+    },
+    {
+      "seniority": "unknown",
+      "years_min": 3.0,
+      "count": 2
     }
   ],
   "industry_experience_bubble": [
@@ -231,6 +263,16 @@
     {
       "industry": "fintech_payments",
       "years_min": 7.0,
+      "count": 2
+    },
+    {
+      "industry": "logistics_supply_chain",
+      "years_min": 3.0,
+      "count": 1
+    },
+    {
+      "industry": "other",
+      "years_min": 3.0,
       "count": 1
     },
     {
@@ -245,58 +287,63 @@
     },
     {
       "industry": "saas_b2b_software",
+      "years_min": 1.0,
+      "count": 1
+    },
+    {
+      "industry": "saas_b2b_software",
       "years_min": 2.0,
       "count": 1
     }
   ],
   "years_experience": {
-    "median": 4.0,
+    "median": 3.0,
     "buckets": [
       {
         "label": "0-2",
-        "count": 1
+        "count": 2
       },
       {
         "label": "3-5",
-        "count": 3
+        "count": 5
       },
       {
         "label": "6-8",
-        "count": 2
+        "count": 3
       },
       {
         "label": "9+",
         "count": 0
       }
     ],
-    "n_extractable": 6
+    "n_extractable": 10
   },
   "ai": {
-    "n_enriched": 19,
-    "n_ai_focus": 10,
-    "n_ai_skills": 10,
-    "ai_focus_pct": 53,
-    "ai_skills_pct": 53
+    "n_enriched": 27,
+    "n_ai_focus": 14,
+    "n_ai_skills": 14,
+    "ai_focus_pct": 52,
+    "ai_skills_pct": 52
   },
   "source": [
     {
       "label": "ats",
-      "count": 10
+      "count": 11
     },
     {
       "label": "arbeitnow",
-      "count": 5
+      "count": 9
     },
     {
       "label": "jsearch",
-      "count": 5
+      "count": 8
     }
   ],
   "companies": {
     "top20": [
       {
         "label": "GetYourGuide",
-        "count": 3
+        "count": 4
       },
       {
         "label": "N26",
@@ -311,15 +358,43 @@
         "count": 2
       },
       {
+        "label": "1KOMMA5\u02da",
+        "count": 2
+      },
+      {
         "label": "Buena",
         "count": 2
+      },
+      {
+        "label": "SumUp",
+        "count": 1
+      },
+      {
+        "label": "Liqid Lig",
+        "count": 1
+      },
+      {
+        "label": "Lightspeedhq",
+        "count": 1
       },
       {
         "label": "Raisin",
         "count": 1
       },
       {
-        "label": "SumUp",
+        "label": "Swissbit Germany AG",
+        "count": 1
+      },
+      {
+        "label": "Staffbase",
+        "count": 1
+      },
+      {
+        "label": "Augustus",
+        "count": 1
+      },
+      {
+        "label": "ENTEGA AG",
         "count": 1
       },
       {
@@ -341,15 +416,11 @@
       {
         "label": "F. Hoffmann-La Roche AG",
         "count": 1
-      },
-      {
-        "label": "1KOMMA5\u02da",
-        "count": 1
       }
     ],
-    "n_companies": 13,
-    "top10_share": 17,
-    "top10_pct": 85,
-    "multi_hiring": 5
+    "n_companies": 19,
+    "top10_share": 19,
+    "top10_pct": 68,
+    "multi_hiring": 6
   }
 }
