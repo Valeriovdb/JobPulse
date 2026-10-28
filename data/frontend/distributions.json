@@ -6,7 +6,7 @@
     },
     {
       "label": "mid",
-      "count": 8
+      "count": 13
     },
     {
       "label": "mid_senior",
@@ -14,7 +14,7 @@
     },
     {
       "label": "senior",
-      "count": 17
+      "count": 13
     },
     {
       "label": "lead",
@@ -36,69 +36,69 @@
   "work_mode": [
     {
       "label": "onsite",
-      "count": 14
+      "count": 15
     },
     {
       "label": "unknown",
-      "count": 10
+      "count": 12
     },
     {
       "label": "remote",
-      "count": 6
-    },
-    {
-      "label": "hybrid",
       "count": 5
     },
     {
+      "label": "hybrid",
+      "count": 3
+    },
+    {
       "label": "hybrid_2d",
-      "count": 1
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 24
+      "count": 23
     },
     {
       "label": "de",
-      "count": 9
+      "count": 10
     },
     {
       "label": "unknown",
-      "count": 3
+      "count": 4
     }
   ],
   "german_requirement": [
     {
-      "label": "not_mentioned",
+      "label": "must",
       "count": 17
     },
     {
-      "label": "must",
-      "count": 14
+      "label": "not_mentioned",
+      "count": 15
     },
     {
       "label": "unclassified",
-      "count": 3
+      "count": 4
     },
     {
       "label": "plus",
-      "count": 2
+      "count": 1
     }
   ],
   "pm_type": [
     {
       "label": "core_pm",
-      "count": 13
+      "count": 15
     },
     {
       "label": "technical",
-      "count": 7
+      "count": 11
     },
     {
       "label": "customer_facing",
-      "count": 9
+      "count": 3
     },
     {
       "label": "data_ai",
@@ -109,7 +109,7 @@
       "count": 2
     },
     {
-      "label": "unclassified",
+      "label": "internal_ops",
       "count": 1
     }
   ],
@@ -117,7 +117,7 @@
   "industry_normalized": [
     {
       "label": "other",
-      "count": 11
+      "count": 14
     },
     {
       "label": "fintech_payments",
@@ -125,11 +125,15 @@
     },
     {
       "label": "saas_b2b_software",
-      "count": 7
+      "count": 4
     },
     {
       "label": "ecommerce_marketplace",
-      "count": 4
+      "count": 3
+    },
+    {
+      "label": "healthtech_biotech",
+      "count": 1
     },
     {
       "label": "consumer_apps",
@@ -140,54 +144,46 @@
       "count": 1
     },
     {
-      "label": "healthtech_biotech",
+      "label": "mobility_automotive",
       "count": 1
     }
   ],
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 34
+      "count": 36
     },
     {
       "label": "yes",
-      "count": 1
-    },
-    {
-      "label": "no",
       "count": 1
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 33
+      "count": 35
     },
     {
       "label": "yes",
       "count": 2
-    },
-    {
-      "label": "no",
-      "count": 1
     }
   ],
   "domain_req_strength": [
     {
       "label": "hard",
-      "count": 17
+      "count": 18
     },
     {
       "label": "none",
-      "count": 12
+      "count": 11
+    },
+    {
+      "label": "unclear",
+      "count": 4
     },
     {
       "label": "soft",
       "count": 4
-    },
-    {
-      "label": "unclear",
-      "count": 3
     }
   ],
   "domain_req_breakdown": [
@@ -199,21 +195,9 @@
     },
     {
       "domain": "ai_ml_data_products",
-      "hard": 3,
+      "hard": 4,
       "soft": 0,
-      "total": 3
-    },
-    {
-      "domain": "saas_b2b_software",
-      "hard": 2,
-      "soft": 1,
-      "total": 3
-    },
-    {
-      "domain": "ecommerce_marketplace",
-      "hard": 1,
-      "soft": 0,
-      "total": 1
+      "total": 4
     },
     {
       "domain": "logistics_supply_chain",
@@ -222,9 +206,9 @@
       "total": 1
     },
     {
-      "domain": "payments",
-      "hard": 1,
-      "soft": 0,
+      "domain": "saas_b2b_software",
+      "hard": 0,
+      "soft": 1,
       "total": 1
     }
   ],
@@ -242,7 +226,12 @@
     {
       "seniority": "mid",
       "years_min": 3.0,
-      "count": 4
+      "count": 5
+    },
+    {
+      "seniority": "mid",
+      "years_min": 5.0,
+      "count": 2
     },
     {
       "seniority": "mid",
@@ -262,12 +251,12 @@
     {
       "seniority": "senior",
       "years_min": 4.0,
-      "count": 2
+      "count": 1
     },
     {
       "seniority": "senior",
       "years_min": 5.0,
-      "count": 5
+      "count": 3
     },
     {
       "seniority": "staff",
@@ -278,7 +267,7 @@
   "industry_experience_bubble": [
     {
       "industry": "consumer_apps",
-      "years_min": 5.0,
+      "years_min": 7.0,
       "count": 1
     },
     {
@@ -289,7 +278,7 @@
     {
       "industry": "other",
       "years_min": 3.0,
-      "count": 1
+      "count": 2
     },
     {
       "industry": "other",
@@ -299,12 +288,7 @@
     {
       "industry": "other",
       "years_min": 5.0,
-      "count": 1
-    },
-    {
-      "industry": "other",
-      "years_min": 7.0,
-      "count": 1
+      "count": 4
     },
     {
       "industry": "other",
@@ -318,13 +302,8 @@
     },
     {
       "industry": "saas_b2b_software",
-      "years_min": 4.0,
-      "count": 1
-    },
-    {
-      "industry": "saas_b2b_software",
       "years_min": 5.0,
-      "count": 4
+      "count": 2
     }
   ],
   "years_experience": {
@@ -359,15 +338,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 17
+      "count": 16
     },
     {
       "label": "ats",
-      "count": 11
+      "count": 12
     },
     {
       "label": "arbeitnow",
-      "count": 8
+      "count": 9
     }
   ],
   "companies": {
@@ -375,6 +354,10 @@
       {
         "label": "GetYourGuide",
         "count": 4
+      },
+      {
+        "label": "Tebis Technische Informationssysteme AG",
+        "count": 3
       },
       {
         "label": "Scalable Capital",
@@ -385,39 +368,23 @@
         "count": 2
       },
       {
+        "label": "HeyJobs",
+        "count": 2
+      },
+      {
         "label": "Ralph",
         "count": 2
       },
       {
-        "label": "Tebis Technische Informationssysteme AG",
+        "label": "1Komma5\u00b0",
         "count": 2
       },
       {
-        "label": "hellofresh",
-        "count": 1
+        "label": "Delivery Hero",
+        "count": 2
       },
       {
         "label": "fino digital GmbH",
-        "count": 1
-      },
-      {
-        "label": "Raisin",
-        "count": 1
-      },
-      {
-        "label": "Apaleo",
-        "count": 1
-      },
-      {
-        "label": "Wire",
-        "count": 1
-      },
-      {
-        "label": "NewWork Software GmbH",
-        "count": 1
-      },
-      {
-        "label": "tink GmbH",
         "count": 1
       },
       {
@@ -425,23 +392,11 @@
         "count": 1
       },
       {
-        "label": "Taswiq4me",
+        "label": "Jobgether",
         "count": 1
       },
       {
-        "label": "Grafana Labs",
-        "count": 1
-      },
-      {
-        "label": "Envelio",
-        "count": 1
-      },
-      {
-        "label": "AMCS Group",
-        "count": 1
-      },
-      {
-        "label": "Prior Labs",
+        "label": "Raisin",
         "count": 1
       },
       {
@@ -449,13 +404,37 @@
         "count": 1
       },
       {
+        "label": "Prior Labs",
+        "count": 1
+      },
+      {
+        "label": "Talantir",
+        "count": 1
+      },
+      {
+        "label": "Rentman",
+        "count": 1
+      },
+      {
+        "label": "Snowflake",
+        "count": 1
+      },
+      {
         "label": "Cherry Ventures",
+        "count": 1
+      },
+      {
+        "label": "Deliveroo",
+        "count": 1
+      },
+      {
+        "label": "MELAG Medizintechnik GmbH & Co. KG",
         "count": 1
       }
     ],
-    "n_companies": 29,
-    "top10_share": 17,
-    "top10_pct": 47,
-    "multi_hiring": 5
+    "n_companies": 26,
+    "top10_share": 21,
+    "top10_pct": 57,
+    "multi_hiring": 8
   }
 }
