@@ -147,7 +147,7 @@
       "language": "en",
       "german_req": "not_mentioned",
       "active_jobs": 10,
-      "jobs_added": 6,
+      "jobs_added": 5,
       "jobs_removed": 0
     },
     {
@@ -3832,7 +3832,7 @@
     },
     {
       "date": "2026-06-05",
-      "count": 5
+      "count": 6
     },
     {
       "date": "2026-06-08",
@@ -4091,7 +4091,7 @@
   ],
   "lifespan": {
     "median_days": 1,
-    "mean_days": 6.8,
+    "mean_days": 6.7,
     "pct_gone_week": 83,
     "n_inactive": 1000
   },
