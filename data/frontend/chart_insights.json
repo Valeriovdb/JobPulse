@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-11-09T17:20:44.999401+00:00",
-  "data_version": "sha256:0bcbbfc0335c9823",
+  "generated_at": "2026-11-10T15:33:34.705394+00:00",
+  "data_version": "sha256:efb024428884c052",
   "charts": {
     "german_requirement": {
       "title": "German Language Requirement is Not Dominant",
       "subtitle": "A significant portion of roles do not require German proficiency, highlighting accessibility for non-German speakers.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:37.886603+00:00",
+      "generated_at": "2026-11-10T15:33:25.984607+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
       "title": "Customer-facing PMs Lead, But Imbalance Persists",
       "subtitle": "A significant gap exists between customer-facing and technical PM roles, highlighting a concentration in the market.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:38.952168+00:00",
+      "generated_at": "2026-11-10T15:33:27.230956+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
       "title": "Senior Roles Dominate the Market",
-      "subtitle": "With 56% of positions classified as senior, the market is heavily weighted towards experienced professionals.",
+      "subtitle": "More than half of the positions are filled by senior-level professionals.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:40.107259+00:00",
+      "generated_at": "2026-11-10T15:33:28.147664+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "Remote Work Dominates Flexible Employment Options",
+      "title": "Remote Work Dominates Flexible Employment Landscape",
       "subtitle": "A significant portion of roles are remote-friendly, with hybrid and onsite options trailing behind.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:41.116221+00:00",
+      "generated_at": "2026-11-10T15:33:29.346348+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
       "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:42.317423+00:00",
+      "generated_at": "2026-11-10T15:33:31.732274+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Now Mainstream in Job Market",
-      "subtitle": "35% of roles require AI as a core responsibility or skill.",
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "43% of roles require AI as a core responsibility, indicating high demand for AI skills.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:43.187769+00:00",
+      "generated_at": "2026-11-10T15:33:32.890695+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
       "title": "Industry Roles Exhibit Equal Representation Across Sectors",
       "subtitle": "No single sector dominates, but unclassified roles limit overall accessibility.",
       "source": "llm",
-      "generated_at": "2026-11-09T17:20:44.189893+00:00",
+      "generated_at": "2026-11-10T15:33:33.884218+00:00",
       "model": "gpt-4o-mini"
     }
   }
