@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-11-12T15:55:18.302867+00:00",
-  "data_version": "sha256:81ff3042674f7b4a",
+  "generated_at": "2026-11-13T15:16:35.378850+00:00",
+  "data_version": "sha256:08d2a4f3c524c85a",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Nearly Balanced",
-      "subtitle": "A slight majority of roles do not require German proficiency, indicating accessibility for non-German speakers.",
+      "title": "German Language Requirement is Not Dominant",
+      "subtitle": "A significant portion of roles do not require German proficiency, highlighting accessibility for non-German speakers.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:11.400918+00:00",
+      "generated_at": "2026-11-13T15:16:27.631448+00:00",
       "model": "gpt-4o-mini"
     },
     "pm_type": {
-      "title": "Customer-facing PMs Dominate Role Landscape",
-      "subtitle": "A significant concentration exists, with nearly half of roles focused on customer interaction.",
+      "title": "Core and Customer-facing PMs Dominate Equally",
+      "subtitle": "A balanced pattern indicates no significant preference for either role in product management.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:12.845598+00:00",
+      "generated_at": "2026-11-13T15:16:28.760788+00:00",
       "model": "gpt-4o-mini"
     },
     "seniority": {
-      "title": "Mid-level Roles Are Predominant",
-      "subtitle": "Mid-level positions comprise 51% of the workforce, with no junior roles present.",
+      "title": "Mid-level Roles Predominate in Seniority Mix",
+      "subtitle": "With 49% of roles classified as mid-level, the seniority landscape is balanced but leans towards mid-level positions.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:13.716341+00:00",
+      "generated_at": "2026-11-13T15:16:30.250258+00:00",
       "model": "gpt-4o-mini"
     },
     "work_mode": {
-      "title": "On-site Work Dominates Despite Remote Options",
-      "subtitle": "A significant portion of employees still prefer on-site arrangements over hybrid or remote work.",
+      "title": "Remote Work Dominates with Balanced Flexibility",
+      "subtitle": "A significant portion of roles offer remote options, while on-site expectations remain comparable.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:14.704291+00:00",
+      "generated_at": "2026-11-13T15:16:31.470826+00:00",
       "model": "gpt-4o-mini"
     },
     "location": {
       "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, limiting remote access.",
+      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with remote options remaining limited.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:15.956730+00:00",
+      "generated_at": "2026-11-13T15:16:32.454301+00:00",
       "model": "gpt-4o-mini"
     },
     "ai": {
-      "title": "AI Expertise is Now Mainstream in Job Market",
-      "subtitle": "Over half of roles demand AI as a core responsibility or skill.",
+      "title": "AI Expertise is Becoming Mainstream in Job Market",
+      "subtitle": "Over half of roles now require AI focus or skills.",
       "source": "llm",
-      "generated_at": "2026-11-12T15:55:16.826430+00:00",
+      "generated_at": "2026-11-13T15:16:33.482069+00:00",
       "model": "gpt-4o-mini"
     },
     "industry": {
-      "title": "PM demand spans multiple industries",
-      "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
-      "source": "fallback",
-      "generated_at": "2026-11-12T15:55:17.393245+00:00",
-      "model": null
+      "title": "Industry Roles Exhibit Equal Representation Across Sectors",
+      "subtitle": "No single sector dominates, but unclassified roles limit overall accessibility.",
+      "source": "llm",
+      "generated_at": "2026-11-13T15:16:34.358292+00:00",
+      "model": "gpt-4o-mini"
     }
   }
 }
