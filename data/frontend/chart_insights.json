@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-11-18T16:21:02.221666+00:00",
-  "data_version": "sha256:e64e904007522583",
+  "generated_at": "2026-11-19T16:28:47.325065+00:00",
+  "data_version": "sha256:1550d338c9e9f646",
   "charts": {
     "german_requirement": {
-      "title": "German Language Requirement is Nearly Balanced",
-      "subtitle": "A slight majority of roles do not require German, but many remain unclassified.",
-      "source": "llm",
-      "generated_at": "2026-11-18T16:20:50.760764+00:00",
-      "model": "gpt-4o-mini"
+      "title": "German requirements vary across roles",
+      "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
+      "source": "fallback",
+      "generated_at": "2026-11-19T16:28:36.313881+00:00",
+      "model": null
     },
     "pm_type": {
-      "title": "Core PMs Lead, But Technical Roles Close Behind",
-      "subtitle": "A slight gap indicates a competitive landscape for project management roles.",
-      "source": "llm",
-      "generated_at": "2026-11-18T16:20:52.133700+00:00",
-      "model": "gpt-4o-mini"
+      "title": "PM demand is spread across role types",
+      "subtitle": "Openings are distributed across several PM types, with no single category strongly dominant.",
+      "source": "fallback",
+      "generated_at": "2026-11-19T16:28:37.972998+00:00",
+      "model": null
     },
     "seniority": {
       "title": "Hiring skews toward experienced roles",
       "subtitle": "Most active roles target senior profiles, with limited entry-level demand.",
       "source": "fallback",
-      "generated_at": "2026-11-18T16:20:54.561245+00:00",
+      "generated_at": "2026-11-19T16:28:39.408053+00:00",
       "model": null
     },
     "work_mode": {
-      "title": "Work style is evenly split",
-      "subtitle": "Remote, hybrid, and on-site roles are all represented in the current market.",
+      "title": "Remote work is widely available",
+      "subtitle": "Around 31% of roles offer full remote flexibility \u2014 high for a Berlin-focused search.",
       "source": "fallback",
-      "generated_at": "2026-11-18T16:20:56.046819+00:00",
+      "generated_at": "2026-11-19T16:28:40.979785+00:00",
       "model": null
     },
     "location": {
-      "title": "Berlin Dominates Job Market Concentration",
-      "subtitle": "A significant majority of opportunities are concentrated in Berlin, with minimal remote options available.",
-      "source": "llm",
-      "generated_at": "2026-11-18T16:20:57.665193+00:00",
-      "model": "gpt-4o-mini"
+      "title": "Roles are heavily concentrated in Berlin",
+      "subtitle": "73% of positions are Berlin-based, with limited availability elsewhere.",
+      "source": "fallback",
+      "generated_at": "2026-11-19T16:28:42.527182+00:00",
+      "model": null
     },
     "ai": {
-      "title": "AI is now mainstream in PM hiring",
-      "subtitle": "57% of roles list AI as a core focus, and 49% require AI skills.",
+      "title": "AI demand is growing across PM roles",
+      "subtitle": "Around 29% of roles involve AI as a core focus \u2014 a rising but not yet dominant signal.",
       "source": "fallback",
-      "generated_at": "2026-11-18T16:20:59.361231+00:00",
+      "generated_at": "2026-11-19T16:28:44.162827+00:00",
       "model": null
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-11-18T16:21:00.798933+00:00",
+      "generated_at": "2026-11-19T16:28:45.737705+00:00",
       "model": null
     }
   }
