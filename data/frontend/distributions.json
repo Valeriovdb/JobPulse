@@ -1,92 +1,80 @@
 {
   "seniority": [
     {
-      "label": "junior",
-      "count": 3
-    },
-    {
       "label": "mid",
-      "count": 19
+      "count": 15
     },
     {
       "label": "mid_senior",
-      "count": 3
+      "count": 4
     },
     {
       "label": "senior",
-      "count": 20
+      "count": 6
     },
     {
       "label": "lead",
-      "count": 5
+      "count": 2
+    },
+    {
+      "label": "principal",
+      "count": 1
     },
     {
       "label": "unknown",
-      "count": 11
+      "count": 2
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 31
-    },
-    {
-      "label": "remote",
       "count": 14
     },
     {
+      "label": "remote",
+      "count": 10
+    },
+    {
       "label": "hybrid",
-      "count": 13
-    },
-    {
-      "label": "onsite",
-      "count": 2
-    },
-    {
-      "label": "hybrid_4d",
-      "count": 1
+      "count": 6
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 36
+      "count": 16
     },
     {
       "label": "de",
-      "count": 21
+      "count": 9
     },
     {
       "label": "unknown",
-      "count": 4
+      "count": 5
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 61
+      "count": 30
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 2
+      "count": 3
     },
     {
       "label": "customer_facing",
-      "count": 2
+      "count": 1
     },
     {
       "label": "platform",
-      "count": 6
-    },
-    {
-      "label": "data_ai",
-      "count": 5
+      "count": 4
     },
     {
       "label": "growth",
-      "count": 7
+      "count": 3
     }
   ],
   "industry": [],
@@ -94,19 +82,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 30
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 30
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 30
     }
   ],
   "domain_req_breakdown": [],
@@ -114,7 +102,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 22,
+    "n_enriched": 11,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -123,57 +111,25 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 45
-    },
-    {
-      "label": "arbeitnow",
-      "count": 10
+      "count": 18
     },
     {
       "label": "ats",
-      "count": 6
+      "count": 7
+    },
+    {
+      "label": "arbeitnow",
+      "count": 5
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "Kooku",
-        "count": 4
-      },
-      {
-        "label": "Media Pioneer Publishing AG",
-        "count": 3
-      },
-      {
-        "label": "voize",
-        "count": 3
-      },
-      {
-        "label": "Kaufland e-commerce",
-        "count": 2
-      },
-      {
-        "label": "Voize",
-        "count": 2
-      },
-      {
-        "label": "Hiring & apply",
-        "count": 2
-      },
-      {
-        "label": "Famedly GmbH",
-        "count": 2
-      },
-      {
-        "label": "Project Q",
-        "count": 2
-      },
-      {
         "label": "Delivery Hero",
-        "count": 2
+        "count": 3
       },
       {
-        "label": "Finmas GmbH",
+        "label": "Distribusion Technologies",
         "count": 2
       },
       {
@@ -181,7 +137,7 @@
         "count": 2
       },
       {
-        "label": "D4L data4life gGmbH",
+        "label": "remote quest jobs",
         "count": 2
       },
       {
@@ -189,37 +145,69 @@
         "count": 1
       },
       {
-        "label": "Deutscher Sparkassen Verlag",
+        "label": "InnoVentures GmbH",
         "count": 1
       },
       {
-        "label": "Yokogawa Electric Corporation",
+        "label": "Acodis AG",
         "count": 1
       },
       {
-        "label": "DAYONE GmbH",
+        "label": "N8N",
         "count": 1
       },
       {
-        "label": "SPREAD GmbH",
+        "label": "SumUp",
         "count": 1
       },
       {
-        "label": "Rematiq Gmbh",
+        "label": "Valsight",
         "count": 1
       },
       {
-        "label": "Bitpanda",
+        "label": "Epikur Software GmbH & Co. KG",
         "count": 1
       },
       {
-        "label": "Northwind Labs",
+        "label": "Helsing GmbH",
+        "count": 1
+      },
+      {
+        "label": "Snowflake",
+        "count": 1
+      },
+      {
+        "label": "Cozero",
+        "count": 1
+      },
+      {
+        "label": "Rhenus Home Delivery GmbH",
+        "count": 1
+      },
+      {
+        "label": "Riverty",
+        "count": 1
+      },
+      {
+        "label": "Rockstar",
+        "count": 1
+      },
+      {
+        "label": "Horizont",
+        "count": 1
+      },
+      {
+        "label": "Rabot Energy",
+        "count": 1
+      },
+      {
+        "label": "Boerse Stuttgart GmbH",
         "count": 1
       }
     ],
-    "n_companies": 45,
-    "top10_share": 24,
-    "top10_pct": 39,
-    "multi_hiring": 12
+    "n_companies": 25,
+    "top10_share": 15,
+    "top10_pct": 50,
+    "multi_hiring": 4
   }
 }
