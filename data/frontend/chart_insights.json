@@ -1,54 +1,54 @@
 {
-  "generated_at": "2026-11-23T19:07:19.637971+00:00",
-  "data_version": "sha256:abc588cdef8bd00d",
+  "generated_at": "2026-11-24T18:46:48.065237+00:00",
+  "data_version": "sha256:9571a250e10c30e3",
   "charts": {
     "german_requirement": {
       "title": "German requirements vary across roles",
       "subtitle": "The market is split \u2014 both language-open and German-required roles are common.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:09.523857+00:00",
+      "generated_at": "2026-11-24T18:46:37.079089+00:00",
       "model": null
     },
     "pm_type": {
       "title": "PM demand is spread across role types",
       "subtitle": "Openings are distributed across several PM types, with no single category strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:11.001908+00:00",
+      "generated_at": "2026-11-24T18:46:38.611235+00:00",
       "model": null
     },
     "seniority": {
       "title": "Hiring is concentrated in mid-level roles",
       "subtitle": "Mid-level openings make up the largest share of the current market.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:12.423555+00:00",
+      "generated_at": "2026-11-24T18:46:40.322059+00:00",
       "model": null
     },
     "work_mode": {
       "title": "Remote work is widely available",
       "subtitle": "Around 33% of roles offer full remote flexibility \u2014 high for a Berlin-focused search.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:13.796848+00:00",
+      "generated_at": "2026-11-24T18:46:41.898309+00:00",
       "model": null
     },
     "location": {
       "title": "Roles are heavily concentrated in Berlin",
-      "subtitle": "77% of positions are Berlin-based, with limited availability elsewhere.",
+      "subtitle": "78% of positions are Berlin-based, with limited availability elsewhere.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:15.257040+00:00",
+      "generated_at": "2026-11-24T18:46:43.440526+00:00",
       "model": null
     },
     "ai": {
       "title": "AI focus remains a niche requirement",
       "subtitle": "AI-specific roles are present but represent a small share of the market at 0%.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:16.695096+00:00",
+      "generated_at": "2026-11-24T18:46:44.982371+00:00",
       "model": null
     },
     "industry": {
       "title": "PM demand spans multiple industries",
       "subtitle": "Hiring is spread across industries with no single sector strongly dominant.",
       "source": "fallback",
-      "generated_at": "2026-11-23T19:07:18.219047+00:00",
+      "generated_at": "2026-11-24T18:46:46.516565+00:00",
       "model": null
     }
   }

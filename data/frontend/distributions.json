@@ -2,15 +2,15 @@
   "seniority": [
     {
       "label": "mid",
-      "count": 15
+      "count": 24
     },
     {
       "label": "mid_senior",
-      "count": 4
+      "count": 5
     },
     {
       "label": "senior",
-      "count": 6
+      "count": 8
     },
     {
       "label": "lead",
@@ -18,45 +18,45 @@
     },
     {
       "label": "principal",
-      "count": 1
+      "count": 2
     },
     {
       "label": "unknown",
-      "count": 2
+      "count": 4
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 14
+      "count": 22
     },
     {
       "label": "remote",
-      "count": 10
+      "count": 15
     },
     {
       "label": "hybrid",
-      "count": 6
+      "count": 8
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 16
+      "count": 24
     },
     {
       "label": "de",
-      "count": 9
+      "count": 15
     },
     {
       "label": "unknown",
-      "count": 5
+      "count": 6
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 30
+      "count": 45
     }
   ],
   "pm_type": [
@@ -66,7 +66,7 @@
     },
     {
       "label": "customer_facing",
-      "count": 1
+      "count": 2
     },
     {
       "label": "platform",
@@ -74,7 +74,7 @@
     },
     {
       "label": "growth",
-      "count": 3
+      "count": 5
     }
   ],
   "industry": [],
@@ -82,19 +82,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 30
+      "count": 45
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 30
+      "count": 45
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 30
+      "count": 45
     }
   ],
   "domain_req_breakdown": [],
@@ -102,7 +102,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 11,
+    "n_enriched": 14,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -111,29 +111,53 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 18
+      "count": 31
     },
     {
       "label": "ats",
-      "count": 7
+      "count": 8
     },
     {
       "label": "arbeitnow",
-      "count": 5
+      "count": 6
     }
   ],
   "companies": {
     "top20": [
       {
+        "label": "Scalable Capital",
+        "count": 3
+      },
+      {
         "label": "Delivery Hero",
         "count": 3
+      },
+      {
+        "label": "Deftpower",
+        "count": 2
       },
       {
         "label": "Distribusion Technologies",
         "count": 2
       },
       {
-        "label": "Scalable Capital",
+        "label": "Snowflake",
+        "count": 2
+      },
+      {
+        "label": "Rhenus Home Delivery GmbH",
+        "count": 2
+      },
+      {
+        "label": "Rockstar",
+        "count": 2
+      },
+      {
+        "label": "Helsing GmbH",
+        "count": 2
+      },
+      {
+        "label": "Zalando",
         "count": 2
       },
       {
@@ -145,11 +169,19 @@
         "count": 1
       },
       {
+        "label": "Epikur Software GmbH & Co. KG",
+        "count": 1
+      },
+      {
         "label": "InnoVentures GmbH",
         "count": 1
       },
       {
-        "label": "Acodis AG",
+        "label": "Cozero",
+        "count": 1
+      },
+      {
+        "label": "Valsight",
         "count": 1
       },
       {
@@ -161,53 +193,21 @@
         "count": 1
       },
       {
-        "label": "Valsight",
+        "label": "Vexcash Aktiengesellschaft",
         "count": 1
       },
       {
-        "label": "Epikur Software GmbH & Co. KG",
+        "label": "Tawo Gmbh",
         "count": 1
       },
       {
-        "label": "Helsing GmbH",
-        "count": 1
-      },
-      {
-        "label": "Snowflake",
-        "count": 1
-      },
-      {
-        "label": "Cozero",
-        "count": 1
-      },
-      {
-        "label": "Rhenus Home Delivery GmbH",
-        "count": 1
-      },
-      {
-        "label": "Riverty",
-        "count": 1
-      },
-      {
-        "label": "Rockstar",
-        "count": 1
-      },
-      {
-        "label": "Horizont",
-        "count": 1
-      },
-      {
-        "label": "Rabot Energy",
-        "count": 1
-      },
-      {
-        "label": "Boerse Stuttgart GmbH",
+        "label": "Acodis AG",
         "count": 1
       }
     ],
-    "n_companies": 25,
-    "top10_share": 15,
-    "top10_pct": 50,
-    "multi_hiring": 4
+    "n_companies": 33,
+    "top10_share": 22,
+    "top10_pct": 49,
+    "multi_hiring": 10
   }
 }
