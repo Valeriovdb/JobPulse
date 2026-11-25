@@ -1,16 +1,16 @@
 {
-  "last_updated": "2026-11-24",
-  "n_active": 45,
-  "n_new_week": 41,
-  "senior_pct": 38,
-  "median_age_days": 1,
+  "last_updated": "2026-11-25",
+  "n_active": 46,
+  "n_new_week": 42,
+  "senior_pct": 43,
+  "median_age_days": 0,
   "accessible_pct": 0,
-  "entry_pct": 53,
+  "entry_pct": 39,
   "language": {
     "en_none": 0,
     "en_plus": 0,
     "en_must": 0,
-    "de": 15
+    "de": 17
   },
   "location": {
     "berlin": 35,

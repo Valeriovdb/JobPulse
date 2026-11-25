@@ -2,61 +2,69 @@
   "seniority": [
     {
       "label": "mid",
-      "count": 24
+      "count": 18
     },
     {
       "label": "mid_senior",
-      "count": 5
+      "count": 4
     },
     {
       "label": "senior",
-      "count": 8
+      "count": 12
     },
     {
       "label": "lead",
-      "count": 2
+      "count": 3
     },
     {
       "label": "principal",
-      "count": 2
+      "count": 1
     },
     {
       "label": "unknown",
-      "count": 4
+      "count": 8
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 22
+      "count": 24
     },
     {
       "label": "remote",
-      "count": 15
+      "count": 13
     },
     {
       "label": "hybrid",
-      "count": 8
+      "count": 5
+    },
+    {
+      "label": "onsite",
+      "count": 3
+    },
+    {
+      "label": "hybrid_3d",
+      "count": 1
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 24
+      "count": 26
     },
     {
       "label": "de",
-      "count": 15
+      "count": 17
     },
     {
       "label": "unknown",
-      "count": 6
+      "count": 3
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 45
+      "count": 46
     }
   ],
   "pm_type": [
@@ -66,15 +74,11 @@
     },
     {
       "label": "customer_facing",
-      "count": 2
-    },
-    {
-      "label": "platform",
       "count": 4
     },
     {
       "label": "growth",
-      "count": 5
+      "count": 6
     }
   ],
   "industry": [],
@@ -82,19 +86,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 45
+      "count": 46
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 45
+      "count": 46
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 45
+      "count": 46
     }
   ],
   "domain_req_breakdown": [],
@@ -102,7 +106,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 14,
+    "n_enriched": 13,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -111,15 +115,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 31
+      "count": 35
     },
     {
       "label": "ats",
-      "count": 8
+      "count": 7
     },
     {
       "label": "arbeitnow",
-      "count": 6
+      "count": 4
     }
   ],
   "companies": {
@@ -129,15 +133,11 @@
         "count": 3
       },
       {
-        "label": "Delivery Hero",
-        "count": 3
-      },
-      {
-        "label": "Deftpower",
+        "label": "MAIA",
         "count": 2
       },
       {
-        "label": "Distribusion Technologies",
+        "label": "Berliner Verkehrsbetriebe (BVG)",
         "count": 2
       },
       {
@@ -149,19 +149,15 @@
         "count": 2
       },
       {
-        "label": "Rockstar",
+        "label": "N26",
         "count": 2
       },
       {
-        "label": "Helsing GmbH",
+        "label": "Jobgether",
         "count": 2
       },
       {
-        "label": "Zalando",
-        "count": 2
-      },
-      {
-        "label": "remote quest jobs",
+        "label": "NielsenIQ",
         "count": 2
       },
       {
@@ -169,23 +165,11 @@
         "count": 1
       },
       {
-        "label": "Epikur Software GmbH & Co. KG",
+        "label": "Helsing GmbH",
         "count": 1
       },
       {
-        "label": "InnoVentures GmbH",
-        "count": 1
-      },
-      {
-        "label": "Cozero",
-        "count": 1
-      },
-      {
-        "label": "Valsight",
-        "count": 1
-      },
-      {
-        "label": "N8N",
+        "label": "Tawo Gmbh",
         "count": 1
       },
       {
@@ -197,17 +181,37 @@
         "count": 1
       },
       {
-        "label": "Tawo Gmbh",
+        "label": "Deftpower",
         "count": 1
       },
       {
         "label": "Acodis AG",
         "count": 1
+      },
+      {
+        "label": "Zalando",
+        "count": 1
+      },
+      {
+        "label": "Padoa",
+        "count": 1
+      },
+      {
+        "label": "Rockstar",
+        "count": 1
+      },
+      {
+        "label": "Bling Services GmbH",
+        "count": 1
+      },
+      {
+        "label": "Nucs AI",
+        "count": 1
       }
     ],
-    "n_companies": 33,
-    "top10_share": 22,
-    "top10_pct": 49,
-    "multi_hiring": 10
+    "n_companies": 37,
+    "top10_share": 19,
+    "top10_pct": 41,
+    "multi_hiring": 8
   }
 }
