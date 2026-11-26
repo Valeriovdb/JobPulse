@@ -6,37 +6,33 @@
     },
     {
       "label": "mid_senior",
-      "count": 4
+      "count": 6
     },
     {
       "label": "senior",
-      "count": 12
+      "count": 19
     },
     {
       "label": "lead",
-      "count": 3
-    },
-    {
-      "label": "principal",
-      "count": 1
+      "count": 8
     },
     {
       "label": "unknown",
-      "count": 8
+      "count": 10
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 24
+      "count": 30
     },
     {
       "label": "remote",
-      "count": 13
+      "count": 19
     },
     {
       "label": "hybrid",
-      "count": 5
+      "count": 8
     },
     {
       "label": "onsite",
@@ -50,11 +46,11 @@
   "language": [
     {
       "label": "en",
-      "count": 26
+      "count": 38
     },
     {
       "label": "de",
-      "count": 17
+      "count": 20
     },
     {
       "label": "unknown",
@@ -64,21 +60,25 @@
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 46
+      "count": 61
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 3
-    },
-    {
-      "label": "customer_facing",
       "count": 4
     },
     {
+      "label": "customer_facing",
+      "count": 5
+    },
+    {
+      "label": "data_ai",
+      "count": 2
+    },
+    {
       "label": "growth",
-      "count": 6
+      "count": 9
     }
   ],
   "industry": [],
@@ -86,19 +86,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 46
+      "count": 61
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 46
+      "count": 61
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 46
+      "count": 61
     }
   ],
   "domain_req_breakdown": [],
@@ -106,7 +106,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 13,
+    "n_enriched": 20,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -115,15 +115,15 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 35
+      "count": 46
+    },
+    {
+      "label": "arbeitnow",
+      "count": 8
     },
     {
       "label": "ats",
       "count": 7
-    },
-    {
-      "label": "arbeitnow",
-      "count": 4
     }
   ],
   "companies": {
@@ -133,23 +133,19 @@
         "count": 3
       },
       {
-        "label": "MAIA",
-        "count": 2
-      },
-      {
-        "label": "Berliner Verkehrsbetriebe (BVG)",
-        "count": 2
-      },
-      {
-        "label": "Snowflake",
-        "count": 2
-      },
-      {
-        "label": "Rhenus Home Delivery GmbH",
-        "count": 2
+        "label": "Bitpanda",
+        "count": 3
       },
       {
         "label": "N26",
+        "count": 2
+      },
+      {
+        "label": "Hiring & apply",
+        "count": 2
+      },
+      {
+        "label": "InnoVentures GmbH",
         "count": 2
       },
       {
@@ -157,61 +153,65 @@
         "count": 2
       },
       {
-        "label": "NielsenIQ",
+        "label": "Cozero",
         "count": 2
       },
       {
-        "label": "Raisin",
+        "label": "50Hertz Transmission GmbH",
+        "count": 2
+      },
+      {
+        "label": "Publitas.com B.V.",
+        "count": 2
+      },
+      {
+        "label": "Neobankbeat",
+        "count": 2
+      },
+      {
+        "label": "MAIA",
+        "count": 2
+      },
+      {
+        "label": "Lynx B.V. Germany Branch",
+        "count": 2
+      },
+      {
+        "label": "Snowflake",
+        "count": 2
+      },
+      {
+        "label": "Americana Restaurants",
+        "count": 2
+      },
+      {
+        "label": "BITMARCK",
         "count": 1
       },
       {
-        "label": "Helsing GmbH",
+        "label": "Rhenus Home Delivery GmbH",
         "count": 1
       },
       {
-        "label": "Tawo Gmbh",
+        "label": "Epikur Software GmbH & Co. KG",
         "count": 1
       },
       {
-        "label": "SumUp",
+        "label": "Awin",
         "count": 1
       },
       {
-        "label": "Vexcash Aktiengesellschaft",
-        "count": 1
-      },
-      {
-        "label": "Deftpower",
+        "label": "NeoCarbon",
         "count": 1
       },
       {
         "label": "Acodis AG",
         "count": 1
-      },
-      {
-        "label": "Zalando",
-        "count": 1
-      },
-      {
-        "label": "Padoa",
-        "count": 1
-      },
-      {
-        "label": "Rockstar",
-        "count": 1
-      },
-      {
-        "label": "Bling Services GmbH",
-        "count": 1
-      },
-      {
-        "label": "Nucs AI",
-        "count": 1
       }
     ],
-    "n_companies": 37,
-    "top10_share": 19,
-    "top10_pct": 41,
-    "multi_hiring": 8
+    "n_companies": 45,
+    "top10_share": 22,
+    "top10_pct": 36,
+    "multi_hiring": 14
   }
 }
