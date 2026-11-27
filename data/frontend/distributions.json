@@ -2,29 +2,33 @@
   "seniority": [
     {
       "label": "mid",
-      "count": 18
+      "count": 15
     },
     {
       "label": "mid_senior",
-      "count": 6
+      "count": 5
     },
     {
       "label": "senior",
-      "count": 19
+      "count": 22
     },
     {
       "label": "lead",
       "count": 8
     },
     {
+      "label": "staff",
+      "count": 1
+    },
+    {
       "label": "unknown",
-      "count": 10
+      "count": 7
     }
   ],
   "work_mode": [
     {
       "label": "unknown",
-      "count": 30
+      "count": 27
     },
     {
       "label": "remote",
@@ -32,45 +36,45 @@
     },
     {
       "label": "hybrid",
-      "count": 8
+      "count": 6
     },
     {
       "label": "onsite",
-      "count": 3
+      "count": 4
     },
     {
       "label": "hybrid_3d",
-      "count": 1
+      "count": 2
     }
   ],
   "language": [
     {
       "label": "en",
-      "count": 38
+      "count": 40
     },
     {
       "label": "de",
-      "count": 20
+      "count": 16
     },
     {
       "label": "unknown",
-      "count": 3
+      "count": 2
     }
   ],
   "german_requirement": [
     {
       "label": "unclassified",
-      "count": 61
+      "count": 58
     }
   ],
   "pm_type": [
     {
       "label": "technical",
-      "count": 4
+      "count": 2
     },
     {
       "label": "customer_facing",
-      "count": 5
+      "count": 6
     },
     {
       "label": "data_ai",
@@ -78,7 +82,7 @@
     },
     {
       "label": "growth",
-      "count": 9
+      "count": 12
     }
   ],
   "industry": [],
@@ -86,19 +90,19 @@
   "visa_sponsorship": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 58
     }
   ],
   "relocation_support": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 58
     }
   ],
   "domain_req_strength": [
     {
       "label": "unclear",
-      "count": 61
+      "count": 58
     }
   ],
   "domain_req_breakdown": [],
@@ -106,7 +110,7 @@
   "industry_experience_bubble": [],
   "years_experience": {},
   "ai": {
-    "n_enriched": 20,
+    "n_enriched": 22,
     "n_ai_focus": 0,
     "n_ai_skills": 0,
     "ai_focus_pct": 0,
@@ -115,103 +119,103 @@
   "source": [
     {
       "label": "jsearch",
-      "count": 46
+      "count": 42
     },
     {
       "label": "arbeitnow",
-      "count": 8
+      "count": 10
     },
     {
       "label": "ats",
-      "count": 7
+      "count": 6
     }
   ],
   "companies": {
     "top20": [
       {
-        "label": "Scalable Capital",
-        "count": 3
+        "label": "Americana Restaurants",
+        "count": 4
       },
       {
-        "label": "Bitpanda",
+        "label": "Hiring & apply",
         "count": 3
       },
       {
         "label": "N26",
+        "count": 3
+      },
+      {
+        "label": "Progyny",
         "count": 2
       },
       {
-        "label": "Hiring & apply",
+        "label": "XTB online trading",
         "count": 2
       },
       {
-        "label": "InnoVentures GmbH",
+        "label": "Geotab",
         "count": 2
       },
       {
-        "label": "Jobgether",
+        "label": "Bitpanda",
         "count": 2
       },
       {
-        "label": "Cozero",
+        "label": "enersis europe",
         "count": 2
       },
       {
-        "label": "50Hertz Transmission GmbH",
+        "label": "Riverty",
         "count": 2
       },
       {
-        "label": "Publitas.com B.V.",
+        "label": "Scalable Capital",
+        "count": 2
+      },
+      {
+        "label": "intercom",
         "count": 2
       },
       {
         "label": "Neobankbeat",
-        "count": 2
-      },
-      {
-        "label": "MAIA",
-        "count": 2
-      },
-      {
-        "label": "Lynx B.V. Germany Branch",
-        "count": 2
-      },
-      {
-        "label": "Snowflake",
-        "count": 2
-      },
-      {
-        "label": "Americana Restaurants",
-        "count": 2
-      },
-      {
-        "label": "BITMARCK",
         "count": 1
       },
       {
-        "label": "Rhenus Home Delivery GmbH",
+        "label": "RecNow GmbH",
         "count": 1
       },
       {
-        "label": "Epikur Software GmbH & Co. KG",
+        "label": "Nmi",
         "count": 1
       },
       {
-        "label": "Awin",
+        "label": "Voize",
         "count": 1
       },
       {
-        "label": "NeoCarbon",
+        "label": "epilot GmbH",
         "count": 1
       },
       {
-        "label": "Acodis AG",
+        "label": "DEMV Systems Gmbh",
+        "count": 1
+      },
+      {
+        "label": "Bling",
+        "count": 1
+      },
+      {
+        "label": "SumUp",
+        "count": 1
+      },
+      {
+        "label": "Raisin",
         "count": 1
       }
     ],
-    "n_companies": 45,
-    "top10_share": 22,
-    "top10_pct": 36,
-    "multi_hiring": 14
+    "n_companies": 43,
+    "top10_share": 24,
+    "top10_pct": 41,
+    "multi_hiring": 11
   }
 }
